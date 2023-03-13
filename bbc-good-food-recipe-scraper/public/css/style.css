@@ -1,0 +1,58 @@
+body {
+  border-top: 10px solid #384d76;
+  padding: 40px 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: lighter;
+  line-height: 1em;
+  margin-bottom: 0.75em;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+#main-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 60px;
+}
+.recipe-info {
+  margin-bottom: 1.6rem;
+}
+.recipe-info p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+p.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.method-list li {
+  margin-bottom: 1rem;
+}
+
+#footer {
+  position: fixed;
+  background-color: #384d76;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+#footer p {
+  line-height: 40px;
+  color: #fff;
+}
