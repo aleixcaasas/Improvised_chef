@@ -14,7 +14,7 @@
         <p>Joel Prat Vilanova : niu </p>
     </li>
     <li>
-        <p>Guillem Tejón Estalella : niu </p>
+        <p>Guillem Tejón Estalella : 1597247 </p>
     </li>
     <li>
         <p>Luigi Galbusera : niu </p>
