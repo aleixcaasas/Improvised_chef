@@ -1,4 +1,4 @@
-<h1 class="text-center">👨‍🍳CHEF IMPROVISADO👨‍🍳</h1>
+<h1>👨‍🍳CHEF IMPROVISADO👨‍🍳</h1>
 
 <p>Resum aplicació...</p>
 
