@@ -5,7 +5,7 @@
 <h4>Components del Grup:</h4>
 <ul>
     <li>
-        <p>Àleix Casas Barco : niu </p>
+        <p>Àleix Casas Barco : 1604174 </p>
     </li>
     <li>
         <p>Joaquim Codina Espin : niu </p>
@@ -23,6 +23,6 @@
         <p>Pol Lopez Peña : niu </p>
     </li>
     <li>
-        <p>Èric Subirana Garcia : niu </p>
+        <p>Èric Subirana Garcia : 1603465 </p>
     </li>
 </ul>
