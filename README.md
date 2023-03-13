@@ -11,7 +11,7 @@
         <p>Joaquim Codina Espin : 1566940 </p>
     </li>
     <li>
-        <p>Joel Prat Vilanova : niu </p>
+        <p>Joel Prat Vilanova : 1568204 </p>
     </li>
     <li>
         <p>Guillem Tejón Estalella : 1597247 </p>
