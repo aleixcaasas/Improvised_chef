@@ -26,5 +26,3 @@
         <p>Èric Subirana Garcia : niu </p>
     </li>
 </ul>
-
-
