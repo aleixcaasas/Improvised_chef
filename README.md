@@ -17,7 +17,7 @@
         <p>Guillem Tejón Estalella : 1597247 </p>
     </li>
     <li>
-        <p>Luigi Galbusera : niu </p>
+        <p>Luigi Galbusera : 1644293 </p>
     </li>
     <li>
         <p>Pol Lopez Peña : 1603460 </p>
