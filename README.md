@@ -20,7 +20,7 @@
         <p>Luigi Galbusera : niu </p>
     </li>
     <li>
-        <p>Pol Lopez Peña : niu </p>
+        <p>Pol Lopez Peña : 1603460 </p>
     </li>
     <li>
         <p>Èric Subirana Garcia : 1603465 </p>
