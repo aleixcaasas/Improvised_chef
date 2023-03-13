@@ -8,7 +8,7 @@
         <p>Àleix Casas Barco : 1604174 </p>
     </li>
     <li>
-        <p>Joaquim Codina Espin : niu </p>
+        <p>Joaquim Codina Espin : 1566940 </p>
     </li>
     <li>
         <p>Joel Prat Vilanova : niu </p>
