@@ -25,4 +25,6 @@
     <li>
         <p>Èric Subirana Garcia : 1603465 </p>
     </li>
+        <p>Eric Navarro Lazaro : 1601206 </p>
+    </li>
 </ul>
