@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const { db } = require('./routes/firebase');
 
 var app = express();
 
@@ -21,11 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
 //app.use('/users', usersRouter);
-
-app.get('/', async (req, res) => {
-  const querySnapshot = await db.collection('cities').get()
-  res.json(querySnapshot.docs.map(doc => doc.data()));
-})
+app.use(indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

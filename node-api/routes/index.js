@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const { Router } = require('express');
+const { db } = require('./firebase');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const router = Router();
+
+router.get('/', async (req, res) => {
+  const querySnapshot = await db.collection("recipes").get();
+  res.json(querySnapshot.docs.map(doc => doc.data()));
 });
 
 module.exports = router;
