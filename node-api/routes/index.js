@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { db } = require('./firebase');
+const bcrypt = require('bcrypt');
 
 const router = Router();
 
@@ -25,5 +26,28 @@ router.get('/recipes/:recipeId', async (req, res) => {
     return res.status(500).send('Error al obtenir els detalls');
   }
 });
+
+router.post('/user/register', async (req, res) => {
+  if (req.body.password !== req.body.confirmpassword) {
+    res.json({success: false, msg: 'La 2 contrasenyes han de coincidir'});
+  }
+  else{
+    const docUsers = db.collection("users");
+    const query = docUsers.where('name', '==', req.body.name);
+    const docUser = await query.get();
+    if (docUser.empty) {
+        var salt = bcrypt.genSaltSync(10);
+        var password = bcrypt.hashSync(req.body.password, salt);
+        docUsers.doc().set({
+          name: req.body.name,
+          password: password
+        })
+        res.json({success: true, msg: 'Usuari afegit correctament'});
+    } 
+    else {
+        return res.json({success: false, msg: 'Account already exists'});
+    }
+  }
+}); 
 
 module.exports = router;
