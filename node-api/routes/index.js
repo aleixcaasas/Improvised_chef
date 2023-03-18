@@ -27,6 +27,26 @@ router.get('/recipes/:recipeId', async (req, res) => {
   }
 });
 
+router.post('/user/login', (req, res) => {
+  const docUsers = db.collection("users");
+  const query = docUsers.where('name', '==', req.body.name);
+  query.get()
+  .then(querySnapshot => {
+    if(querySnapshot.empty){
+      return res.json({success: false, msg: 'Usuari no existeix'});
+    }
+    if(bcrypt.compareSync(req.body.password, querySnapshot.docs[0].data().password)){
+      return res.json(querySnapshot.docs[0].data());
+    }
+    else{
+      return res.json({success: false, msg: 'Contrasenya incorrecte'});
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+});
+
 router.post('/user/register', async (req, res) => {
   if (req.body.password !== req.body.confirmpassword) {
     res.json({success: false, msg: 'La 2 contrasenyes han de coincidir'});
