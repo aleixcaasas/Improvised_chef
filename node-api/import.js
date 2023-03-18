@@ -8,11 +8,12 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const batch = db.batch();
-const collectionRef = db.collection("recipes");
+
+const collectionRecipes = db.collection("recipes");
 
 data.forEach((doc) => {
-    const docRef = collectionRef.doc();
-    batch.set(docRef, doc);
+    const docRecipe = collectionRecipes.doc();
+    batch.set(docRecipe, doc);
 });
 
 batch.commit().then(() => {
