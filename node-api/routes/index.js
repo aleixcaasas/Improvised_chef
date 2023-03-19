@@ -27,6 +27,22 @@ router.get('/recipes/:recipeId', async (req, res) => {
   }
 });
 
+router.get('/user/:userId', async (req, res) => {
+  try{
+    const docId = req.params.userId;
+    const docRef = db.collection("users").doc(docId);
+    const doc = await docRef.get();
+    if(!doc.exists){
+      return res.status(404).send('No ha trobat el document');
+    }
+    return res.json(doc.data());
+  } 
+  catch(error){
+    console.error(error);
+    return res.status(500).send('Error al obtenir els detalls');
+  }
+});
+
 router.post('/user/login', (req, res) => {
   const docUsers = db.collection("users");
   const query = docUsers.where('name', '==', req.body.name);
