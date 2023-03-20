@@ -3,19 +3,19 @@ import {useAuth} from './context/UserAuthC'
 import { useNavigate } from "react-router-dom";
 
 
-const Register = () => {
+export default function Register(){
 
     const navigate = useNavigate();
-    const {error, SignUp, currentuser} = useAuth()
-    const[err, setError] = useState("")
-    const[backError, setBackError] = useState("")
+    const {error, SignUp, currentuser} = useAuth();
+    const[err, setError] = useState("");
+    const[backError, setBackError] = useState("");
     const [user, setUser] = useState({
         Name: "",
         UserName: "",
         email: "",
         password: "",
         passowrdConfirm: ""
-    })
+    });
 
     const useHandler = (e) => {
         const {name, value} = e.target;
@@ -24,7 +24,7 @@ const Register = () => {
                 ...pre,
                 [name]: value
             }
-        })
+        });
     }
 
     useEffect(() => {
@@ -34,12 +34,12 @@ const Register = () => {
             }, 2500)
             setBackError(error)
         }
-    }, [error, currentuser])
+    }, [error, currentuser]);
 
     
 
     const register = async (e) =>{
-        e.preventDefault()
+        e.preventDefault();
 
         if(user.Name === "" || user.UserName === "" || user.email === "" || user.password ===""){
             return setError("Please fill all the fields");
@@ -70,12 +70,10 @@ const Register = () => {
         <div>
             <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={useHandler}/>
             <input type="text" placeholder="USER_NAME" value={user.UserName} name='UserName' onChange={useHandler} />
-            <input type="email" placeholder="MAIL" value={user.email} name='email' onChange={useHandler}/>
+            <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={useHandler}/>
             <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={useHandler} />
             <input type="password" placeholder="PASSWORD" value={user.passowrdConfirm} name='passowrdConfirm' onChange={useHandler} />
-            <button type="submit" onClick={register}>Create User</button>
+            <input type="submit" value="Create user" onClick={register}/>
         </div>
      );
 }
- 
-export default Register;

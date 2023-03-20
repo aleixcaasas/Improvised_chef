@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
-const Home = () => {
+export default function Home(){
 
     const[userW, setUserW] = useState({})
     onAuthStateChanged(auth, (currentuser) => {
         setUserW(currentuser);
-    })
+    });
 
     const logOut = async () => {
         await signOut(auth);
@@ -16,15 +16,14 @@ const Home = () => {
 
     return ( 
         <div>
-            <h1>CHEFF IMPROVISED</h1>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <h1>IMPROVISED CHEFF</h1>
+            <ul>
+                <li><NavLink to="/login" className="navegationLink">Login</NavLink></li>
+                <li><NavLink to="/register" className="navegationLink">Register</NavLink></li>
+            </ul>
             <h3>User Logged In: </h3>
             {userW?.email}
             <button onClick={logOut}>Sign Out</button>
-        </div>
-        
+        </div>      
      );
 }
- 
-export default Home;
