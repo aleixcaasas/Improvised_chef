@@ -3,6 +3,8 @@ import { useState } from "react";
 import { auth } from "./firebase-config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
+
+
 export default function Home(){
 
     const[userW, setUserW] = useState({})
@@ -13,6 +15,7 @@ export default function Home(){
     const logOut = async () => {
         await signOut(auth);
     }
+
 
     return ( 
         <div>

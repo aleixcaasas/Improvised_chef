@@ -31,6 +31,7 @@ const UserAuthC = ({children}) => {
                     const docRef = await addDoc(collection(db, "users"), {
                         Fullname,
                         userName,
+                        email,
                         userId: `${result.user.uid}`
                     });
                     alert("Wellcome")
