@@ -1,11 +1,11 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "./firebase-config";
+import { auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginEmail(){
 
-    const navigation = useNavigate()
+    const navigation = useNavigate();
     const [formState, setFormState] = useState({email: "", password: ""})
     const {email, password} = formState;
 
@@ -33,8 +33,8 @@ export default function LoginEmail(){
     return ( 
         <div>
             <form action="">
-                <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange}/>
-                <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange}/>  
+                <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange}/> <br/>
+                <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange}/><br/>
                 <input type="submit" value="LOGIN" onClick={login}/>
             </form>
                         

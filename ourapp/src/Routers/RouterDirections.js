@@ -1,11 +1,11 @@
 import React from 'react'
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import Home from './Home';
-import UserAuthC from './context/UserAuthC';
-import LoginGoogle from './LoginGoogle';
+import Login from '../components/Login';
+import Register from '../components/Register';
+import Home from '../components/Home';
+import UserAuthC from '../context/UserAuthC';
+import LoginGoogle from '../components/LoginGoogle';
 
 export default function RouterDirections() {
   return (

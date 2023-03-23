@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useAuth} from './context/UserAuthC'
+import {useAuth} from '../context/UserAuthC'
 import { useNavigate } from "react-router-dom";
 
 
@@ -30,9 +30,9 @@ export default function Register(){
     useEffect(() => {
         if(error) {
             setInterval(() => { 
-                setBackError("")
+                setBackError("");
             }, 2500)
-            setBackError(error)
+            setBackError(error);
         }
     }, [error, currentuser]);
 
@@ -42,9 +42,11 @@ export default function Register(){
         e.preventDefault();
 
         if(user.Name === "" || user.UserName === "" || user.email === "" || user.password ===""){
-            return setError("Please fill all the fields");
+            setError("Please fill all the fields")
+            return err;
         }else if (user.password !== user.passowrdConfirm){
-            return setError("Passwords do not match");
+            setError("Passwords do not match")
+            return err;
         }else{
             SignUp(user.Name, user.UserName, user.email, user.password)
             {
@@ -68,11 +70,11 @@ export default function Register(){
 
     return ( 
         <div>
-            <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={useHandler}/>
-            <input type="text" placeholder="USER_NAME" value={user.UserName} name='UserName' onChange={useHandler} />
-            <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={useHandler}/>
-            <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={useHandler} />
-            <input type="password" placeholder="PASSWORD" value={user.passowrdConfirm} name='passowrdConfirm' onChange={useHandler} />
+            <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={useHandler}/> <br/>
+            <input type="text" placeholder="USER_NAME" value={user.UserName} name='UserName' onChange={useHandler} /><br/>
+            <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={useHandler}/><br/>
+            <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={useHandler} /><br/>
+            <input type="password" placeholder="REPEAT PASSWORD" value={user.passowrdConfirm} name='passowrdConfirm' onChange={useHandler} /><br/>
             <input type="submit" value="Create user" onClick={register}/>
         </div>
      );
