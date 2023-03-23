@@ -1,7 +1,9 @@
 import json
 
-unit_variables = ['½', 'litre', 'tspb', 'tsp', 'mg', 'ml', 'g', 'litre', 'l']
-censored_variables = ['of', 'large', 'dried', '(', ')', '[', ']']
+unit_variables = ['½', 'litre', 'tbsp', 'tspb',
+                  'tsp', 'mg', 'ml', 'g', 'litre', 'l']
+censored_variables = ['of', 'large', 'dried', 'thumb', 'sized']
+
 
 def get_data_from_ingredient(s: str):
     quantity_bool, unit_bool, name_bool = False, False, False
@@ -35,10 +37,16 @@ def get_data_from_ingredient(s: str):
                     name = refactor_name(name.split(',')[0])
                     break
         i += 1
-    quantity = int(quantity_s)
+    if quantity_s.isnumeric():
+        quantity = int(quantity_s)
+    elif quantity_s == '½':
+        quantity = 0.5
+    else:
+        return f'{s}'
     if not unit:
         unit = 'No unit'
     return {'name': name, 'quantity': quantity, 'unit': unit}
+
 
 def refactor_name(name: str):
     # Filter of and other unwanted names
@@ -48,12 +56,16 @@ def refactor_name(name: str):
             location = name.index(censored_name) + len(censored_name) + 1
             new_name = name[location:]
     return new_name
+
+
 def parse_recipe(recipe):
     ingredients = recipe.get("ingredients")
     if ingredients:
-        parsed_ingredients = [get_data_from_ingredient(ingredient) for ingredient in ingredients]
+        parsed_ingredients = [get_data_from_ingredient(
+            ingredient) for ingredient in ingredients]
         recipe["ingredients"] = parsed_ingredients
     return recipe
+
 
 def process_recipe_file(input_file_path, output_file_path):
     with open(input_file_path, "r") as input_file:
@@ -61,6 +73,7 @@ def process_recipe_file(input_file_path, output_file_path):
     parsed_recipes = [parse_recipe(recipe) for recipe in recipes]
     with open(output_file_path, "w") as output_file:
         json.dump(parsed_recipes, output_file, indent=4)
+
 
 input_file_path = "recipes.json"
 output_file_path = "parsed_recipes.json"
