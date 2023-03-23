@@ -14,26 +14,16 @@ router.all("/", function (req, res, next) {
 router.get("/", function (req, res) {
   var url = req.query.url,
     recipe = {
-      _id: null,
       title: null,
+      description: null,
       ingredients: [],
       method: [],
-      nutrition: {
-        kcal: null,
-        fat: null,
-        saturates: null,
-        carbs: null,
-        sugars: null,
-        fibre: null,
-        protein: null,
-        salt: null
-      },
-      time: {
-        preparation: null,
-        cooking: null,
-      },
+      difficulty: null,
+      time_preparation: null,
+      time_cooking : null,
       serves: null,
       self_url: url,
+      image: null,
     };
 
   request(url, function (err, response, html) {
@@ -42,12 +32,7 @@ router.get("/", function (req, res) {
       try {
         if (url.match(/https:\/\/www.bbcgoodfood.com/)) {
           console.log("Good Food");
-          setTimeout(() => {
-            const randomId = function(length = 6) {
-              return Math.random().toString(36).substring(2, length+2);
-            };
-            recipe._id = randomId(15);
-          }, 2000);
+
           recipe.title = $("h1").text();
           if (!recipe.title || recipe.title.length < 1) {
             return res.send({ error: "Not a valid BBC Good Food URL" });
@@ -70,20 +55,10 @@ router.get("/", function (req, res) {
             ) {
               recipe.method.push($(this).text());
             });
-            recipe.nutrition = {
-              kcal: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(1) .key-value-blocks__value").first().text(),
-              fat: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(2) .key-value-blocks__value").first().text(),
-              saturates: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(3) .key-value-blocks__value").first().text(),
-              carbs: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(4) .key-value-blocks__value").first().text(),
-              sugars: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(1) .key-value-blocks__value").last().text(),
-              fibre: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(2) .key-value-blocks__value").last().text(),
-              protein: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(3) .key-value-blocks__value").last().text(),
-              salt: $(".key-value-blocks__batch .key-value-blocks__item:nth-child(4) .key-value-blocks__value").last().text(),
-            };
-            recipe.time = {
-              prep: $(".cook-and-prep-time .list time").first().text(),
-              cook: $(".cook-and-prep-time .list time").last().text(),
-            };
+            recipe.description = $(".editor-content p").text();
+            recipe.time_preparation = $(".cook-and-prep-time .list time").first().text();
+            recipe.time_cooking = $(".cook-and-prep-time .list time").last().text();
+            recipe.difficulty = $(".post-header__row .list-item:nth-child(2) div div:nth-child(2)").text();
             recipe.serves = $(".post-header__servings")
               .children()
               .last()
