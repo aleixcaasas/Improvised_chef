@@ -19,7 +19,7 @@ export default function LoginGoogle() {
         emailNotFound = false;
       }
     });
-    console.log(emailNotFound)
+    console.log("email added:" + emailNotFound)
     return emailNotFound;
   }
 
@@ -31,7 +31,6 @@ export default function LoginGoogle() {
       const profilePic = result.user.photoURL;
       const userName = email.split('@')[0];
       const p = await mailNotExists(email);
-      console.log(p);
       if (p) {
         const docRef = await addDoc(collection(db, "users"), {
           name,
@@ -51,9 +50,6 @@ export default function LoginGoogle() {
   return (
     <div>
       <button onClick={signInWithGoogle}>Sign In With Google</button>
-      <button onClick={() => {
-        mailNotExists('ericsubirana444@gmail.com')
-      }}>aaaaaaaaaaaaa</button>
     </div>
   )
 }
