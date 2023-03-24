@@ -1,10 +1,13 @@
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import {provider, auth, db} from './firebase-config';
 import { collection, addDoc, query, getDocs} from 'firebase/firestore';
 
 
 export default function LoginGoogle() {
+
+  const navigation = useNavigate();
 
   const mailNotExists = async (email) => {
     const q = query(collection(db, "users"));
@@ -15,7 +18,6 @@ export default function LoginGoogle() {
     querySnapshot.forEach((doc) => {
       console.log(doc.data().email, email)
       if(doc.data().email === email){
-        console.log('uau')
         emailNotFound = false;
       }
     });
@@ -30,9 +32,9 @@ export default function LoginGoogle() {
       const email = result.user.email;
       const profilePic = result.user.photoURL;
       const userName = email.split('@')[0];
-      const p = await mailNotExists(email);
-      if (p) {
-        const docRef = await addDoc(collection(db, "users"), {
+      const emailNotAtBD = await mailNotExists(email);
+      if (emailNotAtBD) {
+        await addDoc(collection(db, "users"), {
           name,
           userName,
           profilePic,
@@ -40,16 +42,32 @@ export default function LoginGoogle() {
           userId: `${result.user.uid}`
         });
       }
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   }
   
+  const fluxSignInWithGoogle = async () => {
+    await signInWithGoogle()
+    .then((succes) => {
+      if (succes){
+        navigation('/');
+      }else{
+        return 
+        <>
+          <h3>Incorrect Log In. Please try again</h3>
+          <button onClick={navigation('/')}>Go Home</button>
+        </>
+      }
+    });
+  }
   
 
   return (
     <div>
-      <button onClick={signInWithGoogle}>Sign In With Google</button>
+      <button onClick={fluxSignInWithGoogle}>Sign In With Google</button>
     </div>
   )
 }
