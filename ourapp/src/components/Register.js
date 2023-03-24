@@ -58,7 +58,7 @@ export default function Register(){
                     passowrdConfirm: ""
                 })
             }
-            navigate("/")
+            navigate("/");
         }
 
         try{

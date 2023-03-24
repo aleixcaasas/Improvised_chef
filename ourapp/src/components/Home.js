@@ -1,21 +1,26 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../firebase-config";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import { onAuthStateChanged } from "firebase/auth";
+import {useAuth} from '../context/UserAuthC';
+import UserAuthC from "../context/UserAuthC";
 
 
 export default function Home(){
 
     const[userW, setUserW] = useState({});
+    const {logOut} = useAuth();
+
 
     onAuthStateChanged(auth, (currentuser) => {
         setUserW(currentuser);
     });
 
-    const logOut = async () => {
-        await signOut(auth);
+
+    const handleLogOut = async () => {
+        await logOut();
     }
+
 
     return (
         <div>
@@ -36,7 +41,7 @@ export default function Home(){
                 <>
                 <h1>IMPROVISED CHEFF</h1>
                 <h3>User Logged In: {userW?.email}</h3>
-                <button onClick={logOut}>Sign Out</button>
+                <button onClick={handleLogOut}>Sign Out</button>
             </>
             )
         }

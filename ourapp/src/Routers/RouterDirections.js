@@ -5,16 +5,17 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import Home from '../components/Home';
 import UserAuthC from '../context/UserAuthC';
-import LoginGoogle from '../components/LoginGoogle';
+import ForgotPassword from '../components/ForgotPassword';
 
 export default function RouterDirections() {
   return (
     <BrowserRouter>
         <Routes>
-            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/" element={<UserAuthC><Home/></UserAuthC>}/>
             <Route exact path="/login" element={<Login/>}/>
-            <Route  exact path="/register"element={<UserAuthC><Register/></UserAuthC>}/>
-            <Route exact path="/loginGoogle" element={<LoginGoogle/>}/>
+            <Route exact path="/login/forgotPassword" element={<UserAuthC><ForgotPassword/></UserAuthC>}/>
+            <Route exact path="/register"element={<UserAuthC><Register/></UserAuthC>}/>
+            <Route path='*' element={<UserAuthC><Home/></UserAuthC>}/>
         </Routes>
     </BrowserRouter>
   );

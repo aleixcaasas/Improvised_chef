@@ -5,6 +5,7 @@ import App from './App';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+document.title = "Improvised Cheff";
 root.render(
   <React.StrictMode>
     <App />

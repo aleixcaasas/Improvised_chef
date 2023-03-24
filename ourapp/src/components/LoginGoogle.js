@@ -1,56 +1,16 @@
-import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import {provider, auth, db} from './../firebase-config';
-import { collection, addDoc, query, getDocs} from 'firebase/firestore';
+import { useAuth } from '../context/UserAuthC';
 
 
 export default function LoginGoogle() {
 
   const navigation = useNavigate();
+  const {logInWithGoogle} = useAuth();
 
-  const mailNotExists = async (email) => {
-    const q = query(collection(db, "users"));
-    const querySnapshot = await getDocs(q);
-  
-    let emailNotFound = true;
-  
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data().email, email)
-      if(doc.data().email === email){
-        emailNotFound = false;
-      }
-    });
-    console.log("email added:" + emailNotFound)
-    return emailNotFound;
-  }
-
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const name = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-      const userName = email.split('@')[0];
-      const emailNotAtBD = await mailNotExists(email);
-      if (emailNotAtBD) {
-        await addDoc(collection(db, "users"), {
-          name,
-          userName,
-          profilePic,
-          email,
-          userId: `${result.user.uid}`
-        });
-      }
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
   
   const fluxSignInWithGoogle = async () => {
-    await signInWithGoogle()
+    await logInWithGoogle()
     .then((succes) => {
       if (succes){
         navigation('/');
