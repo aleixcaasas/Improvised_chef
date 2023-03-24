@@ -10,33 +10,30 @@ export default function LoginGoogle() {
   const navigation = useNavigate();
 
   const mailNotExists = async (email) => {
-    const users = query(collection(db, "users"));
-    const querySnapshot = await getDocs(users);
+    const q = query(collection(db, "users"));
+    const querySnapshot = await getDocs(q);
   
-    //let emailNotFound = true;
+    let emailNotFound = true;
   
     querySnapshot.forEach((doc) => {
-      console.log(doc.data().email, email);
+      console.log(doc.data().email, email)
       if(doc.data().email === email){
-        console.log('uau');
-        return true;
+        emailNotFound = false;
       }
     });
-    //console.log(emailNotFound)
-    return false;
+    console.log("email added:" + emailNotFound)
+    return emailNotFound;
   }
 
   const signInWithGoogle = async () => {
     try {
-      let result = await signInWithPopup(auth, provider);
-      let name = result.user.displayName;
-      let email = result.user.email;
-      let profilePic = result.user.photoURL;
-      let userName = email.split('@')[0];
-      let isEmailAtBD = await mailNotExists(email);
-      console.log(isEmailAtBD);
-      if (!isEmailAtBD) {
-        //const docRef = await addDoc(collection(db, "users"), {
+      const result = await signInWithPopup(auth, provider);
+      const name = result.user.displayName;
+      const email = result.user.email;
+      const profilePic = result.user.photoURL;
+      const userName = email.split('@')[0];
+      const emailNotAtBD = await mailNotExists(email);
+      if (emailNotAtBD) {
         await addDoc(collection(db, "users"), {
           name,
           userName,
@@ -51,10 +48,9 @@ export default function LoginGoogle() {
       return false;
     }
   }
-
-
-  const fluxSignInWithGoogle = () => {
-    signInWithGoogle()
+  
+  const fluxSignInWithGoogle = async () => {
+    await signInWithGoogle()
     .then((succes) => {
       if (succes){
         navigation('/');
@@ -68,14 +64,10 @@ export default function LoginGoogle() {
     });
   }
   
-  
 
   return (
     <div>
       <button onClick={fluxSignInWithGoogle}>Sign In With Google</button>
-      <button onClick={() => {
-        mailNotExists('ericsubirana444@gmail.com')
-      }}>aaaaaaaaaaaaa</button>
     </div>
   )
 }
