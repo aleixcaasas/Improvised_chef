@@ -8,7 +8,7 @@ export default function Login(){
     return (      
         <div>
             <ul>
-                <h3>Improvised Cheff's acount</h3>
+                <h3>Improvised Cheff's account</h3>
                 <UserAuthC><LoginEmail/></UserAuthC>
                 <p><Link className="navegationLink"to='/login/forgotPassword'>Forgot your password?</Link></p>
                 <h3>Google's acount</h3>
