@@ -13,7 +13,6 @@ export default function ForgotPassword() {
     setMessage(await resetPasswordEmail(email));
 	};
 
-
   if (message === ""){
     return (
       <div>

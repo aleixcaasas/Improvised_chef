@@ -32,7 +32,7 @@ export default function LoginEmail(){
 
     return ( 
         <div>
-            <form action="">
+            <form action="react-app/src/components">
                 <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange}/> <br/>
                 <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange}/><br/>
                 <input type="submit" value="LOGIN" onClick={login}/>

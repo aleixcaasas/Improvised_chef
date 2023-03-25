@@ -1,11 +1,11 @@
 import React from 'react'
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import Login from '../../ourapp/src/components/Login';
-import Register from '../../ourapp/src/components/Register';
-import Home from '../../ourapp/src/components/Home';
+import Login from '../components/Login';
+import Register from '../components/Register';
+import Home from '../components/Home';
 import UserAuthC from '../context/UserAuthC';
-import ForgotPassword from '../../ourapp/src/components/ForgotPassword';
+import ForgotPassword from '../components/ForgotPassword';
 
 export default function RouterDirections() {
   return (

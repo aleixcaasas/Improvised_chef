@@ -3,24 +3,18 @@ import { useState } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import {useAuth} from '../context/UserAuthC';
-import UserAuthC from "../context/UserAuthC";
-
 
 export default function Home(){
-
     const[userW, setUserW] = useState({});
     const {logOut} = useAuth();
-
 
     onAuthStateChanged(auth, (currentuser) => {
         setUserW(currentuser);
     });
 
-
     const handleLogOut = async () => {
         await logOut();
     }
-
 
     return (
         <div>
