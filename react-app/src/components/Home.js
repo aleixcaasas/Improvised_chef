@@ -3,6 +3,7 @@ import { useState } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import {useAuth} from '../context/UserAuthC';
+import MockComponent from './MockComponent';
 
 export default function Home(){
     const[userW, setUserW] = useState({});
@@ -25,11 +26,11 @@ export default function Home(){
                 <ul>
                     <li><NavLink to="/login" className="navegationLink">Login</NavLink></li>
                     <li><NavLink to="/register" className="navegationLink">Register</NavLink></li>
+                    <MockComponent></MockComponent>
                 </ul>
             </>
             )
         }
-
         {
             userW?.email && (
                 <>
