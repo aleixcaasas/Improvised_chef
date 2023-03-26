@@ -9,7 +9,7 @@ fs.readFile('parsed_recipes.json', 'utf8', (err, data) => {
         return('Error al llegir arxiu JSON');
     }
     const obj = JSON.parse(data);
-    for (let i = 0; i < 20; i++) { //mostrar les 20 primeres receptes
+    for (let i = 0; i < 5; i++) {
         const recipe = obj[i];
         let ingredients = [];
         for (let j = 0 ; j < recipe.ingredients.length ; j++){
@@ -24,8 +24,8 @@ router.get('/recipes', async (req, res) => {
     return res.json(recipes);
 });
 
-router.get('/recipes/title', async (req, res) => {
-    return res.json(recipes.find(obj => obj.title.toLowerCase() === req.body.title.toLowerCase()));
+router.post('/recipes/title', async (req, res) => {
+    return res.json(recipes.filter(obj => obj.title.toString().toLowerCase().includes(req.body.title.toLowerCase())));
 });
 
 router.get('/recipes/ingredients', async (req, res) => {
