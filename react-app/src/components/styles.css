@@ -1,7 +1,6 @@
-.home{
+.container{
     width: 350px;
 	height: 600px;
-    
 	background:var(--cream);
 	overflow: hidden;
     border-radius: 10px;
@@ -29,7 +28,7 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+form input{
 	width: 60%;
 	height: 10px;
 	background: #e0dede;
@@ -41,17 +40,19 @@ input{
 	outline: none;
 	border-radius: 50px;
 }
+form p{
+	text-align: center;
+}
 button{
 	width: 60%;
 	height: 40px;
-	margin: 0px auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
 	background-color: var(--red);
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 20px;
+	margin: 20px auto 0;
 	outline: none;
 	border: none;
 	border-radius: 50px;
@@ -84,4 +85,34 @@ button:hover{
 
 #chk:checked ~ .home{
     background-color: var(--red);
+}
+
+input.searchBar {
+	color: inherit;
+	padding: 12px 10px;
+	width: 60vw;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border: none;
+	outline: none;
+}
+.table {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table td, .table th {
+	border: 2px solid #000000;
+	padding: 8px;
+}
+
+.table tr{background-color: #f2f2f2;}
+
+.table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: var(--red);
+	color: white;
 }

@@ -1,7 +1,6 @@
 import { useContext, createContext, useEffect, useState} from "react";
-import { AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged,
-    signOut, signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
-import {provider, auth, db} from './../firebase-config';
+import { AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
+import {provider, auth, db} from '../firebase-config';
 import { addDoc, collection, getDocs, query} from "firebase/firestore";
 
 const userContext = createContext();
