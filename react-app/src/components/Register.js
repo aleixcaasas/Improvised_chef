@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {useAuth} from '../context/UserAuthC'
+import { useAuth } from '../context/UserAuthC'
 import { useNavigate } from "react-router-dom";
-
+import './styles.css';
 
 export default function Register(){
-
     const navigate = useNavigate();
-    const {error, SignUp, currentuser} = useAuth();
+    const {error, SignUp, currentUser} = useAuth();
     const[err, setError] = useState("");
     const[backError, setBackError] = useState("");
     const [user, setUser] = useState({
@@ -14,10 +13,10 @@ export default function Register(){
         UserName: "",
         email: "",
         password: "",
-        passowrdConfirm: ""
+        passwordConfirm: ""
     });
 
-    const useHandler = (e) => {
+    const handleChange = (e) => {
         const {name, value} = e.target;
         setUser((pre) => {
             return {
@@ -34,28 +33,28 @@ export default function Register(){
             }, 2500)
             setBackError(error);
         }
-    }, [error, currentuser]);
-
-    
+    }, [error, currentUser]);
 
     const register = async (e) =>{
         e.preventDefault();
 
-        if(user.Name === "" || user.UserName === "" || user.email === "" || user.password ===""){
+        if(user.Name === "" || user.UserName === "" || user.email === "" || user.password ==="" || user.passwordConfirm ===""){
             setError("Please fill all the fields")
+            alert("Please fill all the fields");
             return err;
-        }else if (user.password !== user.passowrdConfirm){
+        }else if (user.password !== user.passwordConfirm){
             setError("Passwords do not match")
+            alert("Passwords do not match");
             return err;
         }else{
             SignUp(user.Name, user.UserName, user.email, user.password)
             {
-                currentuser && setUser({
+                currentUser && setUser({
                     Name: "",
                     UserName: "",
                     email: "",
                     password: "",
-                    passowrdConfirm: ""
+                    passwordConfirm: ""
                 })
             }
             navigate("/");
@@ -68,14 +67,17 @@ export default function Register(){
         }
     }
 
-    return ( 
-        <div>
-            <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={useHandler}/> <br/>
-            <input type="text" placeholder="USER_NAME" value={user.UserName} name='UserName' onChange={useHandler} /><br/>
-            <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={useHandler}/><br/>
-            <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={useHandler} /><br/>
-            <input type="password" placeholder="REPEAT PASSWORD" value={user.passowrdConfirm} name='passowrdConfirm' onChange={useHandler} /><br/>
-            <input type="submit" value="Create user" onClick={register}/>
+    return (
+        <div className="register_page">
+            <label htmlFor="chk" aria-hidden="true">Register</label>
+            <form action="react-app/src/components">
+                <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={handleChange}/> <br/>
+                <input type="text" placeholder="USER NAME" value={user.UserName} name='UserName' onChange={handleChange}/><br/>
+                <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={handleChange}/><br/>
+                <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={handleChange}/><br/>
+                <input type="password" placeholder="REPEAT PASSWORD" value={user.passwordConfirm} name='passwordConfirm' onChange={handleChange}/><br/>
+                <button type="submit" value="Create user" onClick={register}> Register</button>
+            </form>
         </div>
-     );
+    );
 }

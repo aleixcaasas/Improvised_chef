@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
 export default function MockComponent(){
@@ -39,23 +38,22 @@ export default function MockComponent(){
 
     return (
         <div>
-            <div className="container">
+            <div className="searchBar">
                 <input
-                    className="form-control inputCercador"
+                    className="searchBar"
                     value={cercador}
                     placeholder="Nom recepta o ingredients"
                     onChange={handleChange}
                 />
             </div>
-
-            <div className="table-responsive">
-                <table className="table table-sm table-bordered">
+            <div>
+                <table className="table">
                     <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Ingredients</th>
-                        <th>Image</th>
-                    </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Ingredients</th>
+                            <th>Image</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {recipes && recipes.map((recipe)=>(
@@ -65,6 +63,7 @@ export default function MockComponent(){
                                 {recipes && recipe.ingredients.map((ingredient)=>(
                                     <div key={ingredient.id}>
                                         {ingredient.name}
+                                        <br />
                                         <br />
                                     </div>
                                 ))}
