@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {useAuth } from "../context/UserAuthC";
+import './styles.css';
 
 export default function ForgotPassword() {
 
@@ -15,11 +15,11 @@ export default function ForgotPassword() {
 
   if (message === ""){
     return (
-      <div>
+      <div className = "container" id  = "forgot_password">
         <h1>Reset your password</h1>
         <form onSubmit={handleSubmit}>
           <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>
-          <button type="submit">Send recuperation email</button>
+          <button type="submit">Send ssssssssssemail</button>
         </form>
       </div>
     );

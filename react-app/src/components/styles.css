@@ -7,6 +7,12 @@
 	box-shadow: 5px 20px 50px var(--black);
 }
 
+.container#forgot_password {
+	width: 500px;
+	height: 200px;
+	text-align: center;
+	}
+
 #chk{
 	display: none;
 }
@@ -59,6 +65,11 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
+
+button#button_google {
+	background-color: white;
+	color: #000000;
+}
 button:hover{
 	background: rgb(102, 24, 24);
 }
@@ -66,10 +77,13 @@ button:hover{
 	height: 700px;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
+	background-color: var(--red);
+	border-radius: 10px;
 }
 .register_page label{
-	color: var(--black);
+	color: white;
 	transform: scale(.6);
+
 }
 #chk:checked ~ .register_page{
 	transform: translateY(-650px);
@@ -77,6 +91,7 @@ button:hover{
 }
 #chk:checked ~ .register_page label{
 	transform: scale(1);
+	color: #000000;
     
 }
 #chk:checked ~ .login_page label{

@@ -1,0 +1,18 @@
+
+.searchBar{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: white;
+    border-top-right-radius: 50px;
+	border-top-left-radius: 50px;
+    box-shadow: 5px 20px 50px var(--black);
+}
+
+.CookButton{
+
+}
