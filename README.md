@@ -16,7 +16,7 @@ Pasos para instalar y configurar la aplicación en un entorno de desarrollo loca
 
 Descargar repositorio GitHub
 ```
-git clone https://github.com/improvisedchef/improvisedchef.git
+git clone https://github.com/aleixcaasas/Improvised_chef.git
 ```
 
 ### Configurar e instalar API (Node JS): 
