@@ -1,27 +1,64 @@
-<h1>👨‍🍳IMPROVISED CHEF👨‍🍳</h1>
+<h1 style="text-align: center;">👨‍🍳<b>IMPROVISED CHEF</b>👨‍🍳</h1>
 <p>
-Improvised Chef is a project that involves the development of an innovative application that enables users to cook with the ingredients available in their homes. The backend will be developed in Node.js with a RESTful API that communicates with Firebase as a database. React will be used for the frontend to create an intuitive user interface. Additionally, the database will be initially populated through web scraping of the website <a href="http://www.bbcgoodfood.com"> BBC Good Food</a>.
-The application will provide a database of recipes that can be filtered based on the ingredients available to the user, along with detailed instructions for each recipe. This will simplify the cooking process and enhance the user's daily life. </p>
+"Improvised Chef" es un proyecto que implica el desarrollo de una aplicación innovadora que permite a los usuarios cocinar con los ingredientes disponibles en sus hogares. El backend se desarrollará en Node.js con una API RESTful que se comunica con Firebase como base de datos. React se utilizará para el frontend para crear una interfaz de usuario intuitiva. Además, la base de datos se poblará inicialmente a través de la extracción de datos web del sitio web <a href="http://www.bbcgoodfood.com"> BBC Good Food</a>.
 
-## Tecnologías utilizadas
+La aplicación proporcionará una base de datos de recetas que se pueden filtrar en función de los ingredientes disponibles para el usuario, junto con instrucciones detalladas para cada receta. Esto simplificará el proceso de cocción y mejorará la vida diaria del usuario. <p>
+
+## <b>Tecnologías utilizadas</b>
 
 - <a href="https://nodejs.org/es"> Node JS </a>
 - <a href="https://react.dev/"> React JS </a>
 - <a href="https://react.dev/"> Firebase </a>
 
-## Instalación
+## <b>Instalación</b>
 
-- Pasos para instalar y configurar la aplicación en un entorno de desarrollo local.
+Pasos para instalar y configurar la aplicación en un entorno de desarrollo local.
 
-## Uso
+Descargar repositorio GitHub
+```
+git clone https://github.com/improvisedchef/improvisedchef.git
+```
 
-- Guía del usuario sobre cómo utilizar la aplicación, incluyendo cómo iniciarla, cómo utilizar las diferentes funcionalidades, etc.
+### Configurar e instalar API (Node JS): 
+```
+cd node-api
+npm install
+npm start
+```
+Luego abre tu navegador
+```
+http://localhost:3000
+```
 
-## Contribuir
+### Configurar e instalar app (React JS):
+```
+cd node-api
+npm install
+npm start
+```
+Luego abre tu navegador
+```
+http://localhost:3005
+```
 
-- Información sobre cómo contribuir al proyecto, incluyendo cómo informar de errores, cómo enviar solicitudes de extracción de código, etc.
+## <b>Uso</b>
 
-## Autores
+Guía del usuario sobre cómo utilizar la aplicación, incluyendo cómo iniciarla, cómo utilizar las diferentes funcionalidades, etc.
+
+## <b>Contribuir</b>
+
+Si estás interesado en contribuir al proyecto, ¡estamos encantados de recibir tu ayuda! A continuación se presentan algunas formas en que puedes contribuir:
+
+- Informar errores: Si encuentras algún error o problema en la aplicación, por favor informa de ello abriendo un [issue](https://github.com/aleixcaasas/Improvised_chef/issues) en GitHub. Por favor, describe el problema de la manera más detallada posible para que podamos entenderlo y resolverlo de manera efectiva.
+
+- Realizar mejoras: Si tienes una idea para mejorar la aplicación, siéntete libre de abrir un [issue](https://github.com/aleixcaasas/Improvised_chef/issues) para discutirlo. Si ya tienes una solución, también puedes enviar una [solicitud de extracción](https://github.com/aleixcaasas/Improvised_chef/pulls) con tu código.
+
+- Contribuir con código: Si deseas contribuir con código, te recomendamos que comiences abriendo un [issue](https://github.com/aleixcaasas/Improvised_chef/issues). Esto te permitirá obtener comentarios sobre tus ideas y asegurarte de que estás trabajando en algo que sea relevante para el proyecto. Una vez que estés listo para contribuir con código, por favor envía una [solicitud de extracción](https://github.com/aleixcaasas/Improvised_chef/pulls) con tus cambios.
+
+Agradecemos enormemente cualquier tipo de contribución al proyecto, ¡así que no dudes en contactarnos si tienes alguna idea o sugerencia para mejorarlo!
+
+
+## <b>Autores</b>
 
 |          Nombre         |   NIU   | GitHub User |
 | ----------------------- | ------- | ----------- |
@@ -33,8 +70,3 @@ The application will provide a database of recipes that can be filtered based on
 | Luigi Galbusera         | 1644293 | @luigigalbusera |
 | Pol Lopez Peña          | 1603460 | @PolLopezPena |
 | Eric Navarro Lazaro     | 1601206 | @ernl |
-
-
-## Licencia
-
-- Información sobre la licencia del proyecto y cómo se puede utilizar y distribuir el código.
