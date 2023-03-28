@@ -36,7 +36,7 @@ label{
 }
 form input{
 	width: 60%;
-	height: 10px;
+	height: 15px;
 	background: #e0dede;
 	justify-content: center;
 	display: flex;
@@ -50,7 +50,7 @@ form p{
 	text-align: center;
 }
 button{
-	width: 60%;
+	width: 66%;
 	height: 40px;
 	justify-content: center;
 	display: block;
@@ -66,10 +66,22 @@ button{
 	cursor: pointer;
 }
 
+
 button#button_google {
 	background-color: white;
 	color: #000000;
+	border:1px #333333 solid ;
+	display: flex;
+	align-items: center;
 }
+
+.label_google{
+	margin-left: 5px;
+	color: black;
+	font-size: 1em;
+	margin: 0 0 0 8px;
+}
+
 button:hover{
 	background: rgb(102, 24, 24);
 }
@@ -77,17 +89,17 @@ button:hover{
 	height: 700px;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
-	background-color: var(--red);
+	background-color: #b64926d4;
 	border-radius: 10px;
 }
 .register_page label{
 	color: white;
 	transform: scale(.6);
-
 }
+
 #chk:checked ~ .register_page{
 	transform: translateY(-650px);
-    background: #f4f4f4;
+    background: var(--cream);
 }
 #chk:checked ~ .register_page label{
 	transform: scale(1);
@@ -100,34 +112,4 @@ button:hover{
 
 #chk:checked ~ .home{
     background-color: var(--red);
-}
-
-input.searchBar {
-	color: inherit;
-	padding: 12px 10px;
-	width: 60vw;
-	border-top-right-radius: 5px;
-	border-top-left-radius: 5px;
-	border: none;
-	outline: none;
-}
-.table {
-	font-family: Arial, Helvetica, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.table td, .table th {
-	border: 2px solid #000000;
-	padding: 8px;
-}
-
-.table tr{background-color: #f2f2f2;}
-
-.table th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: center;
-	background-color: var(--red);
-	color: white;
 }

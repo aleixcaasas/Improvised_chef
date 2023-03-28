@@ -67,7 +67,7 @@ export default function LoginGoogle() {
 
   return (
     <div>
-      <button id = "button_google" onClick={fluxSignInWithGoogle}><FcGoogle /> Sign In With Google</button>
+      <button id = "button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
     </div>
   )
 }

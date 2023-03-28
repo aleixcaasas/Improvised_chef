@@ -69,14 +69,14 @@ export default function Register(){
 
     return (
         <div className="register_page">
-            <label htmlFor="chk" aria-hidden="true">Register</label>
+            <label htmlFor="chk" aria-hidden="true">Sign Up</label>
             <form action="react-app/src/components">
                 <input type="text" placeholder="NAME" value={user.Name} name='Name' onChange={handleChange}/> <br/>
                 <input type="text" placeholder="USER NAME" value={user.UserName} name='UserName' onChange={handleChange}/><br/>
                 <input type="email" placeholder="EMAIL" value={user.email} name='email' onChange={handleChange}/><br/>
                 <input type="password" placeholder="PASSWORD" value={user.password} name='password' onChange={handleChange}/><br/>
                 <input type="password" placeholder="REPEAT PASSWORD" value={user.passwordConfirm} name='passwordConfirm' onChange={handleChange}/><br/>
-                <button type="submit" value="Create user" onClick={register}> Register</button>
+                <button type="submit" value="Create user" onClick={register}> Sign Up</button>
             </form>
         </div>
     );
