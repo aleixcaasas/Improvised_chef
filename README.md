@@ -32,7 +32,7 @@ http://localhost:3000
 
 ### Configurar e instalar app (React JS):
 ```
-cd node-api
+cd react-app
 npm install
 npm start
 ```
