@@ -4,7 +4,7 @@ import './SearchBar.css';
 
 export default function SearchBar() {
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
-    const [recipes, setRecipes] = useState([]);
+   /* const [recipes, setRecipes] = useState([]);
 
     //Estat per controlar el que s'escriu en el cercador
     const [cercador, setCercador] = useState("");
@@ -35,16 +35,16 @@ export default function SearchBar() {
                 })
         };
         peticionsApi();
-    }, []);
+    }, []);*/
 
 
     return(
         <div className="searchBar">
             <input
                 className="searchBar"
-                value={cercador}
-                placeholder="Nom recepta o ingredients"
-                onChange={handleChange}
+                //value={cercador}
+                placeholder="recipe name or ingredients"
+                //onChange={handleChange}
             />           
             <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>           
         </div>
