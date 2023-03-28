@@ -23,16 +23,16 @@ The application will provide a database of recipes that can be filtered based on
 
 ## Autores
 
-|          Nombre         |   NIU   |
-| ----------------------- | ------- |
-| Aleix Casas Barco       | 1604174 | 
-| Èric Subirana Garcia    | 1603465 | 
-| Joaquim Codina Espin    | 1566940 | 
-| Joel Prat Vilanova      | 1568204 | 
-| Guillem Tejón Estalella | 1597247 | 
-| Luigi Galbusera         | 1644293 | 
-| Pol Lopez Peña          | 1603460 | 
-| Eric Navarro Lazaro     | 1601206 | 
+|          Nombre         |   NIU   | GitHub User |
+| ----------------------- | ------- | ----------- |
+| Aleix Casas Barco       | 1604174 | @aleixcaasas |
+| Èric Subirana Garcia    | 1603465 | @ericsubirana |
+| Joaquim Codina Espin    | 1566940 | @joaquimcodina |
+| Joel Prat Vilanova      | 1568204 | @joelprat |
+| Guillem Tejón Estalella | 1597247 | @Guillemtejonestalella |
+| Luigi Galbusera         | 1644293 | @luigigalbusera |
+| Pol Lopez Peña          | 1603460 | @PolLopezPena |
+| Eric Navarro Lazaro     | 1601206 | @ernl |
 
 
 ## Licencia
