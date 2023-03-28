@@ -22,14 +22,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
-.navegationLink{
-  list-style: none;
-  text-decoration: none;
-  color: black
-}
-
-.navegationLink:hover{
-  font-weight: bold;
-}
