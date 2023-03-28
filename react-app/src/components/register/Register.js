@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from '../context/UserAuthC'
+import { useAuth } from '../login/UserAuthC'
 import { useNavigate } from "react-router-dom";
-import './styles.css';
+import '../styles.css';
 
 export default function Register(){
     const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import React from "react";
-import UserAuthC from '../context/UserAuthC'
-import Register from "./Register";
+import UserAuthC from './UserAuthC'
+import Register from "../register/Register";
 import LoginEmail from "./LoginEmail";
-import './styles.css';
+import '../styles.css';
 export default function Accounts(){
     return (
         <div className="container">

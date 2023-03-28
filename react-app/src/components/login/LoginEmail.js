@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserAuthC, { useAuth } from "../context/UserAuthC";
+import UserAuthC, { useAuth } from "./UserAuthC";
 import LoginGoogle from "./LoginGoogle";
 
 export default function LoginEmail(){

@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
-import { useAuth } from '../context/UserAuthC';
-import './styles.css';
+import { useAuth } from '../components/login/UserAuthC';
+import '../components/styles.css';
 
 export default function Home(){
     const[user, setUser] = useState({});

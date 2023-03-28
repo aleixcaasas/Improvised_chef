@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {useAuth } from "../context/UserAuthC";
-import './styles.css';
+import { useAuth } from "./UserAuthC";
+import './../styles.css';
 
 export default function ForgotPassword() {
 
@@ -19,7 +19,7 @@ export default function ForgotPassword() {
         <h1>Reset your password</h1>
         <form onSubmit={handleSubmit}>
           <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>
-          <button type="submit">Send ssssssssssemail</button>
+          <button type="submit">Send email</button>
         </form>
       </div>
     );
