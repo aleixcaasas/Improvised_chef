@@ -12,10 +12,8 @@ const UserAuthC = ({children}) => {
 
     useEffect(()=>{
         onAuthStateChanged(auth, user => {
-            console.log(user)
             if(user){
                 setUser(user)
-                console.log("u are logging");
             }
             else{
                 //signOut(auth);

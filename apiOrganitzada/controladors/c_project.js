@@ -48,13 +48,22 @@ var controller = {
     },
 
     loginGoogle: async function(req, res){
-        var params = await loginWithGoogle();
-        console.log(params.login);
 
-        return res.status(200).send({
-            loguejat: 'true',
-            email: params.email
-        })
+        var body = req.body;
+        
+        var params = await loginWithGoogle(body);
+
+        if(params.login){
+            return res.status(200).send({
+                loguejat: 'true',
+                email: params.email
+            })
+        }
+        else{
+            return res.status(400).send({
+                loguejat: 'false'
+            })
+        }
     }
     
 }

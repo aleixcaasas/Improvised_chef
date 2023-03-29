@@ -1,34 +1,19 @@
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { provider, auth, db } from '../../firebase-config';
-import { collection, addDoc, query, getDocs} from 'firebase/firestore';
+import { provider, auth } from '../../firebase-config';
 import { FcGoogle } from 'react-icons/fc';
+import axios from 'axios';
 
 export default function LoginGoogle() {
 
   const navigation = useNavigate();
 
-  const mailNotExists = async (email) => {
-    const q = query(collection(db, "users"));
-    const querySnapshot = await getDocs(q);
-
-    let emailNotFound = true;
-
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data().email, email)
-      if(doc.data().email === email){
-        emailNotFound = false;
-      }
-    });
-    console.log("email added:" + emailNotFound)
-    return emailNotFound;
-  }
-
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      
+      const response = await axios.post('http://localhost:3700/loginWithGoogle', result);
+      console.log(response.data);
       return true;
     } catch (error) {
       console.log(error);
@@ -37,6 +22,7 @@ export default function LoginGoogle() {
   }
 
   const fluxSignInWithGoogle = async () => {
+    
     await signInWithGoogle()
         .then((succes) => {
           if (succes){

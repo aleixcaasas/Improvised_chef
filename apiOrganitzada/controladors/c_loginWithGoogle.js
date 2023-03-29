@@ -1,6 +1,5 @@
-const {signInWithPopup} = require('firebase/auth');
-const {auth, provider, db} = require('../firebase/firebase-config');
-const {addDoc, collection, getDocs} = require('firebase/firestore');
+const {db} = require('../firebase/firebase-config');
+const {addDoc, collection, getDocs, query} = require('firebase/firestore');
 const e = require('express');
 
 const emailNotExists = async (email) => {
@@ -11,7 +10,6 @@ const emailNotExists = async (email) => {
     let emailExist = false;
 
     querySnapshot.forEach((doc) => {
-      console.log(doc.data().email, email)
       if(doc.data().email === email){
         emailExist = true;
       }
@@ -19,15 +17,16 @@ const emailNotExists = async (email) => {
     return emailExist;
 }
 
-var loginWithGoogle = async () => {
+var loginWithGoogle = async (result) => {
+    
     try {
-        /*const result = await signInWithPopup(auth, provider);
         const name = result.user.displayName;
         const email = result.user.email;
         const profilePic = result.user.photoURL;
         const userName = email.split('@')[0];
+       
         const emailNotAtBD = await emailNotExists(email);
-        if (emailNotAtBD) {
+        if (!emailNotAtBD) {
           await addDoc(collection(db, "users"), {
             name,
             userName,
@@ -35,9 +34,9 @@ var loginWithGoogle = async () => {
             email,
             userId: `${result.user.uid}`
           });
-        }*/
+        }
         return {login: true,
-                email : 'pep'};
+                email : email};
     } catch (error) {
         return false;
     }

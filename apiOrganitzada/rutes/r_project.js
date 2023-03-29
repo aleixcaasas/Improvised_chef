@@ -7,7 +7,7 @@ router.get('/home', projectController.home);
 router.get('/', projectController.home);
 
 router.post('/login', projectController.login);
-router.get('/loginWithGoogle', projectController.loginGoogle); //ho faig amb get perque no pasem cap paràmetre
+router.post('/loginWithGoogle', projectController.loginGoogle); 
 router.post('/register', projectController.register);
 
 
