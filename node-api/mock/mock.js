@@ -3,7 +3,7 @@ const fs = require('fs');
 const router = Router();
 const recipes = [];
 
-fs.readFile('parsed_recipes.json', 'utf8', (err, data) => {
+fs.readFile('./data/parsed_recipes.json', 'utf8', (err, data) => {
     if (err) {
         console.error(err);
         return('Error al llegir arxiu JSON');
