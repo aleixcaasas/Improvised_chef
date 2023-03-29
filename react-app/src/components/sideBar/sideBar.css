@@ -1,0 +1,69 @@
+.flex{
+	display: flex;
+}
+.sidebar{
+	width: 350px;
+	height: 600px;
+	text-align: center;
+	display: block;
+    margin-top: auto;
+	font-style: var(--font);
+}
+.sidebar hr{
+	color: #000000;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hache{
+	padding-bottom: 0%;
+}
+.sidebar ul{
+	list-style: none;
+	display: inline-block;
+	text-align: left;
+	padding: 0%;
+}
+.sidebar li{
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+.sidebar a{
+	text-decoration: none;
+	color: #000000;
+	text-align: center;
+}
+.userImage { 
+	display: inline-block; 
+	position: relative; 
+	width: 200px; 
+	height: 200px; 
+	overflow: hidden;
+	object-fit: cover;
+	border-radius: 50%;
+	filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+.sideBarLogOut button{
+    width: 60%;
+	height: 40px;
+	justify-content: center;
+	display: block;
+	color: black;
+	background-color: var(--green);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 20px auto 0;
+	outline: solid 1px black;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+.sideBarLogOut button:hover{
+	background: #254736 !important;
+}
+.sideBarLogOut hr{
+	border: 0.1em solid rgb(41, 41, 41);
+	width: 300px;
+	margin-top: 20px;
+}
