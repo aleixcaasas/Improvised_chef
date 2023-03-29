@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Autocomplete } from "@mui/material";
+//import { Autocomplete } from "@mui/material";
 //import SearchBarSuggestions from "./SearchBarSuggestions";
 //import Data from './data.json';
 
-export default function MockComponent(){
+export default function MockRecipes(){
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [recipes, setRecipes] = useState([]);
 
@@ -13,7 +13,7 @@ export default function MockComponent(){
     const [ingredients, setIngredients] = useState([]);
     //const [ingredientsRecepta, setIngredientsRecepta] = useState("");
 
-    const handleChange1 = async (e) => {
+   /* const handleChange1 = async (e) => {
         setIngredients(e.target.value);
         try {
             if(e.target && e.target.value !== null){
@@ -27,7 +27,7 @@ export default function MockComponent(){
             console.error(error);
         }
     }
-
+*/
     const handleChange = async (e) => {
         setNomRecepta(e.target.value);
         try {
@@ -125,7 +125,7 @@ export default function MockComponent(){
                     onChange={handleChange}
                 />
             </div>*/}
-            <div className="searchBarSuggestions">
+            {/*<div className="searchBarSuggestions">
                 <div className="searchIngredients" >
                     <Autocomplete
                         multiple
@@ -150,7 +150,7 @@ export default function MockComponent(){
                     >
                     </Autocomplete>
                 </div>
-            </div>
+            </div>*/}
             <div>
                 <table className="recipesName">
                     <thead>
