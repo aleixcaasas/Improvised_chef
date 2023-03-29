@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import UserAuthC from '../components/login/UserAuthC';
 import ForgotPassword from '../components/login/ForgotPassword';
 import MockComponent from '../components/mock/MockComponent';
-import SearchBar from '../components/searchBar/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 export default function RouterDirections() {
   return (
