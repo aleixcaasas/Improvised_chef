@@ -6,6 +6,7 @@ censored_variables = ['of', 'large', 'dried', 'thumb', 'sized']
 id_counter_ingredient = 0
 id_counter_recipe = 0
 ingredient_dict = {}
+ingredient_list = []
 total = 0
 
 def get_data_from_ingredient(s: str, recipe_id: int):
@@ -76,7 +77,8 @@ def get_data_from_ingredient(s: str, recipe_id: int):
         unit = "tbsp"
     if name:
         if name not in ingredient_dict:
-            ingredient_dict[name] = {'id': id_counter_ingredient, 'recipes_in': []}
+            ingredient_dict[name] = {'name': name, 'id': id_counter_ingredient, 'recipes_in': []}
+            ingredient_list.append(ingredient_dict[name])
             id_counter_ingredient += 1
         current_id = ingredient_dict[name]['id']
         ingredient_dict[name]['recipes_in'].append(recipe_id)
@@ -123,10 +125,10 @@ def process_recipe_file(input_file_path, output_file_path):
         json.dump(parsed_recipes, output_file, indent=4)
 
     with open(ingredient_file_path, "w") as output_file:
-        json.dump(ingredient_dict, output_file, indent=4)
+        json.dump(ingredient_list, output_file, indent=4)
+        #json.dump(ingredient_dict, output_file, indent=4)
 
 input_file_path = "recipes.json"
 output_file_path = "parsed_recipes.json"
 ingredient_file_path = "parsed_ingredients.json"
 process_recipe_file(input_file_path, output_file_path)
-
