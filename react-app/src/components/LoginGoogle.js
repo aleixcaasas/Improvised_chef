@@ -28,20 +28,7 @@ export default function LoginGoogle() {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const name = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-      const userName = email.split('@')[0];
-      const emailNotAtBD = await mailNotExists(email);
-      if (emailNotAtBD) {
-        await addDoc(collection(db, "users"), {
-          name,
-          userName,
-          profilePic,
-          email,
-          userId: `${result.user.uid}`
-        });
-      }
+      
       return true;
     } catch (error) {
       console.log(error);
