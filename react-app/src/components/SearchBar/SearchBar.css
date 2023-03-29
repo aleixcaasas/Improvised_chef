@@ -1,0 +1,28 @@
+
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 2%;
+  left: 20%;
+  width: 70%;
+  height: 30px;
+}
+
+.searchBar input {
+  margin-right: 10px;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 50px;
+  align-self: stretch;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.CookButton {
+  margin-right: 0%;
+  width: 30%;
+  height: 60px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}

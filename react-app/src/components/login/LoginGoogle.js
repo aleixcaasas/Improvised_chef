@@ -1,7 +1,7 @@
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { provider, auth, db } from '../firebase-config';
+import { provider, auth, db } from '../../firebase-config';
 import { collection, addDoc, query, getDocs} from 'firebase/firestore';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -67,7 +67,7 @@ export default function LoginGoogle() {
 
   return (
     <div>
-      <button onClick={fluxSignInWithGoogle}><FcGoogle /> Sign In With Google</button>
+      <button id = "button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
     </div>
   )
 }

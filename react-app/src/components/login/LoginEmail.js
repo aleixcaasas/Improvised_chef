@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserAuthC, { useAuth } from "../context/UserAuthC";
+import UserAuthC, { useAuth } from "./UserAuthC";
 import LoginGoogle from "./LoginGoogle";
 
 export default function LoginEmail(){
@@ -30,12 +30,12 @@ export default function LoginEmail(){
 
     return (
         <div className="login_page">
-            <label htmlFor="chk" aria-hidden="true">Login</label>
+            <label htmlFor="chk" aria-hidden="true">Sign In</label>
             <form action="react-app/src/components">
                 <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange}/> <br/>
                 <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange}/><br/>
                 <p><Link className="navegationLink" to='/login/forgotPassword'>Forgot your password?</Link></p>
-                <button type="submit" value="LOGIN" onClick={login}>Login</button>
+                <button type="submit" value="LOGIN" onClick={login}>Sign In</button>
             </form>
             <UserAuthC><LoginGoogle/></UserAuthC>
         </div>
