@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import './mock.css';
 //import { Autocomplete } from "@mui/material";
 //import SearchBarSuggestions from "./SearchBarSuggestions";
 //import Data from './data.json';
@@ -109,7 +110,7 @@ export default function MockRecipes(){
         <div id="mock-container">
             <div className="searchBar">
                 <input
-                    className="searchName"
+                    className="searchBar"
                     value={nomRecepta}
                     placeholder="Cercar receptes per nom..."
                     onChange={handleChange}
@@ -152,7 +153,7 @@ export default function MockRecipes(){
                 </div>
             </div>*/}
             <div>
-                <table className="recipesName">
+                <table className="table">
                     <thead>
                     <tr>
                         <th>Title</th>

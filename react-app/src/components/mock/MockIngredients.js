@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import './mock.css';
 export default function MockRecipes(){
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [ingredients, setIngredients] = useState([]);
@@ -40,7 +40,7 @@ export default function MockRecipes(){
         <div id="mock-container">
             <div className="searchBar">
                 <input
-                    className="searchName"
+                    className="searchBar"
                     value={nomIngredient}
                     placeholder="Cercar ingredients per nom..."
                     onChange={handleChange}
@@ -48,12 +48,12 @@ export default function MockRecipes(){
             </div>
             <br/>
             <div>
-                <table className="recipesName">
+                <table className="table">
                     <thead>
                     <tr>
                         <th>Nom</th>
                         <th>ID</th>
-                        <th>Recipes ID</th>
+                        {/*<th>Recipes ID</th>}*/}
                     </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,7 @@ export default function MockRecipes(){
                         <tr>
                             <td>{ingredient.name}</td>
                             <td>{ingredient.id}</td>
-                            <td>
+                            {/*<td>
                                 {ingredient && ingredient.recipes_in.map((recipe)=>(
                                     <div key={recipe.id}>
                                         {recipe}
@@ -74,7 +74,7 @@ export default function MockRecipes(){
                                         <br />
                                     </div>
                                 ))}
-                            </td>
+                            </td>*/}
                         </tr>
                     ))}
                     </tbody>
