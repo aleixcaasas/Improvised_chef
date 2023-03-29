@@ -8,12 +8,19 @@ export default function LoginEmail(){
     const [formState, setFormState] = useState({email: "", password: ""})
     const {email, password} = formState;
     const {logInWithEmail} = useAuth();
+    const [show, setShow] = useState(false);
 
     const handleChange = (e) => {
         let value = e.target.value;
         let name = e.target.name;
         setFormState(prev => ({...prev, [name]: value}));
+        
+
     }
+
+    const handleButtonClick = () => {
+        setShow(true);
+    };
 
     const login = async (e) => {
         e.preventDefault();
@@ -34,7 +41,7 @@ export default function LoginEmail(){
             <form action="react-app/src/components">
                 <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange}/> <br/>
                 <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange}/><br/>
-                <p><Link className="navegationLink" to='/login/forgotPassword'>Forgot your password?</Link></p>
+                <p><Link className="navegationLink" to='/login/forgotPassword' >Forgot your password?</Link></p>
                 <button type="submit" value="LOGIN" onClick={login}>Login</button>
             </form>
             <UserAuthC><LoginGoogle/></UserAuthC>

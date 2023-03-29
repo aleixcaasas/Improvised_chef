@@ -7,15 +7,19 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const {resetPasswordEmail} = useAuth();
+  const [show, setShow] = useState(true);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
     setMessage(await resetPasswordEmail(email));
+   
 	};
+
+
 
   if (message === ""){
     return (
-      <div className = "container" id  = "forgot_password">
+      <div className ={show ? "container container_show" : "container"}  id  = "forgot_password" >
         <h1>Reset your password</h1>
         <form onSubmit={handleSubmit}>
           <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>

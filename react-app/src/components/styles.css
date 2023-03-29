@@ -1,11 +1,18 @@
 .container{
-    width: 350px;
+	opacity: 0;
+  	transition: opacity 0.5s ease-in-out;
+}
+
+.container_show {
+	opacity: 1;
+	width: 350px;
 	height: 600px;
 	background:var(--cream);
 	overflow: hidden;
     border-radius: 10px;
 	box-shadow: 5px 20px 50px var(--black);
-}
+  }
+
 
 .container#forgot_password {
 	width: 500px;

@@ -23,11 +23,11 @@ code {
     monospace;
 }
 
-
 .navegationLink{
   list-style: none;
   text-decoration: none;
-  color: black
+  color: black;
+  transition: 0.2s ease-in-out;
 }
 
 .navegationLink:hover{

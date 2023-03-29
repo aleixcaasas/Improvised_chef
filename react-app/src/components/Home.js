@@ -24,6 +24,7 @@ export default function Home(){
                 <ul>
                     <li><NavLink to="/accounts" className="navegationLink">Accounts</NavLink></li>
                     <li><NavLink to="/mock" className="navegationLink">Mock</NavLink></li>
+                    <li><NavLink to="/receipt" className="navegationLink">Receipt</NavLink></li>
                 </ul>
                 </>
             )

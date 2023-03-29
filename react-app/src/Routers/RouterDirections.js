@@ -5,6 +5,7 @@ import Home from '../components/Home';
 import UserAuthC from '../context/UserAuthC';
 import ForgotPassword from '../components/ForgotPassword';
 import MockComponent from '../components/MockComponent';
+import ReceiptContainer from '../components/Receipt/ReceiptContainer';
 
 export default function RouterDirections() {
   return (
@@ -14,6 +15,7 @@ export default function RouterDirections() {
             <Route exact path="/accounts" element={<Accounts/>}/>
             <Route exact path="/login/forgotPassword" element={<UserAuthC><ForgotPassword/></UserAuthC>}/>
             <Route exact path="/mock" element={<MockComponent></MockComponent>}/>
+            <Route exact path="/receipt" element={<ReceiptContainer></ReceiptContainer>}/>
             <Route path='*' element={<UserAuthC><Home/></UserAuthC>}/>
         </Routes>
     </BrowserRouter>
