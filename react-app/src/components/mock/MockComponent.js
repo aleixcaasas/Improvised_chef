@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+
 export default function MockComponent(){
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [recipes, setRecipes] = useState([]);
