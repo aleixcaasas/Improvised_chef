@@ -54,7 +54,7 @@ label{
 
 .register_page{
 	height: 700px;
-	transform: translateY(-180px);
+	transform: translateY(-150px);
 	transition: .8s ease-in-out;
 	background-color: var(--red);
 	border-radius: 10px;
@@ -62,6 +62,18 @@ label{
 .register_page label{
 	color: white;
 	transform: scale(.6);
+}
+
+.login_page > label {
+	margin: 33px -117px;
+	width: 585px;
+	height: 70px;
+}
+
+#chk:checked ~ .login_page label {
+	background-color: var(--red);
+	color: white;
+	transform: scale(.6) translateY(-80px);
 }
 
 #chk:checked ~ .register_page{
@@ -72,9 +84,6 @@ label{
 	transform: scale(1);
 	color: #000000;
     
-}
-#chk:checked ~ .login_page label{
-	transform: scale(.6) translateY(-80px);
 }
 
 button#button_google {

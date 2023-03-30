@@ -47,7 +47,7 @@ public class GetLinks {
         }
 
         link = driver.findElement(By.cssSelector(".layout-md-rail__primary div:nth-child("+count+") .card .card__content .link"));
-        writer = new FileWriter("data.txt", true);
+        writer = new FileWriter("../data/links.txt", true);
         System.out.println(link.getAttribute("href"));
         writer.append(link.getAttribute("href")).append("\n");
         writer.close();
@@ -73,7 +73,7 @@ public class GetLinks {
     Thread.sleep(5000);
     BufferedReader reader;
     try {
-      reader = new BufferedReader(new FileReader("data.txt"));
+      reader = new BufferedReader(new FileReader("../data/links.txt"));
       String line = reader.readLine();
 
       while (line != null) {

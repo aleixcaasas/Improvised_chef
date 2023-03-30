@@ -4,6 +4,7 @@ var cheerio = require("cheerio");
 var parse = require("iso8601-duration").parse;
 var router = express();
 var fs = require("fs");
+var recipesPath = '../data/recipes.json';
 
 router.all("/", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -67,7 +68,7 @@ router.get("/", function (req, res) {
 
             setTimeout(() => {
               console.log(recipe);
-              fs.appendFile("data.json", JSON.stringify(recipe)+",\n", "utf-8", function(err) {
+              fs.appendFile(recipesPath, JSON.stringify(recipe)+",\n", "utf-8", function(err) {
                 if (err) {
                   return console.log(err);
                 }

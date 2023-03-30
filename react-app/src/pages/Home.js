@@ -22,7 +22,8 @@ export default function Home(){
                 <h1>IMPROVISED CHEF</h1>
                 <ul>
                     <li><NavLink to="/accounts" className="navegationLink">Accounts</NavLink></li>
-                    <li><NavLink to="/mock" className="navegationLink">Mock</NavLink></li>
+                    <li><NavLink to="/recipes" className="navegationLink">Mock Recipes</NavLink></li>
+                    <li><NavLink to="/ingredients" className="navegationLink">Mock Ingredients</NavLink></li>
                 </ul>
                 </>
                 )
