@@ -30,6 +30,7 @@ export default function Home(){
             {
                 user?.email && (
                     <>
+                    
                     <h1>IMPROVISED CHEF</h1>
                     <h3>User Logged In: {user?.email}</h3>
                     <button onClick={handleLogOut}>Sign Out</button>

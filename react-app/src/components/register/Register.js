@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../styles.css';
@@ -44,11 +44,9 @@ export default function Register(){
             const userName = userVar.UserName;
             const email = userVar.email; 
             const password = userVar.password;
-            console.log(name, userName, email, password);
             const result = await axios.post('http://localhost:3700/register', {name, userName, email, password});
-            console.log(result);
             if(result.data.loguejat === "true"){
-                setUser({email: result.data.email});
+                setUser({email: result.data.email, id:result.data.id});
             }
             navigate("/");
         }

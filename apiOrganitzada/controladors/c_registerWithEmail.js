@@ -4,6 +4,7 @@ const {addDoc, collection} = require('firebase/firestore');
 
 
 var registerWithEmail = async (fullName, userName, email, password) => { 
+    var id = null;
     try{
         await createUserWithEmailAndPassword(auth, email, password).then(
             async (result) => {
@@ -14,6 +15,7 @@ var registerWithEmail = async (fullName, userName, email, password) => {
                         email,
                         userId: `${result.user.uid}`
                     });
+                    id = result.user.uid;
                     console.log("Document written with ID: ", docRef.id);
                 } catch(error){
                     console.error("ERROR adding doc", error);
@@ -23,7 +25,7 @@ var registerWithEmail = async (fullName, userName, email, password) => {
     }catch(e){
         return false;
     }
-    return true;
+    return {id:id, loguejat:true};
 };
 
 

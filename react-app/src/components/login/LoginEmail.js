@@ -22,8 +22,9 @@ export default function LoginEmail(){
         e.preventDefault();
         try{
             const result = await axios.post('http://localhost:3700/login', {email, password});
+            console.log(result.data);
             if(result.data.loguejat){
-                setUser({email: result.data.email});
+                setUser({email: result.data.email, id: result.data.id});
             }            
             navigation("/");
         }

@@ -17,10 +17,12 @@ var controller = {
         var params = req.body;
         var email = params.email;
         var password = params.password;
-        if(await loginWithEmail(email, password)){
+        var resposta = await loginWithEmail(email, password);
+        if(resposta.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
-                email: email
+                email: email,
+                id: resposta.return
             })
         }
         else{
@@ -37,10 +39,11 @@ var controller = {
         var email = params.email;
         var password = params.password;
         var boolean = await registerWithEmail(fullName, userName, email, password);
-        if(boolean){
+        if(boolean.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
-                email: email
+                email: email,
+                id: boolean.id
             })
         }
         else{
@@ -56,12 +59,11 @@ var controller = {
         
         var params = await loginWithGoogle(body);
 
-        console.log(params);
-
         if(params.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
-                email: params.email
+                email: params.email,
+                id: params.id
             })
         }
         else{

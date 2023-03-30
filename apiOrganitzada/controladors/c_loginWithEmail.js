@@ -5,13 +5,15 @@ const {auth} = require('../firebase/firebase-config');
 var loginWithEmail = async function (email, password) {
 
     try{
-        await signInWithEmailAndPassword(auth, email, password);
+        result = await signInWithEmailAndPassword(auth, email, password);
+        return {loguejat: true,
+            return: result.user.uid};
     }
     catch(error){
-        console.log(error);
         return false;
     }
-    return true;
+    
+    
 }
 
 

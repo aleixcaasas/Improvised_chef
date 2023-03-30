@@ -23,7 +23,6 @@ var loginWithGoogle = async (result) => {
         const email = result.email;
         const profilePic = result.photoURL;
         const userName = email.split('@')[0];
-       
         const emailNotAtBD = await emailNotExists(email);
 
         if (!emailNotAtBD) {
@@ -36,7 +35,8 @@ var loginWithGoogle = async (result) => {
           });
         }
         return {loguejat: true,
-                email : email};
+                email : email,
+                id: `${result.uid}`};
     } catch (error) {
         return {loguejat: false};
     }
