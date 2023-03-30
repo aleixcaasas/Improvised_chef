@@ -9,6 +9,7 @@ La aplicación proporcionará una base de datos de recetas que se pueden filtrar
 - <a href="https://nodejs.org/es"> Node JS </a>
 - <a href="https://react.dev/"> React JS </a>
 - <a href="https://firebase.google.com/?hl=es"> Firebase </a>
+- <a href="https://www.selenium.dev/"> Selenium </a>
 
 ## <b>Instalación</b>
 
