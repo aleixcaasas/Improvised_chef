@@ -9,7 +9,8 @@ router.get('/', projectController.home);
 router.post('/login', projectController.login);
 router.post('/loginWithGoogle', projectController.loginGoogle); 
 router.post('/register', projectController.register);
-
+router.post('/resetPassword', projectController.resetPassword);
+router.post('/logout', projectController.logout);
 
 
 module.exports = router;

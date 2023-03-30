@@ -2,6 +2,8 @@ const home = require('./c_home');
 const loginWithEmail = require('./c_loginWithEmail');
 const registerWithEmail = require('./c_registerWithEmail');
 const loginWithGoogle = require('./c_loginWithGoogle');
+const resetPasswordEmail = require('./c_resetPassword');
+const signOutV  = require('./c_logout');
 
 var controller = {
 
@@ -11,37 +13,38 @@ var controller = {
         }) 
     },
 
-    login: function(req, res) { 
+    login: async function(req, res) { 
         var params = req.body;
         var email = params.email;
         var password = params.password;
-        if(loginWithEmail(email, password)){
+        if(await loginWithEmail(email, password)){
             return res.status(200).send({
                 loguejat: 'true',
                 email: email
             })
         }
         else{
-            return res.status(400).send({
+            return res.status(200).send({  //200 conforme la peticio sha fet pero no ha donat el resultat esperat
                 loguejat: 'false'
             })
         }
     },
 
-    register: function(req, res) {
+    register: async function(req, res) {
         var params = req.body;
-        var fullName = params.fullName;
+        var fullName = params.name;
         var userName = params.userName;
         var email = params.email;
         var password = params.password;
-        if(registerWithEmail(fullName, userName, email, password)){
+        var boolean = await registerWithEmail(fullName, userName, email, password);
+        if(boolean){
             return res.status(200).send({
                 loguejat: 'true',
                 email: email
             })
         }
         else{
-            return res.status(400).send({
+            return res.status(200).send({ //POSO 200 O 400?¿?¿?¿
                 loguejat: 'false'
             }) 
         }
@@ -53,17 +56,42 @@ var controller = {
         
         var params = await loginWithGoogle(body);
 
-        if(params.login){
+        console.log(params);
+
+        if(params.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
                 email: params.email
             })
         }
         else{
-            return res.status(400).send({
+            return res.status(200).send({ //poso 200 ja que tot ha anat correcte l'unic que no s'ha loguejat
                 loguejat: 'false'
             })
         }
+    },
+
+    resetPassword: async function(req, res){
+
+        var params = await resetPasswordEmail(req.body.email);
+        if(params === "Password reset email send correctly"){
+            return res.status(200).send({
+                message: params
+            })
+        }
+        else{
+            return res.status(200).send({
+                message: params
+            })
+        }
+
+    },
+
+    logout: async function(req, res){
+
+        console.log(req.body);
+        var params = await signOutV(req.body)
+
     }
     
 }

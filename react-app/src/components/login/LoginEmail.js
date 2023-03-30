@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserAuthC, { useAuth } from "./UserAuthC";
 import LoginGoogle from "./LoginGoogle";
+import axios from "axios";
+import { UserContext } from '../../pages/globalValue';
+import { useContext } from "react";
 
 export default function LoginEmail(){
     const navigation = useNavigate();
     const [formState, setFormState] = useState({email: "", password: ""})
     const {email, password} = formState;
-    const {logInWithEmail} = useAuth();
+
+    const { user, setUser } = useContext(UserContext);
 
     const handleChange = (e) => {
         let value = e.target.value;
@@ -18,8 +21,10 @@ export default function LoginEmail(){
     const login = async (e) => {
         e.preventDefault();
         try{
-            const user = await logInWithEmail(email, password);
-            console.log(user);
+            const result = await axios.post('http://localhost:3700/login', {email, password});
+            if(result.data.loguejat){
+                setUser({email: result.data.email});
+            }            
             navigation("/");
         }
         catch (error) {
@@ -37,7 +42,7 @@ export default function LoginEmail(){
                 <p><Link className="navegationLink" to='/login/forgotPassword'>Forgot your password?</Link></p>
                 <button type="submit" value="LOGIN" onClick={login}>Sign In</button>
             </form>
-            <UserAuthC><LoginGoogle/></UserAuthC>
+            <LoginGoogle/>
         </div>
     );
 }

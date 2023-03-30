@@ -5,9 +5,8 @@ const {addDoc, collection} = require('firebase/firestore');
 
 var registerWithEmail = async (fullName, userName, email, password) => { 
     try{
-        createUserWithEmailAndPassword(auth, email, password).then(
+        await createUserWithEmailAndPassword(auth, email, password).then(
             async (result) => {
-                console.log(result)
                 try{
                     const docRef = await addDoc(collection(db, "users"), {
                         fullName,
@@ -21,8 +20,7 @@ var registerWithEmail = async (fullName, userName, email, password) => {
                 }
             }
         )
-    }
-    catch(error){
+    }catch(e){
         return false;
     }
     return true;

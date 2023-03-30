@@ -1,24 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { auth } from "../firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
-import { useAuth } from '../components/login/UserAuthC';
 import '../components/styles.css';
+import { UserContext } from './globalValue';
+import React, { useContext } from "react";
+
 
 export default function Home(){
-    const[user, setUser] = useState({});
-    const {logOut} = useAuth();
-    onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
+
+    const { user, setUser } = useContext(UserContext);
+
     const handleLogOut = async () => {
-        await logOut();
+        //await axios.post('http://localhost:3700/logout', {user});
+        setUser({email:''});
     }
 
     return (
         <div className="home">
-        {
-            !user?.email && (
+            {
+            
+                !user?.email && (
                 <>
                 <h1>IMPROVISED CHEF</h1>
                 <ul>
@@ -26,17 +25,17 @@ export default function Home(){
                     <li><NavLink to="/mock" className="navegationLink">Mock</NavLink></li>
                 </ul>
                 </>
-            )
-        }
-        {
-            user?.email && (
-                <>
-                <h1>IMPROVISED CHEF</h1>
-                <h3>User Logged In: {user?.email}</h3>
-                <button onClick={handleLogOut}>Sign Out</button>
-                </>
-            )
-        }
+                )
+            }
+            {
+                user?.email && (
+                    <>
+                    <h1>IMPROVISED CHEF</h1>
+                    <h3>User Logged In: {user?.email}</h3>
+                    <button onClick={handleLogOut}>Sign Out</button>
+                    </>
+                )
+            }
         </div>    
      );
 }

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useAuth } from "./UserAuthC";
 import './../styles.css';
+import axios from 'axios';
 
 export default function ForgotPassword() {
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const {resetPasswordEmail} = useAuth();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-    setMessage(await resetPasswordEmail(email));
+    const missatge = await axios.post('http://localhost:3700/resetPassword', {email});
+    setMessage(missatge.data.message);
 	};
 
   if (message === ""){

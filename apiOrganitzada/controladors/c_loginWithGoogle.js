@@ -1,6 +1,5 @@
 const {db} = require('../firebase/firebase-config');
 const {addDoc, collection, getDocs, query} = require('firebase/firestore');
-const e = require('express');
 
 const emailNotExists = async (email) => {
     
@@ -18,27 +17,28 @@ const emailNotExists = async (email) => {
 }
 
 var loginWithGoogle = async (result) => {
-    
+
     try {
-        const name = result.user.displayName;
-        const email = result.user.email;
-        const profilePic = result.user.photoURL;
+        const name = result.displayName;
+        const email = result.email;
+        const profilePic = result.photoURL;
         const userName = email.split('@')[0];
        
         const emailNotAtBD = await emailNotExists(email);
+
         if (!emailNotAtBD) {
           await addDoc(collection(db, "users"), {
             name,
             userName,
             profilePic,
             email,
-            userId: `${result.user.uid}`
+            userId: `${result.uid}`
           });
         }
-        return {login: true,
+        return {loguejat: true,
                 email : email};
     } catch (error) {
-        return false;
+        return {loguejat: false};
     }
 };
 
