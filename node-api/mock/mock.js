@@ -48,17 +48,19 @@ router.post('/recipes/title', async (req, res) => {
     return res.json(recipes.filter(obj => obj.title.toString().toLowerCase().includes(req.body.title.toLowerCase())));
 });
 
-router.get('/recipes/ingredients', async (req, res) => {
+router.post('/recipes/ingredients', async (req, res) => {
     let recipesIngredients = [];
-    recipes.forEach(recipe => {
-        recipe.ingredients.forEach(ingredient => {
-            if(ingredients.some(obj => obj.id === ingredient.id)){
-                recipesIngredients.push(recipe);
-            }
+    if(req.body.ingredients.length!==0){
+        recipes.forEach(recipe => {
+            recipe.ingredients.forEach(ingredient => {
+                if(req.body.ingredients.some(obj => obj.id === ingredient.id)){
+                    recipesIngredients.push(recipe);
+                }
+            })
         })
-    })
+    }
     const arraySinDuplicados = recipesIngredients.filter((obj, index, self) =>
-            !index || !self.slice(0, index).some((o) => o.id === obj.id)
+        !index || !self.slice(0, index).some((o) => o.id === obj.id)
     );
     return res.json(arraySinDuplicados);
 });

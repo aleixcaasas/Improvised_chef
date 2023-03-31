@@ -4,6 +4,7 @@ import './mock.css';
 export default function MockRecipes(){
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [ingredients, setIngredients] = useState([]);
+    const [recipesIngredients, setRecipesIngredients] = useState([]);
 
     //Estat per controlar el que s'escriu en el cercador
     const [nomIngredient, setNomIngredient] = useState("");
@@ -16,6 +17,16 @@ export default function MockRecipes(){
                     name: e.target.value
                 });
                 setIngredients(response.data);
+
+                await axios.post("http://localhost:3000/recipes/ingredients", {
+                    ingredients: response.data
+                })
+                .then(response=>{
+                    setRecipesIngredients(response.data);
+                })
+                .catch(error=>{
+                    console.error(error);
+                })
             }
         }
         catch (error) {
@@ -25,13 +36,18 @@ export default function MockRecipes(){
 
     useEffect(()=>{
         const peticionsApi = async ()=>{
-            await axios.get("http://localhost:3000/ingredients")
-                .then(response=>{
-                    setIngredients(response.data);
-                })
-                .catch(error=>{
-                    console.error(error);
-                })
+            const response = await axios.get("http://localhost:3000/ingredients");
+            setIngredients(response.data);
+
+            await axios.post("http://localhost:3000/recipes/ingredients", {
+                ingredients: response.data
+            })
+            .then(response=>{
+                setRecipesIngredients(response.data);
+            })
+            .catch(error=>{
+                console.error(error);
+            })
         };
         peticionsApi();
     }, []);
@@ -47,13 +63,11 @@ export default function MockRecipes(){
                 />
             </div>
             <br/>
-            <div>
-                <table className="table">
+            <div className="table-container">
+                <table className="table ingredients">
                     <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>ID</th>
-                        {/*<th>Recipes ID</th>}*/}
+                        <th>Ingredients</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,16 +79,38 @@ export default function MockRecipes(){
                     {ingredients && ingredients.map((ingredient)=>(
                         <tr>
                             <td>{ingredient.name}</td>
-                            <td>{ingredient.id}</td>
-                            {/*<td>
-                                {ingredient && ingredient.recipes_in.map((recipe)=>(
-                                    <div key={recipe.id}>
-                                        {recipe}
-                                        <br />
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                <table className="table recipes">
+                    <thead>
+                    <tr>
+                        <th>Name Recipe</th>
+                        <th>Ingredients Recipe</th>
+                        <th>Image Recipe</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        recipesIngredients.length===0 && (
+                            <h3>No matches found!</h3>
+                        )
+                    }
+                    {recipesIngredients && recipesIngredients.map((recipeIngredient)=>(
+                        <tr>
+                            <td>{recipeIngredient.title}</td>
+                            <td>
+                                {recipeIngredient && recipeIngredient.ingredients.map((ingredient)=>(
+                                    <div key={ingredient.id}>
+                                        {ingredient.name}
                                         <br />
                                     </div>
                                 ))}
-                            </td>*/}
+                            </td>
+                            <td>
+                                <input type="image" src={recipeIngredient.image} width={200} height={200} alt="image" />
+                            </td>
                         </tr>
                     ))}
                     </tbody>
