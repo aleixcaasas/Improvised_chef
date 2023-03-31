@@ -2,9 +2,8 @@ const {createUserWithEmailAndPassword} = require('firebase/auth');
 const {auth, db} = require('../firebase/firebase-config');
 const {addDoc, collection} = require('firebase/firestore');
 
-
-var registerWithEmail = async (fullName, userName, email, password) => { 
-    var id = null;
+const registerWithEmail = async (fullName, userName, email, password) => {
+    const id = null;
     try{
         await createUserWithEmailAndPassword(auth, email, password).then(
             async (result) => {
@@ -22,11 +21,11 @@ var registerWithEmail = async (fullName, userName, email, password) => {
                 }
             }
         )
-    }catch(e){
+    }
+    catch(e){
         return false;
     }
-    return {id:id, loguejat:true};
+    return {id: id, loguejat: true};
 };
-
 
 module.exports = registerWithEmail;

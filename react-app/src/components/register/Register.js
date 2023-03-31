@@ -16,7 +16,6 @@ export default function Register(){
         password: "",
         passwordConfirm: ""
     });
-    
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -35,20 +34,25 @@ export default function Register(){
             setError("Please fill all the fields")
             alert("Please fill all the fields");
             return err;
-        }else if (userVar.password !== userVar.passwordConfirm){
+        }
+        else if (userVar.password !== userVar.passwordConfirm){
             setError("Passwords do not match")
             alert("Passwords do not match");
             return err;
-        }else{
+        }
+        else{
             const name = userVar.Name;
             const userName = userVar.UserName;
             const email = userVar.email; 
             const password = userVar.password;
-            const result = await axios.post('http://localhost:3700/register', {name, userName, email, password});
+            const result = await axios.post('http://localhost:3000/register', {name, userName, email, password});
             if(result.data.loguejat === "true"){
                 setUser({email: result.data.email, id:result.data.id});
+                navigate("/");
             }
-            navigate("/");
+            else{
+                alert("User exist");
+            }
         }
 
         try{

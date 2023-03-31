@@ -17,7 +17,7 @@ const emailNotExists = async (email) => {
     return emailExist;
 }
 
-var resetPasswordEmail = async (email) => {
+const resetPasswordEmail = async (email) => {
     try{
         if (await emailNotExists(email)){ //email exists
             await sendPasswordResetEmail(auth,email);

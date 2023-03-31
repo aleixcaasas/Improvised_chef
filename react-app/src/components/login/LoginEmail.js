@@ -21,16 +21,23 @@ export default function LoginEmail(){
     const login = async (e) => {
         e.preventDefault();
         try{
-            const result = await axios.post('http://localhost:3700/login', {email, password});
-            console.log(result.data);
-            if(result.data.loguejat){
-                setUser({email: result.data.email, id: result.data.id});
-            }            
-            navigation("/");
+            if(email === "" || password === ""){
+                alert("Please fill all the fields");
+            }
+            else{
+                const result = await axios.post('http://localhost:3000/login', {email, password});
+                console.log(result.data);
+                if(result.data.id != null && result.data.loguejat){
+                    setUser({email: result.data.email, id: result.data.id});
+                    navigation("/");
+                }
+                else{
+                    alert("Username or password incorrect");
+                }
+            }
         }
         catch (error) {
             console.log(error.message);
-            alert("Invalid name or password");
         }
     }
 

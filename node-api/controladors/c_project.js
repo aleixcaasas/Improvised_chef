@@ -4,41 +4,38 @@ const registerWithEmail = require('./c_registerWithEmail');
 const loginWithGoogle = require('./c_loginWithGoogle');
 const resetPasswordEmail = require('./c_resetPassword');
 const signOutV  = require('./c_logout');
+const recipes = require('./c_recipes');
+const ingredients = require('./c_ingredients');
 
-var controller = {
-
+const controller = {
     home: function(req, res) { 
-        return res.status(200).send({
-            home,
-        }) 
+        return res.status(200).send(home)
     },
 
     login: async function(req, res) { 
-        var params = req.body;
-        var email = params.email;
-        var password = params.password;
-        var resposta = await loginWithEmail(email, password);
-        if(resposta.loguejat){
+        const params = req.body;
+        const email = params.email;
+        const password = params.password;
+        const resposta = await loginWithEmail(email, password);
+        if(resposta.id != null && resposta.loguejat) {
             return res.status(200).send({
-                loguejat: 'true',
+                loguejat: true,
                 email: email,
-                id: resposta.return
+                id: resposta.id
             })
         }
-        else{
-            return res.status(200).send({  //200 conforme la peticio sha fet pero no ha donat el resultat esperat
-                loguejat: 'false'
-            })
-        }
+        return res.status(200).send({  //200 conforme la peticio sha fet pero no ha donat el resultat esperat
+            loguejat: false, id: resposta.id
+        })
     },
 
     register: async function(req, res) {
-        var params = req.body;
-        var fullName = params.name;
-        var userName = params.userName;
-        var email = params.email;
-        var password = params.password;
-        var boolean = await registerWithEmail(fullName, userName, email, password);
+        const params = req.body;
+        const fullName = params.name;
+        const userName = params.userName;
+        const email = params.email;
+        const password = params.password;
+        const boolean = await registerWithEmail(fullName, userName, email, password);
         if(boolean.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
@@ -54,11 +51,8 @@ var controller = {
     },
 
     loginGoogle: async function(req, res){
-
-        var body = req.body;
-        
-        var params = await loginWithGoogle(body);
-
+        const body = req.body;
+        const params = await loginWithGoogle(body);
         if(params.loguejat){
             return res.status(200).send({
                 loguejat: 'true',
@@ -74,28 +68,28 @@ var controller = {
     },
 
     resetPassword: async function(req, res){
-
-        var params = await resetPasswordEmail(req.body.email);
+        const params = await resetPasswordEmail(req.body.email);
         if(params === "Password reset email send correctly"){
-            return res.status(200).send({
-                message: params
-            })
+            return res.status(200).send({message: params})
         }
         else{
-            return res.status(200).send({
-                message: params
-            })
+            return res.status(200).send({message: params})
         }
 
     },
 
     logout: async function(req, res){
-
         console.log(req.body);
-        var params = await signOutV(req.body)
+        await signOutV(req.body)
+    },
 
-    }
-    
+    recipes: function(req, res) {
+        return res.status(200).send(recipes)
+    },
+
+    ingredients: function(req, res) {
+        return res.status(200).send(ingredients)
+    },
 }
 
 module.exports = controller;

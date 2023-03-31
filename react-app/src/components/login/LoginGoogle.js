@@ -17,7 +17,7 @@ export default function LoginGoogle() {
 
     try {
       const result = await signInWithPopup(auth, provider);
-      const response = await axios.post('http://localhost:3700/loginWithGoogle', result.user);
+      const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
       console.log(response);
       if(response.data.loguejat === "true"){
         setUser({email: response.data.email, id: response.data.id});

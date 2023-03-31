@@ -7,7 +7,7 @@ import { SlBasket } from 'react-icons/sl';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { MdLogout } from 'react-icons/md';
 import { useState } from "react";
-import { auth } from "../firebase-config";
+import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useAuth } from '../context/UserAuthC';
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="userImage">
-                <img className="userImage" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"></img>
+                <img className="userImage" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" alt="userImage"></img>
             </div>
             <h3 className="hache">JUAN COCINERO</h3>
             <a>@juancocinero</a>

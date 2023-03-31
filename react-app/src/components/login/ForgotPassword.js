@@ -9,7 +9,7 @@ export default function ForgotPassword() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-    const missatge = await axios.post('http://localhost:3700/resetPassword', {email});
+    const missatge = await axios.post('http://localhost:3000/resetPassword', {email});
     setMessage(missatge.data.message);
 	};
 

@@ -16,7 +16,7 @@ const emailNotExists = async (email) => {
     return emailExist;
 }
 
-var loginWithGoogle = async (result) => {
+const loginWithGoogle = async (result) => {
 
     try {
         const name = result.displayName;
