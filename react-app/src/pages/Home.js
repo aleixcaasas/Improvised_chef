@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import '../components/styles.css';
 import { UserContext } from './globalValue';
 import React, { useContext } from "react";
 
@@ -24,6 +23,7 @@ export default function Home(){
                     <li><NavLink to="/accounts" className="navegationLink">Accounts</NavLink></li>
                     <li><NavLink to="/recipes" className="navegationLink">Mock Recipes</NavLink></li>
                     <li><NavLink to="/ingredients" className="navegationLink">Mock Ingredients</NavLink></li>
+                    <li><NavLink to="/components" className="navegationLink">View all components</NavLink></li>
                 </ul>
                 </>
                 )

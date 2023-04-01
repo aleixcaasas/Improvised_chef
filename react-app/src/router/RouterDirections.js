@@ -7,6 +7,9 @@ import MockRecipes from '../components/mock/MockRecipes';
 import MockIngredients from '../components/mock/MockIngredients';
 import SearchBar from '../components/searchBar/SearchBar';
 import { UserProvider } from '../pages/globalValue';
+import Components from '../pages/Components'
+import SideBar from '../components/sideBar/SideBar'
+import ResumeRecipe from '../components/resume_recipe/Resume_recipe';
 
 export default function RouterDirections() {
   return (
@@ -17,9 +20,20 @@ export default function RouterDirections() {
             <Route exact path="/" element={<Home/>}/>
             <Route exact path="/accounts" element={<Accounts/>}/>
             <Route exact path="/login/forgotPassword" element={<ForgotPassword/>}/>
+            
+            {/* TEMPORAL PATHS */}
+            {/* MOCKS */}
             <Route exact path="/recipes" element={<MockRecipes></MockRecipes>}/>
             <Route exact path="/ingredients" element={<MockIngredients></MockIngredients>}/>
-            <Route exact path="/searchbar" element={<SearchBar></SearchBar>}/>
+
+            {/* COMPONENTS */}
+            <Route exact path="/components" element={<Components></Components>} />
+            <Route exact path="/components/accounts" element={<Accounts></Accounts>} />
+            <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
+            <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
+            <Route exact path="/components/resume_recipe" element={<ResumeRecipe/>} />            
+            
+            
             <Route path='*' element={<Home/>}/>
         </Routes>
      </UserProvider>

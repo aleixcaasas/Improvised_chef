@@ -1,58 +1,57 @@
 import { Link } from "react-router-dom";
-import { HiOutlineHome } from 'react-icons/hi';
 import { TbCheese } from 'react-icons/tb';
-import { BsPerson } from 'react-icons/bs';
-import { MdOutlineKitchen } from 'react-icons/md';
-import { SlBasket } from 'react-icons/sl';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { MdLogout } from 'react-icons/md';
+import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 import { useState } from "react";
 import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
-import { useAuth } from '../context/UserAuthC';
+import './sideBar.css';
 
 
 
 const Sidebar = () => {
-    const[user, setUser] = useState({});
-    const {logOut} = useAuth();
+    const [user, setUser] = useState({});
+    //const {logOut} = useAuth();
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
-    const handleLogOut = async () => {
+    /*const handleLogOut = async () => {
         await logOut();
-    }
+    }*/
     return (
         <div className="sidebar">
-            <div className="userImage">
-                <img className="userImage" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" alt="userImage"></img>
+            <div className="sidebar-top">
+                <div className="user-div">
+                    <div className="image-div">
+                        <img className="user-image" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"></img>
+                    </div>
+                    <h3 className="name">JUAN COCINERO</h3>
+                    <a className="username">@juancocinero</a>
+                </div>
+                <div className="logout-div">
+                    <button /*onClick={handleLogOut}*/><MdLogout size={22}></MdLogout> <label>Sign Out</label></button>
+                </div>
             </div>
-            <h3 className="hache">JUAN COCINERO</h3>
-            <a>@juancocinero</a>
-            <p className="sideBarLogOut">
-                <button onClick={handleLogOut}><MdLogout></MdLogout> Log out</button>
-                <hr></hr>
-            </p>
-            <ul>
-                <li>
-                    <Link to=""><HiOutlineHome></HiOutlineHome> Home</Link>
-                </li>
-                <li>
-                    <Link to=""><BsPerson></BsPerson> Profile</Link>
-                </li>
-                <li>
-                    <Link to=""><MdOutlineKitchen></MdOutlineKitchen> My Kitchen</Link>
-                </li>
-                <li>
-                    <Link to=""><TbCheese></TbCheese> My Ingredients</Link>
-                </li>
-                <li>
-                    <Link to=""><SlBasket></SlBasket> Shopping List</Link>
-                </li>
-                <li>
-                    <Link to=""><AiOutlineHeart></AiOutlineHeart> My Favourites</Link>
-                </li>
-            </ul>
+            <div className="sidebar-bottom">
+                <ul>
+                    <Link to=""><li><MdOutlineHome size={30} /><label>Home</label></li></Link>
+
+
+                    <Link to=""><li><MdPersonOutline size={30} /><label>Profile</label></li></Link>
+
+
+                    <Link to=""><li><MdOutlineKitchen size={30} /><label>My Kitchen</label></li></Link>
+
+
+                    <Link to=""><li><TbCheese size={30} /><label>My Ingredients</label></li></Link>
+
+
+                    <Link to=""><li><MdOutlineShoppingCart size={30} /><label>Shopping List</label></li></Link>
+
+
+                    <Link to=""><li><MdOutlineFavoriteBorder size={30} /><label>My Favourites</label></li></Link>
+                </ul>
+            </div>
+
         </div>
     )
 }

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import '../styles.css';
 import { UserContext } from '../../pages/globalValue';
-import { useContext } from "react";
 
-export default function Register(){
+export default function Register() {
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
     const[err, setError] = useState("");

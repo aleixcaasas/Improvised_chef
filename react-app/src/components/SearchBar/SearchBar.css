@@ -1,28 +1,48 @@
-
-
-.searchBar {
+.searchBar-div {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   position: fixed;
   top: 2%;
-  left: 20%;
+  left: 30%;
   width: 70%;
-  height: 30px;
 }
 
-.searchBar input {
-  margin-right: 10px;
-  width: 100%;
-  max-width: 700px;
+.searchBar {
+  width: 60%;
+  max-width: 60%;
+  height: 100%;
   border-radius: 50px;
-  align-self: stretch;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  margin-right: 3%;
+  padding: 10px 20px;
+  border: solid 1px rgba(0, 0, 0, 0.514);
+  font-size: 1em;
+  outline: none;
 }
 
-.CookButton {
-  margin-right: 0%;
-  width: 30%;
-  height: 60px;
+.CookButton{
+  width: 35%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border: solid 1px rgba(0, 0, 0, 0.514);
+  margin-right: 10%;
+  justify-content: center;
+	display: block;
+	color: #fff;
+	background-color: var(--red);
+  outline: none;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
 }
+
+.CookButton:hover{
+  background: rgb(102, 24, 24);
+
+}
+

@@ -23,6 +23,46 @@
 	height: 100%;
 }
 
+.login-form p{
+	text-align: center;
+}
+
+
+.login-form input{
+	width: 60%;
+	height: 18px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 0px auto;
+	padding: 10px 15px;
+	border: none;
+	outline: none;
+	border-radius: 50px;
+}
+
+.login-form button{
+	width: 66%;
+	height: 40px;
+	justify-content: center;
+	display: block;
+	color: #fff;
+	background-color: var(--red);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 20px auto 0;
+	outline: none;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+
+.login-form button:hover{
+	background: rgb(102, 24, 24);
+}
+
+
 label{
 	color: var(--red);
 	font-size: 2em;
@@ -87,6 +127,19 @@ label{
 }
 
 button#button_google {
+	width: 66%;
+	height: 40px;
+	justify-content: center;
+	display: block;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 20px auto 0;
+	outline: none;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+
 	background-color: white;
 	color: #000000;
 	border:1px #333333 solid ;

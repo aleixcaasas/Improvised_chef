@@ -32,23 +32,23 @@ export default function LoginGoogle() {
   const fluxSignInWithGoogle = async () => {
     
     await signInWithGoogle()
-        .then((succes) => {
-          if (succes){
-            navigation('/');
-          }else{
-            return(
-                <>
-                  <h3>Incorrect Log In. Please try again</h3>
-                  <button onClick={navigation('/')}>Go Home</button>
-                </>
-            )
-          }
-        });
+      .then((succes) => {
+        if (succes) {
+          navigation('/');
+        } else {
+          return (
+            <>
+              <h3>Incorrect Log In. Please try again</h3>
+              <button onClick={navigation('/')}>Go Home</button>
+            </>
+          )
+        }
+      });
   }
 
   return (
     <div>
-      <button id = "button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
+      <button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
     </div>
   )
 }

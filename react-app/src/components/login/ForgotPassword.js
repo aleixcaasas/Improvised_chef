@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './../styles.css';
 import axios from 'axios';
 
 export default function ForgotPassword() {
@@ -13,17 +12,17 @@ export default function ForgotPassword() {
     setMessage(missatge.data.message);
 	};
 
-  if (message === ""){
+  if (message === "") {
     return (
-      <div className = "container" id  = "forgot_password">
+      <div className="container" id="forgot_password">
         <h1>Reset your password</h1>
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
           <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>
           <button type="submit">Send email</button>
         </form>
       </div>
     );
-  } else if (message === "Password reset email send correctly"){
+  } else if (message === "Password reset email send correctly") {
     return (
       <h3>{message}</h3>
     );
