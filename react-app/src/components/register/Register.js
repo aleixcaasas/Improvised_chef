@@ -63,7 +63,7 @@ export default function Register() {
     return (
         <div className="register_page">
             <label htmlFor="chk" aria-hidden="true">Sign Up</label>
-            <form action="react-app/src/components">
+            <form className="login-form" action="react-app/src/components">
                 <input type="text" placeholder="NAME" value={userVar.Name} name='Name' onChange={handleChange}/> <br/>
                 <input type="text" placeholder="USER NAME" value={userVar.UserName} name='UserName' onChange={handleChange}/><br/>
                 <input type="email" placeholder="EMAIL" value={userVar.email} name='email' onChange={handleChange}/><br/>
