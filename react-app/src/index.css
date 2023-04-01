@@ -9,12 +9,8 @@
 
 body {
   font-family: var(--font);
-  background-color: var(--green);
   margin: 0;
 	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	min-height: 100vh;
 }
 
@@ -23,13 +19,8 @@ code {
     monospace;
 }
 
-.navegationLink{
-  list-style: none;
+a{
   text-decoration: none;
-  color: black;
-  transition: 0.2s ease-in-out;
-}
-
-.navegationLink:hover{
-  font-weight: bold;
+	color: #000000;
+	text-align: center;
 }

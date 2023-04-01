@@ -1,34 +1,34 @@
-import { useContext, createContext, useEffect, useState} from "react";
+import { useContext, createContext, useEffect, useState } from "react";
 import { AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
-import {provider, auth, db} from '../../firebase-config';
-import { addDoc, collection, getDocs, query} from "firebase/firestore";
+import { provider, auth, db } from '../../firebase-config';
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 
 const userContext = createContext();
-export const useAuth = () => {return useContext(userContext)};
+export const useAuth = () => { return useContext(userContext) };
 
-const UserAuthC = ({children}) => {
+const UserAuthC = ({ children }) => {
     const [error, setError] = useState("");
     const [currentUser, setUser] = useState("");
 
-    useEffect(()=>{
+    useEffect(() => {
         onAuthStateChanged(auth, user => {
             console.log(user)
-            if(user){
+            if (user) {
                 setUser(user)
                 console.log("u are logging");
             }
-            else{
+            else {
                 //signOut(auth);
             }
         })
     }, [currentUser]);
 
-    const SignUp = async (fullName, userName, email, password) => { 
+    const SignUp = async (fullName, userName, email, password) => {
         setError("");
         createUserWithEmailAndPassword(auth, email, password).then(
             async (result) => {
                 console.log(result)
-                try{
+                try {
                     const docRef = await addDoc(collection(db, "users"), {
                         fullName,
                         userName,
@@ -37,18 +37,18 @@ const UserAuthC = ({children}) => {
                     });
                     alert("Welcome");
                     console.log("Document written with ID: ", docRef.id);
-                } catch(error){
+                } catch (error) {
                     console.error("ERROR adding doc", error);
                 }
             }
         ).catch(err => {
-            if(err.code === "auth/email-already-in-use"){
+            if (err.code === "auth/email-already-in-use") {
                 setInterval(() => {
                     setError("");
                 }, 5000)
                 setError("email already exists")
             }
-            else if (err.code === AuthErrorCodes.WEAK_PASSWORD){
+            else if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
                 setInterval(() => {
                     setError("");
                 }, 5000)
@@ -60,11 +60,11 @@ const UserAuthC = ({children}) => {
         })
     };
 
-    const logOut = async () =>{
+    const logOut = async () => {
         await signOut(auth);
     }
 
-    const logInWithEmail = async (email, password) =>{
+    const logInWithEmail = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -77,42 +77,42 @@ const UserAuthC = ({children}) => {
             const userName = email.split('@')[0];
             const emailNotAtBD = await emailNotExists(email);
             if (emailNotAtBD) {
-              await addDoc(collection(db, "users"), {
-                name,
-                userName,
-                profilePic,
-                email,
-                userId: `${result.user.uid}`
-              });
+                await addDoc(collection(db, "users"), {
+                    name,
+                    userName,
+                    profilePic,
+                    email,
+                    userId: `${result.user.uid}`
+                });
             }
             return true;
-          } catch (error) {
+        } catch (error) {
             return false;
-          }
+        }
     };
 
     const emailNotExists = async (email) => {
         const q = query(collection(db, "users"));
         const querySnapshot = await getDocs(q);
-        
+
         let emailExist = false;
 
         querySnapshot.forEach((doc) => {
-          console.log(doc.data().email, email)
-          if(doc.data().email === email){
-            emailExist = true;
-          }
+            console.log(doc.data().email, email)
+            if (doc.data().email === email) {
+                emailExist = true;
+            }
         });
         return emailExist;
     }
 
     const resetPasswordEmail = async (email) => {
-        try{
-            if (await emailNotExists(email)){ //email exists
-                await sendPasswordResetEmail(auth,email);
+        try {
+            if (await emailNotExists(email)) { //email exists
+                await sendPasswordResetEmail(auth, email);
                 return "Password reset email send correctly";
             }
-        }catch (error) {
+        } catch (error) {
             return String(error);
         }
         return "There is not any acount with this email";
@@ -128,7 +128,7 @@ const UserAuthC = ({children}) => {
         emailNotExists,
         resetPasswordEmail
     }
-    
+
     return (
         <userContext.Provider value={value}>{children}</userContext.Provider>
     )

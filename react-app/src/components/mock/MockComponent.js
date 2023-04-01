@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-export default function MockComponent(){
+export default function MockComponent() {
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [recipes, setRecipes] = useState([]);
 
@@ -12,7 +12,7 @@ export default function MockComponent(){
     const handleChange = async (e) => {
         setCercador(e.target.value);
         try {
-            if(e.target && e.target.value !== null){
+            if (e.target && e.target.value !== null) {
                 const response = await axios.post('http://localhost:3000/recipes/title', {
                     title: e.target.value
                 });
@@ -24,13 +24,13 @@ export default function MockComponent(){
         }
     }
 
-    useEffect(()=>{
-        const peticionsApi = async ()=>{
+    useEffect(() => {
+        const peticionsApi = async () => {
             await axios.get("http://localhost:3000/recipes")
-                .then(response=>{
+                .then(response => {
                     setRecipes(response.data);
                 })
-                .catch(error=>{
+                .catch(error => {
                     console.error(error);
                 })
         };
@@ -57,23 +57,23 @@ export default function MockComponent(){
                         </tr>
                     </thead>
                     <tbody>
-                    {recipes && recipes.map((recipe)=>(
-                        <tr>
-                            <td>{recipe.title}</td>
-                            <td>
-                                {recipes && recipe.ingredients.map((ingredient)=>(
-                                    <div key={ingredient.id}>
-                                        {ingredient.name}
-                                        <br />
-                                        <br />
-                                    </div>
-                                ))}
-                            </td>
-                            <td>
-                                <input type="image" src={recipe.image} width={200} height={200} alt="image" />
-                            </td>
-                        </tr>
-                    ))}
+                        {recipes && recipes.map((recipe) => (
+                            <tr>
+                                <td>{recipe.title}</td>
+                                <td>
+                                    {recipes && recipe.ingredients.map((ingredient) => (
+                                        <div key={ingredient.id}>
+                                            {ingredient.name}
+                                            <br />
+                                            <br />
+                                        </div>
+                                    ))}
+                                </td>
+                                <td>
+                                    <input type="image" src={recipe.image} width={200} height={200} alt="image" />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

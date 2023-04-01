@@ -2,7 +2,7 @@ import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { provider, auth, db } from '../../firebase-config';
-import { collection, addDoc, query, getDocs} from 'firebase/firestore';
+import { collection, addDoc, query, getDocs } from 'firebase/firestore';
 import { FcGoogle } from 'react-icons/fc';
 
 export default function LoginGoogle() {
@@ -17,7 +17,7 @@ export default function LoginGoogle() {
 
     querySnapshot.forEach((doc) => {
       console.log(doc.data().email, email)
-      if(doc.data().email === email){
+      if (doc.data().email === email) {
         emailNotFound = false;
       }
     });
@@ -51,23 +51,23 @@ export default function LoginGoogle() {
 
   const fluxSignInWithGoogle = async () => {
     await signInWithGoogle()
-        .then((succes) => {
-          if (succes){
-            navigation('/');
-          }else{
-            return(
-                <>
-                  <h3>Incorrect Log In. Please try again</h3>
-                  <button onClick={navigation('/')}>Go Home</button>
-                </>
-            )
-          }
-        });
+      .then((succes) => {
+        if (succes) {
+          navigation('/');
+        } else {
+          return (
+            <>
+              <h3>Incorrect Log In. Please try again</h3>
+              <button onClick={navigation('/')}>Go Home</button>
+            </>
+          )
+        }
+      });
   }
 
   return (
     <div>
-      <button id = "button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
+      <button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
     </div>
   )
 }
