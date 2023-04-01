@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import ForgotPassword from '../components/login/ForgotPassword';
 import MockRecipes from '../components/mock/MockRecipes';
 import MockIngredients from '../components/mock/MockIngredients';
-import SearchBar from '../components/SearchBar/SearchBar';
+import SearchBar from '../components/searchBar/SearchBar';
 import { UserProvider } from '../pages/globalValue';
 
 export default function RouterDirections() {
