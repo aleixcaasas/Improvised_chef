@@ -43,7 +43,7 @@ export default function LoginEmail() {
 
     return (
         <div className="login_page">
-            <label htmlFor="chk" aria-hidden="true">Sign In</label>
+            <label htmlFor="chk" aria-hidden="true" id="titel">Sign In</label>
             <form className="login-form" action="react-app/src/components">
                 <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange} /> <br />
                 <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange} /><br />
