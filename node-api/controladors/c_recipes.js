@@ -1,4 +1,4 @@
-const { db } = require('../firebase');
+const { db } = require('../firebase/firebase-config');
 const recipes = async function () {
     const querySnapshot = await db.collection("recipes").get();
     return querySnapshot.docs.map(doc => doc.data());

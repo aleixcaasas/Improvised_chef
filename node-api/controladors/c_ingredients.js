@@ -1,4 +1,4 @@
-const { db } = require('../firebase');
+const { db } = require('../firebase/firebase-config');
 
 const ingredients = async function () {
     const querySnapshot = await db.collection("ingredients").get();
