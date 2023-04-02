@@ -78,6 +78,7 @@ router.get('/usuario/resumen/:idUsuario', (req, res) => {
 
   const userSummary = {
     id: userId,
+    fullname: "Aleix Casas",
     username: "aleixcasas",
     email: "aleix.casas@autonoma.cat",
     profilePic: "https://lh3.googleusercontent.com/a/AGNmyxZaJ3uhXsY-AYxmtPPd9Qv-ojRN9BfMQDk7h-SK=s96-c"
