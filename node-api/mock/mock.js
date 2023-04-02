@@ -73,4 +73,17 @@ router.post('/ingredients/name', async (req, res) => {
     return res.json(ingredients.filter(obj => obj.name.toString().toLowerCase().includes(req.body.name.toLowerCase())));
 });
 
+router.get('/usuario/resumen/:idUsuario', (req, res) => {
+  const userId = req.params.idUsuario;
+
+  const userSummary = {
+    id: userId,
+    username: "aleixcasas",
+    email: "aleix.casas@autonoma.cat",
+    profilePic: "https://lh3.googleusercontent.com/a/AGNmyxZaJ3uhXsY-AYxmtPPd9Qv-ojRN9BfMQDk7h-SK=s96-c"
+  };
+  
+  res.json(userSummary);
+});
+
 module.exports = router;
