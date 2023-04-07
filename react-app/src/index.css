@@ -5,13 +5,14 @@
   --cream: #FFF8D7;
   --red:#B64926;
   --black: #000000;
+  --grey: #1d1d1d;
 }
 
 body {
   font-family: var(--font);
   margin: 0;
 	padding: 0;
-	min-height: 100vh;
+	
 }
 
 code {
@@ -23,4 +24,41 @@ a{
   text-decoration: none;
 	color: #000000;
 	text-align: center;
+}
+
+button {
+  width: 66%;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background-color: var(--red);
+  font-size: 1em;
+  font-weight: bold;
+  margin: 20px auto 0;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  transition: .2s ease-in;
+  cursor: pointer;
+}
+button#green {
+  width: 66%;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background-color: var(--green);
+  font-size: 1em;
+  font-weight: bold;
+  margin: 20px auto 0;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  transition: .2s ease-in;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+button#green:hover {
+  background-color:#26573d;
 }
