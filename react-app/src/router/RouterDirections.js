@@ -5,9 +5,9 @@ import Home from '../pages/Home';
 import UserAuthC from '../components/login/UserAuthC';
 import ForgotPassword from '../components/login/ForgotPassword';
 import MockComponent from '../components/mock/MockComponent';
-import SearchBar from '../components/SearchBar/SearchBar';
+import SearchBar from '../components/searchBar/SearchBar';
 import Components from '../pages/Components'
-import SideBar from '../components/sideBar/sideBar'
+import SideBar from '../components/sideBar/SideBar'
 import ResumeRecipe from '../components/resume_recipe/Resume_recipe';
 import ErrorLoginRegister from '../components/Error_login_register/ErrorLoginRegister';
 
