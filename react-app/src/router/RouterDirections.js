@@ -9,7 +9,8 @@ import SearchBar from '../components/searchBar/SearchBar';
 import { UserProvider } from '../pages/globalValue';
 import Components from '../pages/Components'
 import SideBar from '../components/sideBar/SideBar'
-import ResumeRecipe from '../components/resume_recipe/Resume_recipe';
+import ResumeRecipeContainer from '../components/resume_recipe/Resume_recipe_container';
+import ErrorLoginRegister from '../components/Error_login_register/ErrorLoginRegister';
 
 export default function RouterDirections() {
   return (
@@ -31,8 +32,8 @@ export default function RouterDirections() {
             <Route exact path="/components/accounts" element={<Accounts></Accounts>} />
             <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
             <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
-            <Route exact path="/components/resume_recipe" element={<ResumeRecipe/>} />            
-            
+            <Route exact path="/components/resume_recipe" element={<ResumeRecipeContainer/>} />
+            <Route exact path="/components/Error_login_register" element={<ErrorLoginRegister />} />
             
             <Route path='*' element={<Home/>}/>
         </Routes>
