@@ -1,0 +1,187 @@
+/************************************ General *******************************************/
+
+.login-form p{
+	text-align: center;
+}
+
+#chk{
+	display: none;
+}
+
+.container{
+    width: 350px;
+	height: 600px;
+	background-color: var(--cream);
+	overflow: hidden;
+    border-radius: 10px;
+	box-shadow: 5px 20px 50px var(--black);
+}
+
+.navegationLink{
+	list-style: none;
+	text-decoration: none;
+	color: black;
+}
+
+.login-form input{
+	width: 60%;
+	height: 18px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 0px auto;
+	padding: 10px 15px;
+	border: none;
+	outline: none;
+	border-radius: 50px;
+}
+
+.login-form button{
+	width: 66%;
+	height: 40px;
+	justify-content: center;
+	display: block;
+	color: #fff;
+	background-color: var(--red);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 20px auto 0;
+	outline: none;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+
+
+.login-form button:hover{
+	background: rgb(102, 24, 24);
+}
+
+
+button#button_google {
+	width: 66%;
+	height: 40px;
+	justify-content: center;
+	font-size: 1em;
+	margin: 20px auto 0;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+	background-color: white;
+	color: #000000;
+	border:0.1px #333333 solid ;
+	display: flex;
+	align-items: center;
+	transition: .2s ease-in;
+}
+
+/*
+
+label#titel{
+	color: var(--cream);
+    padding-top: 70px;
+}
+
+#chk:checked ~ label#titel{
+	color: var(--black);
+    padding-top: 70px;
+}
+*/
+
+/************************************ Forgot password *******************************************/
+.container#forgot_password {
+	width: 500px;
+	height: 200px;
+	text-align: center;
+	}
+
+/************************************ Log in aninmation *******************************************/
+
+
+.login_page{
+	position: relative;
+	width:100%;
+	height: 100%;
+	transition: 1s ease-in-out;
+}
+
+.login_page label{
+	color:var(--red);
+	padding-top: 60px;
+	margin-bottom: 60px;
+	transform: scale(1);
+}
+
+.register_page{
+	height: 700px;
+	transform: translateY(-60px);
+	transition: 1s ease-in-out;
+	background-color: var(--red);
+	border-radius: 10px;
+}
+
+.register_page label{
+	color: white;
+	padding-top: 0px;
+	margin-bottom: 40px;
+	transform: scale(.6);
+}
+
+/************************************ REsgister animation *******************************************/
+
+#chk:checked ~ .login_page{
+	background-color: var(--red);
+	transition: 1s ease-in-out;
+}
+
+
+#chk:checked ~ .register_page{
+	transform: translateY(-540px);
+    background: var(--cream);
+	transition: 1s ease-in-out;
+}	
+
+#chk:checked ~ .login_page label{
+	color: white;
+	transform: scale(0.6) translateY(-60px);
+}
+
+#chk:checked ~ .register_page label{
+	transform: scale(1);
+	color: var(--red); 
+}
+
+
+
+
+
+
+
+
+
+
+label{
+	color: var(--red);
+	font-size: 2em;
+	justify-content: center;
+	display: flex;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+
+.navegationLink:hover{
+	font-weight: bold;
+}
+
+.label_google{
+	margin-left: 5px;
+	color: black;
+	font-size: 1em;
+	margin: 0 0 0 8px;
+}
+
+#button_google:hover{
+	background-color: rgb(207, 207, 207);
+}
