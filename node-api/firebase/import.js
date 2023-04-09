@@ -8,54 +8,52 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-let batch = db.batch();
-let batchSizeRecipes = 0;
-let batchSizeIngredients = 0;
 
-dataRecipes.forEach((doc) => {
-    const docId = doc.id.toString();
-    const docRecipe = db.collection("recipes").doc(docId);
-    batch.set(docRecipe, doc);
-    batchSizeRecipes++;
-    if (batchSizeRecipes === 499) {
-        batch.commit().then(() => {
-            console.log(`Se agregaron ${batchSizeRecipes} recetas correctamente`);
-        }).catch((error) => {
-            console.error(`Error al agregar documentos: ${error}`);
+const writeRecipes = () => {
+    let batch = db.batch();
+    let batchSizeRecipes = 0;
+    dataRecipes.forEach((doc) => {
+        const docId = doc.id.toString();
+        const docRecipe = db.collection("recipes").doc(docId);
+        batch.set(docRecipe, doc);
+        batchSizeRecipes++;
+        if (0 === batchSizeRecipes % 500) {
+            batch.commit().then(() => {
+                console.log(`Se agregaron ${batchSizeRecipes} recetas correctamente`);
+            }).catch((error) => {
+                console.error(`Error al agregar documentos: ${error}`);
+            });
+            batch = db.batch();
+            batchSizeRecipes = 0;
+        }
+    });
+    return batch.commit();
+};
+
+writeRecipes()
+    .then(() => {
+        let batch = db.batch();
+        let batchSizeIngredients = 0;
+        dataIngredients.forEach((doc) => {
+            const docId = doc.id.toString();
+            const docIngredient = db.collection("ingredients").doc(docId);
+            batch.set(docIngredient, doc);
+            batchSizeIngredients++;
+            if (0 === batchSizeIngredients % 500) {
+                batch.commit().then(() => {
+                    console.log(`Se agregaron ${batchSizeIngredients} ingredientes correctamente`);
+                }).catch((error) => {
+                    console.error(`Error al agregar documentos: ${error}`);
+                });
+                batch = db.batch();
+                batchSizeIngredients = 0;
+            }
         });
-        batch = db.batch();
-        batchSizeRecipes = 0;
-    }
-});
-
-dataIngredients.forEach((doc) => {
-    const docId = doc.id.toString();
-    const docIngredient = db.collection("ingredients").doc(docId);
-    batch.set(docIngredient, doc);
-    batchSizeIngredients++;
-    if (batchSizeIngredients === 499) {
-        batch.commit().then(() => {
-            console.log(`Se agregaron ${batchSizeIngredients} ingredientes correctamente`);
-        }).catch((error) => {
-            console.error(`Error al agregar documentos: ${error}`);
-        });
-        batch = db.batch();
-        batchSizeIngredients = 0;
-    }
-});
-
-if (batchSizeRecipes > 0) {
-    batch.commit().then(() => {
-        console.log(`Se agregaron ${batchSizeRecipes} recetas correctamente`);
-    }).catch((error) => {
+        return batch.commit();
+    })
+    .then(() => {
+        console.log("Se agregaron todas las recetas e ingredientes correctamente");
+    })
+    .catch((error) => {
         console.error(`Error al agregar documentos: ${error}`);
     });
-}
-
-if (batchSizeIngredients > 0) {
-    batch.commit().then(() => {
-        console.log(`Se agregaron ${batchSizeIngredients} ingredientes correctamente`);
-    }).catch((error) => {
-        console.error(`Error al agregar documentos: ${error}`);
-    });
-}
