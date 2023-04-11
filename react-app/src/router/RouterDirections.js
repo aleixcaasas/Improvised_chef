@@ -9,7 +9,7 @@ import SearchBar from '../components/searchBar/SearchBar';
 import { UserProvider } from '../pages/globalValue';
 import Components from '../pages/Components'
 import SideBar from '../components/sideBar/SideBar'
-import ResumeRecipeContainer from '../components/resume_recipe/Resume_recipe_container';
+import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container';
 import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister';
 
 export default function RouterDirections() {
