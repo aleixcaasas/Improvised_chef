@@ -10,6 +10,8 @@ function Components() {
         <li><NavLink to="/components/sidebar" className="navegationLink">Side Bar</NavLink></li>
         <li><NavLink to="/components/resume_recipe" className="navegationLink">Resume Recipe</NavLink></li>
         <li><NavLink to="/components/Error_login_register" classname="navegationLink">Error mesage login/register</NavLink></li>
+        <li><NavLink to="/components/recipes" className="navegationLink">Mock Recipes</NavLink></li>
+        <li><NavLink to="/components/ingredients" className="navegationLink">Mock Ingredients</NavLink></li>
       </ul>
 
     </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Accounts from '../pages/Accounts';
 import Home from '../pages/Home';
+import ChooseOption from '../pages/ChooseOption';
 import ForgotPassword from '../components/login/ForgotPassword';
 import MockRecipes from '../components/mock/MockRecipes';
 import MockIngredients from '../components/mock/MockIngredients';
@@ -11,6 +12,7 @@ import Components from '../pages/Components'
 import SideBar from '../components/sideBar/SideBar'
 import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container';
 import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister';
+import Demo from '../pages/Demo';
 
 export default function RouterDirections() {
   return (
@@ -18,14 +20,17 @@ export default function RouterDirections() {
     <BrowserRouter>
      <UserProvider>
         <Routes>
-            <Route exact path="/" element={<Home/>}/>
-            <Route exact path="/accounts" element={<Accounts/>}/>
+          
+            <Route exact path="/" element={<ChooseOption/>}/>
+            <Route exact path="/home" element={<Home/>}/>
+            {/*route to home*/}
+            <Route exact path="/demo" element={<Demo/>}/>
             <Route exact path="/login/forgotPassword" element={<ForgotPassword/>}/>
             
             {/* TEMPORAL PATHS */}
             {/* MOCKS */}
-            <Route exact path="/recipes" element={<MockRecipes></MockRecipes>}/>
-            <Route exact path="/ingredients" element={<MockIngredients></MockIngredients>}/>
+            <Route exact path="/components/recipes" element={<MockRecipes></MockRecipes>}/>
+            <Route exact path="/components/ingredients" element={<MockIngredients></MockIngredients>}/>
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />
