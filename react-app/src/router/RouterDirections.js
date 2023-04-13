@@ -13,6 +13,11 @@ import SideBar from '../components/sideBar/SideBar'
 import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container';
 import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister';
 import Demo from '../pages/Demo';
+import Profile from '../pages/Profile';
+import MyKitchen from '../pages/MyKitchen'
+import MyIngredients from '../pages/MyIngredients'
+import ShoppingList from '../pages/ShoppingList';
+import FavouriteRecipes from '../pages/FavouriteRecipes';
 
 export default function RouterDirections() {
   return (
@@ -20,14 +25,18 @@ export default function RouterDirections() {
     <BrowserRouter>
      <UserProvider>
         <Routes>
-          
             <Route exact path="/" element={<ChooseOption/>}/>
             <Route exact path="/home" element={<Home/>}/>
-            {/*route to home*/}
-            <Route exact path="/demo" element={<Demo/>}/>
-            <Route exact path="/login/forgotPassword" element={<ForgotPassword/>}/>
-            
-            {/* TEMPORAL PATHS */}
+            {/*FINAL PAGES*/}
+            {/*SERA EL FUTUR HOME*/}<Route exact path="/demo" element={<Demo/>}/>
+            <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
+            <Route exact path="/profile" element={<Profile/>}/>
+            <Route exact path="/MyKitchen" element={<MyKitchen/>}/>
+            <Route exact path="/MyIngredients" element={<MyIngredients/>}/>
+            <Route exact path="/ShoppingList" element={<ShoppingList/>}/>
+            <Route exact path="/FavouriteRecipes" element={<FavouriteRecipes/>}/>
+
+
             {/* MOCKS */}
             <Route exact path="/components/recipes" element={<MockRecipes></MockRecipes>}/>
             <Route exact path="/components/ingredients" element={<MockIngredients></MockIngredients>}/>
