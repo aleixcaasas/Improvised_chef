@@ -5,7 +5,7 @@ import './mock.css';
 //import SearchBarSuggestions from "./SearchBarSuggestions";
 //import Data from './data.json';
 
-export default function MockRecipes(){
+export default function MockRecipes() {
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
     const [recipes, setRecipes] = useState([]);
 
@@ -14,25 +14,25 @@ export default function MockRecipes(){
     const [ingredients, setIngredients] = useState([]);
     //const [ingredientsRecepta, setIngredientsRecepta] = useState("");
 
-   /* const handleChange1 = async (e) => {
-        setIngredients(e.target.value);
-        try {
-            if(e.target && e.target.value !== null){
-                const response = await axios.post('http://localhost:3000/ingredients', {
-                    ingredients: e.target.value
-                });
-                console.log(response.data);
-            }
-        }
-        catch (error) {
-            console.error(error);
-        }
-    }
-*/
+    /* const handleChange1 = async (e) => {
+         setIngredients(e.target.value);
+         try {
+             if(e.target && e.target.value !== null){
+                 const response = await axios.post('http://localhost:3000/ingredients', {
+                     ingredients: e.target.value
+                 });
+                 console.log(response.data);
+             }
+         }
+         catch (error) {
+             console.error(error);
+         }
+     }
+ */
     const handleChange = async (e) => {
         setNomRecepta(e.target.value);
         try {
-            if(e.target && e.target.value !== null){
+            if (e.target && e.target.value !== null) {
                 const response = await axios.post('http://localhost:3000/recipes/title', {
                     title: e.target.value
                 });
@@ -93,13 +93,13 @@ export default function MockRecipes(){
         }
     }*/
 
-    useEffect(()=>{
-        const peticionsApi = async ()=>{
+    useEffect(() => {
+        const peticionsApi = async () => {
             await axios.get("http://localhost:3000/recipes")
-                .then(response=>{
+                .then(response => {
                     setRecipes(response.data);
                 })
-                .catch(error=>{
+                .catch(error => {
                     console.error(error);
                 })
         };
@@ -116,7 +116,7 @@ export default function MockRecipes(){
                     onChange={handleChange}
                 />
             </div>
-            <br/>
+            <br />
             {/*<SearchBarSuggestions></SearchBarSuggestions>
             <div>
                 <input
@@ -155,35 +155,35 @@ export default function MockRecipes(){
             <div>
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Ingredients</th>
-                        <th>Image</th>
-                    </tr>
+                        <tr>
+                            <th>Title</th>
+                            <th>Ingredients</th>
+                            <th>Image</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {
-                        recipes.length===0 && (
-                            <h3>No matches found!</h3>
-                        )
-                    }
-                    {recipes && recipes.map((recipe)=>(
-                        <tr>
-                            <td>{recipe.title}</td>
-                            <td>
-                                {recipes && recipe.ingredients.map((ingredient)=>(
-                                    <div key={ingredient.id}>
-                                        {ingredient.name}
-                                        <br />
-                                        <br />
-                                    </div>
-                                ))}
-                            </td>
-                            <td>
-                                <input type="image" src={recipe.image} width={200} height={200} alt="image" />
-                            </td>
-                        </tr>
-                    ))}
+                        {
+                            recipes.length === 0 && (
+                                <h3>No matches found!</h3>
+                            )
+                        }
+                        {recipes && recipes.map((recipe) => (
+                            <tr>
+                                <td>{recipe.title}</td>
+                                <td>
+                                    {recipes && recipe.ingredients.map((ingredient) => (
+                                        <div key={ingredient.id}>
+                                            {ingredient.name}
+                                            <br />
+                                            <br />
+                                        </div>
+                                    ))}
+                                </td>
+                                <td>
+                                    <input type="image" src={recipe.image} width={200} height={200} alt="image" />
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

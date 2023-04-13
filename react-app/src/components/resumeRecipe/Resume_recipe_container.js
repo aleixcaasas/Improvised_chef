@@ -735,9 +735,9 @@ export default function Resume_recipe_container() {
 
     return (
         <div className="receipt_container">
-            { 
-                receipts.map((receitp)=>(<Resume_recipe key={receitp.id} singleReceipts  = {receitp}/>))
-            }   
+            {
+                receipts.map((receitp) => (<Resume_recipe key={receitp.id} singleReceipts={receitp} />))
+            }
         </div>
     );
 }

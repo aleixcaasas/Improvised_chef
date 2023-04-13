@@ -12,12 +12,12 @@ const Sidebar = () => {
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
-    
+
     const navigation = useNavigate();
 
     const handleLogOut = async () => {
         //await axios.post('http://localhost:3700/logout', {user});
-        setUser({email:''});
+        setUser({ email: '' });
         navigation("/demo");
     }
     return (

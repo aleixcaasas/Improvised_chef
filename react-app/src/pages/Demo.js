@@ -7,9 +7,9 @@ export default function Demo() {
     return (
         <div className="page_login">
             <div className="container">
-                <input type="checkbox" id="chk" aria-hidden="true"/>
-                <LoginEmail/>
-                <Register/>
+                <input type="checkbox" id="chk" aria-hidden="true" />
+                <LoginEmail />
+                <Register />
             </div>
         </div>
     );
