@@ -1,20 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
-import { useState } from "react";
+import React, { useContext } from "react";
+import { UserContext } from '../../pages/globalValue';
 import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import './sideBar.css';
 
 const Sidebar = () => {
-    const [user, setUser] = useState({});
-    //const {logOut} = useAuth();
+    const { user, setUser } = useContext(UserContext);    //const {logOut} = useAuth();
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
-    /*const handleLogOut = async () => {
-        await logOut();
-    }*/
+    
+    const navigation = useNavigate();
+
+    const handleLogOut = async () => {
+        //await axios.post('http://localhost:3700/logout', {user});
+        setUser({email:''});
+        navigation("/demo");
+    }
     return (
         <div className="sidebar">
             <div className="sidebar-top">
@@ -26,7 +31,7 @@ const Sidebar = () => {
                     <Link to="/Profile"><label className="username">@juancocinero</label></Link>
                 </div>
                 <div className="logout-div">
-                    <button /*onClick={handleLogOut}*/><MdLogout size={22}></MdLogout> <label>Sign Out</label></button>
+                    <button onClick={handleLogOut}><MdLogout size={22}></MdLogout> <label>Sign Out</label></button>
                 </div>
             </div>
             <div className="sidebar-bottom">

@@ -1,23 +1,24 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Accounts from '../pages/Accounts';
-import Home from '../pages/Home';
-import ChooseOption from '../pages/ChooseOption';
-import ForgotPassword from '../components/login/ForgotPassword';
-import MockRecipes from '../components/mock/MockRecipes';
-import MockIngredients from '../components/mock/MockIngredients';
-import SearchBar from '../components/searchBar/SearchBar';
 import { UserProvider } from '../pages/globalValue';
+
+import Home from '../pages/Home'
 import Components from '../pages/Components'
-import SideBar from '../components/sideBar/SideBar'
-import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container';
-import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister';
-import Demo from '../pages/Demo';
-import Profile from '../pages/Profile';
+import ChooseOption from '../pages/ChooseOption'
+import Demo from '../pages/Demo'
+import Profile from '../pages/Profile'
 import MyKitchen from '../pages/MyKitchen'
 import MyIngredients from '../pages/MyIngredients'
-import ShoppingList from '../pages/ShoppingList';
-import FavouriteRecipes from '../pages/FavouriteRecipes';
+import ShoppingList from '../pages/ShoppingList'
+import FavouriteRecipes from '../pages/FavouriteRecipes'
+
+import ForgotPassword from '../components/login/ForgotPassword'
+import MockRecipes from '../components/mock/MockRecipes'
+import MockIngredients from '../components/mock/MockIngredients'
+import SearchBar from '../components/searchBar/SearchBar'
+import SideBar from '../components/sideBar/SideBar'
+import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container'
+import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister'
 
 export default function RouterDirections() {
   return (
@@ -43,7 +44,7 @@ export default function RouterDirections() {
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />
-            <Route exact path="/components/accounts" element={<Accounts></Accounts>} />
+            <Route exact path="/components/accounts" element={<Demo/>} />
             <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
             <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
             <Route exact path="/components/resume_recipe" element={<ResumeRecipeContainer/>} />

@@ -1,6 +1,9 @@
 import { UserContext } from './globalValue';
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import SideBar from "../components/sideBar/SideBar"
+import SearchBar from "../components/searchBar/SearchBar"
+import Recipes from "../components/resumeRecipe/Resume_recipe_container"
 
 
 export default function Home(){
@@ -19,9 +22,9 @@ export default function Home(){
             {
                 user?.email && (
                     <>
-                    <h1>IMPROVISED CHEF</h1>
-                    <h3>User Logged In: {user?.email}</h3>
-                    <button onClick={handleLogOut}>Sign Out</button>
+                    <SideBar/>
+                    <SearchBar/>
+                    <Recipes/>
                     </>
                 )
             }
