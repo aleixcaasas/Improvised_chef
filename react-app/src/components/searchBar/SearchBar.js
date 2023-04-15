@@ -42,7 +42,7 @@ export default function SearchBar() {
     return (
         <div className="searchBar-div">
             <input
-                className="searchBar"
+                className="searchBar1"
                 //value={cercador}
                 placeholder={"Search by recipe name"}
             //onChange={handleChange}
