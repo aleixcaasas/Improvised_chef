@@ -51,8 +51,32 @@ writeRecipes()
         });
         return batch.commit();
     })
-    .then(() => {
-        console.log("Se agregaron todas las recetas e ingredientes correctamente");
+    .then(async () => {
+        const recetasSnapshot = await db.collection('recipes').get();
+        let batch = db.batch();
+        let batchSizeRecipes = 0;
+        recetasSnapshot.forEach((doc) => {
+            const titleLowercase = doc.get('title').toLowerCase();
+            const titleWords = titleLowercase
+                .replace(",", "")
+                .replace("(", "")
+                .replace(")", "")
+                .split(" ");
+
+            const recipe = db.collection('recipes').doc(doc.id.toString());
+            batch.update(recipe, { title_words: titleWords });
+            batchSizeRecipes++;
+            if (0 === batchSizeRecipes % 500) {
+                batch.commit().then(() => {
+                    console.log(`Se han actualizado ${batchSizeRecipes} recetas correctamente`);
+                }).catch((error) => {
+                    console.error(`Error al agregar documentos: ${error}`);
+                });
+                batch = db.batch();
+                batchSizeRecipes = 0;
+            }
+        });
+        return batch.commit();
     })
     .catch((error) => {
         console.error(`Error al agregar documentos: ${error}`);

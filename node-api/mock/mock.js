@@ -40,15 +40,15 @@ readFile = function(dataPath){
 readFile(dataRecipes);
 readFile(dataIngredients);
 
-router.get('/recipes', async (req, res) => {
+router.get('/mock/recipes', async (req, res) => {
     return res.json(recipes);
 });
 
-router.post('/recipes/title', async (req, res) => {
+router.post('/mock/recipes/title', async (req, res) => {
     return res.json(recipes.filter(obj => obj.title.toString().toLowerCase().includes(req.body.title.toLowerCase())));
 });
 
-router.post('/recipes/ingredients', async (req, res) => {
+router.post('/mock/recipes/ingredients', async (req, res) => {
     let recipesIngredients = [];
     if(req.body.ingredients.length!==0){
         recipes.forEach(recipe => {
@@ -65,15 +65,15 @@ router.post('/recipes/ingredients', async (req, res) => {
     return res.json(arraySinDuplicados);
 });
 
-router.get('/ingredients', async (req, res) => {
+router.get('/mock/ingredients', async (req, res) => {
     return res.json(ingredients);
 });
 
-router.post('/ingredients/name', async (req, res) => {
+router.post('/mock/ingredients/name', async (req, res) => {
     return res.json(ingredients.filter(obj => obj.name.toString().toLowerCase().includes(req.body.name.toLowerCase())));
 });
 
-router.get('/usuario/resumen/:idUsuario', (req, res) => {
+router.get('/mock/usuario/resumen/:idUsuario', (req, res) => {
   const userId = req.params.idUsuario;
 
   const userSummary = {

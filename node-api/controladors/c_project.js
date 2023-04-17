@@ -4,12 +4,12 @@ const registerWithEmail = require('./c_registerWithEmail');
 const loginWithGoogle = require('./c_loginWithGoogle');
 const resetPasswordEmail = require('./c_resetPassword');
 const signOutV  = require('./c_logout');
-const {recipes, randomRecipe} = require('./c_recipes');
+const {recipes, recipesName, randomRecipe} = require('./c_recipes');
 const ingredients = require('./c_ingredients');
 
 const controller = {
     home: function(req, res) { 
-        return res.status(200).send(home)
+        return res.status(200).send(home);
     },
 
     login: async function(req, res) { 
@@ -83,11 +83,17 @@ const controller = {
         await signOutV(req.body)
     },
 
-    recipes: function(req, res) {
-        return res.status(200).send(recipes())
+    recipes: async function(req, res) {
+        return res.status(200).send(await recipes());
     },
+
     randomRecipe: function(req, res) {
+        console.log(req);
         return res.status(200).send(randomRecipe(req));
+    },
+
+    recipesName: async function(req, res) {
+        return res.status(200).send(await recipesName(req, res))
     },
 
     ingredients: function(req, res) {
