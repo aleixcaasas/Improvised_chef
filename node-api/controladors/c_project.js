@@ -87,9 +87,8 @@ const controller = {
         return res.status(200).send(await recipes());
     },
 
-    randomRecipe: function(req, res) {
-        console.log(req);
-        return res.status(200).send(randomRecipe(req));
+    randomRecipe: async function(req, res) {
+        return res.status(200).send(await randomRecipe(req));
     },
 
     recipesName: async function(req, res) {

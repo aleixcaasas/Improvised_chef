@@ -10,5 +10,6 @@ router.post('/resetPassword', projectController.resetPassword);
 router.post('/logout', projectController.logout);
 router.get('/recipes', projectController.recipes);
 router.post('/recipes/name', projectController.recipesName);
+router.get('/recipes/random', projectController.randomRecipe);
 //router.get('/ingredients', projectController.ingredients);
 module.exports = router;
