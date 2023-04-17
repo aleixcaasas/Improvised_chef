@@ -139,3 +139,28 @@
 	align-items: flex-end;
 }
 
+
+.sideBarLogOut button{
+    width: 60%;
+	height: 40px;
+	justify-content: center;
+	display: block;
+	color: black;
+	background-color: var(--green);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 20px auto 0;
+	outline: solid 1px black;
+	border: none;
+	border-radius: 50px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+.sideBarLogOut button:hover{
+	background: #254736 !important;
+}
+.sideBarLogOut hr{
+	border: 0.1em solid rgb(41, 41, 41);
+	width: 300px;
+	margin-top: 20px;
+}

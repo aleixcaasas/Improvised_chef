@@ -1,73 +1,54 @@
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { provider, auth, db } from '../../firebase-config';
-import { collection, addDoc, query, getDocs } from 'firebase/firestore';
+import { db, auth, provider } from '../../firebase-config';
 import { FcGoogle } from 'react-icons/fc';
+import axios from 'axios';
+import { UserContext } from '../../pages/globalValue';
+import { useContext } from "react";
 
 export default function LoginGoogle() {
 
-  const navigation = useNavigate();
+	const navigation = useNavigate();
 
-  const mailNotExists = async (email) => {
-    const q = query(collection(db, "users"));
-    const querySnapshot = await getDocs(q);
+	const { user, setUser } = useContext(UserContext);
 
-    let emailNotFound = true;
+	const signInWithGoogle = async () => {
 
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data().email, email)
-      if (doc.data().email === email) {
-        emailNotFound = false;
-      }
-    });
-    console.log("email added:" + emailNotFound)
-    return emailNotFound;
-  }
+		try {
+			const result = await signInWithPopup(auth, provider);
+			const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
+			console.log(response);
+			if (response.data.loguejat === "true") {
+				setUser({ email: response.data.email, id: response.data.id });
+			}
+			return true;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+	}
 
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const name = result.user.displayName;
-      const email = result.user.email;
-      const profilePic = result.user.photoURL;
-      const userName = email.split('@')[0];
-      const emailNotAtBD = await mailNotExists(email);
-      if (emailNotAtBD) {
-        await addDoc(collection(db, "users"), {
-          name,
-          userName,
-          profilePic,
-          email,
-          userId: `${result.user.uid}`
-        });
-      }
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
+	const fluxSignInWithGoogle = async () => {
 
-  const fluxSignInWithGoogle = async () => {
-    await signInWithGoogle()
-      .then((succes) => {
-        if (succes) {
-          navigation('/');
-        } else {
-          return (
-            <>
-              <h3>Incorrect Log In. Please try again</h3>
-              <button onClick={navigation('/')}>Go Home</button>
-            </>
-          )
-        }
-      });
-  }
+		await signInWithGoogle()
+			.then((succes) => {
+				if (succes) {
+					navigation('/');
+				} else {
+					return (
+						<>
+							<h3>Incorrect Log In. Please try again</h3>
+							<button onClick={navigation('/')}>Go Home</button>
+						</>
+					)
+				}
+			});
+	}
 
-  return (
-    <div>
-      <button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><label className='label_google'>Sign In With Google</label></button>
-    </div>
-  )
+	return (
+		<div>
+			<button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><p className='label_google'>Sign In With Google</p></button>
+		</div>
+	)
 }

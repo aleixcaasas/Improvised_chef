@@ -27,3 +27,19 @@ input.searchBar {
 	background-color: var(--red);
 	color: white;
 }
+
+.table-container {
+	display: flex;
+}
+
+.ingredients, .recipes {
+	flex-basis: 70%;
+}
+
+.ingredients {
+	margin-right: 10px;
+}
+
+.recipes {
+	margin-left: 10px;
+}
