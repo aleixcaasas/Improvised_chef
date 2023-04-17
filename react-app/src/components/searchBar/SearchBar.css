@@ -85,6 +85,7 @@
   .menuIcon{
     display: block;
     padding-right: 6px;
+    color: var(--green);
   }
   .CookButton{
     font-size: 0.90em;
