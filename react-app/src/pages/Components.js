@@ -12,6 +12,8 @@ function Components() {
 				<li><NavLink to="/components/Error_login_register" classname="navegationLink">Error mesage login/register</NavLink></li>
 				<li><NavLink to="/components/recipes" className="navegationLink">Mock Recipes</NavLink></li>
 				<li><NavLink to="/components/ingredients" className="navegationLink">Mock Ingredients</NavLink></li>
+				<li><NavLink to="/Home" className="navegationLink">Home</NavLink></li>
+				
 			</ul>
 
 		</div>
