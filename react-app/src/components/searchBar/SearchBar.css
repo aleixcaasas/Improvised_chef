@@ -1,6 +1,6 @@
 
 
-.searchBar-div {
+.searchBar-divNo360 {
   display: flex;
   flex-direction: row;  
   justify-content: space-between;
@@ -8,6 +8,14 @@
   position: fixed;
   left: 30%;
   width: 70%;  
+}
+
+.searchBar-divYes3601{
+  display: none;
+}
+
+.searchBar-divYes3602{
+  display: none;
 }
 
 .searchBar1 {
@@ -24,8 +32,7 @@
 	border-top-right-radius: 25px;
 	border-top-left-radius: 25px;
 	border: none;
-  text-align: left;
-	
+  text-align: left;	
 }
 
 .CookButton {  
@@ -48,40 +55,75 @@
   margin-bottom: 18px;
 }
 
+.menuIcon{
+  display: none;
+  size: 30px;
+}
+
 .CookButton:hover {
   background: rgb(102, 24, 24);
 }
 
 
 @media only screen and (max-width: 768px) {
-    
+
+  .searchBar-divYes3601{
+    display: none;
+  }
+
+  .searchBar-divYes3602{
+    display: none;
+  }
+
+  .searchBar-divNo360 {
+    display: flex;
+    flex-direction: row;
+    left: 2%;
+    width: 100%;      
+    text-align: left;
+  }
+  .menuIcon{
+    display: block;
+    padding-right: 6px;
+  }
+  .CookButton{
+    font-size: 0.90em;
+  }  
 }
 
 
 @media only screen and (max-width: 360px) {
   
-  .searchBar-div {
-    display: flex;
+  .searchBar-divNo360 {
+    /*display: flex;
     flex-direction: column;
     left: 2%;
     width: 100%;      
-    text-align: left;
+    text-align: left;*/
+    display: none;
   }
 
-  .searchBar1.placeholder {
-      
+  .searchBar-divYes3601{
+    display: flex;
+    flex-direction: row;
+    height: 78px;
+    align-items:center;
+    padding-left: 10px;
+  }
+
+  .searchBar-divYes3602{
+    display: flex;
+    margin-top: 0px;
   }
 
   .searchBar1{
     order: 1;  
     width: 100%;   
-    padding: 12px  68px;    
-    
+    padding: 12px  68px;        
   }
 
   .CookButton{
     order: 0;
     width: 80%;    
-  } 
-  
+  }   
 }
