@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { MdSearch } from 'react-icons/md';
-import axios from "axios";
+import { TbIcons, TbMenu2 } from 'react-icons/tb';
 import './SearchBar.css';
+import axios from "axios";
 
 
 export default function SearchBar({ onSearch }) {
@@ -36,13 +37,32 @@ export default function SearchBar({ onSearch }) {
 
     return (
         <div className="searchBar-div">
-            <input
-                className="searchBar"
-                value={receipt_to_search}
-                placeholder={"Search by recipe name"}
-                onChange={handleChange}
-            />
-            <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+
+            <div className="searchBar-divNo360"  /*per resolucions majors que 360px*/ > 
+                <TbMenu2 className="menuIcon" size={43} />
+                <input
+                    className="searchBar1"
+                    //value={cercador}
+                    placeholder={"Search by recipe name"}
+                //onChange={handleChange}
+                />
+                <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+            </div>
+
+            <div className="searchBar-divYes3601" /*per resolucions majors que 360px*/>
+                <TbMenu2 className="menuIcon" size={43} />
+                <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+
+            </div>
+
+            <div className="searchBar-divYes3602" /*per resolucions majors que 360px*/>
+                <input
+                    className="searchBar1"
+                    //value={cercador}
+                    placeholder={"Search by recipe name"}
+                    //onChange={handleChange}
+                />
+            </div>
         </div>
     );
 }
