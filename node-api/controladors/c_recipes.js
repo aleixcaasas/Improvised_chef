@@ -1,8 +1,33 @@
 const { db } = require('../firebase/firebase-config');
+const {addDoc, collection, getDocs, query, doc, getDoc, limit, where} = require('firebase/firestore');
+
 const recipes = async function () {
-    const querySnapshot = await db.collection("recipes").get();
-    return querySnapshot.docs.map(doc => doc.data());
-}
+  let docs = [];
+  const q = query(collection(db, "recipes"), limit(10));
+  const querySnapshot = await getDocs(q);
+  console.log(querySnapshot.docs.length)
+  querySnapshot.docs.forEach((doc) => {
+    docs.push(getDoc(doc.ref));
+  });
+  return Promise.all(docs);
+};
+
+
+
+const randomRecipe = async function (req) {
+    let result = [];
+    const numRecipes = parseInt(req.query.number) || 1;
+    for (let n = 0; n < numRecipes; n++){
+        const randomNum = Math.floor(Math.random() * 3842)
+        const q = query(collection(db, "recipes"), where("id", ">=", randomNum), limit(1));
+        const querySnapshot = await getDocs(q);
+        const docData = querySnapshot.docs[0].data();
+        result.push(docData);
+    }
+    return result;
+};
+
+
 
 /*router.get('/recipes/:userIngredientsList', async (req, res) => {
     try{
@@ -48,4 +73,4 @@ router.get('/recipes/:recipeId', async (req, res) => {
     }
 });*/
 
-module.exports = recipes;
+module.exports = {recipes, randomRecipe};
