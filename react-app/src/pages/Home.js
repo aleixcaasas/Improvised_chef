@@ -1,43 +1,71 @@
-import { NavLink } from "react-router-dom";
+import axios from "axios";
 import { UserContext } from './globalValue';
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import SideBar from "../components/sideBar/SideBar"
+import SearchBar from "../components/searchBar/SearchBar"
+import Resume_recipe_container from "../components/resumeRecipe/Resume_recipe_container"
+import Register from "../components/register/Register";
+import LoginEmail from "../components/login/LoginEmail";
+import '../components/login/login.css';
+
+import { debounce } from 'lodash';
 
 
-export default function Home(){
+export default function Home() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    const handleLogOut = async () => {
-        //await axios.post('http://localhost:3700/logout', {user});
-        setUser({email:''});
-    }
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [recipes, setRecipes] = useState([]);
+
+    const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
+    };
+
+    //To dealy the the call of the API 
+    const debouncedSearch = debounce(handleSearch, 800);
+
+    useEffect(() => {
+        const fetchRecipes = async () => {
+            try {
+                const response = await axios.post('http://localhost:3000/recipes/title', {
+                    title: searchTerm
+                });
+                setRecipes(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchRecipes();
+    }, [searchTerm]);
+
 
     return (
         <div className="home">
             {
-            
-                !user?.email && (
-                <>
-                <h1>IMPROVISED CHEF</h1>
-                <ul>
-                    <li><NavLink to="/accounts" className="navegationLink">Accounts</NavLink></li>
-                    <li><NavLink to="/recipes" className="navegationLink">Mock Recipes</NavLink></li>
-                    <li><NavLink to="/ingredients" className="navegationLink">Mock Ingredients</NavLink></li>
-                    <li><NavLink to="/components" className="navegationLink">View all components</NavLink></li>
-                </ul>
-                </>
-                )
-            }
-            {
                 user?.email && (
                     <>
-                    
-                    <h1>IMPROVISED CHEF</h1>
-                    <h3>User Logged In: {user?.email}</h3>
-                    <button onClick={handleLogOut}>Sign Out</button>
+                        <SideBar />
+                        <SearchBar onSearch={debouncedSearch} />
+                        <Resume_recipe_container receiptsJSON={recipes} />
+                    </>
+                )}
+            {
+                !user?.email && (
+                    <>
+                        <div className="page_login">
+                            <div className="container">
+                                <input type="checkbox" id="chk" aria-hidden="true" />
+                                <LoginEmail />
+                                <Register />
+                            </div>
+                        </div>
                     </>
                 )
             }
-        </div>    
-     );
+
+
+        </div>
+    );
 }

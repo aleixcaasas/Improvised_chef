@@ -7,8 +7,8 @@ import { useContext } from "react";
 
 export default function LoginEmail() {
     const navigation = useNavigate();
-    const [formState, setFormState] = useState({email: "", password: ""})
-    const {email, password} = formState;
+    const [formState, setFormState] = useState({ email: "", password: "" })
+    const { email, password } = formState;
 
     const { user, setUser } = useContext(UserContext);
 
@@ -20,18 +20,18 @@ export default function LoginEmail() {
 
     const login = async (e) => {
         e.preventDefault();
-        try{
-            if(email === "" || password === ""){
+        try {
+            if (email === "" || password === "") {
                 alert("Please fill all the fields");
             }
-            else{
-                const result = await axios.post('http://localhost:3000/login', {email, password});
+            else {
+                const result = await axios.post('http://localhost:3000/login', { email, password });
                 console.log(result.data);
-                if(result.data.id != null && result.data.loguejat){
-                    setUser({email: result.data.email, id: result.data.id});
+                if (result.data.id != null && result.data.loguejat) {
+                    setUser({ email: result.data.email, id: result.data.id });
                     navigation("/");
                 }
-                else{
+                else {
                     alert("Username or password incorrect");
                 }
             }
@@ -50,7 +50,7 @@ export default function LoginEmail() {
                 <p><Link className="navegationLink" to='/accounts/forgotPassword'>Forgot your password?</Link></p>
                 <button type="submit" value="LOGIN" onClick={login}>Sign In</button>
             </form>
-            <LoginGoogle/>
+            <LoginGoogle />
         </div>
     );
 }

@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
 import { MdSearch } from 'react-icons/md';
+import { TbIcons, TbMenu2 } from 'react-icons/tb';
 import './SearchBar.css';
+import axios from "axios";
 
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
     //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
-    /* const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
  
-     //Estat per controlar el que s'escriu en el cercador
-     const [cercador, setCercador] = useState("");
- 
-     const handleChange = async (e) => {
-         setCercador(e.target.value);
-         try {
-             if(e.target && e.target.value !== null){
-                 const response = await axios.post('http://localhost:3000/recipes/title', {
-                     title: e.target.value
-                 });
-                 setRecipes(response.data);
-             }
-         }
-         catch (error) {
-             console.error(error);
-         }
-     }
+    //Estat per controlar el que s'escriu en el cercador
+    const [receipt_to_search, setSearch] = useState("");
+    const handleChange = async (e) => {
+        setSearch(e.target.value);
+        try {
+            onSearch(e.target.value)
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }   
  
      useEffect(()=>{
          const peticionsApi = async ()=>{
@@ -36,18 +32,37 @@ export default function SearchBar() {
                  })
          };
          peticionsApi();
-     }, []);*/
+     }, []);
 
 
     return (
         <div className="searchBar-div">
-            <input
-                className="searchBar"
-                //value={cercador}
-                placeholder={"Search by recipe name"}
-            //onChange={handleChange}
-            />
-            <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+
+            <div className="searchBar-divNo360"  /*per resolucions majors que 360px*/ > 
+                <TbMenu2 className="menuIcon" size={43} />
+                <input
+                    className="searchBar1"
+                    //value={cercador}
+                    placeholder={"Search by recipe name"}
+                //onChange={handleChange}
+                />
+                <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+            </div>
+
+            <div className="searchBar-divYes3601" /*per resolucions majors que 360px*/>
+                <TbMenu2 className="menuIcon" size={43} />
+                <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+
+            </div>
+
+            <div className="searchBar-divYes3602" /*per resolucions majors que 360px*/>
+                <input
+                    className="searchBar1"
+                    //value={cercador}
+                    placeholder={"Search by recipe name"}
+                    //onChange={handleChange}
+                />
+            </div>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import { signInWithPopup} from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { db, auth, provider } from '../../firebase-config';
@@ -9,46 +9,46 @@ import { useContext } from "react";
 
 export default function LoginGoogle() {
 
-  const navigation = useNavigate();
+	const navigation = useNavigate();
 
-  const { user, setUser } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
 
-  const signInWithGoogle = async () => {
+	const signInWithGoogle = async () => {
 
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
-      console.log(response);
-      if(response.data.loguejat === "true"){
-        setUser({email: response.data.email, id: response.data.id});
-      }
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
+		try {
+			const result = await signInWithPopup(auth, provider);
+			const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
+			console.log(response);
+			if (response.data.loguejat === "true") {
+				setUser({ email: response.data.email, id: response.data.id });
+			}
+			return true;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+	}
 
-  const fluxSignInWithGoogle = async () => {
-    
-    await signInWithGoogle()
-      .then((succes) => {
-        if (succes) {
-          navigation('/');
-        } else {
-          return (
-            <>
-              <h3>Incorrect Log In. Please try again</h3>
-              <button onClick={navigation('/')}>Go Home</button>
-            </>
-          )
-        }
-      });
-  }
+	const fluxSignInWithGoogle = async () => {
 
-  return (
-    <div>
-      <button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><p className='label_google'>Sign In With Google</p></button>
-    </div>
-  )
+		await signInWithGoogle()
+			.then((succes) => {
+				if (succes) {
+					navigation('/');
+				} else {
+					return (
+						<>
+							<h3>Incorrect Log In. Please try again</h3>
+							<button onClick={navigation('/')}>Go Home</button>
+						</>
+					)
+				}
+			});
+	}
+
+	return (
+		<div>
+			<button id="button_google" onClick={fluxSignInWithGoogle}><FcGoogle size={25} /><p className='label_google'>Sign In With Google</p></button>
+		</div>
+	)
 }

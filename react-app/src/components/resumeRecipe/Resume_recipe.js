@@ -2,7 +2,6 @@ import './Resume_recipe.css'
 import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
 
 
-
 export default function Resume_recipe ({singleReceipts}){
 
     const title = singleReceipts.title; 
@@ -15,7 +14,6 @@ export default function Resume_recipe ({singleReceipts}){
     function calculate_time_in_minutes (time, cookTime) {
         
         let total_time_min = 0;
-        
         const match_hr_preparation = time.match(/(\d+)\s+hr/);
         const match_hr_cooking = cookTime.match(/(\d+)\s+hr/);
         const match_min_preparation = time.match(/(\d+)\s+mins/);
@@ -46,13 +44,13 @@ export default function Resume_recipe ({singleReceipts}){
                 <TbPoint size={20}/>
                 <TbPoint size={20}/>
                 </>
-            ) : difficulty === "Medium" ? (
+            ) : difficulty === "More effort" ? (
                 <>
                 <TbPointFilled size={20}/>
                 <TbPointFilled size={20}/>
                 <TbPoint size={20}/>
                 </>
-            ) : difficulty === "Difficult" ? (
+            ) : difficulty === "A challange" ? (
                 <>
                 <TbPointFilled size={20}/>  
                 <TbPointFilled size={20}/>
@@ -69,7 +67,7 @@ export default function Resume_recipe ({singleReceipts}){
 
     function show_icons_ingridient(ingridients) {   
         
-        const ingridients_to_check = ["chicken", "pork", "turkey", "cod"];
+        const ingridients_to_check = ["chicken", "pork", "turkey", "cod", "beef"];
 
         const hasMeat = ingridients_to_check.some((meat) => {
             return ingridients.some((ingridient) => {
@@ -95,7 +93,7 @@ export default function Resume_recipe ({singleReceipts}){
                         <th>{set_difficulty(difficulty)}</th>
                     </tr>   
                     <tr>
-                        <td>{calculate_time_in_minutes (time, cookTime)}</td>
+                        <td>{time ?calculate_time_in_minutes (time, cookTime): 0}</td>
                         <td>Ingridients</td>
                         <td>Difficulty</td>
                     </tr>  

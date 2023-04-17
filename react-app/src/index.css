@@ -8,6 +8,11 @@
   --grey: #1d1d1d;
 }
 
+.App{
+  min-height: 100%;
+  min-width: 100%;
+}
+
 body {
   font-family: var(--font);
   margin: 0;
@@ -60,4 +65,11 @@ button#green {
 }
 button#green:hover {
   background-color:#26573d;
+}
+
+.page_login{
+  height: 100vh;
+  width: 100%;
+  background-color: var(--green);
+  background-image: url(../public/background.png);
 }

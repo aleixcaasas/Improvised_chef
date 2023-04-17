@@ -5,7 +5,7 @@ const loginWithEmail = async function (email, password) {
     let result;
     try {
         result = await signInWithEmailAndPassword(auth, email, password);
-        if(result.user.uid){
+        if(result.user.uid){ //comprovar
             return {
                 loguejat: true, id: result.user.uid
             };
