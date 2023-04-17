@@ -8,6 +8,7 @@ router.post('/loginWithGoogle', projectController.loginGoogle);
 router.post('/register', projectController.register);
 router.post('/resetPassword', projectController.resetPassword);
 router.post('/logout', projectController.logout);
+router.post('/recipes/name', projectController.recipesName);
 //router.get('/recipes', projectController.recipes);
 //router.get('/ingredients', projectController.ingredients);
 module.exports = router;

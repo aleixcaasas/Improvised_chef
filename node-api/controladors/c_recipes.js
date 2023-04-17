@@ -1,9 +1,26 @@
-const { db } = require('../firebase/firebase-config');
+const { db, collection, getDocs, query, where} = require('../firebase/firebase-config');
 const recipes = async function () {
     const querySnapshot = await db.collection("recipes").get();
     return querySnapshot.docs.map(doc => doc.data());
 }
 
+const recipesName = async function (req, res){
+    try {
+        let results = [];
+        const nameRecipe = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
+        const querySnapshot = await getDocs(query(collection(db, "recipes"), where('title_words', 'array-contains-any', nameRecipe.split(" "))));
+        querySnapshot.forEach((doc) => {
+            if(doc.get('title').toLowerCase().includes(nameRecipe)){
+                results.push(doc.data());
+            }
+        });
+        return results;
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Error al cercar receptes per nom');
+    }
+}
 /*router.get('/recipes/:userIngredientsList', async (req, res) => {
     try{
         var results = [];
@@ -48,4 +65,4 @@ router.get('/recipes/:recipeId', async (req, res) => {
     }
 });*/
 
-module.exports = recipes;
+module.exports = {recipes, recipesName};
