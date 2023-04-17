@@ -87,14 +87,14 @@ export default function Resume_recipe ({singleReceipts}){
                 <h2 className ="title_recepit_resume">{title}</h2>
                 <div className="details_preparation">
                 <table>
-                    <tr>
-                        <th><TbClockHour4 size= "22"/></th>
+                    <tr>                       
                         <th>{show_icons_ingridient(ingridients)}{show_ingridients_numbers(ingridients)}</th>
+                        <th><TbClockHour4 size= "22"/></th>
                         <th>{set_difficulty(difficulty)}</th>
                     </tr>   
                     <tr>
-                        <td>{time ?calculate_time_in_minutes (time, cookTime): 0}</td>
                         <td>Ingridients</td>
+                        <td>{time ?calculate_time_in_minutes (time, cookTime): 0}</td>
                         <td>Difficulty</td>
                     </tr>  
                 </table>   
