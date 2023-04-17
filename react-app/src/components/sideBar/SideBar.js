@@ -18,7 +18,7 @@ const Sidebar = () => {
     const handleLogOut = async () => {
         //await axios.post('http://localhost:3700/logout', {user});
         setUser({ email: '' });
-        navigation("/demo");
+        navigation("/home");
     }
     return (
         <div className="sidebar">
@@ -36,7 +36,7 @@ const Sidebar = () => {
             </div>
             <div className="sidebar-bottom">
                 <ul>
-                    <Link to="/demo"><li><MdOutlineHome size={30} /><label>Home</label></li></Link>
+                    <Link to="/home"><li><MdOutlineHome size={30} /><label>Home</label></li></Link>
 
 
                     <Link to="/Profile"><li><MdPersonOutline size={30} /><label>Profile</label></li></Link>

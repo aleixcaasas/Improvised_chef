@@ -5,7 +5,6 @@ import { UserProvider } from '../pages/globalValue';
 import Home from '../pages/Home'
 import Components from '../pages/Components'
 import ChooseOption from '../pages/ChooseOption'
-import Demo from '../pages/Demo'
 import Profile from '../pages/Profile'
 import MyKitchen from '../pages/MyKitchen'
 import MyIngredients from '../pages/MyIngredients'
@@ -29,7 +28,6 @@ export default function RouterDirections() {
             <Route exact path="/" element={<ChooseOption/>}/>
             <Route exact path="/home" element={<Home/>}/>
             {/*FINAL PAGES*/}
-            {/*SERA EL FUTUR HOME*/}<Route exact path="/demo" element={<Demo/>}/>
             <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/MyKitchen" element={<MyKitchen/>}/>
@@ -44,7 +42,6 @@ export default function RouterDirections() {
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />
-            <Route exact path="/components/accounts" element={<Demo/>} />
             <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
             <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
             <Route exact path="/components/resume_recipe" element={<ResumeRecipeContainer/>} />
