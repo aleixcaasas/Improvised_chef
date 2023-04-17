@@ -13,12 +13,12 @@ export default function MockRecipes() {
         setNomIngredient(e.target.value);
         try {
             if (e.target && e.target.value !== null) {
-                const response = await axios.post('http://localhost:3000/ingredients/name', {
+                const response = await axios.post('http://localhost:3000/mock/ingredients/name', {
                     name: e.target.value
                 });
                 setIngredients(response.data);
 
-                await axios.post("http://localhost:3000/recipes/ingredients", {
+                await axios.post("http://localhost:3000/mock/recipes/ingredients", {
                     ingredients: response.data
                 })
                     .then(response => {
@@ -36,10 +36,10 @@ export default function MockRecipes() {
 
     useEffect(() => {
         const peticionsApi = async () => {
-            const response = await axios.get("http://localhost:3000/ingredients");
+            const response = await axios.get("http://localhost:3000/mock/ingredients");
             setIngredients(response.data);
 
-            await axios.post("http://localhost:3000/recipes/ingredients", {
+            await axios.post("http://localhost:3000/mock/recipes/ingredients", {
                 ingredients: response.data
             })
                 .then(response => {

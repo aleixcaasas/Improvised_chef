@@ -33,7 +33,7 @@ export default function MockRecipes() {
         setNomRecepta(e.target.value);
         try {
             if (e.target && e.target.value !== null) {
-                const response = await axios.post('http://localhost:3000/recipes/title', {
+                const response = await axios.post('http://localhost:3000/mock/recipes/title', {
                     title: e.target.value
                 });
                 setRecipes(response.data);
@@ -95,7 +95,7 @@ export default function MockRecipes() {
 
     useEffect(() => {
         const peticionsApi = async () => {
-            await axios.get("http://localhost:3000/recipes")
+            await axios.get("http://localhost:3000/mock/recipes")
                 .then(response => {
                     setRecipes(response.data);
                 })
