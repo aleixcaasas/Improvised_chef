@@ -1,7 +1,9 @@
 .error_container{
     height: 223px;
-    width: 370px;
-    position: relative;
+    width: 500px;
+    position: absolute;
+    top:25%;
+    left:33.5%;
     background:var(--cream);
     overflow: hidden;
     border-radius: 10px;
@@ -43,3 +45,4 @@
   color: #3a7155;
 
 }
+

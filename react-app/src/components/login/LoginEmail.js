@@ -5,11 +5,12 @@ import axios from "axios";
 import { UserContext } from '../../pages/globalValue';
 import { useContext } from "react";
 
-export default function LoginEmail() {
+export default function LoginEmail(props) {
     const navigation = useNavigate();
     const [formState, setFormState] = useState({ email: "", password: "" })
     const { email, password } = formState;
-
+   
+    
     const { user, setUser } = useContext(UserContext);
 
     const handleChange = (e) => {
@@ -17,12 +18,14 @@ export default function LoginEmail() {
         let name = e.target.name;
         setFormState(prev => ({ ...prev, [name]: value }));
     }
-
+      
+      
     const login = async (e) => {
         e.preventDefault();
         try {
             if (email === "" || password === "") {
-                alert("Please fill all the fields");
+                props.errorM({error: true, comment: "Please fill all the fields"});
+                //setError2({error: true, comment: "Please fill all the fields"});
             }
             else {
                 const result = await axios.post('http://localhost:3000/login', { email, password });
@@ -32,16 +35,17 @@ export default function LoginEmail() {
                     navigation("/");
                 }
                 else {
-                    alert("Username or password incorrect");
+                    props.errorM({error: true, comment: "Username or password incorrect"});
                 }
             }
         }
         catch (error) {
-            console.log(error.message);
+            props.errorM({error: true, comment: error});
         }
     }
 
     return (
+    
         <div className="login_page">
             <label htmlFor="chk" aria-hidden="true" id="titel">Sign In</label>
             <form className="login-form" action="react-app/src/components">
@@ -52,5 +56,6 @@ export default function LoginEmail() {
             </form>
             <LoginGoogle />
         </div>
+        
     );
 }

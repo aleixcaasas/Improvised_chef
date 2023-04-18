@@ -17,7 +17,7 @@ import MockIngredients from '../components/mock/MockIngredients'
 import SearchBar from '../components/searchBar/SearchBar'
 import SideBar from '../components/sideBar/SideBar'
 import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container'
-import ErrorLoginRegister from '../components/errorMessages/Invalid-Mail-Password/ErrorLoginRegister'
+import ErrorMessage from '../components/errorMessages/ErrorMessage'
 
 export default function RouterDirections() {
   return (
@@ -45,7 +45,7 @@ export default function RouterDirections() {
             <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
             <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
             <Route exact path="/components/resume_recipe" element={<ResumeRecipeContainer/>} />
-            <Route exact path="/components/Error_login_register" element={<ErrorLoginRegister />} />
+            <Route exact path="/components/Error_login_register" element={<ErrorMessage/>} />
             
             <Route path='*' element={<Home/>}/>
         </Routes>
