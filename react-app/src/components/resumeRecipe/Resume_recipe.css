@@ -2,20 +2,17 @@
 
 
 .receipt_container {
-    max-width: 100% !important;
+
+    width: 90%;
+    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
+    max-height: 100%;
     padding: 20px;
-    position: fixed;
+    position: fixed;   
     left: 25%;
-    top: 10%;
-
-    overflow-y: auto;
-    height: calc(100vh - 20%);
-
-    max-width: 850px;
-    margin: 0 auto;
-    justify-content: space-between;
+    top: 12%;
+    overflow-y: scroll;
 }
 
 
@@ -23,12 +20,11 @@
     
 .Receipt {
     background-color: var(--cream);
-    width: 400px; 
-    
-    margin-bottom: 20px;
+    width:350px;
+    margin: 10px;
     border-radius: 20px; 
     box-shadow: 10px 10px 20px rgb(181, 181, 181);
-    flex: 0 1 calc(33% - 20px);;
+    flex: 0 1 calc(25% - 20px);
 }
 
 .image_receipt {
@@ -48,8 +44,14 @@
 
 .content_recepit .title_recepit_resume{
     color: var(--red);
+    min-height: 60px;
     font-size: 20px;
     text-align: center;
+
+
+    align-items: center;
+    justify-content: center;
+
     border-bottom: 1px solid var(--red);
     position: relative;
     display: inline-block;

@@ -51,7 +51,7 @@ export default function LoginEmail(props) {
             <form className="login-form" action="react-app/src/components">
                 <input type="email" placeholder="EMAIL" value={email} name="email" onChange={handleChange} /> <br />
                 <input type="password" placeholder="PASSWORD" value={password} name="password" onChange={handleChange} /><br />
-                <p><Link className="navegationLink" to='/accounts/forgotPassword'>Forgot your password?</Link></p>
+                <p><Link className="navegationLink" to='/forgotPassword'>Forgot your password?</Link></p>
                 <button type="submit" value="LOGIN" onClick={login}>Sign In</button>
             </form>
             <LoginGoogle />

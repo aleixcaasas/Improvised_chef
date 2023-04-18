@@ -44,7 +44,7 @@ export default function Home() {
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/recipes/title', {
+                const response = await axios.post('http://localhost:3000/mock/recipes/title', {
                     title: searchTerm
                 });
                 setRecipes(response.data);

@@ -1,9 +1,43 @@
-const { db } = require('../firebase/firebase-config');
+const { db, collection, getDocs, query, where, limit} = require('../firebase/firebase-config');
 const recipes = async function () {
-    const querySnapshot = await db.collection("recipes").get();
-    return querySnapshot.docs.map(doc => doc.data());
-}
+  let results = [];
+  const querySnapshot = await getDocs(query(collection(db, "recipes"), limit(10)));
+  querySnapshot.forEach((doc) => {
+      results.push(doc.data());
+  });
+  return results;
+};
 
+const randomRecipe = async function (req) {
+    let result = [];
+    const numRecipes = parseInt(req.query.number) || 1;
+    for (let n = 0; n < numRecipes; n++){
+        const randomNum = Math.floor(Math.random() * 3842)
+        const q = query(collection(db, "recipes"), where("id", ">=", randomNum), limit(1));
+        const querySnapshot = await getDocs(q);
+        const docData = querySnapshot.docs[0].data();
+        result.push(docData);
+    }
+    return result;
+};
+
+const recipesName = async function (req, res){
+    try {
+        let results = [];
+        const nameRecipe = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
+        const querySnapshot = await getDocs(query(collection(db, "recipes"), where('title_words', 'array-contains-any', nameRecipe.split(" "))));
+        querySnapshot.forEach((doc) => {
+            if(doc.get('title').toLowerCase().includes(nameRecipe)){
+                results.push(doc.data());
+            }
+        });
+        return results;
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Error al cercar receptes per nom');
+    }
+}
 /*router.get('/recipes/:userIngredientsList', async (req, res) => {
     try{
         var results = [];
@@ -48,4 +82,4 @@ router.get('/recipes/:recipeId', async (req, res) => {
     }
 });*/
 
-module.exports = recipes;
+module.exports = {recipes, recipesName, randomRecipe};
