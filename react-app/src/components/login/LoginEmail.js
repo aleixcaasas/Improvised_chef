@@ -25,7 +25,6 @@ export default function LoginEmail(props) {
         try {
             if (email === "" || password === "") {
                 props.errorM({error: true, comment: "Please fill all the fields"});
-                //setError2({error: true, comment: "Please fill all the fields"});
             }
             else {
                 const result = await axios.post('http://localhost:3000/login', { email, password });

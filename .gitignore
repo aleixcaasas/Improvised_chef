@@ -26,3 +26,4 @@ firebase.json
 
 .idea
 bot-data-recipes/target/test-classes/steps/GetLinks.class
+.vscode/settings.json
