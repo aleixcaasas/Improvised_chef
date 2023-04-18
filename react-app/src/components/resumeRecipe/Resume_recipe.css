@@ -2,17 +2,14 @@
 
 
 .receipt_container {
-
-    width: 90%;
-    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
     max-height: 100%;
     padding: 20px;
-    position: fixed;   
+    position: absolute;
     left: 25%;
-    top: 12%;
-    overflow-y: scroll;
+    top: 7%;
+    z-index: -1;
 }
 
 
@@ -39,7 +36,6 @@
 
 .content_recepit {
     margin: 25px ;
-    
 }
 
 .content_recepit .title_recepit_resume{
@@ -100,8 +96,3 @@
 .content_recepit h4{
     margin : 10px;
 }
-
-
-
-
-
