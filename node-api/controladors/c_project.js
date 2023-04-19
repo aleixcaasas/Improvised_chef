@@ -6,6 +6,7 @@ const resetPasswordEmail = require('./c_resetPassword');
 const signOutV  = require('./c_logout');
 const {recipes, recipesName, randomRecipe} = require('./c_recipes');
 const ingredients = require('./c_ingredients');
+const getInfo = require('./c_getInfo');
 
 const controller = {
     home: function(req, res) { 
@@ -98,6 +99,11 @@ const controller = {
     ingredients: function(req, res) {
         return res.status(200).send(ingredients)
     },
+
+    getInfo: function(req, res) {
+        const info = getInfo(req.body);
+        return res.status(200).send(info);
+    }
 }
 
 module.exports = controller;
