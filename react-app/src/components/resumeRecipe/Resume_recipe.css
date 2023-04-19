@@ -1,3 +1,13 @@
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--green); 
+    border-radius: 10px;
+}
+
+
 /******************recepit container***********************/
 
 
@@ -12,21 +22,78 @@
     z-index: -1;
 }
 
-
 /******************recepit resume***********************/
-    
-.Receipt {
+
+@keyframes fade-in-from-bottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.receipt_big{
     background-color: var(--cream);
-    width:350px;
+    width: calc(33.33% - 20px); 
     margin: 10px;
     border-radius: 20px; 
     box-shadow: 10px 10px 20px rgb(181, 181, 181);
-    flex: 0 1 calc(25% - 20px);
+    animation-name: fade-in-from-bottom;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
 }
 
-.image_receipt {
+
+.receipt_medium{
+    background-color: var(--cream);
+    width: calc(50% - 20px); 
+    margin: 10px;
+    border-radius: 20px; 
+    box-shadow: 10px 10px 20px rgb(181, 181, 181);
+}
+
+.receipt_small{
+    background-color: var(--cream);
+    width: calc(100% - 20px); 
+    margin: 10px;
+    border-radius: 20px; 
+    box-shadow: 10px 10px 20px rgb(181, 181, 181);
+
+    animation-name: fade-in-from-bottom;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.image_receipt_big {
     width: 100%;
     height: 150px;
+    background-size: 100% ;
+    border-radius: 20px 20px 0 0; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment:inherit;
+}
+
+.image_receipt_medium {
+    width: 100%;
+    height: 150px;
+    background-size: 100% ;
+    border-radius: 20px 20px 0 0; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment:inherit;
+}
+
+.image_receipt_small {
+    width: 100%;
+    height: 200px;
     background-size: 100% ;
     border-radius: 20px 20px 0 0; 
     background-repeat: no-repeat;
@@ -43,11 +110,8 @@
     min-height: 60px;
     font-size: 20px;
     text-align: center;
-
-
     align-items: center;
     justify-content: center;
-
     border-bottom: 1px solid var(--red);
     position: relative;
     display: inline-block;
