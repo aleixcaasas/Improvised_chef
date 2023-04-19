@@ -1,8 +1,9 @@
 import './Resume_recipe.css'
 import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
+import { useEffect, useState } from 'react';
 
 
-export default function Resume_recipe ({singleReceipts}){
+export default function Resume_recipe ({singleReceipts, index}){
 
     const title = singleReceipts.title; 
     const image = singleReceipts.image;
@@ -11,6 +12,21 @@ export default function Resume_recipe ({singleReceipts}){
     const difficulty = singleReceipts.difficulty;
     const ingridients = singleReceipts.ingredients;
     
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    
+    
+
+    useEffect(() => {
+        function handleResize() {
+          setWindowWidth(window.innerWidth);
+        }
+    
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
+      
+    const responsive = windowWidth >= 1300 ? "_big" : windowWidth >= 830? "_medium":"_small";
+
     function calculate_time_in_minutes (time, cookTime) {
         
         let total_time_min = 0;
@@ -80,10 +96,15 @@ export default function Resume_recipe ({singleReceipts}){
         );
     }
     
+    
+
     return (
-        <div className="Receipt">
-            <div className="image_receipt" style={{backgroundImage: `url("${image}")`}}></div>
-            <div className="content_recepit">
+        <div 
+            className={`receipt${responsive}`}
+            style={{ animationDelay: `${index/10}s` }}
+        >
+            <div className={`image_receipt${responsive}`} style={{backgroundImage: `url("${image}")`}}></div>
+            <div className={`content_recepit`}>
                 <h2 className ="title_recepit_resume">{title}</h2>
                 <div className="details_preparation">
                 <table>
