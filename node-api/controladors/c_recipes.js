@@ -8,26 +8,37 @@ const recipes = async function () {
   return results;
 };
 
-const randomRecipe = async function (req) {
-    let result = [];
-    const numRecipes = parseInt(req.query.number) || 1;
-    let randomNum = []
-    for (let n = 0; n < numRecipes; n++){
-        randomNum.push(Math.floor(Math.random() * 3842))
+const randomRecipe = async function (req, res) {
+    try {
+        let result = [];
+        const numRecipes = parseInt(req.query.number) || 1;
+        let randomNum = []
+        while (randomNum.length < numRecipes) {
+          let random = Math.floor(Math.random() * 3842)
+          if (randomNum.indexOf(random) === -1) {
+            randomNum.push(random)
+          }
+        }
+        const q = query(collection(db, "recipes"), where("id", "in", randomNum));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.docs.forEach((doc) => {
+            const docData = doc.data();
+            const selectedFields = {
+                image: docData.image,
+                difficulty: docData.difficulty,
+                id: docData.id,
+                time_cooking: docData.time_cooking,
+                time_preparation: docData.time_preparation,
+                title: docData.title
+            };
+            result.push(selectedFields);
+        });
+        return result;
     }
-    const q = query(collection(db, "recipes"), where("id", "in", randomNum));
-    const querySnapshot = await getDocs(q);
-    const docData = querySnapshot.docs[0].data();
-    const selectedFields = {
-        image: docData.image,
-        difficulty: docData.difficulty,
-        id: docData.id,
-        time_cooking: docData.time_cooking,
-        time_preparation: docData.time_preparation,
-        title: docData.title
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Error al fer fetch de random recipes!');
     }
-    result.push(selectedFields);
-    return result;
 };
 
 const recipesName = async function (req, res){
