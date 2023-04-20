@@ -92,12 +92,10 @@ export default function Resume_recipe ({singleReceipts, index}){
         });
 
         return (
-            <>{hasMeat ? <TbMeat size="20"/> : <TbPlant size="20"/>}</>
+            <>{hasMeat ? <TbMeat size="25"/> : <TbPlant size="25"/>}</>
         );
     }
     
-    
-
     return (
         <div 
             className={`receipt${responsive}`}
@@ -110,17 +108,17 @@ export default function Resume_recipe ({singleReceipts, index}){
                 <table>
                     <tr>                       
                         <th>{show_icons_ingridient(ingridients)}{show_ingridients_numbers(ingridients)}</th>
-                        <th><TbClockHour4 size= "22"/></th>
+                        <th><TbClockHour4 size= "25"/></th>
                         <th>{set_difficulty(difficulty)}</th>
                     </tr>   
                     <tr>
-                        <td>Ingridients</td>
+                        <td>Ingredients</td>
                         <td>{time ?calculate_time_in_minutes (time, cookTime): 0}</td>
                         <td>Difficulty</td>
                     </tr>  
                 </table>   
                 </div>
-                <button id = "green">Want to know more</button>
+                <button id = "green">See recipe details</button>
             </div>
             
         </div>  
