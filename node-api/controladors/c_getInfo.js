@@ -5,7 +5,7 @@ const getInfo = async function (req, res) {
     try{
         let result = [];
         const users = collection(db, "users");
-        const userInfo = query(users, where("email", "==", req.query.email));
+        const userInfo = query(users, where("email", "==", req.body.user.email));
         const querySnapshot = await getDocs(userInfo);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
@@ -16,6 +16,7 @@ const getInfo = async function (req, res) {
           };
               result.push(selectedFields);
         });
+        console.log(result)
         return result;
     } catch (error) {
         console.log(error);

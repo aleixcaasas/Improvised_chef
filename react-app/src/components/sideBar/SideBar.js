@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 import { UserContext } from '../../pages/globalValue';
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
@@ -13,6 +13,7 @@ const Sidebar = () => {
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
+    const [response, setResponse] = useState(null)
 
     const navigation = useNavigate();
 
@@ -25,8 +26,8 @@ const Sidebar = () => {
     useEffect(() => {
         const getInfo = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/getInfo', { user: user });
-                console.log(response);
+                const response = await axios.post('http://localhost:3000/user/summary', { user: user });
+                setResponse(response);
             } catch (error) {
                 console.log(error);
             }
@@ -40,11 +41,21 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="sidebar-top">
                 <div className="user-div">
-                    <div className="image-div">
-                        <Link to="/Profile"><img className="user-image" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"></img></Link>
-                    </div>
-                    <Link to="/Profile"><h3 className="name">JUAN COCINERO</h3></Link>
-                    <Link to="/Profile"><label className="username">@juancocinero</label></Link>
+                    {response?.data && (
+                        <>
+                            <div className="image-div">
+                                <Link to="/Profile"><img className="user-image" src={response.data[0].profilePic}></img></Link>
+                            </div>
+                            <Link to="/Profile"><h3 className="name">{response.data[0].fullName}</h3></Link>
+                            <Link to="/Profile"><label className="username">{response.data[0].userName}</label></Link>
+                        </>                          
+                    )}
+                    {!response?.data && (
+                        <>
+                            <h1>Loading...</h1>
+                        </>                       
+                    )}
+                    
                 </div>
                 <div className="logout-div">
                     <button onClick={handleLogOut}><MdLogout size={22}></MdLogout> <label>Sign Out</label></button>
@@ -76,3 +87,4 @@ const Sidebar = () => {
 }
 
 export default Sidebar;
+
