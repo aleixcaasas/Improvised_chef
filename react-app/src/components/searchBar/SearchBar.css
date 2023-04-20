@@ -1,6 +1,5 @@
 
-
-.searchBar-divNo360 {
+.searchBar-div {
   display: flex;
   flex-direction: row;  
   justify-content: space-between;
@@ -8,14 +7,6 @@
   position: fixed;
   left: 30%;
   width: 70%;  
-}
-
-.searchBar-divYes3601{
-  display: none;
-}
-
-.searchBar-divYes3602{
-  display: none;
 }
 
 .searchBar1 {
@@ -65,17 +56,9 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) { 
 
-  .searchBar-divYes3601{
-    display: none;
-  }
-
-  .searchBar-divYes3602{
-    display: none;
-  }
-
-  .searchBar-divNo360 {
+  .searchBar-div {
     display: flex;
     flex-direction: row;
     left: 2%;
@@ -95,36 +78,30 @@
 
 @media only screen and (max-width: 360px) {
   
-  .searchBar-divNo360 {
-    /*display: flex;
-    flex-direction: column;
-    left: 2%;
-    width: 100%;      
-    text-align: left;*/
-    display: none;
+  .searchBar-div {
+    display: grid;   
+    grid-template-areas:
+      "menuIcon   CookButton CookButton CookButton CookButton CookButton"
+      "searchBar1 searchBar1 searchBar1 searchBar1 searchBar1 searchBar1";
+    grid-column-gap: 5px;    
   }
 
-  .searchBar-divYes3601{
-    display: flex;
+  .CookButton {
+    grid-area: CookButton;
     flex-direction: row;
-    height: 78px;
-    align-items:center;
-    padding-left: 10px;
+    width: 100%;
+    padding: 10px 48px;
+    position: relative;
+    right: 13px    
   }
 
-  .searchBar-divYes3602{
-    display: flex;
-    margin-top: 0px;
+  .menuIcon{
+    grid-area: menuIcon;
   }
 
   .searchBar1{
-    order: 1;  
-    width: 100%;   
-    padding: 12px  68px;        
-  }
-
-  .CookButton{
-    order: 0;
-    width: 80%;    
-  }   
+    grid-area: searchBar1;
+    width: 85% !important;
+    max-width: 85% !important;    
+  }  
 }
