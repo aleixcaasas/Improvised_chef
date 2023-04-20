@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
+import { AiOutlineClose } from 'react-icons/ai';
+import { FaBars} from 'react-icons/fa';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 import React, { useContext, useState } from "react";
 import { UserContext } from '../../pages/globalValue';
@@ -26,16 +28,18 @@ const Sidebar = () => {
         <>
         <div className="openIconDiv">
             <Link to='#' className="openIcon">
-                <TbCheese onClick={showSidebar}></TbCheese>
+                <FaBars onClick={showSidebar}></FaBars>
             </Link>
         </div>
         <nav className={sidebar ? 'sidebar active' : 'sidebar'}>
+            <div className="closeIconDiv">
+                <Link to='#' className="closeIcon">
+                    <AiOutlineClose onClick={showSidebar}></AiOutlineClose>
+                </Link>
+            </div>
+            <div className="sidebar-content">
             <div className="sidebar-top">
-                <div className="closeIconDiv">
-                    <Link to='#' className="openIcon">
-                        <MdLogout onClick={showSidebar}></MdLogout>
-                    </Link>
-                </div>
+                
                 <div className="user-div">
                     <div className="image-div">
                         <Link to="/Profile"><img className="user-image" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"></img></Link>
@@ -67,6 +71,7 @@ const Sidebar = () => {
 
                     <Link to="/FavouriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favourites</label></li></Link>
                 </ul>
+            </div>
             </div>
         </nav>
         </>
