@@ -27,9 +27,11 @@
 	padding-top: 20px;
 }
 .openIconDiv{
+	display: flex;
 	padding-top: 20px;
 	width: 22%;
 	margin: 0;
+	position: fixed;
 }
 .openIcon{
 	margin-left: 2rem;
