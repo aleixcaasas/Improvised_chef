@@ -127,7 +127,7 @@
     justify-content: center;
     border-bottom: 1px solid var(--red);
     position: relative;
-    display: inline-block;
+    display: flex;
     margin: 0px;
     padding-bottom: 20px;
     width: 100%;
@@ -172,4 +172,10 @@
 
 .content_recepit h4{
     margin : 10px;
+}
+
+@media only screen and (max-width: 768px) {
+	.receipt_container{
+		left: 0%;
+	}
 }
