@@ -24,13 +24,14 @@ export default function ForgotPassword() {
 
 	if (message === "") {
 		return (
-			<div className="container" id="forgot_password">
-
-				<h1>Reset your password</h1>
-				<form className="login-form" onSubmit={handleSubmit}>
-					<input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>
-					<button type="submit">Send email</button>
-				</form>
+			<div className="page_login">
+				<div className="container" id="forgot_password">
+					<h1>Reset your password</h1>
+					<form className="login-form" onSubmit={handleSubmit}>
+						<input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"></input>
+						<button type="submit">Send email</button>
+					</form>
+				</div>
 			</div>
 		);
 	} else if (message === "Password reset email send correctly") {
