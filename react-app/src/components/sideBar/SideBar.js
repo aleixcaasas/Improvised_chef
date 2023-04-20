@@ -47,7 +47,7 @@ const Sidebar = () => {
                                 <Link to="/Profile"><img className="user-image" src={response.data[0].profilePic}></img></Link>
                             </div>
                             <Link to="/Profile"><h3 className="name">{response.data[0].fullName}</h3></Link>
-                            <Link to="/Profile"><label className="username">{response.data[0].userName}</label></Link>
+                            <Link to="/Profile"><label className="username">@{response.data[0].userName}</label></Link>
                         </>                          
                     )}
                     {!response?.data && (
