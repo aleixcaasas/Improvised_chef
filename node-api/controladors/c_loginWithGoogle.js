@@ -13,7 +13,7 @@ const emailNotExists = async (email) => {
         emailExist = true;
       }
     });
-    return emailExist;
+    return emailExist; //modificar consulta i fer-la directe desde un select
 }
 
 const loginWithGoogle = async (result) => {

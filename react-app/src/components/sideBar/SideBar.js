@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
-import React, { useContext } from "react";
 import { UserContext } from '../../pages/globalValue';
+import React, { useContext, useEffect } from "react";
 import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
+import axios from "axios";
 import './sideBar.css';
 
 const Sidebar = () => {
@@ -20,6 +21,21 @@ const Sidebar = () => {
         setUser({ email: '' });
         navigation("/home");
     }
+
+    useEffect(() => {
+        const getInfo = async () => {
+            try {
+                const response = await axios.post('http://localhost:3000/getInfo', { user: user });
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getInfo();
+    }, []);
+    
+
+
     return (
         <div className="sidebar">
             <div className="sidebar-top">
