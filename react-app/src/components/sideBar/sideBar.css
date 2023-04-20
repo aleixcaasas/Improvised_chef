@@ -1,6 +1,7 @@
 .sidebar{
-	width: 22%;
+	width: 350px;
 	height: 100vh;
+	text-align: center;
 	display: flex;
 	font-style: var(--font);
 	background: var(--green);
@@ -11,6 +12,7 @@
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 	margin: 0;
 	position: fixed;
+	z-index: 1;
 }
 .sidebar.active {
 	left: 0;
@@ -32,6 +34,7 @@
 	width: 22%;
 	margin: 0;
 	position: fixed;
+	z-index: 1;
 }
 .openIcon{
 	margin-left: 2rem;
