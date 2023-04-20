@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from '../../pages/globalValue';
 import { auth } from "../../firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
@@ -12,6 +12,8 @@ const Sidebar = () => {
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
     });
+    const [sidebar, setSidebar] = useState(false);
+    const showSidebar = () => setSidebar(!sidebar);
 
     const navigation = useNavigate();
 
@@ -21,8 +23,14 @@ const Sidebar = () => {
         navigation("/home");
     }
     return (
-        <div className="sidebar">
+        <>
+        <nav className={sidebar ? 'sidebar active' : 'sidebar'}>
             <div className="sidebar-top">
+                <div className="closeIconDiv">
+                    <Link to='#' className="openIcon">
+                        <MdLogout></MdLogout>
+                    </Link>
+                </div>
                 <div className="user-div">
                     <div className="image-div">
                         <Link to="/Profile"><img className="user-image" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"></img></Link>
@@ -54,8 +62,8 @@ const Sidebar = () => {
                     <Link to="/FavouriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favourites</label></li></Link>
                 </ul>
             </div>
-
-        </div>
+        </nav>
+        </>
     )
 }
 

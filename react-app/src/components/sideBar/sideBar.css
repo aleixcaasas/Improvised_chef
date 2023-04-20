@@ -9,16 +9,31 @@
 	background: var(--green);
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: -100%;
+	transition: 850ms;
 	color: white;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 	padding-block: 5%;
 	padding-inline: 1%;
+	margin: 0;
 }
-
+.sidebar.active {
+	left: 0;
+	top: 0;
+	transition: 350ms;
+	margin: 0;
+	padding: 0;
+}
+.closeIconDiv{
+	display: flex;
+}
+.openIcon{
+	margin-left: 2rem;
+	font-size: 2rem;
+	background: none;
+}
 .sidebar-top{
-	height: 35%;
-	width: 90%;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -30,8 +45,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 75%;
-	
 }
 .name{
 	color: white;
@@ -107,10 +120,7 @@
 }
 
 
-.sidebar-bottom{
-	width: 90%;
-	height: 65%;
-}
+
 
 .sidebar-bottom ul{
 	list-style: none;
