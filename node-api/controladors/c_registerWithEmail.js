@@ -1,6 +1,7 @@
 const {createUserWithEmailAndPassword} = require('firebase/auth');
 const {auth, db} = require('../firebase/firebase-config');
 const {addDoc, collection} = require('firebase/firestore');
+const profilePic = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kindpng.com%2Fimgv%2Fiwoxbb_user-profile-default-image-png-clipart-png-download%2F&psig=AOvVaw2zWE2hH7CE0jp7sOrTYrSv&ust=1682075554042000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCIji8fCpuP4CFQAAAAAdAAAAABAE';
 
 const registerWithEmail = async (fullName, userName, email, password) => {
     const id = null;
@@ -11,6 +12,7 @@ const registerWithEmail = async (fullName, userName, email, password) => {
                     const docRef = await addDoc(collection(db, "users"), {
                         fullName,
                         userName,
+                        profilePic,
                         email,
                         userId: `${result.user.uid}`
                     });

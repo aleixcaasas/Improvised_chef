@@ -3,11 +3,11 @@ const {query, collection, where, getDocs, getDoc} = require("firebase/firestore"
 
 const getInfo = async function (req, res) {
     try{
-        let docs = [];
+        let result = [];
         const users = collection(db, "users");
         const userInfo = query(users, where("email", "==", req.query.email));
         const querySnapshot = await getDocs(userInfo);
-        querySnapshot.docs.forEach((doc) => {
+        querySnapshot.forEach((doc) => {
           const docData = doc.data();
           const selectedFields = {
               profilePic: docData.profilePic,

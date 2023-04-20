@@ -19,7 +19,7 @@ const emailNotExists = async (email) => {
 const loginWithGoogle = async (result) => {
 
     try {
-        const name = result.displayName;
+        const fullName = result.displayName;
         const email = result.email;
         const profilePic = result.photoURL;
         const userName = email.split('@')[0];
@@ -27,7 +27,7 @@ const loginWithGoogle = async (result) => {
 
         if (!emailNotAtBD) {
           await addDoc(collection(db, "users"), {
-            name,
+            fullName,
             userName,
             profilePic,
             email,
