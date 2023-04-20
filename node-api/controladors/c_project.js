@@ -100,9 +100,8 @@ const controller = {
         return res.status(200).send(ingredients)
     },
 
-    getInfo: function(req, res) {
-        const info = getInfo(req.body);
-        return res.status(200).send(info);
+    getInfo: async function(req, res) {
+        return res.status(200).send(await getInfo(req, res));
     }
 }
 
