@@ -24,11 +24,16 @@ const Sidebar = () => {
     }
     return (
         <>
+        <div className="openIconDiv">
+            <Link to='#' className="openIcon">
+                <TbCheese onClick={showSidebar}></TbCheese>
+            </Link>
+        </div>
         <nav className={sidebar ? 'sidebar active' : 'sidebar'}>
             <div className="sidebar-top">
                 <div className="closeIconDiv">
                     <Link to='#' className="openIcon">
-                        <MdLogout></MdLogout>
+                        <MdLogout onClick={showSidebar}></MdLogout>
                     </Link>
                 </div>
                 <div className="user-div">
@@ -41,6 +46,7 @@ const Sidebar = () => {
                 <div className="logout-div">
                     <button onClick={handleLogOut}><MdLogout size={22}></MdLogout> <label>Sign Out</label></button>
                 </div>
+                <br/>
             </div>
             <div className="sidebar-bottom">
                 <ul>
