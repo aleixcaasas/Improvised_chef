@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { TbCheese } from 'react-icons/tb';
+import { AiOutlineClose } from 'react-icons/ai';
+import { FaBars} from 'react-icons/fa';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 import { UserContext } from '../../pages/globalValue';
 import React, { useContext, useEffect, useState } from "react";
@@ -14,6 +16,8 @@ const Sidebar = () => {
         setUser(currentUser);
     });
     const [response, setResponse] = useState(null)
+    const [sidebar, setSidebar] = useState(true);
+    const showSidebar = () => setSidebar(!sidebar);
 
     const navigation = useNavigate();
 
@@ -33,13 +37,25 @@ const Sidebar = () => {
             }
         }
         getInfo();
-    }, []);
+    }, [user]);
     
 
 
     return (
-        <div className="sidebar">
+        <>
+        <div className="openIconDiv">
+            <Link to='#' className="openIcon">
+                <FaBars onClick={showSidebar}></FaBars>
+            </Link>
+        </div>
+        <div className={sidebar ? 'sidebar active' : 'sidebar'}>
+            <div className="closeIconDiv">
+                <Link to='#' className="closeIcon">
+                    <AiOutlineClose onClick={showSidebar}></AiOutlineClose>
+                </Link>
+            </div>
             <div className="sidebar-top">
+                
                 <div className="user-div">
                     {response?.data && (
                         <>
@@ -81,8 +97,8 @@ const Sidebar = () => {
                     <Link to="/FavouriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favourites</label></li></Link>
                 </ul>
             </div>
-
         </div>
+        </>
     )
 }
 
