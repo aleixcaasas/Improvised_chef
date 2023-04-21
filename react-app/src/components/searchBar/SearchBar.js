@@ -37,7 +37,6 @@ export default function SearchBar({ onSearch }) {
 
     return (
         <div className="searchBar-div"> 
-            <TbMenu2 className="menuIcon" size={43} />
             <input
                 className="searchBar1"
                 //value={cercador}
