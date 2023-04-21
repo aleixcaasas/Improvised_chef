@@ -9,16 +9,16 @@
 	background: var(--green);
 	position: fixed;
 	top: 0;
-	left: -100%;
-	transition: 850ms;
+	left: 0;
 	color: white;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 	padding-block: 5%;
 	padding-inline: 1%;
-	z-index: 1;
 }
-
-.sidebar.active {
+.desplegable{
+	display: none;
+}
+.desplegable.active {
 	left: 0;
 	top: 0;
 	transition: 350ms;
@@ -33,13 +33,9 @@
 	padding-top: 20px;
 }
 .openIconDiv{
-	display: flex;
-	padding-top: 20px;
-	width: 22%;
-	margin: 0;
-	position: fixed;
-	z-index: 1;
+	display: none;
 }
+
 .openIcon{
 	margin-left: 2rem;
 	font-size: 2rem;
@@ -64,7 +60,7 @@
 	justify-content: center;
 	padding-bottom: 4%;
 	border-bottom: 1px rgba(209, 208, 208, 0.571) solid;
-	margin-top: 18%;
+	margin-top: 10%;
 }
 
 .user-div{
@@ -224,5 +220,45 @@
 @media only screen and (max-width: 768px) {
 	.sidebar{
 		display: none;
+	}
+	.openIconDiv{
+		display: flex;
+		padding-top: 20px;
+		width: 22%;
+		margin: 0;
+		position: fixed;
+		z-index: 1;
+	}
+	.desplegable{
+		width: 367px;
+		height: 100vh;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-style: var(--font);
+		background: var(--green);
+		position: fixed;
+		top: 0;
+		left: -100%;
+		transition: 850ms;
+		color: white;
+		box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+		padding-block: 5%;
+		padding-inline: 1%;
+		z-index: 1;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.sidebar{
+		display: none;
+	}
+	.openIconDiv{
+		display: flex;
+		padding-top: 20px;
+		width: 22%;
+		margin: 0;
+		position: fixed;
+		z-index: 1;
 	}
 }
