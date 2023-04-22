@@ -3,7 +3,7 @@ import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
 import { useEffect, useState } from 'react';
 
 
-export default function Resume_recipe ({singleReceipts, index}){
+export default function ResumeRecipe ({singleReceipts, index}){
 
     const title = singleReceipts.title; 
     const image = singleReceipts.image;

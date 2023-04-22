@@ -3,37 +3,32 @@ import { MdSearch } from 'react-icons/md';
 import { TbIcons, TbMenu2 } from 'react-icons/tb';
 import './SearchBar.css';
 import axios from "axios";
+import { debounce } from 'lodash';
 
 
-export default function SearchBar({ onSearch }) {
-    //Estat per emmagatzemar les dades obtingudes en la cerca de manera dinàmica
-    const [recipes, setRecipes] = useState([]);
- 
-    //Estat per controlar el que s'escriu en el cercador
-    const [receipt_to_search, setSearch] = useState("");
-    const handleChange = async (e) => {
-        setSearch(e.target.value);
-        try {
-            onSearch(e.target.value)
+export default function SearchBar({handleSearch}) {
+    
+    const handleChange = async (value) => {
+        if (value.size == 0){
+            handleSearch([]);
+        } else {
+            try {
+                let response = await axios.post('http://localhost:3000/recipes/name', {
+                    name: value
+                });
+    
+                handleSearch(response.data);
+            }
+            catch (error) {
+                console.error(error);
+            }
         }
-        catch (error) {
-            console.error(error);
-        }
-    }   
+    }
  
-     useEffect(()=>{
-         const peticionsApi = async ()=>{
-             await axios.get("http://localhost:3000/recipes")
-                 .then(response=>{
-                     setRecipes(response.data);
-                 })
-                 .catch(error=>{
-                     console.error(error);
-                 })
-         };
-         peticionsApi();
-     }, []);
-
+    //To dealy the the call of the API 
+    const debouncedSearch = debounce((e) =>{
+        handleChange(e.target.value)
+    }, 800);
 
     return (
         <div className="searchBar-div"> 
@@ -41,7 +36,7 @@ export default function SearchBar({ onSearch }) {
                 className="searchBar1"
                 //value={cercador}
                 placeholder={"Search by recipe name"}
-            //onChange={handleChange}
+                onChange={(e) => debouncedSearch(e)}
             />
             <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
             

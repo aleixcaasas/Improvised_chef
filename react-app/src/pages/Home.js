@@ -6,40 +6,51 @@ import Register from "../components/register/Register";
 import LoginEmail from "../components/login/LoginEmail";
 import SearchBar from "../components/searchBar/SearchBar"
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
-import Resume_recipe_container from "../components/resumeRecipe/Resume_recipe_container"
+import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContainer"
 import '../components/login/login.css';
-
-import { debounce } from 'lodash';
 
 
 export default function Home() {
 
     const { user } = useContext(UserContext);
 
-    const [searchTerm, setSearchTerm] = useState("");
     const [recipes, setRecipes] = useState([]);
-    const [error2, setError2] = useState({error:false, comment:""});
+    const [error2, setError2] = useState({ error: false, comment: "" });
 
-    const handleSearch = (searchTerm) => {
-        setSearchTerm(searchTerm);
+    const handleSearch = (searchedReceips) => {
+        setRecipes(searchedReceips);
+        console.log(recipes);
     };
 
     const clicked = (message) => {
-        if(message === "true"){
-            setError2({error:false, comment:""});
+        if (message === "true") {
+            setError2({ error: false, comment: "" });
         }
-      };
+    };
 
     //To dealy the the call of the API 
-    const debouncedSearch = debounce(handleSearch, 800);
 
     const errorM = (message) => {
-        if(message.error){
-            setError2({error:true, comment:message.comment});
+        if (message.error) {
+            setError2({ error: true, comment: message.comment });
             <ErrorMessage errorMessage={message.comment} clicked={clicked}></ErrorMessage>
         }
-        
-      };
+
+    };
+
+    useEffect(() => {
+        if (recipes.length == 0) {
+            const fetchRecipes = async () => {
+                try {
+                    const response = await axios.get('http://localhost:3000/recipes/random');
+                    setRecipes(response.data);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            fetchRecipes();
+        }
+    });
 
     return (
         <div className="home">
@@ -47,8 +58,8 @@ export default function Home() {
                 user?.email && (
                     <>
                         <SideBar />
-                        <SearchBar onSearch={debouncedSearch} />
-                        <Resume_recipe_container receiptsJSON={recipes} />
+                        <SearchBar handleSearch={handleSearch} />
+                        <ResumeRecipeContainer receiptsJSON={recipes} />
                     </>
                 )}
             {
@@ -57,8 +68,8 @@ export default function Home() {
                         <div className="page_login">
                             <div className="container">
                                 <input type="checkbox" id="chk" aria-hidden="true" />
-                                <LoginEmail errorM={errorM}/>
-                                <Register errorM={errorM}/>
+                                <LoginEmail errorM={errorM} />
+                                <Register errorM={errorM} />
                             </div>
                             {error2.error && (
                                 <div className="pep">
@@ -69,7 +80,7 @@ export default function Home() {
                     </>
                 )
             }
-        
+
 
         </div>
     );

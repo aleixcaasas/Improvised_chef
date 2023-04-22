@@ -16,7 +16,7 @@ import MockRecipes from '../components/mock/MockRecipes'
 import MockIngredients from '../components/mock/MockIngredients'
 import SearchBar from '../components/searchBar/SearchBar'
 import SideBar from '../components/sideBar/SideBar'
-import ResumeRecipeContainer from '../components/resumeRecipe/Resume_recipe_container'
+import ResumeRecipeContainer from '../components/resumeRecipe/ResumeRecipeContainer'
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
 
 export default function RouterDirections() {

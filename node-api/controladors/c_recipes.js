@@ -11,7 +11,7 @@ const recipes = async function () {
 const randomRecipe = async function (req, res) {
     try {
         let result = [];
-        const numRecipes = parseInt(req.query.number) || 1;
+        const numRecipes = parseInt(req.query.number) || 9;
         let randomNum = []
         while (randomNum.length < numRecipes) {
           let random = Math.floor(Math.random() * 3842)
@@ -23,15 +23,7 @@ const randomRecipe = async function (req, res) {
         const querySnapshot = await getDocs(q);
         querySnapshot.docs.forEach((doc) => {
             const docData = doc.data();
-            const selectedFields = {
-                image: docData.image,
-                difficulty: docData.difficulty,
-                id: docData.id,
-                time_cooking: docData.time_cooking,
-                time_preparation: docData.time_preparation,
-                title: docData.title
-            };
-            result.push(selectedFields);
+            result.push(docData);
         });
         return result;
     }
