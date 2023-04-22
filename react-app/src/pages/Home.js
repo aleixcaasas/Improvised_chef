@@ -2,12 +2,12 @@ import axios from "axios";
 import { UserContext } from './globalValue';
 import React, { useContext, useState, useEffect } from "react";
 import SideBar from "../components/sideBar/SideBar"
-import SearchBar from "../components/searchBar/SearchBar"
-import Resume_recipe_container from "../components/resumeRecipe/Resume_recipe_container"
 import Register from "../components/register/Register";
 import LoginEmail from "../components/login/LoginEmail";
-import '../components/login/login.css';
+import SearchBar from "../components/searchBar/SearchBar"
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
+import Resume_recipe_container from "../components/resumeRecipe/Resume_recipe_container"
+import '../components/login/login.css';
 
 import { debounce } from 'lodash';
 
@@ -40,21 +40,6 @@ export default function Home() {
         }
         
       };
-
-    useEffect(() => {
-        const fetchRecipes = async () => {
-            try {
-                const response = await axios.post('http://localhost:3000/mock/recipes/title', {
-                    title: searchTerm
-                });
-                setRecipes(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchRecipes();
-    }, [searchTerm]);
-
 
     return (
         <div className="home">

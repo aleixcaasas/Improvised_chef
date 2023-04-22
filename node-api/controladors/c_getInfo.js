@@ -16,7 +16,6 @@ const getInfo = async function (req, res) {
           };
               result.push(selectedFields);
         });
-        console.log(result)
         return result;
     } catch (error) {
         console.log(error);
