@@ -1,12 +1,4 @@
 const { db, collection, getDocs, query, where, limit} = require('../firebase/firebase-config');
-const recipes = async function () {
-  let results = [];
-  const querySnapshot = await getDocs(query(collection(db, "recipes"), limit(10)));
-  querySnapshot.forEach((doc) => {
-      results.push(doc.data());
-  });
-  return results;
-};
 
 const randomRecipe = async function (req, res) {
     try {
@@ -50,6 +42,7 @@ const recipesName = async function (req, res){
         res.status(500).send('Error al cercar receptes per nom');
     }
 }
+
 /*router.get('/recipes/:userIngredientsList', async (req, res) => {
     try{
         var results = [];
@@ -94,4 +87,4 @@ router.get('/recipes/:recipeId', async (req, res) => {
     }
 });*/
 
-module.exports = {recipes, recipesName, randomRecipe};
+module.exports = {recipesName, randomRecipe};

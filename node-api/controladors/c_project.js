@@ -84,10 +84,6 @@ const controller = {
         await signOutV(req.body)
     },
 
-    recipes: async function(req, res) {
-        return res.status(200).send(await recipes());
-    },
-
     randomRecipe: async function(req, res) {
         return res.status(200).send(await randomRecipe(req));
     },
