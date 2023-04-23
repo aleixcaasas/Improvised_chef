@@ -10,28 +10,32 @@ import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
 import './sideBar.css';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     const { user, setUser } = useContext(UserContext);    //const {logOut} = useAuth();
-    onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
     const [response, setResponse] = useState(null)
     const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => setSidebar(!sidebar);
+    const {leaveSession} = props;
 
     const navigation = useNavigate();
 
     const handleLogOut = async () => {
         //await axios.post('http://localhost:3700/logout', {user});
-        setUser({ email: '' });
+        setUser({ email: '', id:'' });
+        window.localStorage.setItem('usuariLogged', { email: '', id: '' })
+        window.localStorage.clear()
+        props.leaveSession("true");
         navigation("/home");
     }
 
     useEffect(() => {
         const getInfo = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/user/summary', { user: user });
-                setResponse(response);
+                if(user.email != ''){
+                    console.log(user)
+                    const response = await axios.post('http://localhost:3000/user/summary', { user: user });
+                    setResponse(response);
+                }
             } catch (error) {
                 console.log(error);
             }

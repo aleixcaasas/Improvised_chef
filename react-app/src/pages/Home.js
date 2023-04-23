@@ -12,7 +12,8 @@ import '../components/login/login.css';
 
 export default function Home() {
 
-    const { user } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
+    const [userLOCAL, setUserLOCAL] = useState({ email: '', id: '' });
 
     const [recipes, setRecipes] = useState([]);
     const [error2, setError2] = useState({ error: false, comment: "" });
@@ -38,8 +39,15 @@ export default function Home() {
 
     };
 
+    const leaveSession = (message) => {
+        if(message){
+            setUserLOCAL(null)
+        }
+    };
+
+    
     useEffect(() => {
-        if (recipes.length == 0) {
+        if (recipes.length === 0) {
             const fetchRecipes = async () => {
                 try {
                     const response = await axios.get('http://localhost:3000/recipes/random');
@@ -50,20 +58,32 @@ export default function Home() {
             }
             fetchRecipes();
         }
-    });
+    },[]);
+
+    useEffect(() => {
+        const setLocalStorageUser = async () => {
+            const loggedUserJSON = window.localStorage.getItem('usuariLogged')
+            if(loggedUserJSON){
+                const user = await JSON.parse(loggedUserJSON)
+                setUserLOCAL(user) //aquí el user conté el email i la id
+                setUser(user)
+            }
+        }
+        setLocalStorageUser()
+    },[])
 
     return (
         <div className="home">
-            {
-                user?.email && (
+            { 
+                userLOCAL?.email && (
                     <>
-                        <SideBar />
+                        <SideBar leaveSession={leaveSession}/>
                         <SearchBar handleSearch={handleSearch} />
                         <ResumeRecipeContainer receiptsJSON={recipes} />
                     </>
                 )}
             {
-                !user?.email && (
+                !userLOCAL?.email && (
                     <>
                         <div className="page_login">
                             <div className="container">

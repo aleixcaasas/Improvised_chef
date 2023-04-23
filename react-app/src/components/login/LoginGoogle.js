@@ -21,6 +21,7 @@ export default function LoginGoogle() {
 			console.log(response);
 			if (response.data.loguejat === "true") {
 				setUser({ email: response.data.email, id: response.data.id });
+				window.localStorage.setItem('usuariLogged', JSON.stringify({ email: response.data.email, id: response.data.id }))
 			}
 			return true;
 		} catch (error) {
