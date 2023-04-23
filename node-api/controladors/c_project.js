@@ -4,7 +4,7 @@ const registerWithEmail = require('./c_registerWithEmail');
 const loginWithGoogle = require('./c_loginWithGoogle');
 const resetPasswordEmail = require('./c_resetPassword');
 const signOutV  = require('./c_logout');
-const {recipes, recipesName, randomRecipe} = require('./c_recipes');
+const {recipesName, randomRecipe} = require('./c_recipes');
 const ingredients = require('./c_ingredients');
 const getInfo = require('./c_getInfo');
 
@@ -82,10 +82,6 @@ const controller = {
     logout: async function(req, res){
         console.log(req.body);
         await signOutV(req.body)
-    },
-
-    recipes: async function(req, res) {
-        return res.status(200).send(await recipes());
     },
 
     randomRecipe: async function(req, res) {
