@@ -44,6 +44,7 @@ export default function Register(props) {
             const result = await axios.post('http://localhost:3000/register', { name, userName, email, password });
             if (result.data.loguejat === "true") {
                 setUser({ email: result.data.email, id: result.data.id });
+                window.localStorage.setItem('usuariLogged', JSON.stringify({ email: result.data.email, id: result.data.id }));
                 navigate("/");
             }
             else {

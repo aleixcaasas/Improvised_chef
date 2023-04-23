@@ -31,6 +31,7 @@ export default function LoginEmail(props) {
                 console.log(result.data);
                 if (result.data.id != null && result.data.loguejat) {
                     setUser({ email: result.data.email, id: result.data.id });
+                    window.localStorage.setItem('usuariLogged', JSON.stringify({ email: result.data.email, id: result.data.id }))
                     navigation("/");
                 }
                 else {
