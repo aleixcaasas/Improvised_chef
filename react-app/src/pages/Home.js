@@ -19,8 +19,12 @@ export default function Home() {
     const [error2, setError2] = useState({ error: false, comment: "" });
 
     const handleSearch = (searchedReceips) => {
-        setRecipes(searchedReceips);
-        console.log(recipes);
+        if(searchedReceips.length !== 0){
+            setRecipes(searchedReceips);
+        }
+        else{
+            setRecipes([]);
+        }
     };
 
     const clicked = (message) => {
@@ -45,7 +49,6 @@ export default function Home() {
         }
     };
 
-    
     useEffect(() => {
         if (recipes.length === 0) {
             const fetchRecipes = async () => {
@@ -58,7 +61,7 @@ export default function Home() {
             }
             fetchRecipes();
         }
-    },[]);
+    },[recipes]);
 
     useEffect(() => {
         const setLocalStorageUser = async () => {
