@@ -5,8 +5,6 @@ import { FaBars} from 'react-icons/fa';
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 import { UserContext } from '../../pages/globalValue';
 import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../../firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
 import './sideBar.css';
 
