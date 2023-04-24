@@ -1,7 +1,7 @@
 import { signInWithPopup } from 'firebase/auth';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { db, auth, provider } from '../../firebase-config';
+import { auth, provider } from '../../firebase-config';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import { UserContext } from '../../pages/globalValue';
@@ -11,7 +11,7 @@ export default function LoginGoogle() {
 
 	const navigation = useNavigate();
 
-	const { user, setUser } = useContext(UserContext);
+	const { setUser } = useContext(UserContext);
 
 	const signInWithGoogle = async () => {
 

@@ -11,7 +11,6 @@ export default function MockRecipes() {
 
     //Estat per controlar el que s'escriu en el cercador
     const [nomRecepta, setNomRecepta] = useState("");
-    const [ingredients, setIngredients] = useState([]);
     //const [ingredientsRecepta, setIngredientsRecepta] = useState("");
 
     /* const handleChange1 = async (e) => {

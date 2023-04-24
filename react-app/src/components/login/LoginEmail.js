@@ -11,7 +11,7 @@ export default function LoginEmail(props) {
     const { email, password } = formState;
    
     
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
     const handleChange = (e) => {
         let value = e.target.value;
@@ -28,7 +28,6 @@ export default function LoginEmail(props) {
             }
             else {
                 const result = await axios.post('http://localhost:3000/login', { email, password });
-                console.log(result.data);
                 if (result.data.id != null && result.data.loguejat) {
                     setUser({ email: result.data.email, id: result.data.id });
                     window.localStorage.setItem('usuariLogged', JSON.stringify({ email: result.data.email, id: result.data.id }))
