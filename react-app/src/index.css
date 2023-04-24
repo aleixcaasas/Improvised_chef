@@ -57,7 +57,7 @@ button#green {
   background-color: var(--green);
   font-size: 1em;
   font-weight: bold;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   outline: none;
   border: none;
   border-radius: 50px;

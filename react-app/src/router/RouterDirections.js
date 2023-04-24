@@ -13,10 +13,6 @@ import FavoriteRecipes from '../pages/FavoriteRecipes'
 
 /*S'HAURAN DE BORRAR TOTS ELS COMPONENTS ABANS D'ENTREGAR EL PROJECTE */
 import ForgotPassword from '../components/login/ForgotPassword'
-import SearchBar from '../components/searchBar/SearchBar'
-import SideBar from '../components/sideBar/SideBar'
-import ResumeRecipeContainer from '../components/resumeRecipe/ResumeRecipeContainer'
-import ErrorMessage from '../components/errorMessages/ErrorMessage'
 import MyKitchenComp from '../components/myKitchen/MyKitchen'
 import MyIngredientsComp from '../components/myIngredients/MyIngredients';
 import ShoppingListComp from '../components/shoppingList/ShoppingList'
@@ -42,10 +38,6 @@ export default function RouterDirections() {
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />
-            <Route exact path="/components/sidebar" element={<SideBar></SideBar>} />
-            <Route exact path="/components/searchbar" element={<SearchBar></SearchBar>} />
-            <Route exact path="/components/resume_recipe" element={<ResumeRecipeContainer/>} />
-            <Route exact path="/components/Error_login_register" element={<ErrorMessage/>} />
             <Route exact path="/components/myKitchen" element={<MyKitchenComp/>} />
             <Route exact path="/components/myIngredients" element={<MyIngredientsComp/>} />
             <Route exact path="/components/shoppingList" element={<ShoppingListComp/>} />

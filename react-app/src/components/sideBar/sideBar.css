@@ -52,7 +52,6 @@
 	color: white;
 }
 
-
 .sidebar-top{
 	height: 35%;
 	width: 90%;
@@ -61,7 +60,6 @@
 	justify-content: center;
 	padding-bottom: 4%;
 	border-bottom: 1px rgba(209, 208, 208, 0.571) solid;
-	margin-top: 10%;
 }
 
 .user-div{
