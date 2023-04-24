@@ -5,7 +5,7 @@ const getUserInfo = async function (req, res) {
     try{
         let result = [];
         const users = collection(db, "users");
-        const userInfo = query(users, where("email", "==", req.body.email));
+        const userInfo = query(users, where("userId", "==", req.body.id));
         const querySnapshot = await getDocs(userInfo);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
@@ -53,7 +53,7 @@ const getUserRecipeList = async (req, res) => {
   try {
     let result = [];
     const users = collection(db, "users");
-    const userInfo = query(users, where("email", "==", req.body.email));
+    const userInfo = query(users, where("userId", "==", req.body.id));
     const querySnapshot = await getDocs(userInfo);
     querySnapshot.forEach((doc) => {
       const docData = doc.data();
@@ -62,7 +62,14 @@ const getUserRecipeList = async (req, res) => {
       };
       result.push(selectedFields);
     });
-    return result;
+    let recipes = [];
+    const q = query(collection(db, "recipes"), where("id", "in", result));
+    const recipeSnapshot = await getDocs(q);
+    recipeSnapshot.docs.forEach((doc) => {
+        const docData = doc.data();
+        recipes.push(docData);
+    });
+    return recipes;
   } catch (error) {
     console.error('Error getting favoriteRecipes: ', error);
     res.status(500).send('Error getting favoriteRecipes');
@@ -72,7 +79,7 @@ const getUserRecipeList = async (req, res) => {
 const addUserRecipe = async (req, res) => {
   try {
     const users = collection(db, "users");
-    const userInfo = query(users, where("email", "==", req.body.email));
+    const userInfo = query(users, where("userId", "==", req.body.id));
     const querySnapshot = await getDocs(userInfo);
     if (querySnapshot.empty) {
       res.status(404).send('User not found');

@@ -31,7 +31,7 @@ const Sidebar = (props) => {
                 // eslint-disable-next-line
                 if(user.email != ''){
                     console.log(user)
-                    const response = await axios.post('http://localhost:3000/user/summary', { user: user });
+                    const response = await axios.post('http://localhost:3000/user/summary', { id: user.id });
                     setResponse(response);
                 }
             } catch (error) {
