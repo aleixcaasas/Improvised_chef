@@ -16,6 +16,15 @@ const registerWithEmail = async (fullName, userName, email, password) => {
                         email,
                         userId: `${result.user.uid}`
                     });
+                    await addDoc(collection(userRef, "myIngredients"), {
+                        someField: "someValue",
+                    });
+                    await addDoc(collection(userRef, "shoppingList"), {
+                    someField: "someValue",
+                    });
+                    await addDoc(collection(userRef, "favoriteRecipes"), {
+                    id_recipe: "someValue",
+                    });
                     id = result.user.uid;
                     console.log("Document written with ID: ", docRef.id);
                 } catch(error){

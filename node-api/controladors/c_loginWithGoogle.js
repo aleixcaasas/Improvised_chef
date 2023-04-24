@@ -24,16 +24,27 @@ const loginWithGoogle = async (result) => {
         const profilePic = result.photoURL;
         const userName = email.split('@')[0];
         const emailNotAtBD = await emailNotExists(email);
+        var userRef = null;
 
         if (!emailNotAtBD) {
-          await addDoc(collection(db, "users"), {
+            userRef = await addDoc(collection(db, "users"), {
             fullName,
             userName,
             profilePic,
             email,
-            userId: `${result.uid}`
+            userId: `${result.uid}`,
           });
         }
+        await addDoc(collection(userRef, "myIngredients"), {
+          someField: "someValue",
+        });
+        await addDoc(collection(userRef, "shoppingList"), {
+          someField: "someValue",
+        });
+        await addDoc(collection(userRef, "favoriteRecipes"), {
+          id_recipe: "someValue",
+        });
+
         return {loguejat: true,
                 email : email,
                 id: `${result.uid}`};
