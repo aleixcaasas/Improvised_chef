@@ -1,5 +1,4 @@
-const { db } = require('../firebase/firebase-config');
-const {query, collection, where, getDocs, getDoc, updateDoc} = require("firebase/firestore");
+const { db, query, collection, where, getDocs, updateDoc } = require('../firebase/firebase-config');
 
 const getUserInfo = async function (req, res) {
     try{
@@ -24,30 +23,16 @@ const getUserInfo = async function (req, res) {
   
 };
 
-
-/*
 const getUserIngredientList = async (req, res) => {
-  const userId = req.params.userId;
-
   try {
-    let result = [];
-    const users = collection(db, "users");
-    const userInfo = query(users, where("email", "==", req.body.email));
-    const querySnapshot = await getDocs(userInfo);
-    querySnapshot.forEach((doc) => {
-      const docData = doc.data();
-      const selectedFields = {
-          myIngredients: docData.myIngredients
-      };
-      result.push(selectedFields);
-    });
-    return result;
-  } catch (error) {
-    console.error('Error getting myIngredients: ', error);
-    res.status(500).send([]);
+      const querySnapshot = await getDocs(query(collection(db, "users"), where("userId", "==", req.body.userId)));
+      return querySnapshot.docs[0].data().myIngredients;
+  }
+  catch (error) {
+    res.status(500).send('Error getting myIngredients: ', error);
   }
 };
-*/
+
 const getUserRecipeList = async (req, res) => {
 
   try {
@@ -101,4 +86,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, addUserRecipe};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserRecipe};

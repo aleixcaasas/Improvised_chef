@@ -2,7 +2,7 @@ const home = require('./c_home');
 
 const {recipesName, randomRecipe} = require('./c_recipes');
 const ingredients = require('./c_ingredients');
-const {getUserInfo, getUserRecipeList, addUserRecipe} = require('./c_users');
+const {getUserInfo, getUserRecipeList, getUserIngredientList, addUserRecipe} = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
 
 const controller = {
@@ -96,10 +96,11 @@ const controller = {
     getUserInfo: async function(req, res) {
         return res.status(200).send(await getUserInfo(req, res));
     },
-    /*getUserIngredientList: async function(req, res) {
+
+    getUserIngredientList: async function(req, res) {
         return res.status(200).send(await getUserIngredientList(req, res));
     },
-     */
+
     getUserRecipeList: async function(req, res) {
         return res.status(200).send(await getUserRecipeList(req, res));
     },
