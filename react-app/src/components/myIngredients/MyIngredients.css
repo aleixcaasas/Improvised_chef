@@ -1,0 +1,43 @@
+.div-outBox{
+    height: 270px;
+    width: 500px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color:var(--cream);
+    overflow: hidden;
+    border-radius: 10px;
+	box-shadow: 5px 20px 50px var(--black); 
+}
+
+
+.div-inBox{
+    height: 150px;
+    width: 400px;
+    position: absolute;
+    top:55%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color:white;
+    overflow: hidden;
+    border-radius: 10px;	 
+}
+
+
+.ingredientsTitle{
+    text-align: center;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+}
+
+
+@media only screen and (max-width: 360px) {
+}
+
+
+
+
