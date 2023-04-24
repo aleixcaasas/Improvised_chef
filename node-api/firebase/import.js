@@ -1,7 +1,7 @@
 const admin = require("firebase-admin");
 const serviceAccount = require("./firebase-private-key.json");
-const dataRecipes = require("../../data/parsed_recipes.json");
-const dataIngredients = require("../../data/parsed_ingredients.json");
+const dataRecipes = require("../../data/filtered_recipes.json");
+const dataIngredients = require("../../data/filtered_ingredients.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
