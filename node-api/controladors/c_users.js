@@ -1,4 +1,4 @@
-const { db, query, collection, where, getDocs, updateDoc } = require('../firebase/firebase-config');
+const { db, query, collection, where, getDocs, updateDoc, doc, arrayUnion } = require('../firebase/firebase-config');
 
 const getUserInfo = async function (req, res) {
     try{
@@ -31,6 +31,25 @@ const getUserIngredientList = async (req, res) => {
   catch (error) {
     res.status(500).send('Error getting myIngredients: ', error);
   }
+};
+
+const addUserIngredient = async (req, res) => {
+    try {
+        const querySnapshot = await getDocs(query(collection(db, "users"), where("userId", "==", req.body.userId)));
+        if (querySnapshot.docs[0].data().myIngredients.filter(ingredient => {
+            return ingredient.id === req.body.ingredientId && ingredient.name === req.body.ingredientName })){
+            res.status(500).send('User ingredient exist');
+        }
+        else {
+            await updateDoc(doc(db, "users", querySnapshot.docs[0].id), {
+                myIngredients: arrayUnion({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+            });
+            res.status(200).send('Ingredient "'+ req.body.ingredientName +'" added to myIngredients.');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error insert ingredients: ', error);
+    }
 };
 
 const getUserRecipeList = async (req, res) => {
@@ -86,4 +105,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserRecipe};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe};

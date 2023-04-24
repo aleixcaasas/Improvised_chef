@@ -1,6 +1,6 @@
 const {initializeApp} = require('firebase/app')
 const {getAuth, GoogleAuthProvider} = require('firebase/auth')
-const {getFirestore, collection, getDocs, query, where, limit} = require('firebase/firestore')
+const {getFirestore, collection, getDocs, doc, query, where, limit, updateDoc, arrayUnion} = require('firebase/firestore')
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,6 +29,9 @@ module.exports = {
   query,
   where,
   limit,
+  doc,
+  updateDoc,
+  arrayUnion,
   auth,
   provider
 }
