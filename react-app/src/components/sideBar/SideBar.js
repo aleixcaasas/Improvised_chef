@@ -13,7 +13,6 @@ const Sidebar = (props) => {
     const [response, setResponse] = useState(null)
     const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => setSidebar(!sidebar);
-    const {leaveSession} = props;
 
     const navigation = useNavigate();
 
@@ -29,6 +28,7 @@ const Sidebar = (props) => {
     useEffect(() => {
         const getInfo = async () => {
             try {
+                // eslint-disable-next-line
                 if(user.email != ''){
                     console.log(user)
                     const response = await axios.post('http://localhost:3000/user/summary', { user: user });

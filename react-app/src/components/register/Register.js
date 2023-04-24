@@ -5,8 +5,8 @@ import { UserContext } from '../../pages/globalValue';
 
 export default function Register(props) {
     const navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
-    const [err, setError] = useState("");
+    const { setUser } = useContext(UserContext);
+    const [err] = useState("");
     const [userVar, setUserVar] = useState({
         Name: "",
         UserName: "",
