@@ -1,12 +1,9 @@
 const home = require('./c_home');
-const loginWithEmail = require('./c_loginWithEmail');
-const registerWithEmail = require('./c_registerWithEmail');
-const loginWithGoogle = require('./c_loginWithGoogle');
-const resetPasswordEmail = require('./c_resetPassword');
-const signOutV  = require('./c_logout');
+
 const {recipesName, randomRecipe} = require('./c_recipes');
 const ingredients = require('./c_ingredients');
-const getInfo = require('./c_getInfo');
+const {getUserInfo, getUserRecipeList, addUserRecipe} = require('./c_users');
+const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
 
 const controller = {
     home: function(req, res) { 
@@ -74,7 +71,7 @@ const controller = {
             return res.status(200).send({message: params})
         }
         else{
-            return res.status(200).send({message: params})
+            return res.status(500).send({message: params})
         }
 
     },
@@ -96,9 +93,19 @@ const controller = {
         return res.status(200).send(ingredients)
     },
 
-    getInfo: async function(req, res) {
-        return res.status(200).send(await getInfo(req, res));
-    }
+    getUserInfo: async function(req, res) {
+        return res.status(200).send(await getUserInfo(req, res));
+    },
+    /*getUserIngredientList: async function(req, res) {
+        return res.status(200).send(await getUserIngredientList(req, res));
+    },
+     */
+    getUserRecipeList: async function(req, res) {
+        return res.status(200).send(await getUserRecipeList(req, res));
+    },
+    addUserRecipe: async function(req, res) {
+        return res.status(200).send(await addUserRecipe(req, res));
+    },
 }
 
 module.exports = controller;

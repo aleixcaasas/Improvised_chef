@@ -27,3 +27,5 @@ firebase.json
 .idea
 bot-data-recipes/target/test-classes/steps/GetLinks.class
 .vscode/settings.json
+firebase-config2.js
+firebase-private-key2.json
