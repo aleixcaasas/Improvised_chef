@@ -10,6 +10,8 @@ router.post('/resetPassword', projectController.resetPassword);
 router.post('/logout', projectController.logout);
 router.post('/recipes/name', projectController.recipesName);
 router.get('/recipes/random', projectController.randomRecipe);
-router.post('/user/summary', projectController.getInfo);
-//router.get('/ingredients', projectController.ingredients);
+router.post('/user/summary', projectController.getUserInfo);
+//router.post('/user/ingredients', projectController.getUserIngredientList)
+router.post('/user/recipes', projectController.getUserRecipeList)
+router.get('/ingredients', projectController.ingredients);
 module.exports = router;
