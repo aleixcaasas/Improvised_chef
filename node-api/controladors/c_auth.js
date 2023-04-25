@@ -1,6 +1,6 @@
 const {signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail} = require('firebase/auth');
 const {auth, db} = require('../firebase/firebase-config');
-const {addDoc, collection, getDocs, query} = require('firebase/firestore');
+const {addDoc, collection, getDocs, query, setDoc, doc} = require('firebase/firestore');
 const profilePic = 'https://img.freepik.com/free-icon/user_318-563642.jpg';
 
 const loginWithEmail = async function (email, password) {
@@ -52,7 +52,7 @@ const loginWithGoogle = async (result) => {
             let myIngredients = [];
             let shoppingList = [];
             let favoriteRecipes = [];
-            userRef = await addDoc(collection(db, "users"), {
+            userRef = await setDoc(doc(db, "users", result.uid), {
             fullName,
             userName,
             profilePic,
@@ -85,7 +85,7 @@ const registerWithEmail = async (fullName, userName, email, password) => {
                     let myIngredients = [];
                     let shoppingList = [];
                     let favoriteRecipes = [];
-                    const docRef = await addDoc(collection(db, "users"), {
+                    const docRef = await setDoc(doc(db, "users", result.user.uid), {
                         fullName,
                         userName,
                         profilePic,
