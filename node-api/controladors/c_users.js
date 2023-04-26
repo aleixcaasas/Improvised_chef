@@ -144,11 +144,20 @@ const addUserRecipe = async (req, res) => {
       const doc = querySnapshot.docs[0];
       const docData = doc.data();
       const recipeIndex = docData.favoriteRecipes.findIndex(id => id == req.body.recipeId);
+      // req.body.image, req.body.difficulty, req.body.title, req.body.time_cooking, req.body.time_preparation
       if (recipeIndex !== -1) {
         res.status(409).send('Recipe already exists');
       } else {
-        docData.favoriteRecipes.push(req.body.recipeId);
-        await updateDoc(doc.ref, docData);
+        const recipes = collection(db, "recipes");
+        const recipeInfo = query(recipes, where("id", "==", req.body.recipeId));
+        const recipeSnapshot2 = await getDocs(recipeInfo);
+        console.log(await getDocs(recipeInfo))
+        if(recipeSnapshot2.empty){
+            console.log('buit')
+            console.log(req.body.recipeId)
+        }
+        //docData.favoriteRecipes.push(req.body.recipeId);
+        //await updateDoc(doc.ref, docData);
         res.status(201).send('Recipe added successfully');
       }
     }
