@@ -120,6 +120,31 @@ const getUserShoppingList = async (req, res) => {
     }
 };
 
+const addUserShoppingList = async (req, res) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            if (querySnapshot.data().shoppingList.some(ingredient => {
+                return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) ||
+                    Object.values(ingredient).includes(req.body.ingredientName) })){
+                res.status(500).send('Ingredient ShoppingList exist');
+            }
+            else {
+                await updateDoc(doc(db, "users", req.body.userId), {
+                    shoppingList: arrayUnion({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                });
+                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" added to shoppingList.');
+            }
+        }
+        else {
+            res.status(500).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error insert shoppingList: ', error);
+    }
+};
+
 const getUserRecipeList = async (req, res) => {
 
   try {
@@ -180,4 +205,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, myKitchen};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, myKitchen};
