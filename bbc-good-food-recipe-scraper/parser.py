@@ -79,7 +79,7 @@ def process_recipe_file(input_file_path, output_file_path):
         json.dump(parsed_recipes, output_file, indent=4)
 
 
-input_file_path = "recipes.json"
-output_file_path = "parsed_recipes.json"
+input_file_path = "final_recipes.json"
+output_file_path = "final_parsed_recipes.json"
 process_recipe_file(input_file_path, output_file_path)
 
