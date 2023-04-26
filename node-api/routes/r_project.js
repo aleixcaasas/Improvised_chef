@@ -13,6 +13,7 @@ router.get('/recipes/random', projectController.randomRecipe);
 router.post('/user/summary', projectController.getUserInfo);
 router.post('/user/ingredients', projectController.getUserIngredientList);
 router.post('/user/addIngredient', projectController.addUserIngredient);
+router.post('/user/removeIngredient', projectController.removeUserIngredient);
 router.post('/user/recipes', projectController.getUserRecipeList);
 router.post('/user/addRecipe', projectController.addUserRecipe);
 router.get('/ingredients', projectController.ingredients);
