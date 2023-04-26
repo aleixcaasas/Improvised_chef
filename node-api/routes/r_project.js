@@ -17,4 +17,6 @@ router.post('/user/removeIngredient', projectController.removeUserIngredient);
 router.post('/user/recipes', projectController.getUserRecipeList);
 router.post('/user/addRecipe', projectController.addUserRecipe);
 router.get('/ingredients', projectController.ingredients);
+router.post('/user/myKitchen', projectController.myKitchen);
+
 module.exports = router;
