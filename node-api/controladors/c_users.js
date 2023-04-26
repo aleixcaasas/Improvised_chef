@@ -145,6 +145,32 @@ const addUserShoppingList = async (req, res) => {
     }
 };
 
+const removeUserShoppingList = async (req, res) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            if (querySnapshot.data().shoppingList.some(ingredient => {
+                return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) &&
+                    Object.values(ingredient).includes(req.body.ingredientName) })){
+
+                await updateDoc(doc(db, "users", req.body.userId), {
+                    shoppingList: arrayRemove({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                });
+                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" deleted to shoppingList.');
+            }
+            else {
+                res.status(500).send('Ingredient shoppingList not exist');
+            }
+        }
+        else {
+            res.status(500).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error remove ingredients: ', error);
+    }
+};
+
 const getUserRecipeList = async (req, res) => {
 
   try {
@@ -205,4 +231,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, myKitchen};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen};

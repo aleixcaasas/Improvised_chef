@@ -16,6 +16,7 @@ router.post('/user/addIngredient', projectController.addUserIngredient);
 router.post('/user/removeIngredient', projectController.removeUserIngredient);
 router.post('/user/shoppingList', projectController.getUserShoppingList);
 router.post('/user/addShoppingList', projectController.addUserShoppingList);
+router.post('/user/removeShoppingList', projectController.removeUserShoppingList);
 router.post('/user/recipes', projectController.getUserRecipeList);
 router.post('/user/addRecipe', projectController.addUserRecipe);
 router.get('/ingredients', projectController.ingredients);
