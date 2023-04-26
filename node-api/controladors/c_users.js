@@ -23,6 +23,22 @@ const getUserInfo = async function (req, res) {
   
 };
 
+
+const myKitchen = async (req, res) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            return [querySnapshot.data().myIngredients, querySnapshot.data().shoppingList, querySnapshot.data().favoriteRecipes];
+        }
+        else {
+            res.status(500).send('User not exist');
+        }
+    }
+    catch (error) {
+      res.status(500).send('Error getting myIngredients: ', error);
+    }
+}
+
 const getUserIngredientList = async (req, res) => {
   try {
       const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
@@ -120,7 +136,7 @@ const getUserRecipeList = async (req, res) => {
 const addUserRecipe = async (req, res) => {
   try {
     const users = collection(db, "users");
-    const userInfo = query(users, where("userId", "==", req.body.id));
+    const userInfo = query(users, where("userId", "==", req.body.userId));
     const querySnapshot = await getDocs(userInfo);
     if (querySnapshot.empty) {
       res.status(404).send('User not found');
@@ -142,4 +158,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, myKitchen};
