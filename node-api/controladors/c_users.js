@@ -135,35 +135,33 @@ const getUserRecipeList = async (req, res) => {
 
 const addUserRecipe = async (req, res) => {
   try {
-    const users = collection(db, "users");
-    const userInfo = query(users, where("userId", "==", req.body.userId));
-    const querySnapshot = await getDocs(userInfo);
-    if (querySnapshot.empty) {
-      res.status(404).send('User not found');
-    } else {
-      const doc = querySnapshot.docs[0];
-      const docData = doc.data();
-      const recipeIndex = docData.favoriteRecipes.findIndex(id => id == req.body.recipeId);
-      // req.body.image, req.body.difficulty, req.body.title, req.body.time_cooking, req.body.time_preparation
-      if (recipeIndex !== -1) {
-        res.status(409).send('Recipe already exists');
-      } else {
-        const recipes = collection(db, "recipes");
-        const recipeInfo = query(recipes, where("id", "==", req.body.recipeId));
-        const recipeSnapshot2 = await getDocs(recipeInfo);
-        console.log(await getDocs(recipeInfo))
-        if(recipeSnapshot2.empty){
-            console.log('buit')
-            console.log(req.body.recipeId)
-        }
-        //docData.favoriteRecipes.push(req.body.recipeId);
-        //await updateDoc(doc.ref, docData);
-        res.status(201).send('Recipe added successfully');
+      const userDoc = await getDoc(doc(db, "users", req.body.userId));
+      if (userDoc.exists()) {
+          if (userDoc.data().favoriteRecipes.some(recipe => {
+              return Object.values(recipe).includes(parseInt(req.body.recipeId)) })){
+              res.status(500).send('User recipe exist');
+          }
+          else {
+              const recipeDoc = await getDoc(doc(db, "recipes", req.body.recipeId));
+              if (recipeDoc.exists()) {
+                  await updateDoc(doc(db, "users", req.body.userId), {
+                      favoriteRecipes: arrayUnion({id: parseInt(recipeDoc.data().id), title: recipeDoc.data().title,
+                          image: recipeDoc.data().image, difficulty: recipeDoc.data().difficulty,
+                          time_preparation: recipeDoc.data().time_preparation, time_cooking: recipeDoc.data().time_cooking })
+                  });
+                  res.status(201).send('Recipe added successfully');
+              }
+              else {
+                  res.status(500).send('Recipe not exist');
+              }
+          }
       }
-    }
-  } catch (error) {
-    console.error('Error adding recipe: ', error);
-    res.status(500).send('Error adding recipe');
+      else {
+          res.status(500).send('User not exist');
+      }
+  }
+  catch (error) {
+      res.status(500).send('Error adding recipe');
   }
 };
 
