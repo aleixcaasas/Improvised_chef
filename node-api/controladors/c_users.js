@@ -105,6 +105,21 @@ const removeUserIngredient = async (req, res) => {
     }
 };
 
+const getUserShoppingList = async (req, res) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            return querySnapshot.data().shoppingList;
+        }
+        else {
+            res.status(500).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error getting shoppingList: ', error);
+    }
+};
+
 const getUserRecipeList = async (req, res) => {
 
   try {
@@ -165,4 +180,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, myKitchen};
+module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, myKitchen};
