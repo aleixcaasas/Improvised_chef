@@ -3,7 +3,7 @@ const home = require('./c_home');
 const {recipesName, randomRecipe} = require('./c_recipes');
 const ingredientsName = require('./c_ingredients');
 const {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
-    removeUserRecipe
+    removeUserRecipe, searchWithIngredients
 } = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
 
@@ -141,6 +141,9 @@ const controller = {
     removeUserRecipe: async function(req, res) {
         return await removeUserRecipe(req, res);
     },
+    searchWithIngredients: async function(req, res) {
+        return await searchWithIngredients(req, res);
+    }
 }
 
 module.exports = controller;

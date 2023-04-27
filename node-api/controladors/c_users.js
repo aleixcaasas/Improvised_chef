@@ -270,6 +270,59 @@ const removeUserRecipe = async (req, res) => {
 };
 
 
+const searchWithIngredients = async (req, res) => {
+    try {
+        const userRef = doc(db, "users", req.body.userId);
+        const userDoc = await getDoc(userRef);
+        if (!userDoc.exists()) {
+            return res.status(404).send('User not found');
+        }
+
+        const ingredientList = userDoc.data().myIngredients || [];
+        if (!ingredientList.length) {
+            return res.status(404).send(`No ingredients found!`);
+        }
+
+        const ingredientIDs = ingredientList.map(ingredient => ingredient.id);
+        const ingredientQuerySnapshot = await getDocs(query(collection(db, 'ingredients'), where('id', 'in', ingredientIDs)));
+        const ingredients = ingredientQuerySnapshot.docs.map(doc => doc.data());
+
+        const recipesIn = [];
+        for (const ingredient of ingredients) {
+            const recipeIDs = ingredient.recipes_in || [];
+            for (const recipeID of recipeIDs) {
+                if (!recipesIn.includes(recipeID)) {
+                    recipesIn.push(recipeID);
+                }
+            }
+        }
+        const freqMap = recipesIn.reduce((map, num) => {
+          if (!map[num]) {
+            map[num] = 1;
+          } else {
+            map[num]++;
+          }
+          return map;
+        }, {});
+
+        const sortedArr = Object.keys(freqMap)
+          .sort((a, b) => freqMap[b] - freqMap[a])
+          .map(num => parseInt(num));
+        let result = [];
+        const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 10)));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.docs.forEach((doc) => {
+            const docData = doc.data();
+            result.push(docData);
+        });
+        res.status(200).send(result);
 
 
-module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe};
+    } catch (error) {
+        res.status(500).send(`Error searching recipes with necessary ingredients recipe: ${error}`);
+    }
+};
+
+
+
+module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients};
