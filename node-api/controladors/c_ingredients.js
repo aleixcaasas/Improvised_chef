@@ -1,7 +1,8 @@
 const { db } = require('../firebase/firebase-config');
 const {query, collection, limit, getDocs, getDoc} = require("firebase/firestore");
 
-const ingredients = async function () {
+const ingredientsName = async function (req, res) {
+  /* S'HA DE CANVIAR L'ENDPOINT PER A FER LA BUSQUEDA SEGONS EL QUE BUSQUEM */
   let docs = [];
   const q = query(collection(db, "ingredients"), limit(10));
   const querySnapshot = await getDocs(q);
@@ -11,4 +12,4 @@ const ingredients = async function () {
   return Promise.all(docs);
 };
 
-module.exports = ingredients;
+module.exports = ingredientsName;

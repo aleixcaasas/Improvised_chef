@@ -23,6 +23,31 @@ const getUserInfo = async function (req, res) {
   
 };
 
+/* S'HA DE VERIFICAR L'ENDPOINT I MIRAR SI PODRIEM CANVIAR LA CONTRASENYA*/
+const getUserProfile = async function (req, res) {
+    try{
+        let result = [];
+        const users = collection(db, "users");
+        const userInfo = query(users, where("userId", "==", req.body.id));
+        const querySnapshot = await getDocs(userInfo);
+        querySnapshot.forEach((doc) => {
+          const docData = doc.data();
+          const selectedFields = {
+              profilePic: docData.profilePic,
+              fullName: docData.fullName,
+              userName: docData.userName,
+              email: docData.email,
+          };
+              result.push(selectedFields);
+        });
+        return result;
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error al fer fetch de random recipes!');
+    }
+  
+};
+
 
 const myKitchen = async (req, res) => {
     try {
@@ -231,4 +256,4 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen};
+module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen};
