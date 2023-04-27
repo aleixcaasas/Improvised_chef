@@ -15,9 +15,8 @@ const getUserInfo = async function (req, res) {
           };
               result.push(selectedFields);
         });
-        return result;
+        res.status(200).send(result);
     } catch (error) {
-        console.log(error);
         res.status(500).send('Error al fer fetch de random recipes!');
     }
   
@@ -26,7 +25,6 @@ const getUserInfo = async function (req, res) {
 /* S'HA DE VERIFICAR L'ENDPOINT I MIRAR SI PODRIEM CANVIAR LA CONTRASENYA*/
 const getUserProfile = async function (req, res) {
     try{
-        console.log(req.body)
         let result = [];
         const users = collection(db, "users");
         const userInfo = query(users, where("userId", "==", req.body.userId));
@@ -41,9 +39,8 @@ const getUserProfile = async function (req, res) {
           };
               result.push(selectedFields);
         });
-        return result;
+        res.status(200).send(result);
     } catch (error) {
-        console.log(error);
         res.status(500).send('Error al fer fetch de random recipes!');
     }
   
@@ -54,7 +51,7 @@ const myKitchen = async (req, res) => {
     try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {
-            return [querySnapshot.data().myIngredients, querySnapshot.data().shoppingList, querySnapshot.data().favoriteRecipes];
+            res.status(200).send([querySnapshot.data().myIngredients, querySnapshot.data().shoppingList, querySnapshot.data().favoriteRecipes]);
         }
         else {
             res.status(500).send('User not exist');
@@ -69,7 +66,7 @@ const getUserIngredientList = async (req, res) => {
   try {
       const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
       if (querySnapshot.exists()) {
-          return querySnapshot.data().myIngredients;
+          res.status(200).send(querySnapshot.data().myIngredients);
       }
       else {
           res.status(500).send('User not exist');
@@ -135,7 +132,7 @@ const getUserShoppingList = async (req, res) => {
     try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {
-            return querySnapshot.data().shoppingList;
+            res.status(200).send(querySnapshot.data().shoppingList);
         }
         else {
             res.status(500).send('User not exist');
@@ -200,29 +197,17 @@ const removeUserShoppingList = async (req, res) => {
 const getUserRecipeList = async (req, res) => {
 
   try {
-    let result = [];
-    const users = collection(db, "users");
-    const userInfo = query(users, where("userId", "==", req.body.userId));
-    const querySnapshot = await getDocs(userInfo);
-    querySnapshot.forEach((doc) => {
-      const docData = doc.data();
-      const selectedFields = {
-          favoriteRecipes: docData.favoriteRecipes
-      };
-      result.push(selectedFields);
-    });
-    let recipes = [];
-    const q = query(collection(db, "recipes"), where("id", "in", result));
-    const recipeSnapshot = await getDocs(q);
-    recipeSnapshot.docs.forEach((doc) => {
-        const docData = doc.data();
-        recipes.push(docData);
-    });
-    return recipes;
-  } catch (error) {
-    console.error('Error getting favoriteRecipes: ', error);
-    res.status(500).send('Error getting favoriteRecipes');
-  }
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            res.status(200).send(querySnapshot.data().favoriteRecipes);
+        }
+        else {
+            res.status(404).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error getting favoriteRecipes: ', error);
+    }
 };
 
 const addUserRecipe = async (req, res) => {

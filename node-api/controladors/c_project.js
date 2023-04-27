@@ -84,51 +84,51 @@ const controller = {
     },
 
     randomRecipe: async function(req, res) {
-        return res.status(200).send(await randomRecipe(req));
+        return await randomRecipe(req);
     },
 
     recipesName: async function(req, res) {
-        return res.status(200).send(await recipesName(req, res))
+        return await recipesName(req, res);
     },
 
     ingredientsName: async function(req, res) {
-        return res.status(200).send(await ingredientsName(req, res))
+        return await ingredientsName(req, res);
     },
 
     getUserInfo: async function(req, res) {
-        return res.status(200).send(await getUserProfile(req, res));
+        return await getUserProfile(req, res);
     },
 
     getUserProfile: async function(req, res) {
-        return res.status(200).send(await getUserInfo(req, res));
+        return await getUserInfo(req, res);
     },
 
     myKitchen: async function(req, res) {
-        return res.status(200).send(await myKitchen(req, res));
+        return await myKitchen(req, res);
     },
 
     getUserIngredientList: async function(req, res) {
-        return res.status(200).send(await getUserIngredientList(req, res));
+        return await getUserIngredientList(req, res);
     },
 
     addUserIngredient: async function(req, res) {
-        return res.status(200).send(await addUserIngredient(req, res));
+        return await addUserIngredient(req, res);
     },
 
     removeUserIngredient: async function(req, res) {
-        return res.status(200).send(await removeUserIngredient(req, res));
+        return await removeUserIngredient(req, res);
     },
 
     getUserShoppingList: async function(req, res) {
-        return res.status(200).send(await getUserShoppingList(req, res));
+        return await getUserShoppingList(req, res);
     },
 
     addUserShoppingList: async function(req, res) {
-        return res.status(200).send(await addUserShoppingList(req, res));
+        return await addUserShoppingList(req, res);
     },
 
     removeUserShoppingList: async function(req, res) {
-        return res.status(200).send(await removeUserShoppingList(req, res));
+        return await removeUserShoppingList(req, res);
     },
 
     getUserRecipeList: async function(req, res) {
