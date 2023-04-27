@@ -84,7 +84,7 @@ const controller = {
     },
 
     randomRecipe: async function(req, res) {
-        return await randomRecipe(req);
+        return await randomRecipe(req, res);
     },
 
     recipesName: async function(req, res) {
