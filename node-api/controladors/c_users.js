@@ -291,9 +291,7 @@ const searchWithIngredients = async (req, res) => {
         for (const ingredient of ingredients) {
             const recipeIDs = ingredient.recipes_in || [];
             for (const recipeID of recipeIDs) {
-                if (!recipesIn.includes(recipeID)) {
-                    recipesIn.push(recipeID);
-                }
+                recipesIn.push(recipeID);
             }
         }
         const freqMap = recipesIn.reduce((map, num) => {
@@ -313,6 +311,20 @@ const searchWithIngredients = async (req, res) => {
         const querySnapshot = await getDocs(q);
         querySnapshot.docs.forEach((doc) => {
             const docData = doc.data();
+            let recipeIngredients = docData.ingredients || [];
+            let ingredientsToBuy = 0;
+            let ingredientsBought = 0;
+            for (let ingr of recipeIngredients) {
+                if (ingredientIDs.includes(ingr.id)) {
+                    ingr.status = 'INCLUDED';
+                    ingredientsBought++;
+                } else {
+                    ingr.status = 'NEEDED';
+                    ingredientsToBuy++;
+                }
+            }
+            docData.ingredientsBought = ingredientsBought;
+            docData.ingredientsToBuy = ingredientsToBuy;
             result.push(docData);
         });
         res.status(200).send(result);
