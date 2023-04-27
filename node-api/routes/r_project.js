@@ -33,6 +33,7 @@ router.post('/user/removeShoppingList', projectController.removeUserShoppingList
 
 router.post('/user/recipes', projectController.getUserRecipeList);
 router.post('/user/addRecipe', projectController.addUserRecipe);
+router.post('/user/removeRecipe', projectController.removeUserRecipe);
 
 
 module.exports = router;

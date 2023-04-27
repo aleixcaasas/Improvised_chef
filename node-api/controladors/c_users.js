@@ -26,9 +26,10 @@ const getUserInfo = async function (req, res) {
 /* S'HA DE VERIFICAR L'ENDPOINT I MIRAR SI PODRIEM CANVIAR LA CONTRASENYA*/
 const getUserProfile = async function (req, res) {
     try{
+        console.log(req.body)
         let result = [];
         const users = collection(db, "users");
-        const userInfo = query(users, where("userId", "==", req.body.id));
+        const userInfo = query(users, where("userId", "==", req.body.userId));
         const querySnapshot = await getDocs(userInfo);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
@@ -201,7 +202,7 @@ const getUserRecipeList = async (req, res) => {
   try {
     let result = [];
     const users = collection(db, "users");
-    const userInfo = query(users, where("userId", "==", req.body.id));
+    const userInfo = query(users, where("userId", "==", req.body.userId));
     const querySnapshot = await getDocs(userInfo);
     querySnapshot.forEach((doc) => {
       const docData = doc.data();
@@ -243,12 +244,12 @@ const addUserRecipe = async (req, res) => {
                   res.status(201).send('Recipe added successfully');
               }
               else {
-                  res.status(500).send('Recipe not exist');
+                  res.status(404).send('Recipe not exist');
               }
           }
       }
       else {
-          res.status(500).send('User not exist');
+          res.status(404).send('User not exist');
       }
   }
   catch (error) {
@@ -256,4 +257,34 @@ const addUserRecipe = async (req, res) => {
   }
 };
 
-module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen};
+const removeUserRecipe = async (req, res) => {
+    try {
+        const userRef = doc(db, "users", req.body.userId);
+        const userDoc = await getDoc(userRef);
+        if (!userDoc.exists()) {
+            return res.status(404).send('User not found');
+        }
+
+        const recipeId = parseInt(req.body.recipeId);
+        const favoriteRecipes = userDoc.data().favoriteRecipes || [];
+        if (!favoriteRecipes.some(recipe => recipe.id === recipeId)) {
+            return res.status(404).send(`Recipe ${recipeId} not found in favoriteRecipes`);
+        }
+
+        const updatedRecipes = favoriteRecipes.filter(recipe => recipe.id !== recipeId);
+
+        await updateDoc(userRef, {
+            favoriteRecipes: updatedRecipes
+        });
+
+
+        res.status(200).send(`Recipe ${recipeId} removed from favoriteRecipes`);
+    } catch (error) {
+        res.status(500).send(`Error removing recipe: ${error}`);
+    }
+};
+
+
+
+
+module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe};
