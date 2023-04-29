@@ -36,7 +36,7 @@ const recipesName = async function (req, res){
                 results.push(doc.data());
             }
         });
-        res.status(200).send(result);
+        res.status(200).send(results);
     }
     catch (error) {
         res.status(500).send('Error al cercar receptes per nom');

@@ -7,14 +7,6 @@
     align-items: center;
 }
 
-.searchBar1{
-    /*margin-top: 5%;
-    margin-left: 15%;*/
-    text-align: center;
-    justify-content: center;
-
-}
-
 .exitButton{
     position: absolute;
     bottom: 25px;

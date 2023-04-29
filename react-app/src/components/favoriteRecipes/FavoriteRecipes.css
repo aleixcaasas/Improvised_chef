@@ -1,3 +1,11 @@
+.div-favRecipes{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;         
+}
+
 .container-recipes{
     width: 550px;
 	height: 600px;
@@ -5,18 +13,18 @@
 	overflow: hidden;
     border-radius: 15px;
 	box-shadow: 5px 20px 50px var(--black);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	position: relative;
+	margin-left: 22%;
 	outline: none;
     font-style: var(--font);
     font-size: large;
 }
+
 .container-recipes p{
     padding-top: 5px;
 	margin-left: 30px;
 }
+
 .list-container{
     width: 500px;
 	height: 450px;
