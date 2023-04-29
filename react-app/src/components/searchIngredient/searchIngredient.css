@@ -1,0 +1,26 @@
+.search-ing-popup{
+    background-color: var(--cream);
+    border-radius: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchBar1{
+    /*margin-top: 5%;
+    margin-left: 15%;*/
+    text-align: center;
+    justify-content: center;
+
+}
+
+.exitButton{
+    position: absolute;
+    bottom: 25px;
+}
+
+.no-ingredients-searched{
+    margin-top: 50%;
+    text-align: center;
+}
