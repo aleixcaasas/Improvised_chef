@@ -1,4 +1,4 @@
-.container{
+.container-recipes{
     width: 550px;
 	height: 600px;
 	background-color: var(--cream);
@@ -13,7 +13,7 @@
     font-style: var(--font);
     font-size: large;
 }
-.container p{
+.container-recipes p{
     padding-top: 5px;
 	margin-left: 30px;
 }

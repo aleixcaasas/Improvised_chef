@@ -4,7 +4,7 @@ import {BsTrash3} from "react-icons/bs"
 export default function FavoriteRecipes() {
     return (
         <>
-            <div className="container">
+            <div className="container-recipes">
                 <p>MY FAVOURITE RECIPES</p>
                 <div className="list-container">
                     <ul className="favourites">

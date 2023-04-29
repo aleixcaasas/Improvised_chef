@@ -29,4 +29,4 @@ const getIngredientsSearched = async function (req, res) {
   
 }
 
-module.exports = {ingredients, getIngredientsSearched};
+module.exports = {ingredientsName, getIngredientsSearched};
