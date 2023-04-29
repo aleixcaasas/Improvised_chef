@@ -19,10 +19,9 @@ const randomRecipe = async function (req, res) {
             const docData = doc.data();
             result.push(docData);
         });
-        return result;
+        res.status(200).send(result);
     }
     catch (error) {
-        console.log(error);
         res.status(500).send('Error al fer fetch de random recipes!');
     }
 };
@@ -37,10 +36,9 @@ const recipesName = async function (req, res){
                 results.push(doc.data());
             }
         });
-        return results;
+        res.status(200).send(result);
     }
     catch (error) {
-        console.log(error);
         res.status(500).send('Error al cercar receptes per nom');
     }
 }

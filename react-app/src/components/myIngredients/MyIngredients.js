@@ -1,7 +1,11 @@
+
+import ingredients from './ingredients.json' ;
 import './MyIngredients.css';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 import { useState } from 'react';
 import classNames from 'classnames';
+import { GiFruitBowl } from 'react-icons/gi';
+import {BsTrash} from 'react-icons/bs';
 
 export default function MyIngredients() {
     const [call, setCall] = useState({ clicked: false })
@@ -26,9 +30,13 @@ export default function MyIngredients() {
                     <button className="addButton" onClick={() => {clicked('false')}}>Add more ingredients to the list</button>   
                     <div className="div-inBox">
                         <ul>
-                            <li>Elemento 1</li>
-                            <li>Elemento 2</li>
-                            <li>Elemento 3</li>
+                            {ingredients.map((ingredient) => (
+                                
+                                <li><GiFruitBowl></GiFruitBowl> 
+                                    <label>{ingredient.name}</label>
+                                    <BsTrash></BsTrash>    
+                                </li>
+                            ))}    
                         </ul>
                     </div>
                 </div>

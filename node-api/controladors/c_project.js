@@ -1,8 +1,10 @@
 const home = require('./c_home');
 
 const {recipesName, randomRecipe} = require('./c_recipes');
-const {ingredients, getIngredientsSearched} = require('./c_ingredients');
-const {getUserInfo, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, myKitchen} = require('./c_users');
+const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
+const {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
+    removeUserRecipe, searchWithIngredients
+} = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
 
 const controller = {
@@ -82,48 +84,70 @@ const controller = {
     },
 
     randomRecipe: async function(req, res) {
-        return res.status(200).send(await randomRecipe(req));
+        return await randomRecipe(req);
     },
 
     recipesName: async function(req, res) {
-        return res.status(200).send(await recipesName(req, res))
+        return await recipesName(req, res);
     },
 
-    ingredients: function(req, res) {
-        return res.status(200).send(ingredients)
+    ingredientsName: async function(req, res) {
+        return await ingredientsName(req, res);
     },
 
     getUserInfo: async function(req, res) {
-        return res.status(200).send(await getUserInfo(req, res));
+        return await getUserProfile(req, res);
+    },
+
+    getUserProfile: async function(req, res) {
+        return await getUserInfo(req, res);
     },
 
     myKitchen: async function(req, res) {
-        return res.status(200).send(await myKitchen(req, res));
+        return await myKitchen(req, res);
     },
 
     getUserIngredientList: async function(req, res) {
-        return res.status(200).send(await getUserIngredientList(req, res));
+        return await getUserIngredientList(req, res);
     },
 
     addUserIngredient: async function(req, res) {
-        return res.status(200).send(await addUserIngredient(req, res));
+        return await addUserIngredient(req, res);
     },
 
     removeUserIngredient: async function(req, res) {
-        return res.status(200).send(await removeUserIngredient(req, res));
+        return await removeUserIngredient(req, res);
+    },
+
+    getUserShoppingList: async function(req, res) {
+        return await getUserShoppingList(req, res);
+    },
+
+    addUserShoppingList: async function(req, res) {
+        return await addUserShoppingList(req, res);
+    },
+
+    removeUserShoppingList: async function(req, res) {
+        return await removeUserShoppingList(req, res);
     },
 
     getUserRecipeList: async function(req, res) {
-        return res.status(200).send(await getUserRecipeList(req, res));
+        return await getUserRecipeList(req, res);
     },
 
     addUserRecipe: async function(req, res) {
-        return res.status(200).send(await addUserRecipe(req, res));
+        return await addUserRecipe(req, res);
+    },
+    removeUserRecipe: async function(req, res) {
+        return await removeUserRecipe(req, res);
     },
 
     getIngredientSearched: async function(req, res) {
         return res.status(200).send(await getIngredientsSearched(req, res));
     },
+    searchWithIngredients: async function(req, res) {
+        return await searchWithIngredients(req, res);
+    }
 }
 
 module.exports = controller;
