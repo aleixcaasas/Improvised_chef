@@ -1,49 +1,49 @@
 const { db, query, collection, where, getDocs, getDoc, updateDoc, doc, arrayUnion, arrayRemove } = require('../firebase/firebase-config');
 
 const getUserInfo = async function (req, res) {
-    try{
+    try {
         let result = [];
         const users = collection(db, "users");
         const userInfo = query(users, where("userId", "==", req.body.id));
         const querySnapshot = await getDocs(userInfo);
         querySnapshot.forEach((doc) => {
-          const docData = doc.data();
-          const selectedFields = {
-              profilePic: docData.profilePic,
-              fullName: docData.fullName,
-              userName: docData.userName,
-          };
-              result.push(selectedFields);
+            const docData = doc.data();
+            const selectedFields = {
+                profilePic: docData.profilePic,
+                fullName: docData.fullName,
+                userName: docData.userName,
+            };
+            result.push(selectedFields);
         });
         res.status(200).send(result);
     } catch (error) {
-        res.status(500).send('Error al fer fetch de random recipes!');
+        res.status(500).send('Error al fer fetch de dades de usuari');
     }
-  
+
 };
 
 /* S'HA DE VERIFICAR L'ENDPOINT I MIRAR SI PODRIEM CANVIAR LA CONTRASENYA*/
 const getUserProfile = async function (req, res) {
-    try{
+    try {
         let result = [];
         const users = collection(db, "users");
         const userInfo = query(users, where("userId", "==", req.body.userId));
         const querySnapshot = await getDocs(userInfo);
         querySnapshot.forEach((doc) => {
-          const docData = doc.data();
-          const selectedFields = {
-              profilePic: docData.profilePic,
-              fullName: docData.fullName,
-              userName: docData.userName,
-              email: docData.email,
-          };
-              result.push(selectedFields);
+            const docData = doc.data();
+            const selectedFields = {
+                profilePic: docData.profilePic,
+                fullName: docData.fullName,
+                userName: docData.userName,
+                email: docData.email,
+            };
+            result.push(selectedFields);
         });
         res.status(200).send(result);
     } catch (error) {
-        res.status(500).send('Error al fer fetch de random recipes!');
+        res.status(500).send('Error al fer fetch de dades de usuari');
     }
-  
+
 };
 
 
@@ -58,23 +58,23 @@ const myKitchen = async (req, res) => {
         }
     }
     catch (error) {
-      res.status(500).send('Error getting myIngredients: ', error);
+        res.status(500).send('Error getting myIngredients: ', error);
     }
 }
 
 const getUserIngredientList = async (req, res) => {
-  try {
-      const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
-      if (querySnapshot.exists()) {
-          res.status(200).send(querySnapshot.data().myIngredients);
-      }
-      else {
-          res.status(500).send('User not exist');
-      }
-  }
-  catch (error) {
-    res.status(500).send('Error getting myIngredients: ', error);
-  }
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        if (querySnapshot.exists()) {
+            res.status(200).send(querySnapshot.data().myIngredients);
+        }
+        else {
+            res.status(500).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error getting myIngredients: ', error);
+    }
 };
 
 const addUserIngredient = async (req, res) => {
@@ -83,14 +83,15 @@ const addUserIngredient = async (req, res) => {
         if (querySnapshot.exists()) {
             if (querySnapshot.data().myIngredients.some(ingredient => {
                 return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) ||
-                    Object.values(ingredient).includes(req.body.ingredientName) })){
+                    Object.values(ingredient).includes(req.body.ingredientName)
+            })) {
                 res.status(500).send('User ingredient exist');
             }
             else {
                 await updateDoc(doc(db, "users", req.body.userId), {
-                    myIngredients: arrayUnion({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                    myIngredients: arrayUnion({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" added to myIngredients.');
+                res.status(200).send('Ingredient "' + req.body.ingredientName + '" added to myIngredients.');
             }
         }
         else {
@@ -108,12 +109,13 @@ const removeUserIngredient = async (req, res) => {
         if (querySnapshot.exists()) {
             if (querySnapshot.data().myIngredients.some(ingredient => {
                 return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) &&
-                    Object.values(ingredient).includes(req.body.ingredientName) })){
+                    Object.values(ingredient).includes(req.body.ingredientName)
+            })) {
 
                 await updateDoc(doc(db, "users", req.body.userId), {
-                    myIngredients: arrayRemove({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                    myIngredients: arrayRemove({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" deleted to myIngredients.');
+                res.status(200).send('Ingredient "' + req.body.ingredientName + '" deleted to myIngredients.');
             }
             else {
                 res.status(500).send('User ingredient not exist');
@@ -149,14 +151,15 @@ const addUserShoppingList = async (req, res) => {
         if (querySnapshot.exists()) {
             if (querySnapshot.data().shoppingList.some(ingredient => {
                 return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) ||
-                    Object.values(ingredient).includes(req.body.ingredientName) })){
+                    Object.values(ingredient).includes(req.body.ingredientName)
+            })) {
                 res.status(500).send('Ingredient ShoppingList exist');
             }
             else {
                 await updateDoc(doc(db, "users", req.body.userId), {
-                    shoppingList: arrayUnion({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                    shoppingList: arrayUnion({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" added to shoppingList.');
+                res.status(200).send('Ingredient "' + req.body.ingredientName + '" added to shoppingList.');
             }
         }
         else {
@@ -174,12 +177,13 @@ const removeUserShoppingList = async (req, res) => {
         if (querySnapshot.exists()) {
             if (querySnapshot.data().shoppingList.some(ingredient => {
                 return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) &&
-                    Object.values(ingredient).includes(req.body.ingredientName) })){
+                    Object.values(ingredient).includes(req.body.ingredientName)
+            })) {
 
                 await updateDoc(doc(db, "users", req.body.userId), {
-                    shoppingList: arrayRemove({id: parseInt(req.body.ingredientId), name: req.body.ingredientName})
+                    shoppingList: arrayRemove({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "'+ req.body.ingredientName +'" deleted to shoppingList.');
+                res.status(200).send('Ingredient "' + req.body.ingredientName + '" deleted to shoppingList.');
             }
             else {
                 res.status(500).send('Ingredient shoppingList not exist');
@@ -196,7 +200,7 @@ const removeUserShoppingList = async (req, res) => {
 
 const getUserRecipeList = async (req, res) => {
 
-  try {
+    try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {
             res.status(200).send(querySnapshot.data().favoriteRecipes);
@@ -211,35 +215,38 @@ const getUserRecipeList = async (req, res) => {
 };
 
 const addUserRecipe = async (req, res) => {
-  try {
-      const userDoc = await getDoc(doc(db, "users", req.body.userId));
-      if (userDoc.exists()) {
-          if (userDoc.data().favoriteRecipes.some(recipe => {
-              return Object.values(recipe).includes(parseInt(req.body.recipeId)) })){
-              res.status(500).send('User recipe exist');
-          }
-          else {
-              const recipeDoc = await getDoc(doc(db, "recipes", req.body.recipeId));
-              if (recipeDoc.exists()) {
-                  await updateDoc(doc(db, "users", req.body.userId), {
-                      favoriteRecipes: arrayUnion({id: parseInt(recipeDoc.data().id), title: recipeDoc.data().title,
-                          image: recipeDoc.data().image, difficulty: recipeDoc.data().difficulty,
-                          time_preparation: recipeDoc.data().time_preparation, time_cooking: recipeDoc.data().time_cooking })
-                  });
-                  res.status(201).send('Recipe added successfully');
-              }
-              else {
-                  res.status(404).send('Recipe not exist');
-              }
-          }
-      }
-      else {
-          res.status(404).send('User not exist');
-      }
-  }
-  catch (error) {
-      res.status(500).send('Error adding recipe');
-  }
+    try {
+        const userDoc = await getDoc(doc(db, "users", req.body.userId));
+        if (userDoc.exists()) {
+            if (userDoc.data().favoriteRecipes.some(recipe => {
+                return Object.values(recipe).includes(parseInt(req.body.recipeId))
+            })) {
+                res.status(500).send('User recipe exist');
+            }
+            else {
+                const recipeDoc = await getDoc(doc(db, "recipes", req.body.recipeId));
+                if (recipeDoc.exists()) {
+                    await updateDoc(doc(db, "users", req.body.userId), {
+                        favoriteRecipes: arrayUnion({
+                            id: parseInt(recipeDoc.data().id), title: recipeDoc.data().title,
+                            image: recipeDoc.data().image, difficulty: recipeDoc.data().difficulty,
+                            time_preparation: recipeDoc.data().time_preparation, time_cooking: recipeDoc.data().time_cooking
+                        })
+                    });
+                    res.status(201).send('Recipe added successfully');
+                }
+                else {
+                    res.status(404).send('Recipe not exist');
+                }
+            }
+        }
+        else {
+            res.status(404).send('User not exist');
+        }
+    }
+    catch (error) {
+        res.status(500).send('Error adding recipe');
+    }
 };
 
 const removeUserRecipe = async (req, res) => {
@@ -295,17 +302,17 @@ const searchWithIngredients = async (req, res) => {
             }
         }
         const freqMap = recipesIn.reduce((map, num) => {
-          if (!map[num]) {
-            map[num] = 1;
-          } else {
-            map[num]++;
-          }
-          return map;
+            if (!map[num]) {
+                map[num] = 1;
+            } else {
+                map[num]++;
+            }
+            return map;
         }, {});
 
         const sortedArr = Object.keys(freqMap)
-          .sort((a, b) => freqMap[b] - freqMap[a])
-          .map(num => parseInt(num));
+            .sort((a, b) => freqMap[b] - freqMap[a])
+            .map(num => parseInt(num));
         let result = [];
         const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 10)));
         const querySnapshot = await getDocs(q);
@@ -337,4 +344,4 @@ const searchWithIngredients = async (req, res) => {
 
 
 
-module.exports = {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients};
+module.exports = { getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };

@@ -96,11 +96,11 @@ const controller = {
     },
 
     getUserInfo: async function(req, res) {
-        return await getUserProfile(req, res);
+        return await getUserInfo(req, res);
     },
 
     getUserProfile: async function(req, res) {
-        return await getUserInfo(req, res);
+        return await getUserProfile(req, res);
     },
 
     myKitchen: async function(req, res) {
