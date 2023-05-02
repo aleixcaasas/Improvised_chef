@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { MdSearch } from 'react-icons/md';
-import { TbIcons, TbMenu2 } from 'react-icons/tb';
 import './SearchBar.css';
 import axios from "axios";
 import { debounce } from 'lodash';

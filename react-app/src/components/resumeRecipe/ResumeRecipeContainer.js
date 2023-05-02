@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ResumeRecipe from "./ResumeRecipe"
 import './Resume_recipe.css'
 import '../mock/MockRecipes'

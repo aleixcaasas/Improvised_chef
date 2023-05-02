@@ -7,16 +7,13 @@ import { useState } from "react";
 
 export default function SearchIngredient(props) {
 
-    const [searching, setSearching] = useState(false);
     const [response, setResponse] = useState('')
 
     const handleChange = async (nomIngredient) => {
         if (nomIngredient === ''){
             //aqui podirme posar fer peticio per ingredients aleatoris
-            setSearching(false);
             setResponse('');
         } else {
-            setSearching(true)
             try {
                     setResponse(await axios.post('http://localhost:3000/user/searchIngredients', { //fer el endpoint de search ingredients!!
                         name: nomIngredient
