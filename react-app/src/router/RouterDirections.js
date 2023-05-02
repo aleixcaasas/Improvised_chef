@@ -34,7 +34,7 @@ export default function RouterDirections() {
             <Route exact path="/MyKitchen" element={<MyKitchen/>}/>
             <Route exact path="/MyIngredients" element={<MyIngredients/>}/>
             <Route exact path="/ShoppingList" element={<ShoppingList/>}/>
-            <Route exact path="/FavouriteRecipes" element={<FavoriteRecipes/>}/>
+            <Route exact path="/FavoriteRecipes" element={<FavoriteRecipes/>}/>
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />

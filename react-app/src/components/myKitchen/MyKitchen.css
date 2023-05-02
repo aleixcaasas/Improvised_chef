@@ -2,8 +2,20 @@
 
 /*My kitchen*/
 /********************/
-.my_kitchen{
+.div-my_kitchen{
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my_kitchen{
+    display: flex;  
+    margin-left: 22%;
+    align-items: center;   
+    height: 75%;
+    position: relative;
 }
 
 
