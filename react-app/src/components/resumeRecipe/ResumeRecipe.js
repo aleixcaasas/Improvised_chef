@@ -83,7 +83,7 @@ export default function ResumeRecipe ({singleReceipts, index}){
 
     function show_icons_ingridient(ingridients) {   
         
-        const ingridients_to_check = ["chicken", "pork", "turkey", "cod", "beef"];
+        const ingridients_to_check = ["chicken", "pork", "turkey", "cod", "beef", "sausage",  " lamb", "bacon" ];
 
         const hasMeat = ingridients_to_check.some((meat) => {
             return ingridients.some((ingridient) => {
