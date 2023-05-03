@@ -33,7 +33,7 @@ export default function MyKitchen() {
     }, [user]);
 
 
-    const size_icon = 20;
+    const size_icon = 30;
     const color_icon = 'rgb(150, 150, 150)'
     const ingredientGroups = {
         'spices': <GiChiliPepper size={size_icon} style={{ color: color_icon }} />,
