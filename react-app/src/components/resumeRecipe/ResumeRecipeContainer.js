@@ -12,7 +12,7 @@ export default function Resume_recipe_container({ receiptsJSON }) {
                 //TEST recepit aqui va a ser el JSON del Database
                 receiptsJSON.map((receitp, index) => (
                     <ResumeRecipe
-                        /*key={receitp.id}*/
+                        key={receitp.id}
                         singleReceipts={receitp}
                         index={index}
                     />))

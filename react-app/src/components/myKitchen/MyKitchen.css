@@ -22,7 +22,7 @@
 /*My shopping List*/
 /********************/
 
-.Ingridient_Icon {
+.Ingredient_Icon {
     background-color: rgb(236, 236, 236);
     margin: 10px;
     height: 70px;
@@ -65,8 +65,9 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(6, 1fr);
     overflow-y: auto;
-    
+    padding-left: 7px;
 }
+
 
 /*container_list*/
 #no_list {

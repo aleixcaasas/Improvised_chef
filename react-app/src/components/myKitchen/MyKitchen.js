@@ -1,19 +1,37 @@
+import './MyKitchen.css'
+import axios from "axios";
 import { Link } from "react-router-dom";
-import recipes from './Test_receipt.json';
-import myIngridients from './Test_ingridients_myIngridient.json';
-import myShoppingList from './Test_ingridients_ShoppingList.json';
-import ingredientCategories from './IngridientsCategories.json';
-/*import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';*/
-
 import { IoIosWater } from "react-icons/io";
+import { UserContext } from '../../pages/globalValue';
+import { useEffect, useContext, useState } from "react";
+import ingredientCategories from './IngridientsCategories.json';
 import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish } from "react-icons/gi"
 
-
-import './MyKitchen.css'
-
 export default function MyKitchen() {
+
+    const { user } = useContext(UserContext);
+    const [list, setList] = useState(null)
+
+    useEffect(() => {
+        const getInfo = async () => {
+            try {
+                console.log(user.id);
+                // eslint-disable-next-line
+                if (user.email != '') {
+                    const response = await axios.post('http://localhost:3000/user/myKitchen', {
+                        userId: user.id
+                    });
+                    console.log(response);
+                    setList(response);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getInfo();
+        console.log(list);
+    }, [user]);
+
 
     const size_icon = 20;
     const color_icon = 'rgb(150, 150, 150)'
@@ -41,70 +59,110 @@ export default function MyKitchen() {
         return ingredientGroups.miscellaneous;
     }
 
-    function getList(listIntgridient) {
+    function getList(listIngredient, path) {
+        if (!listIngredient) {
+            return <div>Loading...</div>;
+        }
 
-        const lenght = listIntgridient.length;
-        if (lenght > 0) {
+        const length = listIngredient.length;
+        if (length > 0) {
             return (
                 <div className="container_list">
-                    {listIntgridient.map((ingridient, index) => (
-                        <div className='Ingridient_Icon'>
-                            {getIngredientIcon(ingridient.name)}
+                    {listIngredient.map((ingredientList, index) => (
+                        <div className='Ingredient_Icon' key={index}>
+                            {getIngredientIcon(ingredientList.name)}
                         </div>
                     ))}
                 </div>
-            )
-        } else if (lenght === 0) {
+            );
+        } else if (length === 0) {
             return (
                 <div className="container_list" id='no_list'>
-                    There are no ingridients in your list!
-                    <h5>ADD SOME INGRIDIENTS</h5>
-                    <button id='button_round'>+</button>
+                    There are no ingredients in your list!
+                    <h5>ADD SOME INGREDIENTS</h5>
+                    <Link to={path}>
+                        <button id='button_round'>+</button>
+                    </Link>
                 </div>
-            )
+            );
         }
     }
 
-
-
-    /*<Slider dots={false} infinite={true} slidesToShow={3} slidesToScroll={1}>*/
+    function getRecipes(recipesList) {
+        if (list.data[2].length == 0) {
+            return (
+                <div className="container_list" id='no_list'>
+                    You does not have favorite recipes yet!
+                    <h5>EXPLORE NEW RECIPES</h5>
+                    <Link to="/home">
+                        <button id='button_round'>+</button>
+                    </Link>
+                </div>
+            );
+        } else {
+            return (
+                <div className="container_list">
+                    {list.data[2].map((recipe, index) => (
+                        <div className='recipe_pic_item' key={index}>
+                            <div
+                                className='recipe_image'
+                                style={{ backgroundImage: `url("${recipe.image}")` }}>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+    }
 
     return (
-
         <div className='div-my_kitchen'>
             <div className='my_kitchen'>
                 <Link to="/MyIngredients">
                     <div className="containers_myKitchen">
                         <h3>MY INGREDIENTS</h3>
-                        {getList(myIngridients)}
+                        {!list?.data && (
+                            <>
+                                <div className="container_list" id='no_list'>
+                                    Loading Ingredients...
+                                </div>
+                            </>
+                        )}
+                        {list?.data && (
+                            getList(list.data[0], "/MyIngredients")
+                        )}
                     </div>
                 </Link>
 
                 <Link to="/FavoriteRecipes">
                     <div className="containers_myKitchen">
                         <h3>FAVORITE RECIPES</h3>
-                        <div className="container_list">
-                            {recipes.map((recipe, index) => (
-                                <div className='recipe_pic_item'>
-                                    <div
-                                        className='recipe_image'
-                                        style={{ backgroundImage: `url("${recipe.image}")` }}>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        {!list?.data && (
+                            <div className="container_list" id='no_list'>
+                                Loading Recipes...
+                            </div>)}
+                        {list?.data && (
+                            getRecipes(list.data[2])
+                        )}
                     </div>
                 </Link>
 
                 <Link to="/ShoppingList">
                     <div className="containers_myKitchen">
                         <h3>SHOPPING LIST</h3>
-                        {getList(myShoppingList)}
+                        {!list?.data && (
+                            <>
+                                <div className="container_list" id='no_list'>
+                                    Loading Ingredients...
+                                </div>
+                            </>
+                        )}
+                        {list?.data && (
+                            getList(list.data[1], "/ShoppingList")
+                        )}
                     </div>
                 </Link>
-
-            </div>
-
-        </div>
-    )
-}
+            </div >
+        </div >
+    );
+}      
