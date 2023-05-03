@@ -19,12 +19,16 @@
 }
 .list-container{
     width: 500px;
+<<<<<<< Updated upstream
 	height: 450px;
+=======
+	height: 520px;
+>>>>>>> Stashed changes
 	background-color: white;
 	overflow: hidden;
     border-radius: 15px;
 	position: absolute;
-	top: 50%;
+	top: 53%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	outline: none;
@@ -35,11 +39,12 @@
 	flex-direction: row;
 	border-radius: 15px;
 	width: 500px;
+	position: relative;
+	align-items: center;
 }
 .recipe-data{
 	flex-direction: column;
 	align-items: left;
-	margin-top: 15px;
 	max-width: 360px;
 }
 .recipe-data li{
@@ -54,6 +59,9 @@
 .data{
 	font-size: small;
 }
+.title{
+	font-weight: 600;
+}
 .favourites{
 	padding: 0;
 	margin: 0;
@@ -61,14 +69,13 @@
 .trashButton{
 	width: 40px;
 	height: 40px;
-	right: 0;
-	position: absolute;
 	margin: 10px;
 	background: none;
 	color: black;
 }
 .trashButtonDiv{
-	padding-top: 20px;
+	right: 0;
+	position: absolute;
 }
 .trashButton:hover{
 	background-color: rgb(154, 154, 154);
