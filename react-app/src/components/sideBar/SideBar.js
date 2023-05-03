@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import './sideBar.css';
+import axios from "axios";
+import { FaBars} from 'react-icons/fa';
 import { TbCheese } from 'react-icons/tb';
 import { AiOutlineClose } from 'react-icons/ai';
-import { FaBars} from 'react-icons/fa';
-import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../../pages/globalValue';
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import './sideBar.css';
+import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 
 const Sidebar = (props) => {
     const { user, setUser } = useContext(UserContext);    //const {logOut} = useAuth();
@@ -30,7 +30,6 @@ const Sidebar = (props) => {
             try {
                 // eslint-disable-next-line
                 if(user.email != ''){
-                    console.log(user)
                     const response = await axios.post('http://localhost:3000/user/summary', { id: user.id });
                     setResponse(response);
                 }
@@ -90,7 +89,7 @@ const Sidebar = (props) => {
                     <Link to="/ShoppingList"><li><MdOutlineShoppingCart size={30} /><label>Shopping List</label></li></Link>
 
 
-                    <Link to="/FavouriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favorites</label></li></Link>
+                    <Link to="/FavoriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favorites</label></li></Link>
                 </ul>
             </div>
             

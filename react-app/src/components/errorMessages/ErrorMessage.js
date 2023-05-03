@@ -1,12 +1,9 @@
 import './errorMessage.css';
-import { NavLink, useNavigate } from 'react-router-dom';
 import { BiConfused } from 'react-icons/bi';
-import { useState } from 'react';
 
 export default function ErrorLoginRegister(props) {
 
     const {errorMessage } = props;
-    const navigate = useNavigate();
 
     return (
         <div className="error_container">

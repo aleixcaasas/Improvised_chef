@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { UserContext } from './globalValue';
 import React, { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ChooseOption() {
 
     const navigation = useNavigate();
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const move = async (e) => {
         navigation("/home");

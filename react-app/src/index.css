@@ -6,6 +6,9 @@
   --red:#B64926;
   --black: #000000;
   --grey: #1d1d1d;
+  --radius_border: 20px;
+  --box_shawod: 10px 10px 20px rgb(181, 181, 181);
+  
 }
 
 .App{

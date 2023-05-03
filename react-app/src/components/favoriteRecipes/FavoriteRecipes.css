@@ -1,29 +1,41 @@
-.container{
+.div-favRecipes{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;         
+}
+
+.container-recipes{
     width: 550px;
 	height: 600px;
 	background-color: var(--cream);
 	overflow: hidden;
     border-radius: 15px;
 	box-shadow: 5px 20px 50px var(--black);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	position: relative;
+	margin-left: 22%;
 	outline: none;
     font-style: var(--font);
     font-size: large;
 }
-.container p{
+
+.container-recipes p{
     padding-top: 5px;
 	margin-left: 30px;
 }
+
 .list-container{
     width: 500px;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 	height: 450px;
 =======
 	height: 520px;
 >>>>>>> Stashed changes
+=======
+	height: 470px;
+>>>>>>> Frontend
 	background-color: white;
 	overflow: hidden;
     border-radius: 15px;

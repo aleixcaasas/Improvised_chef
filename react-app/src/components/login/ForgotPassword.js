@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import ErrorMessage from '../errorMessages/ErrorMessage';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {
 
     const navigation = useNavigate();
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
-	const [error2, setError2] = useState({error:false, comment:""});
 
 	const clicked = (message) => {
         if(message === "true"){
