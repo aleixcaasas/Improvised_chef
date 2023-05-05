@@ -41,7 +41,7 @@ export default function MyIngredients() {
                     </div>
                 </div>
                 {call.clicked &&(
-                        <div className='popUpIngBack'>
+                        <div >
                             <div className='popUpIngredients'>
                                 <SearchIngredient clicked={clicked}></SearchIngredient>
                             </div>
