@@ -115,7 +115,7 @@ const removeUserIngredient = async (req, res) => {
                 await updateDoc(doc(db, "users", req.body.userId), {
                     myIngredients: arrayRemove({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "' + req.body.ingredientName + '" deleted to myIngredients.');
+                res.status(200).send({text: 'Ingredient "' + req.body.ingredientName + '" deleted to myIngredients.', name: req.body.ingredientName});
             }
             else {
                 res.status(500).send('User ingredient not exist');
@@ -183,7 +183,7 @@ const removeUserShoppingList = async (req, res) => {
                 await updateDoc(doc(db, "users", req.body.userId), {
                     shoppingList: arrayRemove({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "' + req.body.ingredientName + '" deleted to shoppingList.');
+                res.status(200).send({text: 'Ingredient "' + req.body.ingredientName + '" deleted to shoppingList.', name: req.body.ingredientName});
             }
             else {
                 res.status(500).send('Ingredient shoppingList not exist');

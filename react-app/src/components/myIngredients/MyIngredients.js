@@ -21,7 +21,6 @@ export default function MyIngredients() {
                     const response = await axios.post('http://localhost:3000/user/ingredients', {
                         userId: user.id
                     });
-                    console.log(response);
                     setIngredients(response);
                 }
             } catch (error) {
@@ -29,16 +28,24 @@ export default function MyIngredients() {
             }
         }
         getInfo();
-    }, [user]);
+    }, []);
 
     async function deleteIngredient(id, name) {
+        let ingEliminated = {};
+        let newIngredientList = Object.assign({}, ingredients);
         try {
             if (user.email !== '') {
-                await axios.post('http://localhost:3000/user/removeIngredient', {
+                ingEliminated = await axios.post('http://localhost:3000/user/removeIngredient', {
                     userId: user.id,
                     ingredientId: id,
                     ingredientName: name
                 });
+                for (let j = 0; j < ingredients.data.length; j++) {
+                    if (ingEliminated.data.name === ingredients.data[j].name) { //quan trobi el ingredient l'elimina
+                        newIngredientList.data.splice(j,1);
+                    }
+                }
+                setIngredients(newIngredientList);
             }
         } catch (error) {
             console.log(error)
