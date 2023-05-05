@@ -65,7 +65,7 @@ export default function FavoriteRecipes() {
                             <div className="recipe">
                                 <img className="image" src={dict.image} alt=""></img>
                                 <div className="recipe-data">
-                                    <li>{dict.title}</li>
+                                    <li className="title">{dict.title}</li>
                                     <li className="data">{dict.difficulty} to make, it takes {dict.time_cooking}</li>
                                 </div>
                                 <div className="trashButtonDiv">
