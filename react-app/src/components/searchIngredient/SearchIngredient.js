@@ -6,6 +6,7 @@ import {RiAddCircleLine} from 'react-icons/ri';
 import {MdFastfood} from 'react-icons/md'
 import {TiTick} from 'react-icons/ti'
 import { UserContext } from '../../pages/globalValue';
+import { getIngredientIcon } from "../myKitchen/MyKitchen";
 
 
 export default function SearchIngredient(props) {
@@ -56,7 +57,7 @@ export default function SearchIngredient(props) {
     return (
         <div className="search-ing-popup">
             <input
-                className="searchBar1"
+                className="searchIng"
                 //value={cercador}
                 placeholder={"Search Ingredient"}
                 onChange={(e) => debouncedSearch(e)}
@@ -65,8 +66,9 @@ export default function SearchIngredient(props) {
                 { response && (  //response.data (això es el que va en comptes de ingredientsJSON) 
                     response.data.map((ingredient) => 
                         <div className="ingredient">
-                            <li style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <MdFastfood size={30} className="icon"></MdFastfood>
+                            <li style={{ display: 'flex', alignItems: 'center' }}>
+                                {//<MdFastfood size={30} className="icon"></MdFastfood>
+                                getIngredientIcon(ingredient.name)}
                                 <div className="ingredient-name">{ingredient.name} </div>
                                 {!ingredient.repeated && (
                                     <RiAddCircleLine size={25} className="add-button" onClick={() => afegirIngredient(ingredient.name, ingredient.id, response.data)} ></RiAddCircleLine>
@@ -80,9 +82,7 @@ export default function SearchIngredient(props) {
                 }
                 { !response && (
                     <div className="no-ingredients-searched">
-                        <h3>NO</h3>
-                        <h3>INGREDIENTS</h3>
-                        <h3>SEARCHED</h3>
+                        Write an ingredient name to add into the list!
                     </div>
                     )
                 }

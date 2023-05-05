@@ -11,8 +11,20 @@
     bottom: 25px;
 }
 
+.exitButton:hover{
+    background: rgb(102, 24, 24);
+}
+
 .no-ingredients-searched{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    letter-spacing: 3px;
+    line-height: 30px;
     text-align: center;
+    height: 90%;
+    font-weight: bold;
 }
 
 .ingredients-div{
@@ -49,9 +61,26 @@
 .ingredient-name{
     display: flex;
     flex-grow: 1;
+    padding-left: 3%;
 }
 
 .add-button:hover{
     cursor: pointer;
     color:var(--green)
+}
+
+.searchIng{
+    width: 70%;
+    max-width: 70%;
+    border-radius: 25px !important;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border: solid 1px rgba(0, 0, 0, 0.514);
+    font-size: 1em;
+    outline: none;
+    color: inherit;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border: none;
+    text-align: left;
 }

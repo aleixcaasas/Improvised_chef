@@ -4,8 +4,44 @@ import { Link } from "react-router-dom";
 import { IoIosWater } from "react-icons/io";
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from "react";
-import ingredientCategories from './IngridientsCategories.json';
 import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish } from "react-icons/gi"
+
+const color_icon = 'rgb(150, 150, 150)'
+const ingredientGroups = {
+    'spices': <GiChiliPepper size={30} style={{ color: color_icon }} />,
+    'herbs': <GiHerbsBundle size={30} style={{ color: color_icon }} />,
+    'vegetables': <GiBroccoli size={30} style={{ color: color_icon }} />,
+    'fruits': <GiBroccoli size={30} style={{ color: color_icon }} />,
+    'dairy': <GiMilkCarton size={30} style={{ color: color_icon }} />,
+    'meat': <GiMeat size={30} style={{ color: color_icon }} />,
+    'seafood': <GiDoubleFish size={30} style={{ color: color_icon }} />,
+    'baking': <GiSlicedBread size={30} style={{ color: color_icon }} />,
+    'liquids': <IoIosWater size={30} style={{ color: color_icon }} />,
+    'miscellaneous': <GiOpenedFoodCan size={30} style={{ color: color_icon }} />
+};
+
+const ingredientCategories= {
+    "spices": ["salt", "pepper", "cumin", "paprika"],
+    "herbs": ["basil", "oregano", "parsley", "thyme"],
+    "vegetables": ["tomato", "carrot", "onion", "celery"],
+    "fruits": ["banana", "apple", "orange", "grape"],
+    "dairy": ["milk", "cheese", "yogurt", "butter"],
+    "meat": ["beef", "pork", "chicken", "lamb"],
+    "seafood": ["shrimp", "salmon", "tuna", "crab"],
+    "baking": ["flour", "sugar", "baking powder", "baking soda"],
+    "liquids": ["water", "oil", "vinegar", "broth", "honey"],
+    "miscellaneous": []
+}
+
+export function getIngredientIcon(name) {
+    const lowercaseName = name.toLowerCase();
+    for (const [category, ingredients] of Object.entries(ingredientCategories)) {
+        if (ingredients.some((ingredient) => lowercaseName.includes(ingredient))) {
+            return ingredientGroups[category];
+        }
+    }
+    return ingredientGroups.miscellaneous;
+}
 
 export default function MyKitchen() {
 
@@ -29,35 +65,8 @@ export default function MyKitchen() {
             }
         }
         getInfo();
-        console.log(list);
     }, [user]);
 
-
-    const size_icon = 30;
-    const color_icon = 'rgb(150, 150, 150)'
-    const ingredientGroups = {
-        'spices': <GiChiliPepper size={size_icon} style={{ color: color_icon }} />,
-        'herbs': <GiHerbsBundle size={size_icon} style={{ color: color_icon }} />,
-        'vegetables': <GiBroccoli size={size_icon} style={{ color: color_icon }} />,
-        'fruits': <GiBroccoli size={size_icon} style={{ color: color_icon }} />,
-        'dairy': <GiMilkCarton size={size_icon} style={{ color: color_icon }} />,
-        'meat': <GiMeat size={size_icon} style={{ color: color_icon }} />,
-        'seafood': <GiDoubleFish size={size_icon} style={{ color: color_icon }} />,
-        'baking': <GiSlicedBread size={size_icon} style={{ color: color_icon }} />,
-        'liquids': <IoIosWater size={size_icon} style={{ color: color_icon }} />,
-        'miscellaneous': <GiOpenedFoodCan size={size_icon} style={{ color: color_icon }} />
-    };
-
-
-    function getIngredientIcon(name) {
-        const lowercaseName = name.toLowerCase();
-        for (const [category, ingredients] of Object.entries(ingredientCategories)) {
-            if (ingredients.some((ingredient) => lowercaseName.includes(ingredient))) {
-                return ingredientGroups[category];
-            }
-        }
-        return ingredientGroups.miscellaneous;
-    }
 
     function getList(listIngredient, path) {
         if (!listIngredient) {
