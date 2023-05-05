@@ -1,4 +1,7 @@
 <h1 style="text-align: center;">👨‍🍳<b>IMPROVISED CHEF</b>👨‍🍳</h1>
+
+<h2> Encuentra la aplicación en: <a href="https://cheff-improvisado.web.app/"> cheff-improvisado.web.app/</a> </h2>
+
 <p>
 "Improvised Chef" es un proyecto que implica el desarrollo de una aplicación innovadora que permite a los usuarios cocinar con los ingredientes disponibles en sus hogares. El backend se desarrollará en Node.js con una API RESTful que se comunica con Firebase como base de datos. React se utilizará para el frontend para crear una interfaz de usuario intuitiva. Además, la base de datos se poblará inicialmente a través de la extracción de datos web del sitio web <a href="http://www.bbcgoodfood.com"> BBC Good Food</a>.
 
@@ -13,6 +16,7 @@ La aplicación proporcionará una base de datos de recetas que se pueden filtrar
 
 ## <b>Instalación</b>
 
+### <b>Instalación entorno de desarrollo</b>
 Pasos para instalar y configurar la aplicación en un entorno de desarrollo local.
 
 Descargar repositorio GitHub
@@ -20,18 +24,14 @@ Descargar repositorio GitHub
 git clone https://github.com/aleixcaasas/Improvised_chef.git
 ```
 
-### Configurar e instalar API (Node JS): 
+#### Configurar e instalar API (Node JS): 
 ```
 cd node-api
 npm install
 npm start
 ```
-Luego abre tu navegador
-```
-http://localhost:3000
-```
 
-### Configurar e instalar app (React JS):
+#### Configurar e instalar app (React JS):
 ```
 cd react-app
 npm install

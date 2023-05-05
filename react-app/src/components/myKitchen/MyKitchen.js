@@ -51,13 +51,11 @@ export default function MyKitchen() {
     useEffect(() => {
         const getInfo = async () => {
             try {
-                console.log(user.id);
                 // eslint-disable-next-line
-                if (user.email != '') {
+                if (user.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/myKitchen', {
                         userId: user.id
                     });
-                    console.log(response);
                     setList(response);
                 }
             } catch (error) {
@@ -98,7 +96,7 @@ export default function MyKitchen() {
     }
 
     function getRecipes(recipesList) {
-        if (list.data[2].length == 0) {
+        if (recipesList.length === 0) {
             return (
                 <div className="container_list" id='no_list'>
                     You does not have favorite recipes yet!
@@ -111,7 +109,7 @@ export default function MyKitchen() {
         } else {
             return (
                 <div className="container_list">
-                    {list.data[2].map((recipe, index) => (
+                    {recipesList.map((recipe, index) => (
                         <div className='recipe_pic_item' key={index}>
                             <div
                                 className='recipe_image'

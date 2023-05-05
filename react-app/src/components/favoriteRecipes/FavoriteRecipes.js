@@ -18,7 +18,6 @@ export default function FavoriteRecipes() {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
                         userId: user.id
                     });
-                    console.log(response);
                     setRecipes(response);
                 }
             } catch (error) {
@@ -28,15 +27,15 @@ export default function FavoriteRecipes() {
         getInfo();
     }, [user]);
 
-    async function deleteRecipt(id){
-        try{
+    async function deleteRecipt(id) {
+        try {
             if (user.email !== '') {
-                const response = await axios.post('http://localhost:3000/user/removeRecipe', {
+                await axios.post('http://localhost:3000/user/removeRecipe', {
                     userId: user.id,
                     recipeId: id
                 });
             }
-        } catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -59,21 +58,24 @@ export default function FavoriteRecipes() {
         } else {
             return (
                 <ul className="favourites">
-                    {recipesList.data.map((dict) =>
+                    {recipesList.data.map((recipe) =>
                         <>
-                        <div className="fav">
-                            <div className="recipe">
-                                <img className="image" src={dict.image} alt=""></img>
-                                <div className="recipe-data">
-                                    <li className="title">{dict.title}</li>
-                                    <li className="data">{dict.difficulty} to make, it takes {dict.time_cooking}</li>
-                                </div>
-                                <div className="trashButtonDiv">
-                                    <button onClick={() => deleteRecipt(dict.id)} className="trashButton"><BsTrash3></BsTrash3></button>
+                            <div className="fav">
+                                <div className="recipe">
+                                    <img className="image" src={recipe.image} alt=""></img>
+                                    <div className="recipe-data">
+                                        <li className="title">{recipe.title}</li>
+                                        <li className="data">{recipe.difficulty} to make, it takes {recipe.time_cooking}</li>
+                                    </div>
+                                    <div className="trashButtonDiv">
+                                        <button onClick={() => deleteRecipt(recipe.id)} className="trashButton"><BsTrash3></BsTrash3></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr className="separador"/>
+                            {recipesList.data[recipesList.data.length - 1] !== recipe && (
+                                <hr className="separador" />
+                            )}
+
                         </>
                     )}
                 </ul>
