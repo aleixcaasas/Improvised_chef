@@ -53,7 +53,7 @@ export default function Register(props) {
         }
 
         try {
-            console.log(userVar)
+            console.log('')
         } catch (error) {
             console.log(error.message)
         }

@@ -18,7 +18,6 @@ export default function FavoriteRecipes() {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
                         userId: user.id
                     });
-                    console.log(response);
                     setRecipes(response);
                 }
             } catch (error) {
@@ -31,7 +30,7 @@ export default function FavoriteRecipes() {
     async function deleteRecipt(id) {
         try {
             if (user.email !== '') {
-                const response = await axios.post('http://localhost:3000/user/removeRecipe', {
+                await axios.post('http://localhost:3000/user/removeRecipe', {
                     userId: user.id,
                     recipeId: id
                 });

@@ -96,7 +96,6 @@ const registerWithEmail = async (fullName, userName, email, password) => {
                         favoriteRecipes
                     });
                     id = result.user.uid;
-                    console.log("Document written with ID: ", docRef.id);
                 } catch(error){
                     console.error("ERROR adding doc", error);
                 }

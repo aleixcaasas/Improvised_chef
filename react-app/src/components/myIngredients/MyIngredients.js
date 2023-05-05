@@ -21,7 +21,6 @@ export default function MyIngredients() {
                     const response = await axios.post('http://localhost:3000/user/ingredients', {
                         userId: user.id
                     });
-                    console.log(response);
                     setIngredients(response);
                 }
             } catch (error) {
