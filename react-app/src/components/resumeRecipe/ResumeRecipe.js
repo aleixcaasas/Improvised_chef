@@ -1,6 +1,6 @@
 import './Resume_recipe.css'
-import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
 import { useEffect, useState } from 'react';
+import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
 
 
 export default function ResumeRecipe ({singleReceipts, index}){

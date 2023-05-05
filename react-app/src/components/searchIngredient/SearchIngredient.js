@@ -1,17 +1,16 @@
 import axios from "axios";
-import { debounce } from 'lodash';
 import './searchIngredient.css';
+import { debounce } from 'lodash';
+import {TiTick} from 'react-icons/ti'
 import { useState, useContext } from "react";
 import {RiAddCircleLine} from 'react-icons/ri';
-import {MdFastfood} from 'react-icons/md'
-import {TiTick} from 'react-icons/ti'
 import { UserContext } from '../../pages/globalValue';
 import { getIngredientIcon } from "../myKitchen/MyKitchen";
 
 
 export default function SearchIngredient(props) {
 
-    const [searching, setSearching] = useState(false);
+    const [ setSearching] = useState(false);
     const [response, setResponse] = useState('');
     const { user } = useContext(UserContext);
 

@@ -76,9 +76,30 @@
     margin-bottom: 46px;
 } 
 
+.ingredients-list{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
 .ingredientsTitle{
     text-align: center;
     height: 400px;
+}
+
+.ingredient-li{
+	display: flex;
+	flex-direction: row;
+	border-radius: 15px;
+    list-style: none;
+    padding: 10px;
+    margin: 3px;
+    text-transform: capitalize;
+}
+
+.ingredient-li:hover{
+    background-color: rgb(238, 238, 238);
 }
 
 

@@ -5,7 +5,6 @@ import { BsTrash3 } from "react-icons/bs"
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from "react";
 
-
 export default function FavoriteRecipes() {
 
     const { user } = useContext(UserContext);

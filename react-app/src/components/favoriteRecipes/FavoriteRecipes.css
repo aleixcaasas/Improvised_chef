@@ -38,6 +38,7 @@
 	outline: none;
 	overflow-y: scroll;
 }
+
 .recipe{
 	display: flex;
 	flex-direction: row;
@@ -46,26 +47,32 @@
 	position: relative;
 	align-items: center;
 }
+
 .recipe-data{
 	flex-direction: column;
 	align-items: left;
 	max-width: 360px;
 }
+
 .recipe-data li{
 	list-style: none;
 }
+
 .image{
 	height: 70px;
 	width: 70px;
 	border-radius: 50%;
 	margin: 15px;
 }
+
 .data{
 	font-size: small;
 }
+
 .title{
 	font-weight: 600;
 }
+
 .favourites{
 	padding: 0;
 	margin: 0;
@@ -73,6 +80,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .trashButton{
 	display: flex;
     width: 40px;
@@ -83,16 +91,20 @@
     justify-content: center;
     align-items: center;
 }
+
 .trashButtonDiv{
 	right: 0;
 	position: absolute;
 }
+
 .trashButton:hover{
 	background-color: rgb(154, 154, 154);
 }
+
 .fav{
 	border-radius: 15px;
 }
+
 .fav:hover{
 	background-color: rgb(188, 188, 188);
 }

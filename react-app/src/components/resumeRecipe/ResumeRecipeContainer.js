@@ -1,7 +1,6 @@
 import React from "react";
-import ResumeRecipe from "./ResumeRecipe"
 import './Resume_recipe.css'
-import '../mock/MockRecipes'
+import ResumeRecipe from "./ResumeRecipe"
 
 
 export default function Resume_recipe_container({ receiptsJSON }) {
