@@ -84,10 +84,9 @@ export default function MyIngredients() {
             {call.clicked && (
                 <div>
                     <div className='popUpIngredients'>
-                        <SearchIngredient clicked={clicked}></SearchIngredient>
+                        <SearchIngredient list='shopping' clicked={clicked}></SearchIngredient>
                     </div>
                 </div>
-
             )}
         </div>
     );
