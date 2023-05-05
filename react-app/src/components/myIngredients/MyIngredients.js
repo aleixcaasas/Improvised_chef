@@ -26,7 +26,7 @@ export default function MyIngredients() {
         <div className={myIngredientsClass}>
             <div className={outBox}>
                 <h2 className="ingredientsTitle">INGREDIENTS LIST</h2>
-                <button className="addButton" onClick={() => { clicked('false') }}>Add more ingredients to the list</button>
+                <button className="addButton" onClick={() => {clicked('false') }}>Add more ingredients to the list</button>
                 <div className="div-inBox">
                     <ul>
                         {ingredients.map((ingredient) => (
@@ -40,7 +40,7 @@ export default function MyIngredients() {
                 </div>
             </div>
             {call.clicked && (
-                <div className='popUpIngBack'>
+                <div>
                     <div className='popUpIngredients'>
                         <SearchIngredient clicked={clicked}></SearchIngredient>
                     </div>
@@ -48,6 +48,5 @@ export default function MyIngredients() {
 
             )}
         </div>
-
     );
 }
