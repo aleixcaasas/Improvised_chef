@@ -61,6 +61,7 @@ export default function FavoriteRecipes() {
             return (
                 <ul className="favourites">
                     {recipesList.data.map((dict) =>
+                        <>
                         <div className="fav">
                             <div className="recipe">
                                 <img className="image" src={dict.image} alt=""></img>
@@ -73,8 +74,9 @@ export default function FavoriteRecipes() {
                                 </div>
                             </div>
                         </div>
+                        <hr className="separador"/>
+                        </>
                     )}
-
                 </ul>
             );
         }
