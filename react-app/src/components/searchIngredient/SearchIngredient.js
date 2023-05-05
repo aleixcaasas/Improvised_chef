@@ -40,14 +40,26 @@ export default function SearchIngredient(props) {
 
     const afegirIngredient = async (name, id) => {
         try {
-            const result = await axios.post('http://localhost:3000/user/addIngredient', { userId: user.id, ingredientId: id, ingredientName: name });
-            let res = Object.assign({}, response);
-            for (let j = 0; j < response.data.length; j++) {
-                if (result.data.name === response.data[j].name) {
-                    res.data[j].repeated = true;
+            if (props.list === 'ingredients'){
+                const result = await axios.post('http://localhost:3000/user/addIngredient', { userId: user.id, ingredientId: id, ingredientName: name });
+                let res = Object.assign({}, response);
+                for (let j = 0; j < response.data.length; j++) {
+                    if (result.data.name === response.data[j].name) {
+                        res.data[j].repeated = true;
+                    }
                 }
+                setResponse(res);
+            }else if (props.list === 'shopping'){
+                const result = await axios.post('http://localhost:3000/user/addShoppingList', { userId: user.id, ingredientId: id, ingredientName: name });
+                let res = Object.assign({}, response);
+                for (let j = 0; j < response.data.length; j++) {
+                    if (result.data.name === response.data[j].name) {
+                        res.data[j].repeated = true;
+                    }
+                }
+                setResponse(res);
             }
-            setResponse(res);
+
         } catch (error) {
             console.log(error)
         }

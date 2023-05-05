@@ -159,7 +159,7 @@ const addUserShoppingList = async (req, res) => {
                 await updateDoc(doc(db, "users", req.body.userId), {
                     shoppingList: arrayUnion({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
                 });
-                res.status(200).send('Ingredient "' + req.body.ingredientName + '" added to shoppingList.');
+                res.status(200).send({text: 'Ingredient "' + req.body.ingredientName + '" added to shoppingList.',name: req.body.ingredientName});
             }
         }
         else {
