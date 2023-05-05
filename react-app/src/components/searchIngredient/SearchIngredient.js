@@ -1,11 +1,10 @@
 import axios from "axios";
 import { debounce } from 'lodash';
 import './searchIngredient.css';
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import {RiAddCircleLine} from 'react-icons/ri';
 import {MdFastfood} from 'react-icons/md'
 import {TiTick} from 'react-icons/ti'
-import ingredientsJSON from '../myIngredients/ingredients.json';
 import { UserContext } from '../../pages/globalValue';
 
 
@@ -44,7 +43,6 @@ export default function SearchIngredient(props) {
         try{
             const result = await axios.post('http://localhost:3000/user/addIngredient', {userId: user.id, ingredientId: id, ingredientName: name});
             let res = Object.assign({}, response);
-            console.log(res)
             for (let j = 0; j < response.data.length; j++) {
                 if (result.data.name === response.data[j].name) {
                     res.data[j].repeated = true;
@@ -78,7 +76,6 @@ export default function SearchIngredient(props) {
                                     <TiTick size={25} className="add-button"></TiTick>
                                 )}
                             </li> 
-                            {console.log(response)}
                         </div>
                     ))
                 }

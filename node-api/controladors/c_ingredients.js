@@ -32,7 +32,6 @@ const getIngredientsSearched = async function (req, res) {
         }
       }
     }
-    console.log(docs);
     return docs;
   } catch (error) {
     return res.status(500).send(error);
