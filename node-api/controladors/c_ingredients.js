@@ -1,5 +1,6 @@
 const { db } = require('../firebase/firebase-config');
-const {query, collection, limit, getDocs, getDoc, where} = require("firebase/firestore");
+const {query, collection, limit, getDocs, getDoc, where, doc} = require("firebase/firestore");
+const {getUserIngredientList} = require('./c_users');
 
 const ingredientsName = async function (req, res) {
   /* S'HA DE CANVIAR L'ENDPOINT PER A FER LA BUSQUEDA SEGONS EL QUE BUSQUEM */
@@ -16,12 +17,22 @@ const getIngredientsSearched = async function (req, res) {
   let docs = [];
   const nameIngredient = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
   const querySnapshot = await getDocs(query(collection(db, "ingredients")));
+  const querySnapshot2 = await getDoc(doc(db, "users", req.body.userId));
+  let userIngredients = querySnapshot2.data().myIngredients;
   try {
     querySnapshot.forEach((doc) => {
       if(doc.get('name').toLowerCase().includes(nameIngredient)){
-          docs.push(doc.data().name, doc.data().id);
+          docs.push({name: doc.data().name, id: doc.data().id, repeated: false});
       }
     });
+    for (let i = 0; i < userIngredients.length; i++) {
+      for (let j = 0; j < docs.length; j++) {
+        if (userIngredients[i].name === docs[j].name) {
+          docs[j].repeated = true;
+        }
+      }
+    }
+    console.log(docs);
     return docs;
   } catch (error) {
     return res.status(500).send(error);
