@@ -268,9 +268,8 @@ const removeUserRecipe = async (req, res) => {
         await updateDoc(userRef, {
             favoriteRecipes: updatedRecipes
         });
+        res.status(200).send({text: `Recipe ${recipeId} removed from favoriteRecipes`, id: req.body.recipeId});
 
-
-        res.status(200).send(`Recipe ${recipeId} removed from favoriteRecipes`);
     } catch (error) {
         res.status(500).send(`Error removing recipe: ${error}`);
     }

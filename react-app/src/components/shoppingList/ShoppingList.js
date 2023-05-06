@@ -43,7 +43,6 @@ export default function MyIngredients() {
                 for (let j = 0; j < ingredients.data.length; j++) {
                     if (ingEliminated.data.name === ingredients.data[j].name) { //quan trobi el ingredient l'elimina
                         newIngredientList.data.splice(j,1);
-                        console.log('hem entrat')
                     }
                 }
                 setIngredients(newIngredientList);

@@ -28,13 +28,23 @@ export default function FavoriteRecipes() {
     }, [user]);
 
     async function deleteRecipt(id) {
+        let newFavoriteRecipes = Object.assign({}, recipes);
+        let recipeEliminated = {};
+        console.log(newFavoriteRecipes);
         try {
             if (user.email !== '') {
-                await axios.post('http://localhost:3000/user/removeRecipe', {
+                recipeEliminated = await axios.post('http://localhost:3000/user/removeRecipe', {
                     userId: user.id,
                     recipeId: id
                 });
+                for (let j = 0; j < recipes.data.length; j++) {
+                    if (recipeEliminated.data.id === recipes.data[j].id) { //quan trobi la recepta l'elimina
+                        newFavoriteRecipes.data.splice(j,1);
+                    }
+                }
+                setRecipes(newFavoriteRecipes);
             }
+
         } catch (error) {
             console.log(error)
         }
@@ -89,7 +99,7 @@ export default function FavoriteRecipes() {
     return (
         <div className="div-favRecipes">
             <div className="container-recipes">
-                <h2 className="favouriteTitle">MY FAVOURITE RECIPES</h2>
+                <h2 className="favouriteTitle">MY FAVORITE RECIPES</h2>
                 <div className="list-container">
                     {!recipes?.data && (
                         <div className="container_list" id='no_list'>
