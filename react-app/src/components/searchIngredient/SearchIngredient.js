@@ -98,7 +98,7 @@ export default function SearchIngredient(props) {
                 )
                 }
             </div>
-            <button className="exitButton" onClick={() => { props.clicked("true"); }}>EXIT</button>
+            <button className="exitButton" onClick={() => { props.clicked("true"); props.updateScreen(response)}}>EXIT</button>
         </div>
     )
 }

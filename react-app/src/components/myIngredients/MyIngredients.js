@@ -54,11 +54,16 @@ export default function MyIngredients() {
 
     const clicked = async (message) => {
         if (message === 'true') {
+            
             setCall({ clicked: false })
         }
         else {
             setCall({ clicked: true })
         }
+    }
+
+    const updateScreen = async (data) => {
+        setIngredients(data);
     }
 
     const myIngredientsClass = classNames('div-myIngridients', { 'dark': call.clicked });
@@ -91,7 +96,7 @@ export default function MyIngredients() {
             {call.clicked && (
                 <div>
                     <div className='popUpIngredients'>
-                        <SearchIngredient list='ingredients' clicked={clicked}></SearchIngredient>
+                        <SearchIngredient list='ingredients' clicked={clicked} updateScreen={updateScreen}></SearchIngredient>
                     </div>
                 </div>
 

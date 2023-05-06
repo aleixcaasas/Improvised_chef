@@ -62,6 +62,10 @@ export default function MyIngredients() {
         }
     }
 
+    const updateScreen = async (data) => {
+        setIngredients(data);
+    }
+
     const myIngredientsClass = classNames('div-myIngridients', { 'dark': call.clicked });
     const outBox = classNames('div-outBox', { 'dark': call.clicked });
 
@@ -92,7 +96,7 @@ export default function MyIngredients() {
             {call.clicked && (
                 <div>
                     <div className='popUpIngredients'>
-                        <SearchIngredient list='shopping' clicked={clicked}></SearchIngredient>
+                        <SearchIngredient list='shopping' clicked={clicked} updateScreen={updateScreen}></SearchIngredient>
                     </div>
                 </div>
             )}
