@@ -62,7 +62,9 @@ export default function FavoriteRecipes() {
                         <>
                             <div className="fav">
                                 <div className="recipe">
-                                    <img className="image" src={recipe.image} alt=""></img>
+                                    <div className="div-image">
+                                        <img className="image" src={recipe.image} alt=""></img>
+                                    </div>
                                     <div className="recipe-data">
                                         <li className="title">{recipe.title}</li>
                                         <li className="data">{recipe.difficulty} to make, it takes {recipe.time_cooking}</li>
@@ -87,7 +89,7 @@ export default function FavoriteRecipes() {
     return (
         <div className="div-favRecipes">
             <div className="container-recipes">
-                <p>MY FAVOURITE RECIPES</p>
+                <h2 className="favouriteTitle">MY FAVOURITE RECIPES</h2>
                 <div className="list-container">
                     {!recipes?.data && (
                         <div className="container_list" id='no_list'>
