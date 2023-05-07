@@ -63,7 +63,13 @@ export default function MyIngredients() {
     }
 
     const updateScreen = async (data) => {
-        setIngredients(data);
+        if(data === 'update'){
+            const response = await axios.post('http://localhost:3000/user/ingredients', {
+                userId: user.id
+            });
+            setIngredients(response);
+        }
+        
     }
 
     const myIngredientsClass = classNames('div-myIngridients', { 'dark': call.clicked });
