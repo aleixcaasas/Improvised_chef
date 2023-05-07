@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from 'react';
+import { BsFillArrowDownCircleFill } from 'react-icons/bs';
 import { getIngredientIcon } from '../myKitchen/MyKitchen';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 
@@ -42,7 +43,7 @@ export default function MyIngredients() {
                 });
                 for (let j = 0; j < ingredients.data.length; j++) {
                     if (ingEliminated.data.name === ingredients.data[j].name) { //quan trobi el ingredient l'elimina
-                        newIngredientList.data.splice(j,1);
+                        newIngredientList.data.splice(j, 1);
                     }
                 }
                 setIngredients(newIngredientList);
@@ -54,7 +55,7 @@ export default function MyIngredients() {
 
     const clicked = async (message) => {
         if (message === 'true') {
-            
+
             setCall({ clicked: false })
         }
         else {
@@ -63,13 +64,43 @@ export default function MyIngredients() {
     }
 
     const updateScreen = async (data) => {
-        if(data === 'update'){
+        if (data === 'update') {
             const response = await axios.post('http://localhost:3000/user/ingredients', {
                 userId: user.id
             });
             setIngredients(response);
         }
-        
+
+    }
+
+    function getIngredientsList(ingredientsList) {
+
+        if (!ingredientsList.data) {
+            return <div>Loading...</div>;
+        }
+
+        if (ingredientsList.data.length === 0) {
+            return (
+                <div className="container_list" id='no_list'>
+                    You does not have ingredients in the list yet!
+                    <h5>ADD MORE INGREDIENTS</h5>
+                    <BsFillArrowDownCircleFill size={40} style={{ color: 'var(--green)' }}/>
+                </div>
+            );
+        } else {
+            return (
+                <ul className='ingredients-list'>
+                    {ingredientsList.data.map((ingredient) => (
+                        <li className='ingredient-li'>
+                            {getIngredientIcon(ingredient.name)}
+                            <div>{ingredient.name}</div>
+                            <BsTrash size={30} onClick={() => deleteIngredient(ingredient.id, ingredient.name)}></BsTrash>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+
     }
 
     const myIngredientsClass = classNames('div-myIngridients', { 'dark': call.clicked });
@@ -83,19 +114,11 @@ export default function MyIngredients() {
                 <div className="div-inBox">
                     {!ingredients?.data && (
                         <div className="container_list" id='no_list'>
-                            Loading Ingredients...
+                            Loading Recipes...
                         </div>
                     )}
                     {ingredients?.data && (
-                        <ul className='ingredients-list'>
-                            {ingredients.data.map((ingredient) => (
-                                <li className='ingredient-li'>
-                                    {getIngredientIcon(ingredient.name)}
-                                    <div>{ingredient.name}</div>
-                                    <BsTrash size={30} onClick={() => deleteIngredient(ingredient.id, ingredient.name)}></BsTrash>
-                                </li>
-                            ))}
-                        </ul>
+                        getIngredientsList(ingredients)
                     )}
                 </div>
             </div>
