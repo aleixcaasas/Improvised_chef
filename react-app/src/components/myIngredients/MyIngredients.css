@@ -17,6 +17,7 @@
     top: 40%;
 	left: 55%;
 	transform: translate(-50%, -50%);
+    
 }
 
 .div-myIngridients{
@@ -24,7 +25,8 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;         
+    align-items: center;  
+
 }
 
 .div-outBox{
@@ -39,6 +41,7 @@
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 5px 20px 50px var(--black); 
+    
 }
 
 .addButton{    
@@ -74,6 +77,7 @@
     margin-top: -57vh;
     margin-left: 0vw;
     margin-bottom: 46px;
+    overflow-y: scroll;
 } 
 
 .ingredients-list{
@@ -81,6 +85,9 @@
     padding: 0;
     overflow: hidden;
     overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .ingredientsTitle{
@@ -96,6 +103,7 @@
     padding: 10px;
     margin: 3px;
     text-transform: capitalize;
+    
 }
 
 .ingredient-li:hover{
@@ -164,5 +172,6 @@
         margin-top: -40vh;
         margin-left: 0vw;
         margin-bottom: 46px;
+        overflow-y: scroll;
     }
 }

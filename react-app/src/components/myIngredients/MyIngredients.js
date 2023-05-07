@@ -81,15 +81,17 @@ export default function MyIngredients() {
                         </div>
                     )}
                     {ingredients?.data && (
-                        <ul className='ingredients-list'>
+                        <div className='ingredients-list'>
                             {ingredients.data.map((ingredient) => (
                                 <li className='ingredient-li'>
-                                    {getIngredientIcon(ingredient.name)}
-                                    <div>{ingredient.name}</div>
+                                    <div className='ingredientIcon'></div>{getIngredientIcon(ingredient.name)}
+                                    <div className='ingredientName'>{ingredient.name}</div>
+                                    <div className='trashButt'>
                                     <BsTrash size={30} onClick={() => deleteIngredient(ingredient.id, ingredient.name)}></BsTrash>
+                                    </div>
                                 </li>
                             ))}
-                        </ul>
+                        </div>
                     )}
                 </div>
             </div>
