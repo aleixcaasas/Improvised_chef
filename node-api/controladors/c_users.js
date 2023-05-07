@@ -270,7 +270,7 @@ const removeUserRecipe = async (req, res) => {
         });
 
 
-        res.status(200).send(`Recipe ${recipeId} removed from favoriteRecipes`);
+        res.status(200).send({message: `Recipe ${recipeId} removed from favoriteRecipes` , id: req.body.recipeId});
     } catch (error) {
         res.status(500).send(`Error removing recipe: ${error}`);
     }

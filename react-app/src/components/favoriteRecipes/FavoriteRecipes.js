@@ -25,16 +25,24 @@ export default function FavoriteRecipes() {
             }
         }
         getInfo();
-    }, [user]);
+    }, []);
 
     async function deleteRecipt(id) {
+        let recipeEiminated = {};
+        let newRecipeList = Object.assign({}, recipes);
         try {
             if (user.email !== '') {
-                await axios.post('http://localhost:3000/user/removeRecipe', {
+                recipeEiminated = await axios.post('http://localhost:3000/user/removeRecipe', {
                     userId: user.id,
                     recipeId: id
                 });
             }
+            for (let j = 0; j < recipes.data.length; j++) {
+                if (recipeEiminated.data.id === recipes.data[j].id) { //quan trobi el ingredient l'elimina
+                    newRecipeList.data.splice(j,1);
+                }
+            }
+            setRecipes(newRecipeList)
         } catch (error) {
             console.log(error)
         }
