@@ -1,7 +1,7 @@
 import axios from 'axios';
 import './MyIngredients.css';
 import classNames from 'classnames';
-import { BsTrash } from 'react-icons/bs';
+import { BsTrash3 } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from 'react';
 import { getIngredientIcon } from '../myKitchen/MyKitchen';
@@ -84,16 +84,19 @@ export default function MyIngredients() {
                         <div className='ingredients-list'>
                             {ingredients.data.map((ingredient) => (
                                 <li className='ingredient-li'>
-                                    <div className='ingredientIcon'></div>{getIngredientIcon(ingredient.name)}
+                                    <div className='ingredientIcon'>{getIngredientIcon(ingredient.name)}</div>
                                     <div className='ingredientName'>{ingredient.name}</div>
-                                    <div className='trashButt'>
-                                    <BsTrash size={30} onClick={() => deleteIngredient(ingredient.id, ingredient.name)}></BsTrash>
+                                    <div className='trashButt-div'>
+                                    <BsTrash3 size={20} onClick={() => deleteIngredient(ingredient.id, ingredient.name)} className='trashButt'></BsTrash3>
                                     </div>
+                                    <hr className="separador" />
                                 </li>
-                            ))}
+                            ))}                    
                         </div>
                     )}
+                    
                 </div>
+                
             </div>
             {call.clicked && (
                 <div>
