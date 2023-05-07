@@ -25,12 +25,11 @@ export default function FavoriteRecipes() {
             }
         }
         getInfo();
-    }, [user]);
+    }, []);
 
     async function deleteRecipt(id) {
         let newFavoriteRecipes = Object.assign({}, recipes);
         let recipeEliminated = {};
-        console.log(newFavoriteRecipes);
         try {
             if (user.email !== '') {
                 recipeEliminated = await axios.post('http://localhost:3000/user/removeRecipe', {
