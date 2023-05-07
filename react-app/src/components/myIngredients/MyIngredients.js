@@ -84,19 +84,23 @@ export default function MyIngredients() {
                         <div className='ingredients-list'>
                             {ingredients.data.map((ingredient) => (
                                 <li className='ingredient-li'>
-                                    <div className='ingredientIcon'>{getIngredientIcon(ingredient.name)}</div>
-                                    <div className='ingredientName'>{ingredient.name}</div>
-                                    <div className='trashButt-div'>
-                                    <BsTrash3 size={20} onClick={() => deleteIngredient(ingredient.id, ingredient.name)} className='trashButt'></BsTrash3>
+                                    <div className='icon-div'>
+                                        <div className='ingredientIcon'>{getIngredientIcon(ingredient.name)}</div>
                                     </div>
-                                    <hr className="separador" />
+                                   
+                                    <div className='ingredientName'>{ingredient.name}</div>
+
+                                    <div className='trashButt-div'>
+                                    <BsTrash3 onClick={() => deleteIngredient(ingredient.id, ingredient.name)} className='trashButt'></BsTrash3>
+                                    </div>
+                                    {ingredients.data[ingredients.data.length - 1] !== ingredients && (
+                                        <hr className="separador2" />
+                                    )}                                
                                 </li>
                             ))}                    
                         </div>
-                    )}
-                    
+                    )}   
                 </div>
-                
             </div>
             {call.clicked && (
                 <div>

@@ -82,13 +82,17 @@
     margin-top: -57vh;
     margin-left: 0vw;
     margin-bottom: 46px;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 } 
 
 .ingredientIcon {
     position: absolute;
+    height: 70px;
+    width: 70px;
     left: 20px;
 }
+
+
 
 .ingredientName {
     position: absolute;
@@ -106,12 +110,10 @@
     align-items: center;
     width: 17px;
     height: 17px;
-
-    
 }
 
 .trashButt-div{
-    right: 5px;
+    right: 15px;
 	position: absolute;
 }
 
@@ -119,8 +121,7 @@
 .ingredients-list{
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    overflow-y: scroll;
+    overflow: hidden;    
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -141,34 +142,31 @@
     margin: 3px;
     text-transform: capitalize;
     width: 45vw;
-    
-    
 }
 
 .ingredient-li:hover{
     background-color: rgb(188, 188, 188);
     border-radius: 20px;
-    width: 100%;
-    
-    
+    width: 100%;  
 }
 
-.trashButt:hover{
+.trashButt-div:hover{
 	background-color: rgb(154, 154, 154);
     border-radius: 30px;
-    
 }
 
 
-.separador{
-	width: 90%;
-	border-radius: 0;
-	margin: 0;
-    padding: 0;
-    padding-bottom: 0px;
-	color:transparent;
-	border: none;
-	border-top: 1px solid rgba(128, 128, 128, 0.648);
+.separador2{
+    position: absolute;
+    width: 75%;
+    border-radius: 0;
+    left: 15%;
+    right: 12%;
+    margin: -14px auto;
+    transform: translateY(-50%);
+    color: transparent;
+    border: none;
+    border-top: 1px solid rgba(128, 128, 128, 0.648);
 }
 
 
@@ -232,7 +230,6 @@
         border-radius: 10px;
         margin-top: -40vh;
         margin-left: 0vw;
-        margin-bottom: 46px;
-        overflow-y: scroll;
+        margin-bottom: 46px;       
     }
 }
