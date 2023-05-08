@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './ShoppingList.css';
+import './CSS-IngredientsList.css';
 import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
@@ -89,18 +89,20 @@ export default function MyIngredients() {
             return (
                 <ul className='ingredients-list'>
                     {ingredientsList.data.map((ingredient) => (
-                        <li className='ingredient-li'>
-                            <div className='icon-div'>
+                        <>
+                            <li className='ingredient-li'>
                                 <div className='ingredientIcon'>{getIngredientIcon(ingredient.name)}</div>
-                            </div>
-                            <div className='ingredientName'>{ingredient.name}</div>
-                            <div className='trashButt-div'>
-                                <BsTrash onClick={() => deleteIngredient(ingredient.id, ingredient.name)} className='trashButt'></BsTrash>
-                            </div>
-                            {ingredients.data[ingredients.data.length - 1] !== ingredients && (
-                                <hr className="separador2" />
-                            )}
-                        </li>
+                                <div className='ingredientName'>{ingredient.name}</div>
+                                <div className='trashButt-div'>
+                                    <BsTrash size={40} onClick={() => deleteIngredient(ingredient.id, ingredient.name)} />
+                                </div>
+                            </li>
+                            {
+                                ingredients.data[ingredients.data.length - 1] !== ingredient && (
+                                    <hr className="separador" />
+                                )
+                            }
+                        </>
                     ))}
                 </ul>
             )
@@ -115,7 +117,6 @@ export default function MyIngredients() {
         <div className={myIngredientsClass}>
             <div className={outBox}>
                 <h2 className="ingredientsTitle">SHOPPING LIST</h2>
-                <button className="addButton" onClick={() => { clicked('false') }}>Add more ingredients to the list</button>
                 <div className="div-inBox">
                     {!ingredients?.data && (
                         <div className="container_list" id='no_list'>
@@ -126,6 +127,7 @@ export default function MyIngredients() {
                         getIngredientsList(ingredients)
                     )}
                 </div>
+                <button className="addButton" onClick={() => { clicked('false') }}>Add more ingredients to the list</button>
             </div>
             {call.clicked && (
                 <div>
