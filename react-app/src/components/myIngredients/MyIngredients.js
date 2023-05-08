@@ -84,7 +84,7 @@ export default function MyIngredients() {
                 <div className="container_list" id='no_list'>
                     You does not have ingredients in the list yet!
                     <h5>ADD MORE INGREDIENTS</h5>
-                    <BsFillArrowDownCircleFill size={40} style={{ color: 'var(--green)' }}/>
+                    <BsFillArrowDownCircleFill size={40} style={{ color: 'var(--green)' }} />
                 </div>
             );
         } else {
@@ -92,9 +92,16 @@ export default function MyIngredients() {
                 <ul className='ingredients-list'>
                     {ingredientsList.data.map((ingredient) => (
                         <li className='ingredient-li'>
-                            {getIngredientIcon(ingredient.name)}
-                            <div>{ingredient.name}</div>
-                            <BsTrash size={30} onClick={() => deleteIngredient(ingredient.id, ingredient.name)}></BsTrash>
+                            <div className='icon-div'>
+                                <div className='ingredientIcon'>{getIngredientIcon(ingredient.name)}</div>
+                            </div>
+                            <div className='ingredientName'>{ingredient.name}</div>
+                            <div className='trashButt-div'>
+                                <BsTrash onClick={() => deleteIngredient(ingredient.id, ingredient.name)} className='trashButt'></BsTrash>
+                            </div>
+                            {ingredients.data[ingredients.data.length - 1] !== ingredients && (
+                                <hr className="separador2" />
+                            )}
                         </li>
                     ))}
                 </ul>
