@@ -17,6 +17,7 @@
     top: 40%;
 	left: 55%;
 	transform: translate(-50%, -50%);
+    
 }
 
 .div-myIngridients{
@@ -24,7 +25,8 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;         
+    align-items: center;  
+
 }
 
 .div-outBox{
@@ -39,6 +41,7 @@
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 5px 20px 50px var(--black); 
+    
 }
 
 .addButton{    
@@ -61,6 +64,11 @@
     
 }
 
+.trashButt{
+    width: 40px;
+    height: 40px;
+}
+
 .div-inBox{         
     position: absolute;
     top: 128%;
@@ -74,13 +82,47 @@
     margin-top: -57vh;
     margin-left: 0vw;
     margin-bottom: 46px;
+    overflow-y: scroll !important;
 } 
+
+.ingredientIcon {
+    position: absolute;
+    left: 20px;
+}
+
+
+
+.ingredientName {
+    position: absolute;
+    left: 77px;
+    padding-top: 6.5px;
+}
+
+.trashButt {
+    display: flex;
+    margin: 10px;
+    
+    background: none;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    width: 17px;
+    height: 17px;
+}
+
+.trashButt-div{
+    right: 15px;
+	position: absolute;
+}
+
 
 .ingredients-list{
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    overflow-y: scroll;
+    overflow: hidden;    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .ingredientsTitle{
@@ -91,15 +133,38 @@
 .ingredient-li{
 	display: flex;
 	flex-direction: row;
-	border-radius: 15px;
+	border-radius: 20px;
     list-style: none;
     padding: 10px;
+    padding-bottom: 50px;
     margin: 3px;
     text-transform: capitalize;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .ingredient-li:hover{
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(188, 188, 188);
+    border-radius: 20px;
+    width: 100%;  
+}
+
+.trashButt-div:hover{
+	background-color: rgb(154, 154, 154);
+    border-radius: 30px;
+}
+
+
+.separador2{
+    position: absolute;
+    width: 85%;
+    border-radius: 0;
+    margin: -14px auto;
+    transform: translateY(-50%);
+    color: transparent;
+    border: none;
+    border-top: 1px solid rgba(128, 128, 128, 0.648);
 }
 
 
@@ -163,6 +228,6 @@
         border-radius: 10px;
         margin-top: -40vh;
         margin-left: 0vw;
-        margin-bottom: 46px;
+        margin-bottom: 46px;       
     }
 }
