@@ -8,7 +8,7 @@
 }
 
 .div-myIngridients.dark {
-    background-color: rgba(0, 0, 0, 0.5); /* Establece el color de fondo oscuro */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .div-outBox.dark{
@@ -64,13 +64,14 @@
 
 .div-inBox{         
     width: 45vw;
-	height: 55vh;
-	margin-bottom: 3%;
-	background-color: white;
-	overflow: hidden;
+    height: 55vh;
+    margin-bottom: 3%;
+    background-color: white;
+    overflow: hidden;
     border-radius: 15px;
-	outline: none;
-	overflow-y: scroll;
+    outline: none;
+    overflow-y: scroll;
+
 } 
 
 .ingredientsTitle{
@@ -80,10 +81,19 @@
 .ingredients-list{
     margin: 0;
     padding: 0;
+    width: 100%;
     overflow: hidden;    
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.ingredients-no-list{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .ingredient-li{
@@ -131,6 +141,7 @@
 
 .trashButt-div:hover{
 	background-color: rgb(154, 154, 154);
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

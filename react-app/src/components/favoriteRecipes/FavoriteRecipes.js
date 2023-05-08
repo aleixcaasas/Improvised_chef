@@ -56,7 +56,7 @@ export default function FavoriteRecipes() {
 
         if (recipesList.data.length === 0) {
             return (
-                <div className="container_list" id='no_list'>
+                <div className="ingredients-no-list" id='no_list_recipes'>
                     You does not have favorite recipes yet!
                     <h5>EXPLORE NEW RECIPES</h5>
                     <Link to="/home">

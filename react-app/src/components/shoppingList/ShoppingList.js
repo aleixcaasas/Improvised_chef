@@ -79,7 +79,7 @@ export default function MyIngredients() {
 
         if (ingredientsList.data.length === 0) {
             return (
-                <div className="container_list" id='no_list'>
+                <div className="ingredients-no-list" id='no_list_ingredients'>
                     You does not have ingredients in the list yet!
                     <h5>ADD MORE INGREDIENTS</h5>
                     <BsFillArrowDownCircleFill size={40} style={{ color: 'var(--green)' }} />
