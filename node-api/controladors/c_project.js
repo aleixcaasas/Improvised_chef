@@ -100,7 +100,15 @@ const controller = {
     },
 
     getUserProfile: async function(req, res) {
-        return await getUserProfile(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const userProfile = await getUserProfile(userId);
+        if(userProfile){
+            res.status(200).send(userProfile);
+        }
+        else{
+            res.status(500).send('User not exist');
+        }
     },
 
     myKitchen: async function(req, res) {

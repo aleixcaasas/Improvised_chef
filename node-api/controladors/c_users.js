@@ -23,28 +23,24 @@ const getUserInfo = async function (req, res) {
 };
 
 /* S'HA DE VERIFICAR L'ENDPOINT I MIRAR SI PODRIEM CANVIAR LA CONTRASENYA*/
-const getUserProfile = async function (req, res) {
+const getUserProfile = async function (userId) {
     try {
-        let result = [];
-        const users = collection(db, "users");
-        const userInfo = query(users, where("userId", "==", req.body.userId));
-        const querySnapshot = await getDocs(userInfo);
-        querySnapshot.forEach((doc) => {
-            const docData = doc.data();
-            const selectedFields = {
-                profilePic: docData.profilePic,
-                fullName: docData.fullName,
-                userName: docData.userName,
-                email: docData.email,
-            };
-            result.push(selectedFields);
-        });
-        res.status(200).send(result);
-    } catch (error) {
-        res.status(500).send('Error al fer fetch de dades de usuari');
+        const querySnapshot = await getDoc(doc(db, "users", userId));
+        if (querySnapshot.exists()) {
+            return {
+                userId: querySnapshot.data().userId,
+                userName: querySnapshot.data().userName,
+                fullName: querySnapshot.data().fullName,
+                email: querySnapshot.data().email,
+                profilePic: querySnapshot.data().profilePic,
+            }
+        }
+        return false;
     }
-
-};
+    catch (error) {
+        return error;
+    }
+}
 
 
 const myKitchen = async (req, res) => {
