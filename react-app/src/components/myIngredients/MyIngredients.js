@@ -1,7 +1,7 @@
 import axios from 'axios';
 import './MyIngredients.css';
 import classNames from 'classnames';
-import { BsTrash3 } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from 'react';
 import { BsFillArrowDownCircleFill } from 'react-icons/bs';
