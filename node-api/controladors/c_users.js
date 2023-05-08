@@ -58,18 +58,16 @@ const myKitchen = async (req, res) => {
     }
 }
 
-const getUserIngredientList = async (req, res) => {
+const getUserIngredientList = async (userId) => {
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
-            res.status(200).send(querySnapshot.data().myIngredients);
+            return querySnapshot.data().myIngredients;
         }
-        else {
-            res.status(500).send('User not exist');
-        }
+        return false;
     }
     catch (error) {
-        res.status(500).send('Error getting myIngredients: ', error);
+        return error;
     }
 };
 

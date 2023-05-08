@@ -1,6 +1,6 @@
 const home = require('./c_home');
 
-const {recipesName, randomRecipe} = require('./c_recipes');
+const {infoRecipe, recipesName, randomRecipe} = require('./c_recipes');
 const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
 const {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
     removeUserRecipe, searchWithIngredients
@@ -87,6 +87,21 @@ const controller = {
         return await randomRecipe(req, res);
     },
 
+    infoRecipe: async function(req, res){
+        const params = req.params;
+        const body = req.body;
+        const userId = body.userId;
+        const recipeName = params.recipeName;
+        const userIngredients = await getUserIngredientList(userId);
+        const recipeData = await infoRecipe(recipeName, userIngredients);
+        if(recipeData){
+            res.status(200).send(recipeData);
+        }
+        else{
+            res.status(500).send('Recipe not exist');
+        }
+    },
+
     recipesName: async function(req, res) {
         return await recipesName(req, res);
     },
@@ -116,7 +131,15 @@ const controller = {
     },
 
     getUserIngredientList: async function(req, res) {
-        return await getUserIngredientList(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const userIngredients = await getUserIngredientList(userId);
+        if(userIngredients){
+            res.status(200).send(userIngredients);
+        }
+        else{
+            res.status(500).send('User not exist');
+        }
     },
 
     addUserIngredient: async function(req, res) {

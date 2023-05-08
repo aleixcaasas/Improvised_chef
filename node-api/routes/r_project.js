@@ -11,6 +11,7 @@ router.post('/resetPassword', projectController.resetPassword);
 router.post('/logout', projectController.logout);
 
 /* RECIPES ENDPOINTS */
+router.post('/recipe/:recipeName', projectController.infoRecipe);
 router.post('/recipes/name', projectController.recipesName);
 router.get('/recipes/random', projectController.randomRecipe);
 

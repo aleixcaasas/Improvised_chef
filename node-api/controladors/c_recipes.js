@@ -1,4 +1,4 @@
-const { db, collection, getDocs, query, where, limit} = require('../firebase/firebase-config');
+const { db, collection, getDocs, query, where } = require('../firebase/firebase-config');
 
 const RECIPES_NUMBER = 1378;
 
@@ -26,6 +26,31 @@ const randomRecipe = async function (req, res) {
     }
 };
 
+const infoRecipe = async function (recipeName, userIngredients){
+    try {
+        let ingredients = [];
+        let recipe = {};
+        const querySnapshot = await getDocs(query(collection(db, "recipes"), where('title', '==', recipeName.charAt(0).toUpperCase() + recipeName.slice(1).replaceAll('_', ' ').toLowerCase())));
+        if (!querySnapshot.empty) {
+            for (const [key, value] of Object.entries(querySnapshot.docs[0].data())) {
+                if (key !== 'ingredients') {
+                    recipe[key] = value;
+                }
+            }
+            querySnapshot.docs[0].data().ingredients.forEach(ingredient =>{
+                ingredient.hasIt = !!userIngredients.find(userIngredient => userIngredient.id === ingredient.id);
+                ingredients.push(ingredient);
+            });
+            recipe.ingredients = ingredients;
+            return recipe;
+        }
+        return false;
+    }
+    catch (error) {
+        return error;
+    }
+}
+
 const recipesName = async function (req, res){
     try {
         let results = [];
@@ -43,4 +68,4 @@ const recipesName = async function (req, res){
     }
 }
 
-module.exports = {recipesName, randomRecipe};
+module.exports = {recipesName, infoRecipe, randomRecipe};
