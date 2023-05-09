@@ -88,12 +88,11 @@ const controller = {
     },
 
     infoRecipe: async function(req, res){
-        const params = req.params;
         const body = req.body;
+        const recipeId = body.recipeId;
         const userId = body.userId;
-        const recipeName = params.recipeName;
         const userIngredients = await getUserIngredientList(userId);
-        const recipeData = await infoRecipe(recipeName, userIngredients);
+        const recipeData = await infoRecipe(recipeId, userIngredients);
         if(recipeData){
             res.status(200).send(recipeData);
         }
