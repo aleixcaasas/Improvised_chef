@@ -5,7 +5,7 @@ import { TiTick } from 'react-icons/ti'
 import { useState, useContext } from "react";
 import { RiAddCircleLine } from 'react-icons/ri';
 import { UserContext } from '../../pages/globalValue';
-import { getIngredientIcon } from "../myKitchen/MyKitchen";
+import { getIngredientIcon } from '../IngredientIcons';
 
 
 export default function SearchIngredient(props) {

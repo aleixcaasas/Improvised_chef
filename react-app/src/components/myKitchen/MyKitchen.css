@@ -63,7 +63,7 @@
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-auto-rows: minmax(0, 2fr);
     overflow-y: auto;
     padding-left: 7px;
 }
@@ -90,7 +90,7 @@
 }
 
 .recipe_pic_item {    
-    max-height: 70px;
+    max-height: 100%;
     margin:10px; 
     
 }
@@ -109,4 +109,21 @@
 /*My soppinh List*/
 /********************/
 
+@media screen and (max-width: 1066px) {
 
+    .containers_myKitchen{
+        width:calc(85% /2);
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .my_kitchen{
+        margin-left:0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .containers_myKitchen{
+        width: 100%;
+    }
+}

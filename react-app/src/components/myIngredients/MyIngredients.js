@@ -3,9 +3,9 @@ import '../shoppingList/CSS-IngredientsList.css';
 import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
+import { getIngredientIcon } from '../IngredientIcons';
 import { useEffect, useContext, useState } from 'react';
 import { BsFillArrowDownCircleFill } from 'react-icons/bs';
-import { getIngredientIcon } from '../myKitchen/MyKitchen';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 
 export default function MyIngredients() {
