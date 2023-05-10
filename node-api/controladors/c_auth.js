@@ -1,6 +1,6 @@
-const {signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail} = require('firebase/auth');
-const {auth, db} = require('../firebase/firebase-config');
-const {addDoc, collection, getDocs, query, setDoc, doc} = require('firebase/firestore');
+const {signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, getAuth} = require('firebase/auth');
+const {auth, db, getDoc} = require('../firebase/firebase-config');
+const {addDoc, collection, getDocs, query, setDoc, doc, deleteDoc} = require('firebase/firestore');
 const profilePic = 'https://img.freepik.com/free-icon/user_318-563642.jpg';
 
 const loginWithEmail = async function (email, password) {
@@ -36,6 +36,7 @@ const emailNotExists = async (email) => {
     });
     return emailExist; //modificar consulta i fer-la directe desde un select
 }
+
 
 
 const loginWithGoogle = async (result) => {
@@ -120,9 +121,25 @@ const resetPasswordEmail = async (email) => {
     }catch (error) {
         return String(error);
     }
-    return "There is not any acount with this email";
+    return "There is not any account with this email";
+}
+
+const deleteUser = async(userId) => {
+    try{
+        const userDoc = await doc(db, "users", userId);
+        console.log(userDoc)
+        if (userDoc) {
+            await deleteDoc(userDoc);
+            return "Account deleted successfully!";
+        }
+        console.log('No account with ID');
+        return "There is not any account with this ID";
+
+    } catch (error) {
+        console.log(error);
+        return String(error);
+    }
 }
 
 
-
-module.exports = {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail};
+module.exports = {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser};

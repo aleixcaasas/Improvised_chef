@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const mockRouter = require('./mock/mock');
 const projectRouter = require('./routes/r_project');
 const app = express();
 
@@ -27,7 +26,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', projectRouter);
-app.use(mockRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
