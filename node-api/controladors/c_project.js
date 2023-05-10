@@ -5,7 +5,7 @@ const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
 const {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
     removeUserRecipe, searchWithIngredients
 } = require('./c_users');
-const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
+const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser} = require('./c_auth');
 
 const controller = {
     home: function(req, res) { 
@@ -177,6 +177,17 @@ const controller = {
     },
     searchWithIngredients: async function(req, res) {
         return await searchWithIngredients(req, res);
+    },
+    deleteUser: async function(req, res) {
+        const userId = req.body.userId;
+        const output = await deleteUser(userId);
+        console.log(output);
+        if(output == 'Account deleted successfully!'){
+            res.status(200).send('Account deleted successfully!');
+        }
+        else{
+            res.status(500).send('Something went wrong!');
+        }
     }
 }
 

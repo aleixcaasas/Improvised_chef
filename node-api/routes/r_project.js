@@ -37,6 +37,7 @@ router.post('/user/addRecipe', projectController.addUserRecipe);
 router.post('/user/removeRecipe', projectController.removeUserRecipe);
 router.post('/user/searchWithIngredients', projectController.searchWithIngredients);
 router.post('/user/searchIngredients', projectController.getIngredientSearched);
+router.post('/user/delete', projectController.deleteUser);
 
 
 module.exports = router;
