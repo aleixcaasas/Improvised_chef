@@ -8,7 +8,7 @@ const ingredientGroups = {
     'herbs': <GiHerbsBundle size={size_icon} style={{ color: '#837f28' }} />,
     'vegetables': <GiBroccoli size={size_icon} style={{ color: '#837f28' }} />,
     'fruits': <GiShinyApple size={size_icon} style={{ color: '#97BE11' }} />,
-    'dairy': <GiMilkCarton size={size_icon} style={{ color: '#fafafa' }} />,
+    'dairy': <GiMilkCarton size={size_icon} style={{ color: '#57504d' }} />,
     'meat': <GiMeat size={size_icon} style={{ color: '#AA3C3B' }} />,
     'seafood': <GiDoubleFish size={size_icon} style={{ color: '#31c4a0' }} />,
     'baking': <GiSlicedBread size={size_icon} style={{ color: '#eec07b' }} />,

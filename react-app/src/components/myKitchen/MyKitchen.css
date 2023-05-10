@@ -3,7 +3,7 @@
 /*My kitchen*/
 /********************/
 .div-my_kitchen{
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -11,11 +11,12 @@
 }
 
 .my_kitchen{
-    display: flex;  
-    margin-left: 22%;
-    align-items: center;   
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    margin-left: 23%;   
     height: 75%;
-    position: relative;
+    width: 70%;
 }
 
 
@@ -42,10 +43,11 @@
     transition: transform 0.5s ease-in-out;
     
 }
+
 .containers_myKitchen{
     background-color: var(--cream);
-    width: 300px;
-    min-height: 500px;
+    width: 28%;
+    max-height: 610px;
     border-radius: var(--radius_border);    
     box-shadow: var(--box_shawod);  
     margin: 10px;
@@ -65,7 +67,9 @@
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(0, 2fr);
     overflow-y: auto;
-    padding-left: 7px;
+    padding: 7px;
+    align-items: center;
+    justify-items: center;
 }
 
 
@@ -109,17 +113,39 @@
 /*My soppinh List*/
 /********************/
 
-@media screen and (max-width: 1066px) {
+@media screen and (max-width: 1410px) {
+
+    .my_kitchen{
+        align-content: flex-start;
+        align-self: normal;
+        margin-top: 20px;
+    }
 
     .containers_myKitchen{
-        width:calc(85% /2);
+        width: 44%;
     }
+
+    .containers_myKitchen:last-child {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
 }
 
-@media screen and (max-width: 769px) {
-    .my_kitchen{
-        margin-left:0;
+@media screen and (max-width: 1190px) {
+    .containers_myKitchen{
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
     }
+
+}
+
+@media screen and (max-width: 768px) {
+    .my_kitchen{
+        margin-left: 0;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
