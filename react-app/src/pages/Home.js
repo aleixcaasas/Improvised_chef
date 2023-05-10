@@ -1,13 +1,13 @@
 import axios from "axios";
+import '../components/login/login.css';
 import { UserContext } from './globalValue';
-import React, { useContext, useState, useEffect } from "react";
 import SideBar from "../components/sideBar/SideBar"
 import Register from "../components/register/Register";
 import LoginEmail from "../components/login/LoginEmail";
 import SearchBar from "../components/searchBar/SearchBar"
+import { useContext, useState, useEffect } from "react";
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
 import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContainer"
-import '../components/login/login.css';
 
 
 export default function Home() {
@@ -16,35 +16,36 @@ export default function Home() {
     const [userLOCAL, setUserLOCAL] = useState({ email: '', id: '' });
 
     const [recipes, setRecipes] = useState([]);
-    const [error2, setError2] = useState({ error: false, comment: "" });
+    const [loginError, setloginError] = useState({ error: false, comment: "" });
 
-    const handleSearch = (searchedReceips) => {
-        if(searchedReceips.length !== 0){
-            setRecipes(searchedReceips);
-        }
-        else{
-            setRecipes([]);
-        }
-    };
-
+    // ERROR MESSAGES FUNCTIONS
     const clicked = (message) => {
         if (message === "true") {
-            setError2({ error: false, comment: "" });
+            setloginError({ error: false, comment: "" });
         }
     };
-
-    //To dealy the the call of the API 
 
     const errorM = (message) => {
         if (message.error) {
-            setError2({ error: true, comment: message.comment });
+            setloginError({ error: true, comment: message.comment });
             <ErrorMessage errorMessage={message.comment} clicked={clicked}></ErrorMessage>
         }
 
     };
 
+
+    const handleSearch = (searchedReceips) => {
+        if (searchedReceips.length !== 0) {
+            setRecipes(searchedReceips);
+        }
+        else {
+            setRecipes([]);
+        }
+    };
+
+
     const leaveSession = (message) => {
-        if(message){
+        if (message) {
             setUserLOCAL(null)
         }
     };
@@ -61,26 +62,26 @@ export default function Home() {
             }
             fetchRecipes();
         }
-    },[recipes]);
+    }, [recipes]);
 
     useEffect(() => {
         const setLocalStorageUser = async () => {
             const loggedUserJSON = window.localStorage.getItem('usuariLogged')
-            if(loggedUserJSON){
+            if (loggedUserJSON) {
                 const user = await JSON.parse(loggedUserJSON)
                 setUserLOCAL(user) //aquí el user conté el email i la id
                 setUser(user)
             }
         }
         setLocalStorageUser()
-    },[])
+    }, [])
 
     return (
         <div className="home">
-            { 
+            {
                 userLOCAL?.email && (
                     <>
-                        <SideBar leaveSession={leaveSession}/>
+                        <SideBar leaveSession={leaveSession} />
                         <SearchBar handleSearch={handleSearch} />
                         <ResumeRecipeContainer receiptsJSON={recipes} />
                     </>
@@ -94,17 +95,15 @@ export default function Home() {
                                 <LoginEmail errorM={errorM} />
                                 <Register errorM={errorM} />
                             </div>
-                            {error2.error && (
+                            {loginError.error && (
                                 <div className="pep">
-                                    <ErrorMessage errorMessage={error2.comment} clicked={clicked} ></ErrorMessage>
+                                    <ErrorMessage errorMessage={loginError.comment} clicked={clicked} ></ErrorMessage>
                                 </div>
                             )}
                         </div>
                     </>
                 )
             }
-
-
         </div>
     );
 }

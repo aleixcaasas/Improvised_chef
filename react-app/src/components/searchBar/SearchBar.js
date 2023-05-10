@@ -1,19 +1,25 @@
 import './SearchBar.css';
 import axios from "axios";
+import { useState } from 'react';
 import { debounce } from 'lodash';
+import { useContext } from 'react';
+import { UserContext } from '../../pages/globalValue';
+
 
 
 export default function SearchBar({handleSearch}) {
     
+    const { user } = useContext(UserContext);
+    const [buttonClicked, setButtonClicked] = useState(false);
+
     const handleChange = async (value) => {
-        if (value.size == 0){
+        if (value.size === 0){
             handleSearch([]);
         } else {
             try {
                 let response = await axios.post('http://localhost:3000/recipes/name', {
                     name: value
                 });
-    
                 handleSearch(response.data);
             }
             catch (error) {
@@ -24,18 +30,38 @@ export default function SearchBar({handleSearch}) {
  
     //To dealy the the call of the API 
     const debouncedSearch = debounce((e) =>{
-        handleChange(e.target.value)
+        handleChange(e.target.value);
     }, 800);
+
+    async function searchRecipesWithIngr(){
+        if (!buttonClicked){
+            try {
+                let response = await axios.post('http://localhost:3000/user/searchWithIngredients', {
+                    userId: user.id
+                });
+                handleSearch(response.data);
+                console.log(response.data);
+                setButtonClicked(true);
+            }
+            catch (error) {
+                if (error.response.data === 'No ingredients found!'){
+                    alert('Add ingredients to your list to search recipes with them!');
+                }
+            }
+        }else{
+            setButtonClicked(false);
+            handleSearch([]);
+        }
+    }
 
     return (
         <div className="searchBar-div"> 
             <input
                 className="searchBar1"
-                //value={cercador}
                 placeholder={"Search by recipe name"}
                 onChange={(e) => debouncedSearch(e)}
             />
-            <button className="CookButton" type="submit" value="Create user"> Cook with my ingredients</button>
+            <button className={`CookButton ${buttonClicked ? "clicked" : ""}`} onClick={() => searchRecipesWithIngr()} value="Create user">{buttonClicked ? "Stop searching with my ingredients" : "Cook with my ingredients"} </button>
             
         </div>
     );

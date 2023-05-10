@@ -47,10 +47,16 @@
   margin-bottom: 18px;
 }
 
-
-
 .CookButton:hover {
   background: rgb(102, 24, 24);
+}
+
+.clicked{
+  background: rgb(102, 24, 24);
+}
+
+.clicked:hover{
+  background-color: var(--red);
 }
 
 

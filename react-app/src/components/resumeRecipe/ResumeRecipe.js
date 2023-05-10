@@ -11,6 +11,10 @@ export default function ResumeRecipe ({singleReceipts, index}){
     const cookTime = singleReceipts.time_cooking;
     const difficulty = singleReceipts.difficulty;
     const ingridients = singleReceipts.ingredients;
+    let userIngredients = -1;
+    if (singleReceipts.ingredientsBought){
+        userIngredients = singleReceipts.ingredientsBought;
+    }
     
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     
@@ -78,6 +82,9 @@ export default function ResumeRecipe ({singleReceipts, index}){
       }
     
     function show_ingridients_numbers(list)  {
+        if(userIngredients > 0){
+            return `${userIngredients} / ${list.length}`
+        }
         return list.length;
     }
 
