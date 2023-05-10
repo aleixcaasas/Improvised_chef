@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
 import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from 'react';
-import { getIngredientIcon } from '../myKitchen/MyKitchen';
+import { getIngredientIcon } from '../iconsIngridients/getIconsIngridient.js';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 
 export default function MyIngredients() {

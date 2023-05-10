@@ -1,52 +1,17 @@
 import './MyKitchen.css'
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { IoIosWater } from "react-icons/io";
 import { UserContext } from '../../pages/globalValue';
-import { useEffect, useContext, useState } from "react";
-import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish } from "react-icons/gi"
+import { useEffect, useContext, useState} from "react";
+import { getIngredientIcon } from '../iconsIngridients/getIconsIngridient.js';
 
-const color_icon = 'rgb(150, 150, 150)'
-const ingredientGroups = {
-    'spices': <GiChiliPepper size={30} style={{ color: color_icon }} />,
-    'herbs': <GiHerbsBundle size={30} style={{ color: color_icon }} />,
-    'vegetables': <GiBroccoli size={30} style={{ color: color_icon }} />,
-    'fruits': <GiBroccoli size={30} style={{ color: color_icon }} />,
-    'dairy': <GiMilkCarton size={30} style={{ color: color_icon }} />,
-    'meat': <GiMeat size={30} style={{ color: color_icon }} />,
-    'seafood': <GiDoubleFish size={30} style={{ color: color_icon }} />,
-    'baking': <GiSlicedBread size={30} style={{ color: color_icon }} />,
-    'liquids': <IoIosWater size={30} style={{ color: color_icon }} />,
-    'miscellaneous': <GiOpenedFoodCan size={30} style={{ color: color_icon }} />
-};
 
-const ingredientCategories= {
-    "spices": ["salt", "pepper", "cumin", "paprika"],
-    "herbs": ["basil", "oregano", "parsley", "thyme"],
-    "vegetables": ["tomato", "carrot", "onion", "celery"],
-    "fruits": ["banana", "apple", "orange", "grape"],
-    "dairy": ["milk", "cheese", "yogurt", "butter"],
-    "meat": ["beef", "pork", "chicken", "lamb"],
-    "seafood": ["shrimp", "salmon", "tuna", "crab"],
-    "baking": ["flour", "sugar", "baking powder", "baking soda"],
-    "liquids": ["water", "oil", "vinegar", "broth", "honey"],
-    "miscellaneous": []
-}
 
-export function getIngredientIcon(name) {
-    const lowercaseName = name.toLowerCase();
-    for (const [category, ingredients] of Object.entries(ingredientCategories)) {
-        if (ingredients.some((ingredient) => lowercaseName.includes(ingredient))) {
-            return ingredientGroups[category];
-        }
-    }
-    return ingredientGroups.miscellaneous;
-}
-
-export default function MyKitchen() {
+export default function MyKitchen(){
 
     const { user } = useContext(UserContext);
     const [list, setList] = useState(null)
+    
 
     useEffect(() => {
         const getInfo = async () => {
@@ -64,7 +29,6 @@ export default function MyKitchen() {
         }
         getInfo();
     }, [user]);
-
 
     function getList(listIngredient, path) {
         if (!listIngredient) {
@@ -106,6 +70,19 @@ export default function MyKitchen() {
                     </Link>
                 </div>
             );
+        } else if (recipesList.length > 0 && recipesList.length < 6 ){
+            return (
+                <div className="container_list">
+                    {recipesList.map((recipe, index) => (
+                        <div className='recipe_pic_item' key={index}>
+                            <div
+                                className='recipe_image'
+                                style={{ backgroundImage: `url("${recipe.image}")` }}>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )
         } else {
             return (
                 <div className="container_list">
@@ -120,56 +97,59 @@ export default function MyKitchen() {
                 </div>
             );
         }
-    }
 
+
+    };
+    
     return (
-        <div className='div-my_kitchen'>
-            <div className='my_kitchen'>
+        
+        <div className='my_kitchen'>
+            <div className="containers_myKitchen">
+                <h3>MY INGREDIENTS</h3>
                 <Link to="/MyIngredients">
-                    <div className="containers_myKitchen">
-                        <h3>MY INGREDIENTS</h3>
-                        {!list?.data && (
-                            <>
-                                <div className="container_list" id='no_list'>
-                                    Loading Ingredients...
-                                </div>
-                            </>
-                        )}
-                        {list?.data && (
-                            getList(list.data[0], "/MyIngredients")
-                        )}
-                    </div>
-                </Link>
-
-                <Link to="/FavoriteRecipes">
-                    <div className="containers_myKitchen">
-                        <h3>FAVORITE RECIPES</h3>
                         {!list?.data && (
                             <div className="container_list" id='no_list'>
-                                Loading Recipes...
-                            </div>)}
-                        {list?.data && (
-                            getRecipes(list.data[2])
+                                Loading Ingredients...
+                            </div>
                         )}
-                    </div>
+                        {list?.data && (
+                        getList(list.data[0], "/MyIngredients")
+                        )}
+                        
+                    
                 </Link>
-
+            </div>
+            <div className="containers_myKitchen">
+            <h3>FAVORITE RECIPES</h3>
+                <Link to="/FavoriteRecipes">
+                    {!list?.data && (
+                    <div className="container_list" id='no_list'>
+                        Loading Recipes...
+                    </div>
+                    )}
+                    {list?.data && (
+                    getRecipes(list.data[2])
+                    )}
+                </Link>
+            </div>
+            <div className="containers_myKitchen">
+                <h3>SHOPPING LIST</h3>
                 <Link to="/ShoppingList">
-                    <div className="containers_myKitchen">
-                        <h3>SHOPPING LIST</h3>
-                        {!list?.data && (
-                            <>
-                                <div className="container_list" id='no_list'>
-                                    Loading Ingredients...
-                                </div>
-                            </>
-                        )}
-                        {list?.data && (
-                            getList(list.data[1], "/ShoppingList")
-                        )}
-                    </div>
+                
+                {!list?.data && (
+                <div className="container_list" id='no_list'>
+                    Loading Ingredients...
+                </div>
+                )}
+                {list?.data && (
+                getList(list.data[1], "/ShoppingList")
+                )}
                 </Link>
-            </div >
-        </div >
-    );
-}      
+            </div>   
+        </div>
+        
+        );
+        
+
+}
+

@@ -3,7 +3,7 @@
 /*My kitchen*/
 /********************/
 .div-my_kitchen{
-    width: 100vw;
+    
     height: 100vh;
     display: flex;
     align-items: center;
@@ -11,12 +11,32 @@
 }
 
 .my_kitchen{
-    display: flex;  
-    margin-left: 22%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-wrap: normal;
+    margin-left: 25%;
+    padding-top: 70px;
     align-items: center;   
-    height: 75%;
-    position: relative;
+    max-width: 1200px;
 }
+
+.containers_myKitchen{
+    white-space: nowrap;
+    background-color: var(--cream);
+    height: 600px;
+    width: calc(85% / 3);
+    border-radius: var(--radius_border);    
+    box-shadow: var(--box_shawod);  
+    margin: 5px;
+    padding: 15px;
+    justify-content: center;
+    display: flex; 
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    text-align: center;
+    overflow: hidden;
+}
+
 
 
 /*My shopping List*/
@@ -42,30 +62,17 @@
     transition: transform 0.5s ease-in-out;
     
 }
-.containers_myKitchen{
-    background-color: var(--cream);
-    width: 300px;
-    min-height: 500px;
-    border-radius: var(--radius_border);    
-    box-shadow: var(--box_shawod);  
-    margin: 10px;
-    padding: 15px;
-    justify-content: center;
-    display: flex; 
-    flex-direction: column;
-    transition: transform 0.5s ease-in-out;
-    text-align: center;
-}
 
 .container_list {
     background-color: white;
     border-radius: var(--radius_border); 
-    height: 500px;
+    height:500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-auto-rows: minmax(0, 2fr);
     overflow-y: auto;
-    padding-left: 7px;
+
+    
 }
 
 
@@ -80,7 +87,7 @@
 #button_round {
     background-color: var(--green);
     height: 70px;
-    width:70px;
+    width: 70px;
     font-size: 20px;
     transition: transform 0.3s ease-in-out;
 }
@@ -90,15 +97,16 @@
 }
 
 .recipe_pic_item {    
-    max-height: 70px;
+    max-height: 100%;
     margin:10px; 
     
 }
 
 
 .recipe_image{
-    height: 70px;
     width: 70px;
+    height: 70px;
+    
     border-radius: 50%;
     background-position: center;
     background-size: cover; 
@@ -106,7 +114,26 @@
 }
 
 
-/*My soppinh List*/
-/********************/
+@media screen and (max-width: 1066px) {
+    
+    .containers_myKitchen{
+        width:calc(85% /2);
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .my_kitchen{
+        margin-left:0px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .containers_myKitchen{
+        width: 100%;
+    }
+}
+
+
+
 
 
