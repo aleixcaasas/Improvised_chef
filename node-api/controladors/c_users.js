@@ -307,7 +307,7 @@ const searchWithIngredients = async (req, res) => {
             .sort((a, b) => freqMap[b] - freqMap[a])
             .map(num => parseInt(num));
         let result = [];
-        const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 10)));
+        const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 9)));
         const querySnapshot = await getDocs(q);
         querySnapshot.docs.forEach((doc) => {
             const docData = doc.data();
