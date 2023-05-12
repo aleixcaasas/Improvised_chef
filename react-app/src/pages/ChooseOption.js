@@ -32,7 +32,7 @@ export default function ChooseOption() {
                     <>
                         <h1>IMPROVISED CHEF</h1>
                         <ul>
-                            <li><NavLink to="/home" className="navegaitionLink">DEMO</NavLink></li>
+                            <li><NavLink to="/home" className="navegationLink">DEMO</NavLink></li>
                             <li><NavLink to="/components" className="navegationLink">View all components</NavLink></li>
                         </ul>
                     </>
