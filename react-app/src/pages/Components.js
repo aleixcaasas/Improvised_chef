@@ -6,9 +6,8 @@ function Components() {
 		<div>
 			<ul>
 				<li><NavLink to="/components/myKitchen" classname="navegationLink">My Kitchen</NavLink></li>
-				<li><NavLink to="/components/myIngredients" classname="navegationLink">My Ingredients</NavLink></li>
-				<li><NavLink to="/components/shoppingList" classname="navegationLink">Shopping List</NavLink></li>
-				<li><NavLink to="/components/favoriteRecipes" classname="navegationLink">Favorite Recipes</NavLink></li>
+				<li><NavLink to="/components/detailRecipe" classname="navegationLink">Detail Recipe</NavLink></li>
+				<li><NavLink to="/components/userProfile" classname="navegationLink">User Profile</NavLink></li>
 			</ul>
 
 		</div>
