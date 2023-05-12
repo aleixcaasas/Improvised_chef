@@ -2,22 +2,23 @@ import axios from "axios";
 import "./FavoriteRecipes.css";
 import { Link } from "react-router-dom";
 import { BsTrash3 } from "react-icons/bs"
-import { UserContext } from '../../pages/globalValue';
 import { useEffect, useContext, useState } from "react";
 
 export default function FavoriteRecipes() {
-
-    const { user } = useContext(UserContext);
+    
+    //const { user } = useContext(UserContext);
     const [recipes, setRecipes] = useState(null)
+    const [userAPI, setUSerAPI] = useState('');
 
     useEffect(() => {
         const getInfo = async () => {
             try {
-                // eslint-disable-next-line
-                if (user.email != '') {
+                const userBO = await axios.get('http://localhost:3000/user');
+                if (userBO.data.email != '') {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
-                        userId: user.id
+                        userId: userBO.data.id
                     });
+                    setUSerAPI(userBO.data);
                     setRecipes(response);
                 }
             } catch (error) {
@@ -31,9 +32,9 @@ export default function FavoriteRecipes() {
         let newFavoriteRecipes = Object.assign({}, recipes);
         let recipeEliminated = {};
         try {
-            if (user.email !== '') {
+            if (userAPI.email !== '') {
                 recipeEliminated = await axios.post('http://localhost:3000/user/removeRecipe', {
-                    userId: user.id,
+                    userId: userAPI.id,
                     recipeId: id
                 });
                 for (let j = 0; j < recipes.data.length; j++) {

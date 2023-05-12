@@ -18,6 +18,8 @@ const controller = {
         const password = params.password;
         const resposta = await loginWithEmail(email, password);
         if(resposta.id != null && resposta.loguejat) {
+            req.session.userEmail = email;
+            req.session.userID = resposta.id;
             return res.status(200).send({
                 loguejat: true,
                 email: email,
@@ -37,6 +39,8 @@ const controller = {
         const password = params.password;
         const boolean = await registerWithEmail(fullName, userName, email, password);
         if(boolean.loguejat){
+            req.session.userEmail = email;
+            req.session.userID = boolean.id;
             return res.status(200).send({
                 loguejat: 'true',
                 email: email,
@@ -54,6 +58,8 @@ const controller = {
         const body = req.body;
         const params = await loginWithGoogle(body);
         if(params.loguejat){
+            req.session.userEmail = params.email;
+            req.session.userID = params.id;
             return res.status(200).send({
                 loguejat: 'true',
                 email: params.email,
@@ -79,8 +85,15 @@ const controller = {
     },
 
     logout: async function(req, res){
-        console.log(req.body);
-        await signOutV(req.body)
+        //await signOutV(req.body)
+        delete req.session.userID;
+        delete req.session.userEmail;
+        return res.status(200).send('LogOut');
+    },
+
+    actualUser : async function(req, res) {
+        const { userID, userEmail } = req.session;
+        return res.status(200).send({ id: userID, email: userEmail });
     },
 
     randomRecipe: async function(req, res) {

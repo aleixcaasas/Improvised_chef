@@ -4,7 +4,7 @@ import ErrorMessage from '../errorMessages/ErrorMessage';
 import { useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {
-
+	
     const navigation = useNavigate();
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");

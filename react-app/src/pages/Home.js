@@ -1,18 +1,16 @@
 import axios from "axios";
 import '../components/login/login.css';
-import { UserContext } from './globalValue';
 import SideBar from "../components/sideBar/SideBar"
 import Register from "../components/register/Register";
 import LoginEmail from "../components/login/LoginEmail";
 import SearchBar from "../components/searchBar/SearchBar"
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
 import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContainer"
 
 
 export default function Home() {
 
-    const { setUser } = useContext(UserContext);
     const [userLOCAL, setUserLOCAL] = useState({ email: '', id: '' });
 
     const [recipes, setRecipes] = useState([]);
@@ -43,13 +41,6 @@ export default function Home() {
         }
     };
 
-
-    const leaveSession = (message) => {
-        if (message) {
-            setUserLOCAL(null)
-        }
-    };
-
     useEffect(() => {
         if (recipes.length === 0) {
             const fetchRecipes = async () => {
@@ -66,11 +57,9 @@ export default function Home() {
 
     useEffect(() => {
         const setLocalStorageUser = async () => {
-            const loggedUserJSON = window.localStorage.getItem('usuariLogged')
-            if (loggedUserJSON) {
-                const user = await JSON.parse(loggedUserJSON)
-                setUserLOCAL(user) //aquí el user conté el email i la id
-                setUser(user)
+            const userActual = await axios.get('http://localhost:3000/user');
+            if (userActual) {
+                setUserLOCAL(userActual.data) //aquí el user conté el email i la id
             }
         }
         setLocalStorageUser()
@@ -81,7 +70,7 @@ export default function Home() {
             {
                 userLOCAL?.email && (
                     <>
-                        <SideBar leaveSession={leaveSession} />
+                        <SideBar/>
                         <SearchBar handleSearch={handleSearch} />
                         <ResumeRecipeContainer receiptsJSON={recipes} />
                     </>

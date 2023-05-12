@@ -1,15 +1,13 @@
 import './MyKitchen.css'
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { UserContext } from '../../pages/globalValue';
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { getIngredientIcon } from '../IngredientIcons';
 
 
 
 export default function MyKitchen() {
 
-    const { user } = useContext(UserContext);
     const [list, setList] = useState(null)
 
 
@@ -17,9 +15,10 @@ export default function MyKitchen() {
         const getInfo = async () => {
             try {
                 // eslint-disable-next-line
-                if (user.email !== '') {
+                const userBO = await axios.get('http://localhost:3000/user');
+                if (userBO.data.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/myKitchen', {
-                        userId: user.id
+                        userId: userBO.data.id
                     });
                     setList(response);
                 }
@@ -28,7 +27,7 @@ export default function MyKitchen() {
             }
         }
         getInfo();
-    }, [user]);
+    }, []);
 
     function getList(listIngredient, path) {
         if (!listIngredient) {

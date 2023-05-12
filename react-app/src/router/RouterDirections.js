@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { UserProvider } from '../pages/globalValue';
 
 import Home from '../pages/Home'
 import Components from '../pages/Components'
@@ -24,7 +23,6 @@ export default function RouterDirections() {
   return (
     
     <BrowserRouter>
-     <UserProvider>
         <Routes>
             <Route exact path="/" element={<ChooseOption/>}/>
             <Route exact path="/home" element={<Home/>}/>
@@ -46,7 +44,6 @@ export default function RouterDirections() {
             
             <Route path='*' element={<Home/>}/>
         </Routes>
-     </UserProvider>
     </BrowserRouter>
   );
 }

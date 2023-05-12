@@ -8,7 +8,8 @@ router.post('/login', projectController.login);
 router.post('/loginWithGoogle', projectController.loginGoogle); 
 router.post('/register', projectController.register);
 router.post('/resetPassword', projectController.resetPassword);
-router.post('/logout', projectController.logout);
+router.get('/logout', projectController.logout);
+router.get('/user', projectController.actualUser);
 
 /* RECIPES ENDPOINTS */
 router.post('/recipe/detail', projectController.infoRecipe);

@@ -193,7 +193,7 @@ const removeUserShoppingList = async (req, res) => {
 };
 
 const getUserRecipeList = async (req, res) => {
-
+    
     try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {

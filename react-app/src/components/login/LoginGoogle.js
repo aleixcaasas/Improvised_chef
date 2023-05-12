@@ -4,14 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../firebase-config';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
-import { UserContext } from '../../pages/globalValue';
-import { useContext } from "react";
 
 export default function LoginGoogle() {
 
 	const navigation = useNavigate();
-
-	const { setUser } = useContext(UserContext);
 
 	const signInWithGoogle = async () => {
 
@@ -19,8 +15,7 @@ export default function LoginGoogle() {
 			const result = await signInWithPopup(auth, provider);
 			const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
 			if (response.data.loguejat === "true") {
-				setUser({ email: response.data.email, id: response.data.id });
-				window.localStorage.setItem('usuariLogged', JSON.stringify({ email: response.data.email, id: response.data.id }))
+				
 			}
 			return true;
 		} catch (error) {
