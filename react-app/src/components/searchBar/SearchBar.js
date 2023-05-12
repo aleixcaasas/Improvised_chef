@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { debounce } from 'lodash';
 
 
-
-
 export default function SearchBar({handleSearch}) {
     
     const [buttonClicked, setButtonClicked] = useState(false);
@@ -39,7 +37,6 @@ export default function SearchBar({handleSearch}) {
                     userId: userBO.data.id
                 });
                 handleSearch(response.data);
-                console.log(response.data);
                 setButtonClicked(true);
             }
             catch (error) {

@@ -48,12 +48,6 @@ export default function Register(props) {
                 props.errorM({error: true, comment: "User already exist"});
             }
         }
-
-        try {
-            console.log('')
-        } catch (error) {
-            console.log(error.message)
-        }
     }
 
     return (
