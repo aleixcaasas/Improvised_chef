@@ -2,9 +2,8 @@ const home = require('./c_home');
 
 const {infoRecipe, recipesName, randomRecipe} = require('./c_recipes');
 const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
-const {getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
-    removeUserRecipe, searchWithIngredients
-} = require('./c_users');
+const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
+    removeUserRecipe, searchWithIngredients } = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
 
 const controller = {
@@ -123,6 +122,24 @@ const controller = {
         else{
             res.status(500).send('User not exist');
         }
+    },
+
+    editUserProfile: async function(req, res) {
+        const params = req.body;
+        const userId = params.userId;
+        const userName = params.userName;
+        const fullName = params.fullName;
+        const profilePic = req.file;
+        const password = params.password;
+        const confirmPassword = params.confirmPassword;
+        if(profilePic){
+            await uploadProfilePic(userId, profilePic);
+        }
+        if(password !== undefined && confirmPassword !== undefined){
+            await changePassword(password, confirmPassword);
+        }
+        let response = await editUserProfile(userId, fullName, userName);
+        res.status(response[0]).send(response[1]);
     },
 
     myKitchen: async function(req, res) {

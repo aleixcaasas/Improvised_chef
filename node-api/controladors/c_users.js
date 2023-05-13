@@ -1,5 +1,4 @@
-const { db, query, collection, where, getDocs, getDoc, updateDoc, doc, arrayUnion, arrayRemove } = require('../firebase/firebase-config');
-
+const { db, query, collection, where, getDocs, getDoc, updateDoc, updatePassword, updateProfile, getDownloadURL, storage, ref, uploadBytesResumable, auth, doc, arrayUnion, arrayRemove } = require('../firebase/firebase-config');
 const getUserInfo = async function (req, res) {
     try {
         let result = [];
@@ -42,6 +41,62 @@ const getUserProfile = async function (userId) {
     }
 }
 
+const uploadProfilePic = async function(userId, profilePic){
+    try {
+        console.log(auth.currentUser);
+        const storageRef = ref(storage, `images/${userId + " / " + profilePic.originalname}`);
+        const metadata = {
+            contentType: profilePic.mimetype,
+        };
+        await uploadBytesResumable(storageRef, profilePic.buffer, metadata);
+        getDownloadURL(storageRef)
+            .then(async downloadURL => {
+                await updateProfile(auth.currentUser, {
+                    photoURL: downloadURL
+                });
+                await updateDoc(doc(db, "users", userId), {
+                    profilePic: downloadURL
+                });
+            })
+            .catch(error => {
+                return [500, error];
+            });
+        return [200, 'Image uploaded successfully'];
+    }
+    catch (error){
+        return [500, error];
+    }
+}
+
+const changePassword = async function(newPassword, confirmPassword){
+    if(newPassword.length > 0 && confirmPassword.length > 0){
+        if (newPassword === confirmPassword) {
+            await updatePassword(auth.currentUser, newPassword);
+        }
+        else {
+            return [500, 'Passwords do not match'];
+        }
+    }
+}
+
+const editUserProfile = async function(userId, newFullName, newUserName){
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", userId));
+        if (querySnapshot.exists()) {
+            await updateDoc(doc(db, "users", userId), {
+                fullName: newFullName,
+                userName: newUserName
+            });
+            return [200, 'User profile edited successfully'];
+        }
+        else {
+            return [500, 'User profile not edited'];
+        }
+    }
+    catch (error){
+        return [500, error];
+    }
+}
 
 const myKitchen = async (req, res) => {
     try {
@@ -337,4 +392,4 @@ const searchWithIngredients = async (req, res) => {
 
 
 
-module.exports = { getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
+module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };

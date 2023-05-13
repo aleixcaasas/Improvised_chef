@@ -1,5 +1,7 @@
 const express = require('express');
 const projectController = require('../controladors/c_project');
+const multer = require('multer');
+const upload = multer({storage: multer.memoryStorage()});
 const router = express.Router();
 
 router.get(['/home', '/'], projectController.home);
@@ -21,6 +23,7 @@ router.post('/ingredients/name', projectController.ingredientsName);
 /* USER ENDPOINTS */
 router.post('/user/summary', projectController.getUserInfo);
 router.post('/user/profile', projectController.getUserProfile);
+router.post('/user/edit', upload.single('profilePic'), projectController.editUserProfile);
 
 router.post('/user/myKitchen', projectController.myKitchen);
 
