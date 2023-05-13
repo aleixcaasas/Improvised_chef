@@ -1,5 +1,6 @@
 const {initializeApp} = require('firebase/app')
-const {getAuth, GoogleAuthProvider} = require('firebase/auth')
+const {getAuth, GoogleAuthProvider, updatePassword, updateProfile} = require('firebase/auth')
+const {getDownloadURL, getStorage, ref, uploadBytesResumable} = require('firebase/storage')
 const {getFirestore, collection, getDocs, getDoc, doc, query, where, limit, updateDoc, arrayUnion, arrayRemove} = require('firebase/firestore')
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 
 module.exports = {
@@ -39,6 +41,12 @@ module.exports = {
   limit,
   doc,
   updateDoc,
+  updatePassword,
+  updateProfile,
+  getDownloadURL,
+  storage,
+  ref,
+  uploadBytesResumable,
   arrayUnion,
   arrayRemove,
   auth,
