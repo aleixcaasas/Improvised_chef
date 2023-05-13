@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import React, { useState, useContext } from "react";
-import { UserContext } from '../../pages/globalValue';
+import React, { useState } from "react";
+
 
 export default function Register(props) {
     const navigate = useNavigate();
-    const { setUser } = useContext(UserContext);
     const [err] = useState("");
     const [userVar, setUserVar] = useState({
         Name: "",
@@ -43,19 +42,11 @@ export default function Register(props) {
             const password = userVar.password;
             const result = await axios.post('http://localhost:3000/register', { name, userName, email, password });
             if (result.data.loguejat === "true") {
-                setUser({ email: result.data.email, id: result.data.id });
-                window.localStorage.setItem('usuariLogged', JSON.stringify({ email: result.data.email, id: result.data.id }));
                 navigate("/");
             }
             else {
                 props.errorM({error: true, comment: "User already exist"});
             }
-        }
-
-        try {
-            console.log('')
-        } catch (error) {
-            console.log(error.message)
         }
     }
 

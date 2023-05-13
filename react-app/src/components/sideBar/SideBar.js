@@ -4,12 +4,10 @@ import { FaBars} from 'react-icons/fa';
 import { TbCheese } from 'react-icons/tb';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from '../../pages/globalValue';
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 
 const Sidebar = (props) => {
-    const { user, setUser } = useContext(UserContext);    //const {logOut} = useAuth();
     const [response, setResponse] = useState(null)
     const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => setSidebar(!sidebar);
@@ -17,11 +15,7 @@ const Sidebar = (props) => {
     const navigation = useNavigate();
 
     const handleLogOut = async () => {
-        //await axios.post('http://localhost:3700/logout', {user});
-        setUser({ email: '', id:'' });
-        window.localStorage.setItem('usuariLogged', { email: '', id: '' })
-        window.localStorage.clear()
-        props.leaveSession("true");
+        await axios.get('http://localhost:3000/logout'); //ESBORREM LA COOKIE
         navigation("/home");
     }
 
@@ -29,16 +23,16 @@ const Sidebar = (props) => {
         const getInfo = async () => {
             try {
                 // eslint-disable-next-line
-                if(user.email != ''){
-                    const response = await axios.post('http://localhost:3000/user/summary', { id: user.id });
-                    setResponse(response);
-                }
+                const userBO = await axios.get('http://localhost:3000/user');
+                const response = await axios.post('http://localhost:3000/user/summary', { id: userBO.data.id });
+                setResponse(response);
+                
             } catch (error) {
                 console.log(error);
             }
         }
         getInfo();
-    }, [user]);
+    }, []);
     
 
 

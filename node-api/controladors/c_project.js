@@ -2,9 +2,8 @@ const home = require('./c_home');
 
 const {infoRecipe, recipesName, randomRecipe} = require('./c_recipes');
 const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
-const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen,
-    removeUserRecipe, searchWithIngredients } = require('./c_users');
-const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail} = require('./c_auth');
+const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients } = require('./c_users');
+const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser} = require('./c_auth');
 
 const controller = {
     home: function(req, res) { 
@@ -17,6 +16,8 @@ const controller = {
         const password = params.password;
         const resposta = await loginWithEmail(email, password);
         if(resposta.id != null && resposta.loguejat) {
+            req.session.userEmail = email;
+            req.session.userID = resposta.id;
             return res.status(200).send({
                 loguejat: true,
                 email: email,
@@ -36,6 +37,8 @@ const controller = {
         const password = params.password;
         const boolean = await registerWithEmail(fullName, userName, email, password);
         if(boolean.loguejat){
+            req.session.userEmail = email;
+            req.session.userID = boolean.id;
             return res.status(200).send({
                 loguejat: 'true',
                 email: email,
@@ -53,6 +56,8 @@ const controller = {
         const body = req.body;
         const params = await loginWithGoogle(body);
         if(params.loguejat){
+            req.session.userEmail = params.email;
+            req.session.userID = params.id;
             return res.status(200).send({
                 loguejat: 'true',
                 email: params.email,
@@ -78,8 +83,15 @@ const controller = {
     },
 
     logout: async function(req, res){
-        console.log(req.body);
-        await signOutV(req.body)
+        //await signOutV(req.body)
+        delete req.session.userID;
+        delete req.session.userEmail;
+        return res.status(200).send('LogOut');
+    },
+
+    actualUser : async function(req, res) {
+        const { userID, userEmail } = req.session;
+        return res.status(200).send({ id: userID, email: userEmail });
     },
 
     randomRecipe: async function(req, res) {
@@ -194,6 +206,17 @@ const controller = {
     },
     searchWithIngredients: async function(req, res) {
         return await searchWithIngredients(req, res);
+    },
+    deleteUser: async function(req, res) {
+        const userId = req.body.userId;
+        const output = await deleteUser(userId);
+        console.log(output);
+        if(output == 'Account deleted successfully!'){
+            res.status(200).send('Account deleted successfully!');
+        }
+        else{
+            res.status(500).send('Something went wrong!');
+        }
     }
 }
 

@@ -43,7 +43,6 @@ const getUserProfile = async function (userId) {
 
 const uploadProfilePic = async function(userId, profilePic){
     try {
-        console.log(auth.currentUser);
         const storageRef = ref(storage, `images/${userId + " / " + profilePic.originalname}`);
         const metadata = {
             contentType: profilePic.mimetype,
@@ -69,7 +68,7 @@ const uploadProfilePic = async function(userId, profilePic){
 }
 
 const changePassword = async function(newPassword, confirmPassword){
-    if(newPassword.length > 0 && confirmPassword.length > 0){
+    if(auth.currentUser.providerData[0].providerId==="password" && newPassword.length > 0 && confirmPassword.length > 0){
         if (newPassword === confirmPassword) {
             await updatePassword(auth.currentUser, newPassword);
         }
@@ -248,7 +247,7 @@ const removeUserShoppingList = async (req, res) => {
 };
 
 const getUserRecipeList = async (req, res) => {
-
+    
     try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {
@@ -362,7 +361,7 @@ const searchWithIngredients = async (req, res) => {
             .sort((a, b) => freqMap[b] - freqMap[a])
             .map(num => parseInt(num));
         let result = [];
-        const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 10)));
+        const q = query(collection(db, "recipes"), where("id", "in", sortedArr.slice(0, 9)));
         const querySnapshot = await getDocs(q);
         querySnapshot.docs.forEach((doc) => {
             const docData = doc.data();

@@ -2,26 +2,26 @@ import axios from 'axios';
 import '../shoppingList/CSS-IngredientsList.css';
 import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
-import { UserContext } from '../../pages/globalValue';
-import { useEffect, useContext, useState } from 'react';
+import { getIngredientIcon } from '../IngredientIcons';
+import { useEffect, useState } from 'react';
 import { BsFillArrowDownCircleFill } from 'react-icons/bs';
-import { getIngredientIcon } from '../myKitchen/MyKitchen';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 
 export default function MyIngredients() {
 
     const [call, setCall] = useState({ clicked: false })
-    const { user } = useContext(UserContext);
     const [ingredients, setIngredients] = useState(null)
+    const [userAPI, setUSerAPI] = useState('');
 
     useEffect(() => {
         const getInfo = async () => {
             try {
-                // eslint-disable-next-line
-                if (user.email != '') {
+                const userBO = await axios.get('http://localhost:3000/user');
+                if (userBO.data.email != '') {
                     const response = await axios.post('http://localhost:3000/user/ingredients', {
-                        userId: user.id
+                        userId: userBO.data.id
                     });
+                    setUSerAPI(userBO.data);
                     setIngredients(response);
                 }
             } catch (error) {
@@ -35,9 +35,9 @@ export default function MyIngredients() {
         let ingEliminated = {};
         let newIngredientList = Object.assign({}, ingredients);
         try {
-            if (user.email !== '') {
+            if (userAPI.email !== '') {
                 ingEliminated = await axios.post('http://localhost:3000/user/removeIngredient', {
-                    userId: user.id,
+                    userId: userAPI.id,
                     ingredientId: id,
                     ingredientName: name
                 });
@@ -66,7 +66,7 @@ export default function MyIngredients() {
     const updateScreen = async (data) => {
         if (data === 'update') {
             const response = await axios.post('http://localhost:3000/user/ingredients', {
-                userId: user.id
+                userId: userAPI.id
             });
             setIngredients(response);
         }
