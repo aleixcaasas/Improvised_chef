@@ -145,10 +145,18 @@ const controller = {
         const password = params.password;
         const confirmPassword = params.confirmPassword;
         if(profilePic){
-            await uploadProfilePic(userId, profilePic);
+            uploadProfilePic(userId, profilePic).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err);
+            });
         }
         if(password !== undefined && confirmPassword !== undefined){
-            await changePassword(password, confirmPassword);
+            changePassword(password, confirmPassword).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err);
+            });
         }
         let response = await editUserProfile(userId, fullName, userName);
         res.status(response[0]).send(response[1]);
