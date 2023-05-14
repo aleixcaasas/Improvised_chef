@@ -144,8 +144,37 @@ const controller = {
         }
     },
 
+    editUserProfile: async function(req, res) {
+        const params = req.body;
+        const userId = params.userId;
+        const userName = params.userName;
+        const fullName = params.fullName;
+        const profilePic = req.file;
+        const password = params.password;
+        const confirmPassword = params.confirmPassword;
+        if(profilePic){
+            uploadProfilePic(userId, profilePic).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        if(password !== undefined && confirmPassword !== undefined){
+            changePassword(password, confirmPassword).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        let response = await editUserProfile(userId, fullName, userName);
+        res.status(response[0]).send(response[1]);
+    },
+
     myKitchen: async function(req, res) {
-        return await myKitchen(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const response = await myKitchen(userId);
+        res.status(response[0]).send(response[1]);
     },
 
     getUserIngredientList: async function(req, res) {
@@ -161,15 +190,28 @@ const controller = {
     },
 
     addUserIngredient: async function(req, res) {
-        return await addUserIngredient(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const ingredientId = params.ingredientId;
+        const ingredientName = params.ingredientName;
+        const response = await addUserIngredient(userId, ingredientId, ingredientName);
+        res.status(response[0]).send(response[1]);
     },
 
     removeUserIngredient: async function(req, res) {
-        return await removeUserIngredient(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const ingredientId = params.ingredientId;
+        const ingredientName = params.ingredientName;
+        const response = await removeUserIngredient(userId, ingredientId, ingredientName);
+        res.status(response[0]).send(response[1]);
     },
 
     getUserShoppingList: async function(req, res) {
-        return await getUserShoppingList(req, res);
+        const params = req.body;
+        const userId = params.userId;
+        const response = await getUserShoppingList(userId);
+        res.status(response[0]).send(response[1]);
     },
 
     addUserShoppingList: async function(req, res) {

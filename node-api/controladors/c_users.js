@@ -1,5 +1,4 @@
-const { db, query, collection, where, getDocs, getDoc, updateDoc, doc, arrayUnion, arrayRemove } = require('../firebase/firebase-config');
-
+const { db, query, collection, where, getDocs, getDoc, updateDoc, updatePassword, updateProfile, getDownloadURL, storage, ref, uploadBytesResumable, auth, doc, arrayUnion, arrayRemove } = require('../firebase/firebase-config');
 
 
 const getUserInfo = async function (id) {
@@ -46,18 +45,74 @@ const getUserProfile = async function (id) {
 
 };
 
-const myKitchen = async (req, res) => {
+const uploadProfilePic = async function(userId, profilePic){
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
-        if (querySnapshot.exists()) {
-            res.status(200).send([querySnapshot.data().myIngredients, querySnapshot.data().shoppingList, querySnapshot.data().favoriteRecipes]);
+        const storageRef = ref(storage, `images/${userId + " / " + profilePic.originalname}`);
+        const metadata = {
+            contentType: profilePic.mimetype,
+        };
+        await uploadBytesResumable(storageRef, profilePic.buffer, metadata);
+        getDownloadURL(storageRef)
+            .then(async downloadURL => {
+                await updateProfile(auth.currentUser, {
+                    photoURL: downloadURL
+                });
+                await updateDoc(doc(db, "users", userId), {
+                    profilePic: downloadURL
+                });
+            })
+            .catch(error => {
+                return [500, error];
+            });
+        return [200, 'Image uploaded successfully'];
+    }
+    catch (error){
+        return [500, error];
+    }
+}
+
+const changePassword = async function(newPassword, confirmPassword){
+    if(auth.currentUser.providerData[0].providerId==="password" && newPassword.length > 0 && confirmPassword.length > 0){
+        if (newPassword === confirmPassword) {
+            await updatePassword(auth.currentUser, newPassword);
         }
         else {
-            res.status(500).send('User not exist');
+            return [500, 'Passwords do not match'];
+        }
+    }
+}
+
+const editUserProfile = async function(userId, newFullName, newUserName){
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", userId));
+        if (querySnapshot.exists()) {
+            await updateDoc(doc(db, "users", userId), {
+                fullName: newFullName,
+                userName: newUserName
+            });
+            return [200, 'User profile edited successfully'];
+        }
+        else {
+            return [500, 'User profile not edited'];
+        }
+    }
+    catch (error){
+        return [500, error];
+    }
+}
+
+const myKitchen = async (userId) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", userId));
+        if (querySnapshot.exists()) {
+            return [200, [querySnapshot.data().myIngredients, querySnapshot.data().shoppingList, querySnapshot.data().favoriteRecipes]];
+        }
+        else {
+            return [500, 'User not exist'];
         }
     }
     catch (error) {
-        res.status(500).send('Error getting myIngredients: ', error);
+        return [500, 'Error getting myIngredients: ' + error];
     }
 }
 
@@ -74,71 +129,70 @@ const getUserIngredientList = async (userId) => {
     }
 };
 
-const addUserIngredient = async (req, res) => {
+const addUserIngredient = async (userId, ingredientId, ingredientName) => {
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
             if (querySnapshot.data().myIngredients.some(ingredient => {
-                return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) ||
-                    Object.values(ingredient).includes(req.body.ingredientName)
+                return Object.values(ingredient).includes(parseInt(ingredientId)) ||
+                    Object.values(ingredient).includes(ingredientName)
             })) {
-                res.status(500).send('User ingredient exist');
+                return [500, 'User ingredient exist'];
             }
             else {
-                await updateDoc(doc(db, "users", req.body.userId), {
-                    myIngredients: arrayUnion({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
+                await updateDoc(doc(db, "users", userId), {
+                    myIngredients: arrayUnion({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                res.status(200).send({text: 'Ingredient "' + req.body.ingredientName + '" added to myIngredients.',name: req.body.ingredientName});
+                return [200, {text: 'Ingredient "' + ingredientName + '" added to myIngredients.',name: ingredientName}];
             }
         }
         else {
-            res.status(500).send('User not exist');
+            return [500, 'User not exist'];
         }
     }
     catch (error) {
-        res.status(500).send('Error insert ingredients: ', error);
+        return [500, 'Error insert ingredients: '+error];
     }
 };
 
-const removeUserIngredient = async (req, res) => {
+const removeUserIngredient = async (userId, ingredientId, ingredientName) => {
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
             if (querySnapshot.data().myIngredients.some(ingredient => {
-                return Object.values(ingredient).includes(parseInt(req.body.ingredientId)) &&
-                    Object.values(ingredient).includes(req.body.ingredientName)
+                return Object.values(ingredient).includes(parseInt(ingredientId)) &&
+                    Object.values(ingredient).includes(ingredientName)
             })) {
-
-                await updateDoc(doc(db, "users", req.body.userId), {
-                    myIngredients: arrayRemove({ id: parseInt(req.body.ingredientId), name: req.body.ingredientName })
+                await updateDoc(doc(db, "users", userId), {
+                    myIngredients: arrayRemove({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                res.status(200).send({text: 'Ingredient "' + req.body.ingredientName + '" deleted to myIngredients.', name: req.body.ingredientName});
+                return [200, {text: 'Ingredient "' + ingredientName + '" deleted to myIngredients.', name: ingredientName}];
             }
             else {
-                res.status(500).send('User ingredient not exist');
+                return [500, 'User ingredient not exist'];
             }
         }
         else {
-            res.status(500).send('User not exist');
+            return [500, 'User not exist'];
         }
     }
     catch (error) {
-        res.status(500).send('Error remove ingredients: ', error);
+        return [500, 'Error remove ingredients: '+error]
     }
 };
 
-const getUserShoppingList = async (req, res) => {
+const getUserShoppingList = async (userId) => {
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
-            res.status(200).send(querySnapshot.data().shoppingList);
+            return [200, querySnapshot.data().shoppingList];
         }
         else {
-            res.status(500).send('User not exist');
+            return [500, 'User not exist'];
         }
     }
     catch (error) {
-        res.status(500).send('Error getting shoppingList: ', error);
+        return [500, 'Error getting shoppingList: '+error];
     }
 };
 
