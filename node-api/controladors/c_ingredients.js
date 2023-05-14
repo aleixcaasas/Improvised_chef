@@ -14,11 +14,11 @@ const ingredientsName = async function () {
   return Promise.all(docs);
 };
 
-const getIngredientsSearched = async function (req, res) {
+const getIngredientsSearched = async function (userId) {
   let docs = [];
   const nameIngredient = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
   const querySnapshot = await getDocs(query(collection(db, "ingredients")));
-  const querySnapshot2 = await getDoc(doc(db, "users", req.body.userId));
+  const querySnapshot2 = await getDoc(doc(db, "users", userId));
   
   let userIngredients = ''
   if (req.body.list === 'ingredients') {
@@ -40,9 +40,9 @@ const getIngredientsSearched = async function (req, res) {
         }
       }
     }
-    return docs;
+    return [200, docs];
   } catch (error) {
-    return res.status(500).send(error);
+    return [500, error];
   }
 
 }
