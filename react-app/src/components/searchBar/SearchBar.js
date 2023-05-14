@@ -2,14 +2,10 @@ import './SearchBar.css';
 import axios from "axios";
 import { useState } from 'react';
 import { debounce } from 'lodash';
-import { useContext } from 'react';
-import { UserContext } from '../../pages/globalValue';
-
 
 
 export default function SearchBar({handleSearch}) {
     
-    const { user } = useContext(UserContext);
     const [buttonClicked, setButtonClicked] = useState(false);
 
     const handleChange = async (value) => {
@@ -36,11 +32,11 @@ export default function SearchBar({handleSearch}) {
     async function searchRecipesWithIngr(){
         if (!buttonClicked){
             try {
+                const userBO = await axios.get('http://localhost:3000/user');
                 let response = await axios.post('http://localhost:3000/user/searchWithIngredients', {
-                    userId: user.id
+                    userId: userBO.data.id
                 });
                 handleSearch(response.data);
-                console.log(response.data);
                 setButtonClicked(true);
             }
             catch (error) {

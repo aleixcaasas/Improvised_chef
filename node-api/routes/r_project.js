@@ -1,5 +1,7 @@
 const express = require('express');
 const projectController = require('../controladors/c_project');
+const multer = require('multer');
+const upload = multer({storage: multer.memoryStorage()});
 const router = express.Router();
 
 router.get(['/home', '/'], projectController.home);
@@ -8,7 +10,8 @@ router.post('/login', projectController.login);
 router.post('/loginWithGoogle', projectController.loginGoogle); 
 router.post('/register', projectController.register);
 router.post('/resetPassword', projectController.resetPassword);
-router.post('/logout', projectController.logout);
+router.get('/logout', projectController.logout);
+router.get('/user', projectController.actualUser);
 
 /* RECIPES ENDPOINTS */
 router.post('/recipe/detail', projectController.infoRecipe);
@@ -21,6 +24,7 @@ router.post('/ingredients/name', projectController.ingredientsName);
 /* USER ENDPOINTS */
 router.post('/user/summary', projectController.getUserInfo);
 router.post('/user/profile', projectController.getUserProfile);
+router.post('/user/edit', upload.single('profilePic'), projectController.editUserProfile);
 
 router.post('/user/myKitchen', projectController.myKitchen);
 

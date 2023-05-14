@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoginGoogle from "./LoginGoogle";
 import axios from "axios";
-import { UserContext } from '../../pages/globalValue';
-import { useContext } from "react";
 
 export default function LoginEmail(props) {
+    
     const navigation = useNavigate();
     const [formState, setFormState] = useState({ email: "", password: "" })
     const { email, password } = formState;
    
     
-    const { setUser } = useContext(UserContext);
 
     const handleChange = (e) => {
         let value = e.target.value;
@@ -27,14 +25,12 @@ export default function LoginEmail(props) {
                 props.errorM({error: true, comment: "Please fill all the fields"});
             }
             else {
-                const result = await axios.post('http://localhost:3000/login', { email, password });
+                const result = await axios.post('http://localhost:3000/login', { email, password }, {withCredentials:true});
                 if (result.data.id != null && result.data.loguejat) {
-                    setUser({ email: result.data.email, id: result.data.id });
-                    window.localStorage.setItem('usuariLogged', JSON.stringify({ email: result.data.email, id: result.data.id }))
                     navigation("/");
                 }
                 else {
-                    props.errorM({error: true, comment: "Username or password incorrect"});
+                   props.errorM({error: true, comment: "Username or password incorrect"});
                 }
             }
         }

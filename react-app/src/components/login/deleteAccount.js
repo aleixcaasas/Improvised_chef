@@ -5,7 +5,6 @@ class DeleteAccountButton extends React.Component {
   handleDeleteAccount = async () => {
     try {
       const response = await axios.post('http://localhost:3000/user/delete');
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

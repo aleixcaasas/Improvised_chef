@@ -196,7 +196,7 @@ const removeUserShoppingList = async (req, res) => {
 };
 
 const getUserRecipeList = async (req, res) => {
-
+    
     try {
         const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
         if (querySnapshot.exists()) {
@@ -340,4 +340,4 @@ const searchWithIngredients = async (req, res) => {
 
 
 
-module.exports = { getUserInfo, getUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
+module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
