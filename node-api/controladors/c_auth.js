@@ -124,22 +124,20 @@ const resetPasswordEmail = async (email) => {
     return "There is not any account with this email";
 }
 
-const deleteUser = async(userId) => {
-    try{
-        const userDoc = await doc(db, "users", userId);
-        console.log(userDoc)
-        if (userDoc) {
-            await deleteDoc(userDoc);
-            return "Account deleted successfully!";
-        }
-        console.log('No account with ID');
-        return "There is not any account with this ID";
-
-    } catch (error) {
-        console.log(error);
-        return String(error);
+const deleteUser = async (userId) => {
+  try {
+    const userDocRef = doc(db, "users", userId);
+    const userDocSnap = await getDoc(userDocRef);
+    if (userDocSnap.exists()) {
+      await deleteDoc(userDocRef);
+      return [200, "Account deleted successfully!"];
+    } else {
+      return [404, "There is not any account with this ID"];
     }
-}
+  } catch (error) {
+    return [500, String(error)];
+  }
+};
 
 
 module.exports = {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser};

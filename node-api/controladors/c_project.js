@@ -24,7 +24,7 @@ const controller = {
                 id: resposta.id
             })
         }
-        return res.status(200).send({  //200 conforme la peticio sha fet pero no ha donat el resultat esperat
+        return res.status(200).send({
             loguejat: false, id: resposta.id
         })
     },
@@ -44,7 +44,7 @@ const controller = {
             })
         }
         else{
-            return res.status(200).send({ //POSO 200 O 400?¿?¿?¿
+            return res.status(200).send({
                 loguejat: 'false'
             }) 
         }
@@ -61,7 +61,7 @@ const controller = {
             })
         }
         else{
-            return res.status(200).send({ //poso 200 ja que tot ha anat correcte l'unic que no s'ha loguejat
+            return res.status(200).send({
                 loguejat: 'false'
             })
         }
@@ -84,9 +84,40 @@ const controller = {
     },
 
     randomRecipe: async function(req, res) {
-        return await randomRecipe(req, res);
+        const numRecipes = parseInt(req.query.number) || 9;
+        let randomNum = []
+        while (randomNum.length < numRecipes) {
+            const RECIPES_NUMBER = 1378;
+            let random = Math.floor(Math.random() * RECIPES_NUMBER)
+          if (randomNum.indexOf(random) === -1) {
+            randomNum.push(random)
+          }
+        }
+        let response = await randomRecipe(randomNum);
+        return res.status(response[0]).send(response[1]);
     },
 
+    recipesName: async function(req, res) {
+        let nameRecipe = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
+        let response = await recipesName(nameRecipe);
+        return res.status(response[0]).send(response[1]);
+    },
+
+    ingredientsName: async function(req, res) {
+        let response = await ingredientsName();
+        return response;
+    },
+
+    getUserInfo: async function(req, res) {
+        let id = req.body.id;
+        let response = await getUserInfo(id);
+        return res.status(response[0]).send(response[1]);
+    },
+
+    getUserProfile: async function(req, res) {
+        let id = req.body.userId;
+        let response = await getUserProfile(id);
+    },
     infoRecipe: async function(req, res){
         const body = req.body;
         const recipeId = body.recipeId;
@@ -98,30 +129,6 @@ const controller = {
         }
         else{
             res.status(500).send('Recipe not exist');
-        }
-    },
-
-    recipesName: async function(req, res) {
-        return await recipesName(req, res);
-    },
-
-    ingredientsName: async function(req, res) {
-        return await ingredientsName(req, res);
-    },
-
-    getUserInfo: async function(req, res) {
-        return await getUserInfo(req, res);
-    },
-
-    getUserProfile: async function(req, res) {
-        const params = req.body;
-        const userId = params.userId;
-        const userProfile = await getUserProfile(userId);
-        if(userProfile){
-            res.status(200).send(userProfile);
-        }
-        else{
-            res.status(500).send('User not exist');
         }
     },
 
@@ -180,14 +187,8 @@ const controller = {
     },
     deleteUser: async function(req, res) {
         const userId = req.body.userId;
-        const output = await deleteUser(userId);
-        console.log(output);
-        if(output == 'Account deleted successfully!'){
-            res.status(200).send('Account deleted successfully!');
-        }
-        else{
-            res.status(500).send('Something went wrong!');
-        }
+        let response = await deleteUser(userId);
+        return res.status(response[0]).send(response[1]);
     }
 }
 

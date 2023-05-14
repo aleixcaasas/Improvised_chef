@@ -2,7 +2,8 @@ const { db } = require('../firebase/firebase-config');
 const { query, collection, limit, getDocs, getDoc, where, doc } = require("firebase/firestore");
 const { getUserIngredientList } = require('./c_users');
 
-const ingredientsName = async function (req, res) {
+
+const ingredientsName = async function () {
   /* S'HA DE CANVIAR L'ENDPOINT PER A FER LA BUSQUEDA SEGONS EL QUE BUSQUEM */
   let docs = [];
   const q = query(collection(db, "ingredients"), limit(10));
