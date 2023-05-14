@@ -251,7 +251,8 @@ const controller = {
 
     getIngredientSearched: async function(req, res) {
         const userId = req.body.userId;
-        let response = await getIngredientsSearched(userId);
+        const list = req.body.list;
+        let response = await getIngredientsSearched(userId, list);
         return res.status(response[0]).send(response[1]);
     },
     searchWithIngredients: async function(req, res) {

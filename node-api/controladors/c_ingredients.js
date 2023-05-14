@@ -14,16 +14,16 @@ const ingredientsName = async function () {
   return Promise.all(docs);
 };
 
-const getIngredientsSearched = async function (userId) {
+const getIngredientsSearched = async function (userId, list) {
   let docs = [];
   const nameIngredient = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
   const querySnapshot = await getDocs(query(collection(db, "ingredients")));
   const querySnapshot2 = await getDoc(doc(db, "users", userId));
   
   let userIngredients = ''
-  if (req.body.list === 'ingredients') {
+  if (list === 'ingredients') {
     userIngredients = querySnapshot2.data().myIngredients;
-  } else if (req.body.list === 'shopping') {
+  } else if (list === 'shopping') {
     userIngredients = querySnapshot2.data().shoppingList;
   }
 
