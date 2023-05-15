@@ -245,14 +245,15 @@ const controller = {
     removeUserRecipe: async function(req, res) {
         const userId = req.body.userId;
         const recipeId = req.body.recipeId;
-        let response = await removeUserRecipe(userId, recipeId);
+        let response = await removeUserRecipe(userId, parseInt(recipeId));
         return res.status(response[0]).send(response[1]);
     },
 
     getIngredientSearched: async function(req, res) {
         const userId = req.body.userId;
         const list = req.body.list;
-        let response = await getIngredientsSearched(userId, list);
+        const ingredientName = req.body.name;
+        let response = await getIngredientsSearched(userId, ingredientName, list);
         return res.status(response[0]).send(response[1]);
     },
     searchWithIngredients: async function(req, res) {

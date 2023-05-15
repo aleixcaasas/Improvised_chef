@@ -207,7 +207,7 @@ const addUserShoppingList = async (userId, ingredientName, ingredientId) => {
                 return [500,'Ingredient ShoppingList exist'];
             }
             else {
-                await updateDoc(doc(db, "users", req.body.userId), {
+                await updateDoc(doc(db, "users", userId), {
                     shoppingList: arrayUnion({ id: parseInt(ingredientId), name: ingredientName })
                 });
                 return [200,{text: 'Ingredient "' + ingredientName + '" added to shoppingList.',name: ingredientName}];
@@ -252,7 +252,7 @@ const removeUserShoppingList = async (userId, ingredientName, ingredientId) => {
 const getUserRecipeList = async (userId) => {
     
     try {
-        const querySnapshot = await getDoc(doc(db, "users", req.body.userId));
+        const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
             return [200, querySnapshot.data().favoriteRecipes];
         }
@@ -305,13 +305,12 @@ const removeUserRecipe = async (userId, recipeId) => {
         const userRef = doc(db, "users", userId);
         const userDoc = await getDoc(userRef);
         if (!userDoc.exists()) {
-            return res.status(404).send('User not found');
+            return [404, 'User not found'];
         }
 
-        const recipeId = parseInt(recipeId);
         const favoriteRecipes = userDoc.data().favoriteRecipes || [];
         if (!favoriteRecipes.some(recipe => recipe.id === recipeId)) {
-            return res.status(404).send(`Recipe ${recipeId} not found in favoriteRecipes`);
+            return [404, `Recipe ${recipeId} not found in favoriteRecipes`];
         }
 
         const updatedRecipes = favoriteRecipes.filter(recipe => recipe.id !== recipeId);
