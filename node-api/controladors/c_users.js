@@ -53,11 +53,11 @@ const uploadProfilePic = async function(userId, profilePic){
         };
         await uploadBytesResumable(storageRef, profilePic.buffer, metadata);
         getDownloadURL(storageRef)
-            .then(async downloadURL => {
-                await updateProfile(auth.currentUser, {
+            .then(downloadURL => {
+                /*updateProfile(auth.currentUser, {
                     photoURL: downloadURL
-                });
-                await updateDoc(doc(db, "users", userId), {
+                });*/
+                updateDoc(doc(db, "users", userId), {
                     profilePic: downloadURL
                 });
             })
