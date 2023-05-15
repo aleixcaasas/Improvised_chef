@@ -2,7 +2,7 @@ const home = require('./c_home');
 
 const {infoRecipe, recipesName, randomRecipe} = require('./c_recipes');
 const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
-const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients } = require('./c_users');
+const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients } = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser} = require('./c_auth');
 
 const controller = {
@@ -204,6 +204,16 @@ const controller = {
         const ingredientId = params.ingredientId;
         const ingredientName = params.ingredientName;
         const response = await removeUserIngredient(userId, ingredientId, ingredientName);
+        res.status(response[0]).send(response[1]);
+    },
+
+    addIngredientsRecipeShoppingList: async function(req, res) {
+        const body = req.body;
+        const recipeId = body.recipeId;
+        const userId = body.userId;
+        const userIngredients = await getUserIngredientList(userId);
+        const recipeData = await infoRecipe(recipeId, userIngredients);
+        const response = await addIngredientsRecipeShoppingList(userId, recipeData);
         res.status(response[0]).send(response[1]);
     },
 

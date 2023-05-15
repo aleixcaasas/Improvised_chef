@@ -181,6 +181,23 @@ const removeUserIngredient = async (userId, ingredientId, ingredientName) => {
     }
 };
 
+const addIngredientsRecipeShoppingList = async (userId, recipeData) => {
+    try {
+        const querySnapshot = await getDoc(doc(db, "users", userId));
+        if (querySnapshot.exists()) {
+            const ingredientsNotHasIt = recipeData.ingredients.filter(item => item['hasIt'] === false);
+            await updateDoc(doc(db, "users", userId), { shoppingList: arrayUnion(...querySnapshot.data().shoppingList, ...ingredientsNotHasIt)});
+            return [200, 'Recipe ingredients added to shoppingList'];
+        }
+        else {
+            return [500, 'User not exist'];
+        }
+
+    } catch(error) {
+        return [500, 'Error add recipe ingredients to shoppingList: ' + error];
+    }
+}
+
 const getUserShoppingList = async (userId) => {
     try {
         const querySnapshot = await getDoc(doc(db, "users", userId));
@@ -393,4 +410,4 @@ const searchWithIngredients = async (userId) => {
 
 
 
-module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
+module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
