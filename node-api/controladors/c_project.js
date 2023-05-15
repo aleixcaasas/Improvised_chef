@@ -130,12 +130,14 @@ const controller = {
         let response = await getUserProfile(id);
         return res.status(response[0]).send(response[1]);
     },
+
     infoRecipe: async function(req, res){
         const body = req.body;
         const recipeId = body.recipeId;
-        const userId = body.userId;
+        const userId = req.session.userID;
         const userIngredients = await getUserIngredientList(userId);
         const recipeData = await infoRecipe(recipeId, userIngredients);
+        console.log(userIngredients, recipeData);
         if(recipeData){
             res.status(200).send(recipeData);
         }

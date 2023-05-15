@@ -9,6 +9,7 @@ import MyKitchen from '../pages/MyKitchen'
 import MyIngredients from '../pages/MyIngredients'
 import ShoppingList from '../pages/ShoppingList'
 import FavoriteRecipes from '../pages/FavoriteRecipes'
+import ResumeSingleRecipe from '../pages/ResumeSingleRecipe' 
 
 /*S'HAURAN DE BORRAR TOTS ELS COMPONENTS ABANS D'ENTREGAR EL PROJECTE */
 import ForgotPassword from '../components/login/ForgotPassword'
@@ -31,6 +32,7 @@ export default function RouterDirections() {
             <Route exact path="/MyIngredients" element={<MyIngredients/>}/>
             <Route exact path="/ShoppingList" element={<ShoppingList/>}/>
             <Route exact path="/FavoriteRecipes" element={<FavoriteRecipes/>}/>
+            <Route exact path="/recipe/:title" element={<ResumeSingleRecipe/>}/>                      
 
             {/* COMPONENTS */}
             <Route exact path="/components" element={<Components></Components>} />

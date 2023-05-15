@@ -1,9 +1,9 @@
 import './Resume_recipe.css'
 import { useEffect, useState } from 'react';
 import {TbPoint,TbPointFilled,TbPlant,TbClockHour4,TbMeat}from "react-icons/tb";
+import axios from "axios";
 
-
-export default function ResumeRecipe ({singleReceipts, index}){
+export default function ResumeRecipe ({singleReceipts, index, obrirRecepta}){
 
     const title = singleReceipts.title; 
     const image = singleReceipts.image;
@@ -88,6 +88,14 @@ export default function ResumeRecipe ({singleReceipts, index}){
         return list.length;
     }
 
+    async function recipeDetails(title, id) {
+        const formatedTitle = title.replace(/\s+/g, '-');
+        const response = await axios.post(`http://localhost:3000/recipe/detail`, {recipeId: id});
+        //response conté tota la ingo de la recepta i obrirRercepta es una funció que li pasem per props per obrir la nova pagina
+        obrirRecepta({formatedTitle});
+        console.log(response.data);
+    }      
+
     function show_icons_ingridient(ingridients) {   
         
         const ingridients_to_check = ["chicken", "pork", "turkey", "cod", "beef", "sausage",  " lamb", "bacon" ];
@@ -125,7 +133,7 @@ export default function ResumeRecipe ({singleReceipts, index}){
                     </tr>  
                 </table>   
                 </div>
-                <button id = "green">See recipe details</button>
+                <button id="green" onClick={() => recipeDetails(title, singleReceipts.id)}>See recipe details</button>
             </div>
             
         </div>  
