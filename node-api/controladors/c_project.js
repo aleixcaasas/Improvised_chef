@@ -130,12 +130,14 @@ const controller = {
         let response = await getUserProfile(id);
         return res.status(response[0]).send(response[1]);
     },
+
     infoRecipe: async function(req, res){
         const body = req.body;
         const recipeId = body.recipeId;
-        const userId = body.userId;
+        const userId = req.session.userID;
         const userIngredients = await getUserIngredientList(userId);
         const recipeData = await infoRecipe(recipeId, userIngredients);
+        console.log(userIngredients, recipeData);
         if(recipeData){
             res.status(200).send(recipeData);
         }
@@ -245,14 +247,15 @@ const controller = {
     removeUserRecipe: async function(req, res) {
         const userId = req.body.userId;
         const recipeId = req.body.recipeId;
-        let response = await removeUserRecipe(userId, recipeId);
+        let response = await removeUserRecipe(userId, parseInt(recipeId));
         return res.status(response[0]).send(response[1]);
     },
 
     getIngredientSearched: async function(req, res) {
         const userId = req.body.userId;
         const list = req.body.list;
-        let response = await getIngredientsSearched(userId, list);
+        const ingredientName = req.body.name;
+        let response = await getIngredientsSearched(userId, ingredientName, list);
         return res.status(response[0]).send(response[1]);
     },
     searchWithIngredients: async function(req, res) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import '../components/login/login.css';
 import SideBar from "../components/sideBar/SideBar"
 import Register from "../components/register/Register";
@@ -12,9 +13,9 @@ import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContai
 export default function Home() {
 
     const [userLOCAL, setUserLOCAL] = useState({ email: '', id: '' });
-
     const [recipes, setRecipes] = useState([]);
     const [loginError, setloginError] = useState({ error: false, comment: "" });
+    const navigation = useNavigate();
 
     // ERROR MESSAGES FUNCTIONS
     const clicked = (message) => {
@@ -23,6 +24,12 @@ export default function Home() {
         }
     };
 
+    const obrirRecepta = async (info) => {
+        const response = await axios.post(`http://localhost:3000/recipe/detail`, {recipeId: info.id});
+        const infoRecipe = response.data;
+        navigation(`/recipe/${info.formatedTitle}`, { state: { infoRecipe } });
+    }
+
     const errorM = (message) => {
         if (message.error) {
             setloginError({ error: true, comment: message.comment });
@@ -30,7 +37,6 @@ export default function Home() {
         }
 
     };
-
 
     const handleSearch = (searchedReceips) => {
         if (searchedReceips.length !== 0) {
@@ -72,7 +78,7 @@ export default function Home() {
                     <>
                         <SideBar/>
                         <SearchBar handleSearch={handleSearch} />
-                        <ResumeRecipeContainer receiptsJSON={recipes} />
+                        <ResumeRecipeContainer receiptsJSON={recipes} obrirRecepta={obrirRecepta} />
                     </>
                 )}
             {

@@ -14,9 +14,9 @@ const ingredientsName = async function () {
   return Promise.all(docs);
 };
 
-const getIngredientsSearched = async function (userId, list) {
+const getIngredientsSearched = async function (userId, ingredientName, list) {
   let docs = [];
-  const nameIngredient = req.body.name.toLowerCase().replace(/\s+/g, ' ').trim();
+  const nameIngredient = ingredientName.toLowerCase().replace(/\s+/g, ' ').trim();
   const querySnapshot = await getDocs(query(collection(db, "ingredients")));
   const querySnapshot2 = await getDoc(doc(db, "users", userId));
   

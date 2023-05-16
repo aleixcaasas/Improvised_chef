@@ -21,7 +21,7 @@ const infoRecipe = async (recipeId, userIngredients) => {
     try {
         let ingredients = [];
         let recipe = {};
-        const querySnapshot = await getDoc(doc(db, "recipes", recipeId));
+        const querySnapshot = await getDoc(doc(db, "recipes", recipeId.toString()));
         if (querySnapshot.exists()) {
             for (const [key, value] of Object.entries(querySnapshot.data())) {
                 if (key !== 'ingredients') {
