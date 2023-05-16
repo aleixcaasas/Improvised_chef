@@ -1,5 +1,6 @@
 import Sidebar from "../components/sideBar/SideBar";
 import { useLocation } from 'react-router-dom';
+import DetailRecipe from '../components/detailRecipe/DetailRecipe'
 
 export default function Recipe() {
     const location = useLocation();
@@ -8,11 +9,10 @@ export default function Recipe() {
     //console.log('a', infoRecipe);
 
     return (
-        <div>
-            <div className="receipt_container">
-                <h2>Recipe</h2>
-            </div>
-            <Sidebar></Sidebar>
+        <div className="page">
+            <Sidebar/>
+            <DetailRecipe/>
+
         </div>
     )
 }
