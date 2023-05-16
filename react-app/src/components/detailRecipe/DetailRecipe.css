@@ -57,6 +57,7 @@
     flex-direction: row;
     width: 90%;
     height: 90%;
+    column-gap: 35px;
 }
 
 .photo-ingredients-div{
@@ -64,27 +65,32 @@
     flex-direction: column;
     width: 90%;
     height: 90%;
+    border-radius: 20px;
+    row-gap: 25px;
 }
 
 
 .foto-div{
-    background-color: aqua;
+    background-color: white;
     width: 100%;
     height: 90%;
+    border-radius: 20px;
 
 }
 
 .detail-ingredients-div{
-    background-color: blueviolet;
+    background-color: white;
     width: 100%;
     height: 90%;
+    border-radius: 20px;
 
 }
 
 .detail-description-div{
-    background-color: chocolate;
+    background-color: white;
     width: 100%;
     height: 90%;
+    border-radius: 20px;
 }
 
 
