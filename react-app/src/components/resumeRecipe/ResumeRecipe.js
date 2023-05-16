@@ -89,11 +89,11 @@ export default function ResumeRecipe ({singleReceipts, index, obrirRecepta}){
     }
 
     async function recipeDetails(title, id) {
-        const formatedTitle = title.replace(/\s+/g, '-');
-        const response = await axios.post(`http://localhost:3000/recipe/detail`, {recipeId: id});
+        let formatedTitle = title.replace(/\s+/g, '-');
+        formatedTitle = formatedTitle.toLowerCase();
         //response conté tota la ingo de la recepta i obrirRercepta es una funció que li pasem per props per obrir la nova pagina
-        obrirRecepta({formatedTitle});
-        console.log(response.data);
+        obrirRecepta({formatedTitle, id});
+        
     }      
 
     function show_icons_ingridient(ingridients) {   

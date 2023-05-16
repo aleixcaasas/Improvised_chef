@@ -8,7 +8,6 @@ import SearchBar from "../components/searchBar/SearchBar"
 import { useState, useEffect } from "react";
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
 import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContainer"
-import ResumeSingleRecipe from "./ResumeSingleRecipe"
 
 
 export default function Home() {
@@ -25,8 +24,10 @@ export default function Home() {
         }
     };
 
-    const obrirRecepta = (title) => {
-        navigation(`/recipe/${title.formatedTitle}`);
+    const obrirRecepta = async (info) => {
+        const response = await axios.post(`http://localhost:3000/recipe/detail`, {recipeId: info.id});
+        const infoRecipe = response.data;
+        navigation(`/recipe/${info.formatedTitle}`, { state: { infoRecipe } });
     }
 
     const errorM = (message) => {
@@ -78,7 +79,6 @@ export default function Home() {
                         <SideBar/>
                         <SearchBar handleSearch={handleSearch} />
                         <ResumeRecipeContainer receiptsJSON={recipes} obrirRecepta={obrirRecepta} />
-                        
                     </>
                 )}
             {
