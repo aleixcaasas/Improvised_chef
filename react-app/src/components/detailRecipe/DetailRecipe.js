@@ -9,17 +9,21 @@ export default function DetailRecipe() {
                     <div className="prepareButt-div"><button className="prepareButt" >Prepare / add</button></div>
                 </div>
 
-                <div className="recipeInfo-div">
-                    <div className="foto_Ingredients-div">
+                <div className="three-elements-div">
+                    <div className="photo-ingredients-div">
+                        <div className="foto-div">
+                            <p>foto de la recepta</p>
+                        </div>
 
+                        <div className="detail-ingredients-div">
+                            <p>ingredients</p>
+                        </div>
                     </div>
-
-
-                </div>
-
-                <div className="description-div">
-
-                </div>
+                    
+                    <div className="detail-description-div">
+                        <p>Desctipcio de la recepta</p>
+                    </div>
+                </div>          
             </div>
         </div>
     );
