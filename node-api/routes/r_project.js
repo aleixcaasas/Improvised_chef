@@ -32,6 +32,7 @@ router.post('/user/ingredients', projectController.getUserIngredientList);
 router.post('/user/addIngredient', projectController.addUserIngredient);
 router.post('/user/removeIngredient', projectController.removeUserIngredient);
 
+router.post('/user/addIngredientsRecipeShoppingList', projectController.addIngredientsRecipeShoppingList);
 router.post('/user/shoppingList', projectController.getUserShoppingList);
 router.post('/user/addShoppingList', projectController.addUserShoppingList);
 router.post('/user/removeShoppingList', projectController.removeUserShoppingList);
