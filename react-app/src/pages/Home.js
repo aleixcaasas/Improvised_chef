@@ -35,8 +35,9 @@ export default function Home() {
             setloginError({ error: true, comment: message.comment });
             <ErrorMessage errorMessage={message.comment} clicked={clicked}></ErrorMessage>
         }
-
     };
+
+    
 
     const handleSearch = (searchedReceips) => {
         if (searchedReceips.length !== 0) {
@@ -65,7 +66,7 @@ export default function Home() {
         const setLocalStorageUser = async () => {
             const userActual = await axios.get('http://localhost:3000/user');
             if (userActual) {
-                setUserLOCAL(userActual.data) //aquí el user conté el email i la id
+                setUserLOCAL(userActual.data); //aquí el user conté el email i la id
             }
         }
         setLocalStorageUser()
