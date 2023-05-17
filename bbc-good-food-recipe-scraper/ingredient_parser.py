@@ -50,8 +50,9 @@ def refactor_name(name: str):
             break
         new_name += char
 
-    new_name = ''.join(i for i in new_name if not i.isdigit())
-    new_name = re.sub(r'[^a-zA-Z\u00C0-\u017F]+', ' ', new_name)
+    new_name = ''.join(i.lower() for i in new_name if not i.isdigit())
+    new_name = re.sub(r'\\[uU][0-9a-fA-F]{4}', '', new_name)
+    new_name = re.sub(r'[^\x00-\x7F]', '', new_name)
     new_name = " ".join(new_name.split())
     new_name_list = new_name.split()
     for censored in censored_variables:
@@ -64,7 +65,8 @@ def refactor_name(name: str):
             break
         if word == 'or':
             break
-        res.append(word)
+        if len(word) > 2:
+            res.append(word)
     return ' '.join(res)
 
 
