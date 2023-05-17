@@ -34,6 +34,7 @@ export default function DetailRecipe(props) {
 
                         <div className="detail-ingredients-div">
                             <h4>INGREDIENTS:</h4>
+                            <hr className="separator-ingredients"></hr>
                             {infoRecipe.ingredients.map((ingredient) =>
                                 <div className="ingredient">
                                     <li style={{ display: 'flex', alignItems: 'center' }}>
@@ -52,7 +53,19 @@ export default function DetailRecipe(props) {
                     </div>
 
                     <div className="detail-description-div">
-                        <p>Desctipcio de la recepta</p>
+                        <h4>DESCRIPTION:</h4>
+                        <div className="description">
+                            <hr className="separator-ingredients"></hr>
+                            <div className="details">
+                                <p>Difficulty: </p> <a>{infoRecipe.difficulty}</a>
+                                <p>Serves: </p> <a>{infoRecipe.serves}</a>
+                                <p>Preparation Time: </p> <a>{infoRecipe.time_preparation}</a>
+                                <p>Cooking Time: </p> <a>{infoRecipe.time_cooking}</a>
+                            </div>
+                            <div className="button-link-div"><a href={infoRecipe.self_url}><button className="button-link">Original recipe</button></a></div>
+                            <hr className="separator-ingredients"></hr>
+                            <p>{infoRecipe.description}</p>
+                        </div>
                     </div>
                 </div>
             </div>
