@@ -30,6 +30,11 @@
     flex-direction: row;
     width: 100%;
     margin-left: 100px;
+    column-gap: 20px;
+}
+
+.fav-icon{
+    color: var(--green);
 }
 
 .prepareButt-div {
