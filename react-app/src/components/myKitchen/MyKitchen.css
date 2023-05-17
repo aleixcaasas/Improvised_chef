@@ -61,17 +61,41 @@
 
 .container_list {
     background-color: white;
-    border-radius: var(--radius_border); 
+    border-radius: var(--radius_border);
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: minmax(0, 2fr);
     overflow-y: auto;
     padding: 7px;
     align-items: center;
     justify-items: center;
 }
 
+.container_list_myrecepit {
+    background-color: white;
+    border-radius: var(--radius_border);
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto;
+    padding: 7px;
+    align-items: center;
+    justify-items: center;
+}
+
+.recipe_data_myKitchen {
+    display: flex;
+    align-items: center;
+}
+
+#container_receipt {
+   display: flex;
+   flex-flow: column;
+
+   
+
+}
 
 /*container_list*/
 #no_list {
@@ -93,10 +117,21 @@
     transform: rotate(180deg);
 }
 
-.recipe_pic_item {    
-    max-height: 100%;
-    margin:10px; 
+
+.recipe_item {    
+    height: 70px;
+    margin: 10px;
+    width: 90%;
+    display: flex;
+	flex-direction: row;
+	align-items: left;
     
+}
+.recipe_item p {
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+
 }
 
 
@@ -105,8 +140,10 @@
     width: 70px;
     border-radius: 50%;
     background-position: center;
-    background-size: cover; 
-    position: relative;     
+    background-size: cover;
+    position: relative;
+    margin-right: 10px;
+    flex-shrink: 0;
 }
 
 
