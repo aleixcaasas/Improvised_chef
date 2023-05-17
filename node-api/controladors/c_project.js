@@ -136,7 +136,6 @@ const controller = {
         const userId = req.session.userID;
         const userIngredients = await getUserIngredientList(userId);
         const recipeData = await infoRecipe(recipeId, userIngredients);
-        console.log(userIngredients, recipeData);
         if(recipeData){
             res.status(200).send(recipeData);
         }

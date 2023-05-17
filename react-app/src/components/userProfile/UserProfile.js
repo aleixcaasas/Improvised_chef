@@ -64,8 +64,6 @@ export default function UserProfile() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-
-            console.log(response.data); // Handle the response as needed
         } catch (error) {
             console.log(error);
         }
@@ -83,17 +81,7 @@ export default function UserProfile() {
         const username = document.getElementById('username-input').value;
         const email = document.getElementById('email-input').value;
         */
-
-        console.log("name:" + name)
-        console.log("username:" + username)
-
-
-
     }
-
-    console.log("user id:" + userAPI.id)
-    console.log("name:" + name)
-    console.log(imageRef)
 
     return (
         <div className="div-user">

@@ -6,13 +6,10 @@ export default function Recipe() {
     const location = useLocation();
     const { infoRecipe } = location.state;
 
-    //console.log('a', infoRecipe);
-
     return (
         <div className="page">
             <Sidebar/>
             <DetailRecipe/>
-
         </div>
     )
 }
