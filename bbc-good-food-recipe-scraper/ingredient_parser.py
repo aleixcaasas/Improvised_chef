@@ -13,8 +13,6 @@ def read_censored_keywords(file_path):
 
 
 
-unit_variables = ['litre', 'tbsp', 'tspb',
-                  'tsp', 'mg', 'ml', 'g', 'litre', 'l']
 censored_variables = read_censored_keywords('censored.json')
 id_counter_ingredient = 0
 id_counter_recipe = 0
@@ -26,68 +24,11 @@ def get_data_from_ingredient(s: str, recipe_id: int):
     global total
     total += 1
     print(total)
-    quantity_bool, unit_bool, name_bool = False, False, False
-    name = ''
-    quantity = 0.0
-    unit = None
+    name = s
     i = 0
     global id_counter_ingredient
-    while i < len(s):
-        if s[i].isnumeric() or s[i] == "½" or s[i] == "¼":
-            if i == 0:
-                quantity_bool = True
-            if quantity_bool:
-                if s[i] == "½":
-                    quantity += 0.5
-                elif s[i] == "¼":
-                    quantity += 0.25
-                elif s[i] == "⅓":
-                    quantity += 0.33
-                elif s[i] == "⅔":
-                    quantity += 0.66
-                elif s[i] == "¾":
-                    quantity += 0.75
-                elif s[i] == "⅛":
-                    quantity += 0.125
-                elif s[i].isnumeric():
-                    quantity += float(s[i])
-        else:
-            if quantity_bool:
-                quantity_bool = False
-                for unit_element in unit_variables:
-                    if unit_element in s[i:i + 7]:
-                        if s[i:i + len(unit_element) + 1].replace(' ', '') == unit_element:
-                            unit = unit_element
-                            i += len(unit)
-                            break
-                unit_bool = True
-
-            if unit_bool:
-                if s[i] == ' ':
-                    name_bool = True
-                elif name_bool:
-                    name_start = i
-                    name = s[name_start:]
-                    name = refactor_name(name.split(',')[0])
-                    break
-        i += 1
-    try:
-        quantity = float(quantity)
-    except ValueError:
-        return f'{s}'
-    if not unit:
-        split_words = name.split()
-        for unit_element in unit_variables:
-            if unit_element in split_words:
-                unit = unit_element
-                split_words.remove(unit_element)
-                name = ' '.join(split_words)
-                break
-        if not unit:
-            unit = 'No unit'
-    name = refactor_name(name.split(',')[0])
-    if unit == "tspb" or unit == "tsp":
-        unit = "tbsp"
+    name = refactor_name(name)
+    print(name)
     if name:
         if name not in ingredient_dict:
             ingredient_dict[name] = {'name': name, 'id': id_counter_ingredient, 'recipes_in': []}
@@ -95,27 +36,36 @@ def get_data_from_ingredient(s: str, recipe_id: int):
             id_counter_ingredient += 1
         current_id = ingredient_dict[name]['id']
         ingredient_dict[name]['recipes_in'].append(recipe_id)
-        return {'id': current_id, 'name': name, 'quantity': quantity, 'unit': unit, 'orig': s}
+        return {'id': current_id, 'name': name, 'orig': s}
     return {'name': s}
 
 
 def refactor_name(name: str):
     # Filter of and other unwanted names
-    new_name = name
-    for censored_name in censored_variables:
-        if censored_name in name:
-            location = name.index(censored_name) + len(censored_name) + 1
-            new_name = name[location:]
+    new_name = ''
+    for char in name:
+        if char == ',':
+            break
+        if char == '(':
+            break
+        new_name += char
 
-    # remove multiple spaces
-    new_name = re.sub(r'\s+', ' ', new_name)
-    pattern = r'[\[\({].*?[\)\]}]'  # to remove text inside brackets
-    new_name = re.sub(pattern, '', new_name)
-    pattern = r'\s*\(.+?\)'  # to remove text inside parentheses
-    new_name = re.sub(pattern, '', new_name)
-    new_name = re.sub(r'[^a-zA-Z\s]', '', new_name)
-    new_name = new_name.strip()
-    return new_name
+    new_name = ''.join(i for i in new_name if not i.isdigit())
+    new_name = re.sub(r'[^a-zA-Z\u00C0-\u017F]+', ' ', new_name)
+    new_name = " ".join(new_name.split())
+    new_name_list = new_name.split()
+    for censored in censored_variables:
+        for subword in new_name_list:
+            if subword == censored:
+                new_name_list.remove(subword)
+    res = []
+    for word in new_name_list:
+        if word == 'and':
+            break
+        if word == 'or':
+            break
+        res.append(word)
+    return ' '.join(res)
 
 
 def parse_recipe(recipe):
