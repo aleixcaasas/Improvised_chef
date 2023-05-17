@@ -69,33 +69,32 @@ export default function MyKitchen() {
                     </Link>
                 </div>
             );
-        } else if (recipesList.length > 0 && recipesList.length < 6) {
+        } else  {
             return (
-                <div className="container_list">
-                    {recipesList.map((recipe, index) => (
-                        <div className='recipe_pic_item' key={index}>
+                <div className="container_list_myrecepit" >
+                    {recipesList.map((recipe, index) => 
+                        <>
+                        <div className='recipe_item' key={index}>
                             <div
                                 className='recipe_image'
                                 style={{ backgroundImage: `url("${recipe.image}")` }}>
                             </div>
+                            <div className="recipe_data_myKitchen">
+                                <p>{recipe.title}</p>
+                            </div>
+                           
                         </div>
-                    ))}
+                       
+                            {recipesList[recipesList.length - 1] !== recipe && (
+                                <hr className="separador" />
+                            )}
+                        
+                        </>
+                        
+                    )}
                 </div>
             )
-        } else {
-            return (
-                <div className="container_list">
-                    {recipesList.map((recipe, index) => (
-                        <div className='recipe_pic_item' key={index}>
-                            <div
-                                className='recipe_image'
-                                style={{ backgroundImage: `url("${recipe.image}")` }}>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            );
-        }
+        } 
 
 
     };
