@@ -1,43 +1,42 @@
-
 .searchBar-div {
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   left: 30%;
-  width: 70%; 
-  background: transparent; 
+  width: 70%;
+  background: transparent;
 }
 
 .searchBar1 {
   width: 60%;
-  max-width: 60%;  
+  max-width: 60%;
   border-radius: 25px !important;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   margin-right: 3%;
   padding: 10px 20px;
   border: solid 1px rgba(0, 0, 0, 0.514);
   font-size: 1em;
-  outline: none;  
+  outline: none;
   color: inherit;
-	border-top-right-radius: 25px;
-	border-top-left-radius: 25px;
-	border: none;
-  text-align: left;	
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border: none;
+  text-align: left;
 }
 
-.CookButton {  
+.CookButton {
   width: 60%;
   height: 43px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   padding: 10px 20px;
-  margin-right: 10%;  
-  display: block;  
+  margin-right: 10%;
+  display: block;
   color: #fff;
   background-color: var(--red);
   outline: none;
-  border: none;  
+  border: none;
   border-radius: 50px;
   transition: .2s ease-in;
   cursor: pointer;
@@ -51,57 +50,64 @@
   background: rgb(102, 24, 24);
 }
 
-.clicked{
+.clicked {
   background: rgb(102, 24, 24);
 }
 
-.clicked:hover{
+.clicked:hover {
   background-color: var(--red);
 }
 
 
-@media only screen and (max-width: 768px) { 
+@media only screen and (max-width: 768px) {
 
   .searchBar-div {
     display: flex;
     flex-direction: row;
     left: 10%;
-    width: 100%;      
+    width: 100%;
     text-align: left;
   }
 
-  .CookButton{
+  .CookButton {
     font-size: 0.90em;
     right: 10%;
-  }  
+  }
 }
 
 
 @media only screen and (max-width: 360px) {
-  
+
   .searchBar-div {
-    display: flex;   
+    display: flex;
     flex-direction: column;
-    grid-column-gap: 5px;    
-    margin-right: 10%;  
+    grid-column-gap: 5px;
+    margin-right: 10%;
     width: 100%;
   }
 
-  .CookButton {     
+  .CookButton {
     order: 0;
     width: 80%;
     padding: 10px 48px;
     position: relative;
     right: 13px;
     margin-right: 3%;
-    left: -9%    
+    left: -9%
   }
 
-  .searchBar1{   
+  .searchBar1 {
     order: 1;
     width: 85% !important;
     max-width: 85% !important;
     left: -9%;
     position: relative;
-  }  
+  }
+}
+
+.errorNoIngredients {
+  position: absolute;
+  top: 450%;
+  left: 40%;
+  transform: translate(-50%, -50%);
 }

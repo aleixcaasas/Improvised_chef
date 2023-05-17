@@ -2,12 +2,13 @@ import './SearchBar.css';
 import axios from "axios";
 import { useState } from 'react';
 import { debounce } from 'lodash';
+import ErrorMessage from '../errorMessages/ErrorMessage';
 
 
 export default function SearchBar({handleSearch}) {
     
     const [buttonClicked, setButtonClicked] = useState(false);
-
+    const [errorIngredients, setError] = useState({comentari: ''})
     const handleChange = async (value) => {
         if (value.size === 0){
             handleSearch([]);
@@ -23,6 +24,12 @@ export default function SearchBar({handleSearch}) {
             }
         }
     }
+
+    const clicked = (message) => {
+        if (message === "true") {
+            setError({ commentari: '' });
+        }
+    };
  
     //To dealy the the call of the API 
     const debouncedSearch = debounce((e) =>{
@@ -41,7 +48,8 @@ export default function SearchBar({handleSearch}) {
             }
             catch (error) {
                 if (error.response.data === 'No ingredients found!'){
-                    alert('Add ingredients to your list to search recipes with them!');
+                    setError({comentari: 'Add ingredients to your list to search recipes with them!'})
+                    console.log(errorIngredients);
                 }
             }
         }else{
@@ -52,6 +60,11 @@ export default function SearchBar({handleSearch}) {
 
     return (
         <div className="searchBar-div"> 
+            {errorIngredients?.comentari &&(
+                <div className="errorNoIngredients">
+                    <ErrorMessage errorMessage={'Necesites tenir ingreidents a la llista!'} clicked={clicked}/>
+                </div>
+            )}
             <input
                 className="searchBar1"
                 placeholder={"Search by recipe name"}

@@ -15,6 +15,7 @@ export default function Home() {
     const [userLOCAL, setUserLOCAL] = useState({ email: '', id: '' });
     const [recipes, setRecipes] = useState([]);
     const [loginError, setloginError] = useState({ error: false, comment: "" });
+    const [oldRecipes, setOldRecipes] = useState('');
     const navigation = useNavigate();
 
     // ERROR MESSAGES FUNCTIONS
@@ -41,10 +42,11 @@ export default function Home() {
 
     const handleSearch = (searchedReceips) => {
         if (searchedReceips.length !== 0) {
+            setOldRecipes(recipes);
             setRecipes(searchedReceips);
         }
-        else {
-            setRecipes([]);
+        else{
+            setRecipes(oldRecipes)
         }
     };
 
@@ -52,8 +54,10 @@ export default function Home() {
         if (recipes.length === 0) {
             const fetchRecipes = async () => {
                 try {
-                    const response = await axios.get('http://localhost:3000/recipes/random');
-                    setRecipes(response.data);
+                    if(!recipes.data){
+                        const response = await axios.get('http://localhost:3000/recipes/random');
+                        setRecipes(response.data);
+                    }
                 } catch (error) {
                     console.error(error);
                 }
