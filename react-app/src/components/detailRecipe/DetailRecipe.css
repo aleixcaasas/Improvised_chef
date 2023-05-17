@@ -52,7 +52,7 @@
 .prepareButt{
     margin: 0;
     margin-right: 20px;
-    box-shadow: var(--box_shawod);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /*a partir d aqui, son els 3 elements de info que hi ha (foto, ingredients i descripcio)*/
