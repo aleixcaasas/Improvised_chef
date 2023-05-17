@@ -23,7 +23,7 @@ export default function DetailRecipe(props) {
             <div className="general-div">
                 <div className="detail-title-div">
                     <MdStars size={40} className="fav-icon" />
-                    <h2 className="detail-title">{infoRecipe.title}</h2>
+                    <h2 className="detail-title">{infoRecipe.title.toUpperCase()}</h2>
                     <div className="prepareButt-div"><button className="prepareButt" >
                         {allIngredients && ("Prepare recipe")}{!allIngredients && ("Add all ingredients to shopping list")}</button></div>
                 </div>
@@ -33,6 +33,7 @@ export default function DetailRecipe(props) {
                         <div className="foto-div" style={{ backgroundImage: `url("${infoRecipe.image}")` }} />
 
                         <div className="detail-ingredients-div">
+                            <h4>INGREDIENTS:</h4>
                             {infoRecipe.ingredients.map((ingredient) =>
                                 <div className="ingredient">
                                     <li style={{ display: 'flex', alignItems: 'center' }}>

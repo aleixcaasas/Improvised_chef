@@ -19,7 +19,9 @@
     box-shadow: var(--box_shawod);
     font-style: var(--font);
 }
-
+.fav-icon{
+    margin-left: 5%;
+}
 
 .detail-title-div {
     align-items: center;
@@ -29,7 +31,7 @@
     flex-wrap: nowrap;
     flex-direction: row;
     width: 100%;
-    margin-left: 100px;
+    /*margin-left: 100px;*/
     column-gap: 20px;
 }
 
@@ -39,20 +41,24 @@
 
 .prepareButt-div {
     display: flex;
-    width: 250px;
-    margin-left: auto;
+    width: 40%;
+    /*margin-left: auto;*/
+    justify-content: flex-end;
+    margin-right: 25px;
 }
 
 .detail-title{
-    text-align: center;
+    /*text-align: center;*/
     top: 0%;
     color: var(--green);
+    width: 40%;
 }
 
 .prepareButt{
     margin: 0;
-    margin-right: 20px;
+    margin-right: 25px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    width: 100%;
 }
 
 /*a partir d aqui, son els 3 elements de info que hi ha (foto, ingredients i descripcio)*/
@@ -92,7 +98,12 @@
     border-radius: 20px;
     overflow-y: scroll;
 }
-
+.detail-ingredients-div h4{
+    margin: 0;
+    margin-left: 15px;
+    margin-top: 15px;
+    color: var(--green);
+}
 .detail-description-div{
     background-color: white;
     width: 100%;
