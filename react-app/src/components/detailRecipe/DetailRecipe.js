@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./DetailRecipe.css"
 import { MdStars } from 'react-icons/md';
 import { getIngredientIcon } from "../IngredientIcons";
@@ -8,16 +8,16 @@ import { TiTimes } from 'react-icons/ti'
 
 export default function DetailRecipe(props) {
     const { infoRecipe } = props;
-    let allIngredients = useRef(null);
+    const [allIngredients, setAllIngredients] = useState('');
+
 
     useEffect(() => {
         function hasAllIngredients(ingredients){
             return ingredients.every(ingredient => ingredient.hasIt === true);
         }
-        allIngredients.current = hasAllIngredients(infoRecipe.ingredients);
+        setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
     },[infoRecipe]); 
 
-    console.log(infoRecipe)
     return (
         <div className="div-Recipe">
             <div className="general-div">
@@ -25,7 +25,7 @@ export default function DetailRecipe(props) {
                     <MdStars size={40} className="fav-icon" />
                     <h2 className="detail-title">{infoRecipe.title}</h2>
                     <div className="prepareButt-div"><button className="prepareButt" >
-                        {allIngredients.current && ("Prepare recipe")}{!allIngredients.current && ("Add all ingredients to shopping list")}</button></div>
+                        {allIngredients && ("Prepare recipe")}{!allIngredients && ("Add all ingredients to shopping list")}</button></div>
                 </div>
 
                 <div className="three-elements-div">
