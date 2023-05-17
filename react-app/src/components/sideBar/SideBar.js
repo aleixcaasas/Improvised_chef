@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaBars} from 'react-icons/fa';
 import { TbCheese } from 'react-icons/tb';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 
@@ -13,10 +13,16 @@ const Sidebar = (props) => {
     const showSidebar = () => setSidebar(!sidebar);
 
     const navigation = useNavigate();
+    const location = useLocation();
 
     const handleLogOut = async () => {
         await axios.get('http://localhost:3000/logout'); //ESBORREM LA COOKIE
-        navigation("/home");
+        if(location.pathname === '/home'){
+            window.location.reload();
+        }
+        else{
+            navigation("/home");
+        } 
     }
 
     useEffect(() => {

@@ -84,8 +84,7 @@ const controller = {
 
     logout: async function(req, res){
         //await signOutV(req.body)
-        delete req.session.userID;
-        delete req.session.userEmail;
+        req.session.destroy();
         return res.status(200).send('LogOut');
     },
 
