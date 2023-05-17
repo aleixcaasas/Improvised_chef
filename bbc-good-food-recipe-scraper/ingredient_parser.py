@@ -1,8 +1,21 @@
 import json
 import re
+
+
+def read_censored_keywords(file_path):
+    list = []
+    with open(file_path, 'r') as f:
+        for line in f:
+            new_line = line.replace('\n', '')
+            if new_line not in list:
+                list.append(new_line)
+    return list
+
+
+
 unit_variables = ['litre', 'tbsp', 'tspb',
                   'tsp', 'mg', 'ml', 'g', 'litre', 'l']
-censored_variables = ['of', 'large', 'dried', 'thumb', 'sized']
+censored_variables = read_censored_keywords('censored.json')
 id_counter_ingredient = 0
 id_counter_recipe = 0
 ingredient_dict = {}
@@ -126,9 +139,10 @@ def process_recipe_file(input_file_path, output_file_path):
 
     with open(ingredient_file_path, "w") as output_file:
         json.dump(ingredient_list, output_file, indent=4)
-        #json.dump(ingredient_dict, output_file, indent=4)
 
-input_file_path = "final_recipes.json"
-output_file_path = "final_parsed_recipes.json"
-ingredient_file_path = "final_parsed_ingredients.json"
+input_file_path = "../data/final_recipes.json"
+output_file_path = "../data/final_parsed_recipes_v2.json"
+ingredient_file_path = "../data/final_parsed_ingredients_v2.json"
 process_recipe_file(input_file_path, output_file_path)
+
+

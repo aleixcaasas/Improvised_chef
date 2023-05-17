@@ -8,6 +8,7 @@ const {getFirestore, collection, getDocs, getDoc, doc, query, where, limit, upda
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
+  /*
   apiKey: "AIzaSyCpVw3wUH3_NWm4WUF1cLIe1_eCeZCEMGI",
   authDomain: "cheff-improvisado.firebaseapp.com",
   projectId: "cheff-improvisado",
@@ -15,13 +16,14 @@ const firebaseConfig = {
   messagingSenderId: "785865687041",
   appId: "1:785865687041:web:1bedf6742cec76f2de4000",
   measurementId: "G-YPK6ERRE9X"
-  /*apiKey: "AIzaSyCremjjBCYR7iA0wz-xl3MplYOq1ADzZ9E",
+  */
+  apiKey: "AIzaSyCremjjBCYR7iA0wz-xl3MplYOq1ADzZ9E",
   authDomain: "prova-bd-ae518.firebaseapp.com",
   projectId: "prova-bd-ae518",
   storageBucket: "prova-bd-ae518.appspot.com",
   messagingSenderId: "780344726761",
   appId: "1:780344726761:web:a3db3603ca02a04c1c0c78",
-  measurementId: "G-W9Q8ZNFBZ1"*/
+  measurementId: "G-W9Q8ZNFBZ1"
 };
 
 // Initialize Firebase
