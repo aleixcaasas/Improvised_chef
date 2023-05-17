@@ -9,7 +9,7 @@ export default function Recipe() {
     return (
         <div className="page">
             <Sidebar/>
-            <DetailRecipe/>
+            <DetailRecipe infoRecipe={infoRecipe}/>
         </div>
     )
 }
