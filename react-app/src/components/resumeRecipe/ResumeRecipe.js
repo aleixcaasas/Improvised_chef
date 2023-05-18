@@ -70,7 +70,7 @@ export default function ResumeRecipe ({singleReceipts, index, obrirRecepta}){
                 <TbPointFilled size={20}/>
                 <TbPoint size={20}/>
                 </>
-            ) : difficulty === "A challange" ? (
+            ) : difficulty === "A challenge" ? (
                 <>
                 <TbPointFilled size={20}/>  
                 <TbPointFilled size={20}/>

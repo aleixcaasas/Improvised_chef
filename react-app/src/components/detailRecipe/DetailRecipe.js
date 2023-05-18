@@ -1,22 +1,49 @@
-import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import "./DetailRecipe.css"
-import { MdStars } from 'react-icons/md';
-import { getIngredientIcon } from "../IngredientIcons";
 import { TiTick } from 'react-icons/ti'
 import { TiTimes } from 'react-icons/ti'
+import { MdStars } from 'react-icons/md';
+import { AiFillStar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
+import { useEffect, useRef, useState } from "react";
+import { getIngredientIcon } from "../IngredientIcons";
 
 
 export default function DetailRecipe(props) {
     const { infoRecipe } = props;
     const [allIngredients, setAllIngredients] = useState('');
+    const [recipeFavorite, setRecipeFavorite] = useState('');
+    const [recipesList, setRecipesList] = useState('')
+    const [userAPI, setUSerAPI] = useState('');
 
 
     useEffect(() => {
-        function hasAllIngredients(ingredients){
+        function hasAllIngredients(ingredients) {
             return ingredients.every(ingredient => ingredient.hasIt === true);
         }
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
-    },[infoRecipe]); 
+    }, [infoRecipe]);
+
+    useEffect(() => {
+        async function isRecipeFavorite(recipeId) {
+            try {
+                const userBO = await axios.get('http://localhost:3000/user');
+                if (userBO.data.email != '') {
+                    const response = await axios.post('http://localhost:3000/user/recipes', {
+                        userId: userBO.data.id
+                    });
+                    setUSerAPI(userBO.data);
+                    setRecipesList(response.data)
+                    const isFavorite = recipesList.some(recipe => recipe.id === recipeId);
+                    setRecipeFavorite(isFavorite);
+                }
+            } catch (error) { 
+                console.log(error);
+            }
+        }
+        isRecipeFavorite(infoRecipe.id);
+        console.log(recipeFavorite);
+    },[infoRecipe])
 
     return (
         <div className="div-Recipe">
