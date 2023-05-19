@@ -102,6 +102,7 @@ h4{
     margin: 0;
     margin-left: 20px;
     margin-top: 15px;
+    letter-spacing: 1px;
 }
 .detail-description-div{
     background-color: white;
@@ -147,6 +148,15 @@ h4{
     align-items: center;
     column-gap: 5px;
 }
+
+.instructions-list{
+    padding-left: 10px;
+}
+
+.instructions-list li{
+    margin-bottom: 8px;
+}
+
 @media only screen and (max-width: 768px) { 
     .general-div {
         width: 95%;

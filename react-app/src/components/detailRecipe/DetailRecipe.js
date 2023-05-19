@@ -5,41 +5,40 @@ import { getIngredientIcon } from "../IngredientIcons";
 import { TiTick, TiTimes } from 'react-icons/ti'
 import { RiEmotionLaughLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiDashboard3Line, RiRestaurant2Line } from 'react-icons/ri'
 
-
-
-
-
 export default function DetailRecipe(props) {
     const { infoRecipe } = props;
     const [allIngredients, setAllIngredients] = useState('');
 
-
     useEffect(() => {
-        function hasAllIngredients(ingredients){
+        function hasAllIngredients(ingredients) {
             return ingredients.every(ingredient => ingredient.hasIt === true);
         }
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
-    },[infoRecipe]);
-    
+    }, [infoRecipe]);
+
     function set_difficulty(difficulty) {
         return (
-          <>
-            {difficulty === "Easy" ? (
-                <>
-                <RiEmotionLaughLine size={20}/>
-                </>
-            ) : difficulty === "More effort" ? (
-                <>
-                <RiEmotionNormalLine size={20}/>
-                </>
-            ) : difficulty === "A challange" ? (
-                <>
-                <RiEmotionUnhappyLine size={20}/>  
-                </>
-            ) :null}
-          </>
+            <>
+                {difficulty === "Easy" ? (
+                    <>
+                        <RiEmotionLaughLine size={20} />
+                    </>
+                ) : difficulty === "More effort" ? (
+                    <>
+                        <RiEmotionNormalLine size={20} />
+                    </>
+                ) : difficulty === "A challange" ? (
+                    <>
+                        <RiEmotionUnhappyLine size={20} />
+                    </>
+                ) : null}
+            </>
         );
-      }
+    }
+
+    const openRecipeLink = () => {
+        window.open(infoRecipe.self_url, '_blank');
+    };
 
     return (
         <div className="div-Recipe">
@@ -76,18 +75,32 @@ export default function DetailRecipe(props) {
                     </div>
 
                     <div className="detail-description-div">
-                        <h4>DESCRIPTION:</h4>
+                        <h4>RECIPE DETAILS:</h4>
+                        <hr className="separator-ingredients"></hr>
                         <div className="description">
-                            <hr className="separator-ingredients"></hr>
                             <div>
                                 <p className="details-p">{set_difficulty(infoRecipe.difficulty)}<a className="details">  Difficulty: </a> <a>  {infoRecipe.difficulty}</a></p>
-                                <p className="details-p"><RiRestaurant2Line size={20}/><a className="details">Serves: </a> <a>{infoRecipe.serves}</a></p>
-                                <p className="details-p"><RiDashboard3Line size={20}/><a className="details">Preparation Time: </a> <a>{infoRecipe.time_preparation}</a></p>
-                                <p className="details-p"><RiDashboard3Line size={20}/><a className="details">Cooking Time: </a> <a>{infoRecipe.time_cooking}</a></p>
+                                <p className="details-p"><RiRestaurant2Line size={20} /><a className="details">Serves: </a> <a>{infoRecipe.serves}</a></p>
+                                <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Preparation Time: </a> <a>{infoRecipe.time_preparation}</a></p>
+                                <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Cooking Time: </a> <a>{infoRecipe.time_cooking}</a></p>
                             </div>
-                            <div className="button-link-div"><a href={infoRecipe.self_url}><button className="button-link">Original recipe</button></a></div>
-                            <hr className="separator-ingredients"></hr>
+                            <button className="button-link" onClick={openRecipeLink}>Original recipe</button>
+                        </div>
+                        <h4>DESCRIPTION:</h4>
+                        <hr className="separator-ingredients"></hr>
+                        <div className="description">
                             <p>{infoRecipe.description}</p>
+                        </div>
+                        <h4>INSTRUCTIONS:</h4>
+                        <hr className="separator-ingredients"></hr>
+                        <div className="description">
+                            <ol className="instructions-list">
+                                {infoRecipe.method.map(instruction => (
+                                    <li>
+                                        {instruction}
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
                     </div>
                 </div>
