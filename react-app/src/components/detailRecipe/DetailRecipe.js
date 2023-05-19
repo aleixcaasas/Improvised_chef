@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import "./DetailRecipe.css"
 import { MdStars } from 'react-icons/md';
 import { getIngredientIcon } from "../IngredientIcons";
-import { TiTick } from 'react-icons/ti'
-import { TiTimes } from 'react-icons/ti'
+import { TiTick, TiTimes } from 'react-icons/ti'
+import { RiEmotionLaughLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiDashboard3Line, RiRestaurant2Line } from 'react-icons/ri'
+
+
+
 
 
 export default function DetailRecipe(props) {
@@ -16,7 +19,27 @@ export default function DetailRecipe(props) {
             return ingredients.every(ingredient => ingredient.hasIt === true);
         }
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
-    },[infoRecipe]); 
+    },[infoRecipe]);
+    
+    function set_difficulty(difficulty) {
+        return (
+          <>
+            {difficulty === "Easy" ? (
+                <>
+                <RiEmotionLaughLine size={20}/>
+                </>
+            ) : difficulty === "More effort" ? (
+                <>
+                <RiEmotionNormalLine size={20}/>
+                </>
+            ) : difficulty === "A challange" ? (
+                <>
+                <RiEmotionUnhappyLine size={20}/>  
+                </>
+            ) :null}
+          </>
+        );
+      }
 
     return (
         <div className="div-Recipe">
@@ -56,11 +79,11 @@ export default function DetailRecipe(props) {
                         <h4>DESCRIPTION:</h4>
                         <div className="description">
                             <hr className="separator-ingredients"></hr>
-                            <div className="details">
-                                <p>Difficulty: </p> <a>{infoRecipe.difficulty}</a>
-                                <p>Serves: </p> <a>{infoRecipe.serves}</a>
-                                <p>Preparation Time: </p> <a>{infoRecipe.time_preparation}</a>
-                                <p>Cooking Time: </p> <a>{infoRecipe.time_cooking}</a>
+                            <div>
+                                <p className="details-p">{set_difficulty(infoRecipe.difficulty)}<a className="details">  Difficulty: </a> <a>  {infoRecipe.difficulty}</a></p>
+                                <p className="details-p"><RiRestaurant2Line size={20}/><a className="details">Serves: </a> <a>{infoRecipe.serves}</a></p>
+                                <p className="details-p"><RiDashboard3Line size={20}/><a className="details">Preparation Time: </a> <a>{infoRecipe.time_preparation}</a></p>
+                                <p className="details-p"><RiDashboard3Line size={20}/><a className="details">Cooking Time: </a> <a>{infoRecipe.time_cooking}</a></p>
                             </div>
                             <div className="button-link-div"><a href={infoRecipe.self_url}><button className="button-link">Original recipe</button></a></div>
                             <hr className="separator-ingredients"></hr>
