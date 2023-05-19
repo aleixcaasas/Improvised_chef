@@ -19,7 +19,9 @@
     box-shadow: var(--box_shawod);
     font-style: var(--font);
 }
-
+.fav-icon{
+    margin-left: 5%;
+}
 
 .detail-title-div {
     align-items: center;
@@ -29,7 +31,7 @@
     flex-wrap: nowrap;
     flex-direction: row;
     width: 100%;
-    margin-left: 100px;
+    /*margin-left: 100px;*/
     column-gap: 20px;
 }
 
@@ -39,20 +41,24 @@
 
 .prepareButt-div {
     display: flex;
-    width: 250px;
-    margin-left: auto;
+    width: 40%;
+    /*margin-left: auto;*/
+    justify-content: flex-end;
+    margin-right: 25px;
 }
 
 .detail-title{
-    text-align: center;
+    /*text-align: center;*/
     top: 0%;
     color: var(--green);
+    width: 40%;
 }
 
 .prepareButt{
     margin: 0;
-    margin-right: 20px;
+    margin-right: 25px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    width: 100%;
 }
 
 /*a partir d aqui, son els 3 elements de info que hi ha (foto, ingredients i descripcio)*/
@@ -92,16 +98,64 @@
     border-radius: 20px;
     overflow-y: scroll;
 }
-
+h4{
+    margin: 0;
+    margin-left: 20px;
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
 .detail-description-div{
     background-color: white;
     width: 100%;
     height: 90%;
-    border-radius: 20px;    
+    border-radius: 20px;  
+    overflow-y: scroll;  
+}
+.description{
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: justify;
+    font-size: smaller;
 }
 
+.separator-ingredients{
+    width: 95%;
+}
+.button-link{
+    height: 30px;
+    width: 60%;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background-color: var(--green);
+    font-size: 1em;
+    font-weight: bold;
+    margin: 10px auto 0;
+    margin-bottom: 15px;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    transition: .2s ease-in;
+    cursor: pointer;
+    box-shadow: 0;
+}
+.details{
+    font-weight: bold;
+}
+.details-p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+}
 
+.instructions-list{
+    padding-left: 10px;
+}
 
+.instructions-list li{
+    margin-bottom: 8px;
+}
 
 @media only screen and (max-width: 768px) { 
     .general-div {
