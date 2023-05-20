@@ -44,7 +44,7 @@
     margin: 10px;
     border-radius: 20px; 
     box-shadow: 10px 10px 20px rgb(181, 181, 181);
-
+    
     animation-name: fade-in-from-bottom;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
@@ -55,7 +55,6 @@
 
 .receipt_big:hover{
     transform: scale3d(1.05,1.05,1.05);
-    cursor: pointer;
 }
 
 
