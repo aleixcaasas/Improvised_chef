@@ -2,7 +2,7 @@ const home = require('./c_home');
 
 const {infoRecipe, recipesName, randomRecipe} = require('./c_recipes');
 const {ingredientsName, getIngredientsSearched} = require('./c_ingredients');
-const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients } = require('./c_users');
+const {getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients, removeRecipeIngredients } = require('./c_users');
 const {registerWithEmail, signOutV, loginWithGoogle, loginWithEmail, resetPasswordEmail, deleteUser} = require('./c_auth');
 
 const controller = {
@@ -83,7 +83,6 @@ const controller = {
     },
 
     logout: async function(req, res){
-        //await signOutV(req.body)
         req.session.destroy();
         return res.status(200).send('LogOut');
     },
@@ -258,7 +257,12 @@ const controller = {
         let response = await removeUserRecipe(userId, parseInt(recipeId));
         return res.status(response[0]).send(response[1]);
     },
-
+    removeRecipeIngredients: async function (req, res) {
+        const userId = req.body.userId;
+        const recipeId = req.body.recipeId;
+        let response = await removeRecipeIngredients(userId, parseInt(recipeId));
+        return res.status(response[0]).send(response[1]);
+    },
     getIngredientSearched: async function(req, res) {
         const userId = req.body.userId;
         const list = req.body.list;

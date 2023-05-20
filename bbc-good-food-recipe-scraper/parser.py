@@ -2,7 +2,7 @@ import json
 import re
 unit_variables = ['litre', 'tbsp', 'tspb',
                   'tsp', 'mg', 'ml', 'g', 'litre', 'l']
-censored_variables = ['of', 'large', 'dried', 'thumb', 'sized']
+censored_variables = ['of', 'large', 'dried', 'thumb', 'sized', 'a', 'pinch', 'cooking', 'small', 'bunch', 'nutrional', 'and', ]
 
 
 def get_data_from_ingredient(s: str):
@@ -79,7 +79,7 @@ def process_recipe_file(input_file_path, output_file_path):
         json.dump(parsed_recipes, output_file, indent=4)
 
 
-input_file_path = "final_recipes.json"
-output_file_path = "final_parsed_recipes.json"
+input_file_path = "../data/final_recipes.json"
+output_file_path = "../data/final_parsed_recipes_v2.json"
 process_recipe_file(input_file_path, output_file_path)
 

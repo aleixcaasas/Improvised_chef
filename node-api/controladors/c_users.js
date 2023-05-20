@@ -408,6 +408,30 @@ const searchWithIngredients = async (userId) => {
     }
 };
 
+const removeRecipeIngredients = async (userId, recipeId) =>
+{
+        try {
+            const userRef = doc(db, "users", userId);
+            const userDoc = await getDoc(userRef);
+            if (!userDoc.exists()) {
+                return [404, 'User not found'];
+            }
+            const recipeRef = doc(db, "recipes", recipeId);
+            const recipeDoc = await getDoc(recipeRef);
+            if (!recipeDoc.exists()) {
+                return [404, 'Recipe not found'];
+            }
+            const myIngredients = userDoc.data().myIngredients;
+            const recipeIngredients = recipeDoc.data().ingredients;
+            const updatedIngredients = myIngredients.filter((ingredient) => !recipeIngredients.includes(ingredient))
+
+            await userRef.update({myIngredients: updatedIngredients});
+            return [200, 'Removed matching myIngredients from user successfully'];
+
+        } catch (error) {
+        return [500, `Error removing user ingredients from recipe: ${error}`];
+    }
+}
 
 
-module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients };
+module.exports = { getUserInfo, getUserProfile, uploadProfilePic, changePassword, editUserProfile, getUserRecipeList, getUserIngredientList, addUserIngredient, addUserRecipe, removeUserIngredient, addIngredientsRecipeShoppingList, getUserShoppingList, addUserShoppingList, removeUserShoppingList, myKitchen, removeUserRecipe, searchWithIngredients, removeRecipeIngredients };
