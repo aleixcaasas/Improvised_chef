@@ -62,7 +62,7 @@ export default function SearchBar({handleSearch}) {
         <div className="searchBar-div"> 
             {errorIngredients?.comentari &&(
                 <div className="errorNoIngredients">
-                    <ErrorMessage errorMessage={'Necesites tenir ingreidents a la llista!'} clicked={clicked}/>
+                    <ErrorMessage errorMessage={'Add ingredients to your list for recipe search!'} clicked={clicked}/>
                 </div>
             )}
             <input
