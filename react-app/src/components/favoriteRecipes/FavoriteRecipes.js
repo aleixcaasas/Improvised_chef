@@ -2,13 +2,30 @@ import axios from "axios";
 import "./FavoriteRecipes.css";
 import { Link } from "react-router-dom";
 import { BsTrash3 } from "react-icons/bs"
+import { useNavigate } from "react-router-dom";
+
 import { useEffect, useContext, useState } from "react";
 
 export default function FavoriteRecipes() {
-    
-    //const { user } = useContext(UserContext);
+
     const [recipes, setRecipes] = useState(null)
     const [userAPI, setUSerAPI] = useState('');
+
+    const navigation = useNavigate();
+
+    async function recipeDetails(title, id) {
+        let formatedTitle = title.replace(/\s+/g, '-');
+        formatedTitle = formatedTitle.toLowerCase();
+        //response conté tota la ingo de la recepta i obrirRercepta es una funció que li pasem per props per obrir la nova pagina
+        obrirRecepta({ formatedTitle, id });
+
+    }
+
+    const obrirRecepta = async (info) => {
+        const response = await axios.post(`http://localhost:3000/recipe/detail`, { recipeId: info.id });
+        const infoRecipe = response.data;
+        navigation(`/recipe/${info.formatedTitle}`, { state: { infoRecipe } });
+    }
 
     useEffect(() => {
         const getInfo = async () => {
@@ -39,7 +56,7 @@ export default function FavoriteRecipes() {
                 });
                 for (let j = 0; j < recipes.data.length; j++) {
                     if (recipeEliminated.data.id === recipes.data[j].id) { //quan trobi la recepta l'elimina
-                        newFavoriteRecipes.data.splice(j,1);
+                        newFavoriteRecipes.data.splice(j, 1);
                     }
                 }
                 setRecipes(newFavoriteRecipes);
@@ -70,7 +87,7 @@ export default function FavoriteRecipes() {
                 <ul className="favourites">
                     {recipesList.data.map((recipe) =>
                         <>
-                            <div className="fav">
+                            <div className="fav" onClick={() => recipeDetails(recipe.title, recipe.id)}>
                                 <div className="recipe">
                                     <div className="div-image">
                                         <img className="image" src={recipe.image} alt=""></img>

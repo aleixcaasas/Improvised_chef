@@ -106,6 +106,7 @@
 .fav{
 	border-radius: 15px;
 	width: 100%;
+	cursor: pointer;
 }
 
 .fav:hover{

@@ -5,11 +5,9 @@ import { useEffect, useState } from "react";
 import { getIngredientIcon } from '../IngredientIcons';
 
 
-
 export default function MyKitchen() {
 
-    const [list, setList] = useState(null)
-
+    const [list, setList] = useState(null);
 
     useEffect(() => {
         const getInfo = async () => {
@@ -69,32 +67,32 @@ export default function MyKitchen() {
                     </Link>
                 </div>
             );
-        } else  {
+        } else {
             return (
-                <div className="container_list_myrecepit" >
-                    {recipesList.map((recipe, index) => 
+                <div className="container_list_myrecepit">
+                    {recipesList.map((recipe, index) =>
                         <>
-                        <div className='recipe_item' key={index}>
-                            <div
-                                className='recipe_image'
-                                style={{ backgroundImage: `url("${recipe.image}")` }}>
+                            <div className='recipe_item' key={index} >
+                                <div
+                                    className='recipe_image'
+                                    style={{ backgroundImage: `url("${recipe.image}")` }}>
+                                </div>
+                                <div className="recipe_data_myKitchen">
+                                    <p>{recipe.title}</p>
+                                </div>
+
                             </div>
-                            <div className="recipe_data_myKitchen">
-                                <p>{recipe.title}</p>
-                            </div>
-                           
-                        </div>
-                       
+
                             {recipesList[recipesList.length - 1] !== recipe && (
                                 <hr className="separador" />
                             )}
-                        
+
                         </>
-                        
+
                     )}
                 </div>
             )
-        } 
+        }
 
 
     };
@@ -130,7 +128,7 @@ export default function MyKitchen() {
                         )}
                     </Link>
                 </div>
-                
+
                 <div className="containers_myKitchen">
                     <h3>SHOPPING LIST</h3>
                     <Link to="/ShoppingList">
