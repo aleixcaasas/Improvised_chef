@@ -400,6 +400,7 @@ const searchWithIngredients = async (userId) => {
             docData.ingredientsToBuy = ingredientsToBuy;
             result.push(docData);
         });
+        result.sort((a,b) => (a.ingredientsBought < b.ingredientsBought ? 1 : -1));
         return [200, result];
 
 

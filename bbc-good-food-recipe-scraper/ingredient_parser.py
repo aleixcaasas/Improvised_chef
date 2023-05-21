@@ -1,7 +1,10 @@
 import json
 import re
+import inflect
+import enchant
 
-
+p = inflect.engine()
+d = enchant.Dict("en_US")
 def read_censored_keywords(file_path):
     list = []
     with open(file_path, 'r') as f:
@@ -50,6 +53,7 @@ def refactor_name(name: str):
             break
         new_name += char
 
+    new_name = re.sub(r'[^a-zA-Z0-9\s]', '', new_name)
     new_name = ''.join(i.lower() for i in new_name if not i.isdigit())
     new_name = re.sub(r'\\[uU][0-9a-fA-F]{4}', '', new_name)
     new_name = re.sub(r'[^\x00-\x7F]', '', new_name)
@@ -66,7 +70,15 @@ def refactor_name(name: str):
         if word == 'or':
             break
         if len(word) > 2:
-            res.append(word)
+            try:
+                singular = p.singular_noun(word)
+            except:
+                print('Error generating the singular form')
+                singular = word
+            if type(singular) == bool:
+                singular = word
+            if d.check(singular):
+                res.append(singular)
     return ' '.join(res)
 
 
