@@ -118,14 +118,16 @@ const controller = {
     },
 
     getUserInfo: async function(req, res) {
-        let id = req.body.id;
-        let response = await getUserInfo(id);
+        //let id = req.body.id;
+        const { userID, userEmail } = req.session;
+        let response = await getUserInfo(userID);
         return res.status(response[0]).send(response[1]);
     },
 
     getUserProfile: async function(req, res) {
-        let id = req.body.userId;
-        let response = await getUserProfile(id);
+        //let id = req.body.userId;
+        const { userID, userEmail } = req.session;
+        let response = await getUserProfile(userID);
         return res.status(response[0]).send(response[1]);
     },
 
@@ -145,14 +147,14 @@ const controller = {
 
     editUserProfile: async function(req, res) {
         const params = req.body;
-        const userId = params.userId;
+        const { userID, userEmail } = req.session;
         const userName = params.userName;
         const fullName = params.fullName;
         const profilePic = req.file;
         const password = params.password;
         const confirmPassword = params.confirmPassword;
         if(profilePic){
-            uploadProfilePic(userId, profilePic).then(res => {
+            uploadProfilePic(userID, profilePic).then(res => {
                 console.log(res)
             }).catch(err => {
                 console.log(err);
@@ -170,16 +172,14 @@ const controller = {
     },
 
     myKitchen: async function(req, res) {
-        const params = req.body;
-        const userId = params.userId;
-        const response = await myKitchen(userId);
+        const { userID, userEmail } = req.session;
+        const response = await myKitchen(userID);
         res.status(response[0]).send(response[1]);
     },
 
     getUserIngredientList: async function(req, res) {
-        const params = req.body;
-        const userId = params.userId;
-        const userIngredients = await getUserIngredientList(userId);
+        const { userID, userEmail } = req.session;
+        const userIngredients = await getUserIngredientList(userID);
         if(userIngredients){
             res.status(200).send(userIngredients);
         }
@@ -190,94 +190,93 @@ const controller = {
 
     addUserIngredient: async function(req, res) {
         const params = req.body;
-        const userId = params.userId;
+        const { userID, userEmail } = req.session;
         const ingredientId = params.ingredientId;
         const ingredientName = params.ingredientName;
-        const response = await addUserIngredient(userId, ingredientId, ingredientName);
+        const response = await addUserIngredient(userID, ingredientId, ingredientName);
         res.status(response[0]).send(response[1]);
     },
 
     removeUserIngredient: async function(req, res) {
         const params = req.body;
-        const userId = params.userId;
+        const { userID, userEmail } = req.session;
         const ingredientId = params.ingredientId;
         const ingredientName = params.ingredientName;
-        const response = await removeUserIngredient(userId, ingredientId, ingredientName);
+        const response = await removeUserIngredient(userID, ingredientId, ingredientName);
         res.status(response[0]).send(response[1]);
     },
 
     addIngredientsRecipeShoppingList: async function(req, res) {
         const body = req.body;
         const recipeId = body.recipeId;
-        const userId = body.userId;
-        const userIngredients = await getUserIngredientList(userId);
+        const { userID, userEmail } = req.session;
+        const userIngredients = await getUserIngredientList(userID);
         const recipeData = await infoRecipe(recipeId, userIngredients);
-        const response = await addIngredientsRecipeShoppingList(userId, recipeData);
+        const response = await addIngredientsRecipeShoppingList(userID, recipeData);
         res.status(response[0]).send(response[1]);
     },
 
     getUserShoppingList: async function(req, res) {
-        const params = req.body;
-        const userId = params.userId;
-        const response = await getUserShoppingList(userId);
+        const { userID, userEmail } = req.session;
+        const response = await getUserShoppingList(userID);
         res.status(response[0]).send(response[1]);
     },
 
     addUserShoppingList: async function(req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const ingredientName = req.body.ingredientName;
         const ingredientId = req.body.ingredientId;
-        let response = await addUserShoppingList(userId, ingredientName, ingredientId);
+        let response = await addUserShoppingList(userID, ingredientName, ingredientId);
         return res.status(response[0]).send(response[1]);
     },
 
     removeUserShoppingList: async function(req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const ingredientName = req.body.ingredientName;
         const ingredientId = req.body.ingredientId;
-        let response = await removeUserShoppingList(userId, ingredientName, ingredientId);
+        let response = await removeUserShoppingList(userID, ingredientName, ingredientId);
         return res.status(response[0]).send(response[1]);
     },
 
     getUserRecipeList: async function(req, res) {
-        const userId = req.body.userId;
-        let response = await getUserRecipeList(userId);
+        const { userID, userEmail } = req.session;
+        let response = await getUserRecipeList(userID);
         return res.status(response[0]).send(response[1]);
     },
 
     addUserRecipe: async function(req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const recipeId = req.body.recipeId;
-        let response = await addUserRecipe(userId, recipeId);
+        let response = await addUserRecipe(userID, recipeId);
         return res.status(response[0]).send(response[1]);
     },
     removeUserRecipe: async function(req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const recipeId = req.body.recipeId;
-        let response = await removeUserRecipe(userId, parseInt(recipeId));
+        let response = await removeUserRecipe(userID, parseInt(recipeId));
         return res.status(response[0]).send(response[1]);
     },
     removeRecipeIngredients: async function (req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const recipeId = req.body.recipeId;
-        let response = await removeRecipeIngredients(userId, parseInt(recipeId));
+        let response = await removeRecipeIngredients(userID, parseInt(recipeId));
         return res.status(response[0]).send(response[1]);
     },
     getIngredientSearched: async function(req, res) {
-        const userId = req.body.userId;
+        const { userID, userEmail } = req.session;
         const list = req.body.list;
         const ingredientName = req.body.name;
-        let response = await getIngredientsSearched(userId, ingredientName, list);
+        let response = await getIngredientsSearched(userID, ingredientName, list);
         return res.status(response[0]).send(response[1]);
     },
     searchWithIngredients: async function(req, res) {
-        const userId = req.body.userId;
-        let response = await searchWithIngredients(userId);
+        const { userID, userEmail } = req.session;
+        let response = await searchWithIngredients(userID);
         return res.status(response[0]).send(response[1]);
     },
     deleteUser: async function(req, res) {
-        const userId = req.body.userId;
-        let response = await deleteUser(userId);
+        const { userID, userEmail } = req.session;
+        let response = await deleteUser(userID);
         return res.status(response[0]).send(response[1]);
     }
 }

@@ -17,7 +17,7 @@ export default function UserProfile() {
         const getInfo = async () => {
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
-                const response = await axios.post('http://localhost:3000/user/summary', { id: userBO.data.id });
+                const response = await axios.post('http://localhost:3000/user/summary', {});
                 setUSerAPI(userBO.data);
                 setResponse(response);
                 setName(response?.data[0].fullName);

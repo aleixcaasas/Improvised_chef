@@ -19,7 +19,6 @@ export default function MyIngredients() {
                 const userBO = await axios.get('http://localhost:3000/user');
                 if (userBO.data.email != '') {
                     const response = await axios.post('http://localhost:3000/user/ingredients', {
-                        userId: userBO.data.id
                     });
                     setUSerAPI(userBO.data);
                     setIngredients(response);
@@ -37,7 +36,6 @@ export default function MyIngredients() {
         try {
             if (userAPI.email !== '') {
                 ingEliminated = await axios.post('http://localhost:3000/user/removeIngredient', {
-                    userId: userAPI.id,
                     ingredientId: id,
                     ingredientName: name
                 });
@@ -65,9 +63,7 @@ export default function MyIngredients() {
 
     const updateScreen = async (data) => {
         if (data === 'update') {
-            const response = await axios.post('http://localhost:3000/user/ingredients', {
-                userId: userAPI.id
-            });
+            const response = await axios.post('http://localhost:3000/user/ingredients', {});
             setIngredients(response);
         }
 

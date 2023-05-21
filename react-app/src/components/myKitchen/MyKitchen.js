@@ -15,9 +15,7 @@ export default function MyKitchen() {
                 // eslint-disable-next-line
                 const userBO = await axios.get('http://localhost:3000/user');
                 if (userBO.data.email !== '') {
-                    const response = await axios.post('http://localhost:3000/user/myKitchen', {
-                        userId: userBO.data.id
-                    });
+                    const response = await axios.post('http://localhost:3000/user/myKitchen', {});
                     setList(response);
                 }
             } catch (error) {

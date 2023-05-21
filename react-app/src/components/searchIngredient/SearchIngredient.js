@@ -19,10 +19,8 @@ export default function SearchIngredient(props) {
             setResponse('');
         } else {
             try {
-                const userBO = await axios.get('http://localhost:3000/user');
                 const res = await axios.post('http://localhost:3000/user/searchIngredients', {
                     name: nomIngredient,
-                    userId: userBO.data.id,
                     list: props.list
                 });
                 setResponse(res);
@@ -41,7 +39,7 @@ export default function SearchIngredient(props) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
             if (props.list === 'ingredients'){
-                const result = await axios.post('http://localhost:3000/user/addIngredient', { userId: userBO.data.id, ingredientId: id, ingredientName: name });
+                const result = await axios.post('http://localhost:3000/user/addIngredient', { ingredientId: id, ingredientName: name });
                 let res = Object.assign({}, response);
                 for (let j = 0; j < response.data.length; j++) {
                     if (result.data.name === response.data[j].name) {
@@ -50,7 +48,7 @@ export default function SearchIngredient(props) {
                 }
                 setResponse(res);
             }else if (props.list === 'shopping'){
-                const result = await axios.post('http://localhost:3000/user/addShoppingList', { userId: userBO.data.id, ingredientId: id, ingredientName: name });
+                const result = await axios.post('http://localhost:3000/user/addShoppingList', { ingredientId: id, ingredientName: name });
                 let res = Object.assign({}, response);
                 for (let j = 0; j < response.data.length; j++) {
                     if (result.data.name === response.data[j].name) {

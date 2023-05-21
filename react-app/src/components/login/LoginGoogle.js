@@ -14,9 +14,6 @@ export default function LoginGoogle() {
 		try {
 			const result = await signInWithPopup(auth, provider);
 			const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
-			if (response.data.loguejat === "true") {
-				
-			}
 			return true;
 		} catch (error) {
 			console.log(error);

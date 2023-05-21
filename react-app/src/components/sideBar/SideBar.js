@@ -30,7 +30,7 @@ const Sidebar = (props) => {
             try {
                 // eslint-disable-next-line
                 const userBO = await axios.get('http://localhost:3000/user');
-                const response = await axios.post('http://localhost:3000/user/summary', { id: userBO.data.id });
+                const response = await axios.post('http://localhost:3000/user/summary', {});
                 setResponse(response);
                 
             } catch (error) {

@@ -40,9 +40,7 @@ export default function SearchBar({handleSearch}) {
         if (!buttonClicked){
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
-                let response = await axios.post('http://localhost:3000/user/searchWithIngredients', {
-                    userId: userBO.data.id
-                });
+                let response = await axios.post('http://localhost:3000/user/searchWithIngredients', {});
                 handleSearch(response.data);
                 setButtonClicked(true);
             }

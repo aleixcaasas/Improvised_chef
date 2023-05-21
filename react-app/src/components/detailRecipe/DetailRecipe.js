@@ -33,11 +33,8 @@ export default function DetailRecipe(props) {
     async function addFavRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
-            console.log(idRecipe);
-            console.log(userBO.data.id);
             if (userBO.data.email != '') {
                 const response = await axios.post('http://localhost:3000/user/addRecipe', {
-                    userId: userBO.data.id,
                     recipeId: idRecipe
                 });
             }
@@ -53,7 +50,6 @@ export default function DetailRecipe(props) {
                 const userBO = await axios.get('http://localhost:3000/user');
                 if (userBO.data.email != '') {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
-                        userId: userBO.data.id
                     });
                     setUSerAPI(userBO.data);
                     setRecipesList(response.data)

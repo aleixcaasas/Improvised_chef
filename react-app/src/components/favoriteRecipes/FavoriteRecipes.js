@@ -32,9 +32,7 @@ export default function FavoriteRecipes() {
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
                 if (userBO.data.email != '') {
-                    const response = await axios.post('http://localhost:3000/user/recipes', {
-                        userId: userBO.data.id
-                    });
+                    const response = await axios.post('http://localhost:3000/user/recipes', {});
                     setUSerAPI(userBO.data);
                     setRecipes(response);
                 }
@@ -51,7 +49,6 @@ export default function FavoriteRecipes() {
         try {
             if (userAPI.email !== '') {
                 recipeEliminated = await axios.post('http://localhost:3000/user/removeRecipe', {
-                    userId: userAPI.id,
                     recipeId: id
                 });
                 for (let j = 0; j < recipes.data.length; j++) {
