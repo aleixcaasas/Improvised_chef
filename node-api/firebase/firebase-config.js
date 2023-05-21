@@ -14,7 +14,8 @@ const firebaseConfig = {
   storageBucket: "cheff-improvisado.appspot.com",
   messagingSenderId: "785865687041",
   appId: "1:785865687041:web:1bedf6742cec76f2de4000",
-  measurementId: "G-YPK6ERRE9X"*/
+  measurementId: "G-YPK6ERRE9X"
+  */
   apiKey: "AIzaSyCremjjBCYR7iA0wz-xl3MplYOq1ADzZ9E",
   authDomain: "prova-bd-ae518.firebaseapp.com",
   projectId: "prova-bd-ae518",
@@ -22,6 +23,7 @@ const firebaseConfig = {
   messagingSenderId: "780344726761",
   appId: "1:780344726761:web:a3db3603ca02a04c1c0c78",
   measurementId: "G-W9Q8ZNFBZ1"
+  
 };
 
 // Initialize Firebase

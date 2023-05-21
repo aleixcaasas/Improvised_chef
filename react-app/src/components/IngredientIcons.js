@@ -22,8 +22,8 @@ const ingredientCategories= {
     "vegetables": ["tomato", "carrot", "onion", "celery"],
     "fruits": ["banana", "apple", "orange", "grape"],
     "dairy": ["milk", "cheese", "yogurt", "butter"],
-    "meat": ["beef", "pork", "chicken", "lamb"],
-    "seafood": ["shrimp", "salmon", "tuna", "crab"],
+    "meat": ["beef", "pork", "chicken", "lamb", "mincemeat"],
+    "seafood": ["shrimp", "salmon", "tuna", "crab", "fish"],
     "baking": ["flour", "sugar", "baking powder", "baking soda"],
     "liquids": ["water", "oil", "vinegar", "broth", "honey"],
     "miscellaneous": []
