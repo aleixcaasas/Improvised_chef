@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getIngredientIcon } from '../IngredientIcons';
 
-
 export default function MyKitchen() {
 
     const [list, setList] = useState(null);
@@ -12,7 +11,6 @@ export default function MyKitchen() {
     useEffect(() => {
         const getInfo = async () => {
             try {
-                // eslint-disable-next-line
                 const userBO = await axios.get('http://localhost:3000/user');
                 if (userBO.data.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/myKitchen', {});
@@ -84,15 +82,12 @@ export default function MyKitchen() {
                             {recipesList[recipesList.length - 1] !== recipe && (
                                 <hr className="separador" />
                             )}
-
                         </>
 
                     )}
                 </div>
             )
         }
-
-
     };
 
     return (
@@ -143,9 +138,6 @@ export default function MyKitchen() {
                 </div>
             </div>
         </div>
-
     );
-
-
 }
 

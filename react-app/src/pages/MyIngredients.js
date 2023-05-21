@@ -5,8 +5,8 @@ import MyIngredients from "../components/myIngredients/MyIngredients";
 export default function MyIngredientsPage() {
     return (
         <div className="page">
-            <Sidebar/>
-            <MyIngredients/>
+            <Sidebar />
+            <MyIngredients />
         </div>
     );
 

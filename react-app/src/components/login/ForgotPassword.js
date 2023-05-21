@@ -1,19 +1,19 @@
-import React, { useState } from "react";
 import axios from 'axios';
-import ErrorMessage from '../errorMessages/ErrorMessage';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from '../errorMessages/ErrorMessage';
 
 export default function ForgotPassword() {
-	
-    const navigation = useNavigate();
+
+	const navigation = useNavigate();
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 
 	const clicked = (message) => {
-        if(message === "true"){
-            navigation("/home");
-        }
-    };
+		if (message === "true") {
+			navigation("/home");
+		}
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -38,10 +38,10 @@ export default function ForgotPassword() {
 			navigation("/home")
 		);
 	} else {
-		return(
+		return (
 			<div className="pep">
-					<ErrorMessage errorMessage={message} clicked={clicked}></ErrorMessage>;
-			</div>		
-		)	
+				<ErrorMessage errorMessage={message} clicked={clicked}></ErrorMessage>;
+			</div>
+		)
 	}
 }

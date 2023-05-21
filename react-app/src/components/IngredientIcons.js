@@ -2,7 +2,7 @@ import React from 'react';
 import { IoIosWater } from "react-icons/io";
 import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish, GiShinyApple } from "react-icons/gi"
 
-const size_icon=30;
+const size_icon = 30;
 const ingredientGroups = {
     'spices': <GiChiliPepper size={size_icon} style={{ color: '#a51409' }} />,
     'herbs': <GiHerbsBundle size={size_icon} style={{ color: '#837f28' }} />,
@@ -16,7 +16,7 @@ const ingredientGroups = {
     'miscellaneous': <GiOpenedFoodCan size={size_icon} style={{ color: '539165' }} />
 };
 
-const ingredientCategories= {
+const ingredientCategories = {
     "spices": ["salt", "pepper", "cumin", "paprika", "mustard", "garlic", "ginger"],
     "herbs": ["basil", "oregano", "parsley", "thyme", "sesame seed"],
     "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach"],
@@ -29,7 +29,7 @@ const ingredientCategories= {
     "miscellaneous": []
 }
 
-  
+
 export function getIngredientIcon(name) {
     const lowercaseName = name.toLowerCase();
     for (const [category, ingredients] of Object.entries(ingredientCategories)) {

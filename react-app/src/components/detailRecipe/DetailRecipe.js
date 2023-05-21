@@ -1,11 +1,11 @@
 import axios from "axios";
-import "./DetailRecipe.css"
-import { AiFillStar } from 'react-icons/ai'
-import { AiOutlineStar } from 'react-icons/ai'
-import { useEffect, useRef, useState } from "react";
+import "./DetailRecipe.css";
+import { AiFillStar } from 'react-icons/ai';
+import { useEffect, useState } from "react";
+import { AiOutlineStar } from 'react-icons/ai';
+import { TiTick, TiTimes } from 'react-icons/ti';
 import { getIngredientIcon } from "../IngredientIcons";
-import { TiTick, TiTimes } from 'react-icons/ti'
-import { RiEmotionLaughLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiDashboard3Line, RiRestaurant2Line } from 'react-icons/ri'
+import { RiEmotionLaughLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiDashboard3Line, RiRestaurant2Line } from 'react-icons/ri';
 
 export default function DetailRecipe(props) {
     const { infoRecipe } = props;
@@ -25,7 +25,7 @@ export default function DetailRecipe(props) {
         if (allIngredients) {
             return <AiFillStar size={40} className="fav-icon" />;
         } else {
-            return <AiOutlineStar size={40} className="fav-icon" onClick={() => addFavRecipe(infoRecipe.id)}/>;
+            return <AiOutlineStar size={40} className="fav-icon" onClick={() => addFavRecipe(infoRecipe.id)} />;
         }
     }
 
@@ -33,8 +33,8 @@ export default function DetailRecipe(props) {
     async function addFavRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email != '') {
-                const response = await axios.post('http://localhost:3000/user/addRecipe', {
+            if (userBO.data.email !== '') {
+                await axios.post('http://localhost:3000/user/addRecipe', {
                     recipeId: idRecipe
                 });
             }
@@ -48,7 +48,7 @@ export default function DetailRecipe(props) {
         async function isRecipeFavorite(recipeId) {
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email != '') {
+                if (userBO.data.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
                     });
                     setUSerAPI(userBO.data);
@@ -155,5 +155,4 @@ export default function DetailRecipe(props) {
             </div>
         </div>
     );
-
 }

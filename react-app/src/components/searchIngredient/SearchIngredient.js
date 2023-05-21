@@ -1,17 +1,15 @@
 import axios from "axios";
 import './searchIngredient.css';
+import { useState } from "react";
 import { debounce } from 'lodash';
 import { TiTick } from 'react-icons/ti'
-import { useState } from "react";
 import { RiAddCircleLine } from 'react-icons/ri';
 import { getIngredientIcon } from '../IngredientIcons';
-
 
 export default function SearchIngredient(props) {
 
     const [setSearching] = useState(false);
     const [response, setResponse] = useState('');
-
 
     const handleChange = async (nomIngredient) => {
         if (nomIngredient === '') {
@@ -37,8 +35,7 @@ export default function SearchIngredient(props) {
 
     const afegirIngredient = async (name, id) => {
         try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (props.list === 'ingredients'){
+            if (props.list === 'ingredients') {
                 const result = await axios.post('http://localhost:3000/user/addIngredient', { ingredientId: id, ingredientName: name });
                 let res = Object.assign({}, response);
                 for (let j = 0; j < response.data.length; j++) {
@@ -47,9 +44,12 @@ export default function SearchIngredient(props) {
                     }
                 }
                 setResponse(res);
-            }else if (props.list === 'shopping'){
+
+            } else if (props.list === 'shopping') {
+
                 const result = await axios.post('http://localhost:3000/user/addShoppingList', { ingredientId: id, ingredientName: name });
                 let res = Object.assign({}, response);
+
                 for (let j = 0; j < response.data.length; j++) {
                     if (result.data.name === response.data[j].name) {
                         res.data[j].repeated = true;
@@ -67,16 +67,15 @@ export default function SearchIngredient(props) {
         <div className="search-ing-popup">
             <input
                 className="searchIng"
-                //value={cercador}
                 placeholder={"Search Ingredient"}
                 onChange={(e) => debouncedSearch(e)}
             />
             <div className="ingredients-div">
-                {response && (  
+                {response && (
                     response.data.map((ingredient) =>
                         <div className="ingredient">
                             <li style={{ display: 'flex', alignItems: 'center' }}>
-                                {//<MdFastfood size={30} className="icon"></MdFastfood>
+                                {
                                     getIngredientIcon(ingredient.name)}
                                 <div className="ingredient-name">{ingredient.name} </div>
                                 {!ingredient.repeated && (
@@ -96,7 +95,7 @@ export default function SearchIngredient(props) {
                 )
                 }
             </div>
-            <button className="exitButton" onClick={() => { props.clicked("true"); props.updateScreen('update')}}>EXIT</button>
+            <button className="exitButton" onClick={() => { props.clicked("true"); props.updateScreen('update') }}>EXIT</button>
         </div>
     )
 }

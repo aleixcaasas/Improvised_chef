@@ -2,8 +2,8 @@ import axios from 'axios';
 import './CSS-IngredientsList.css';
 import classNames from 'classnames';
 import { BsTrash } from 'react-icons/bs';
-import { getIngredientIcon } from '../IngredientIcons';
 import { useEffect, useState } from 'react';
+import { getIngredientIcon } from '../IngredientIcons';
 import { BsFillArrowDownCircleFill } from 'react-icons/bs';
 import SearchIngredient from '../searchIngredient/SearchIngredient';
 
@@ -17,8 +17,7 @@ export default function MyIngredients() {
         const getInfo = async () => {
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
-                // eslint-disable-next-line
-                if (userBO.data.email != '') {
+                if (userBO.data.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/shoppingList', {});
                     setUserAPI(userBO.data);
                     setIngredients(response);

@@ -1,6 +1,6 @@
-import "./UserProfile.css"
-import DeleteAccountButton from "../login/deleteAccount"
 import axios from "axios";
+import "./UserProfile.css";
+import DeleteAccountButton from "../login/deleteAccount";
 import React, { useEffect, useState, useRef } from "react";
 
 export default function UserProfile() {

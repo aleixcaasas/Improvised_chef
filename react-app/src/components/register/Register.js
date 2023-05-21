@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-
 export default function Register(props) {
+
     const navigate = useNavigate();
     const [err] = useState("");
     const [userVar, setUserVar] = useState({
@@ -28,11 +28,11 @@ export default function Register(props) {
         e.preventDefault();
 
         if (userVar.Name === "" || userVar.UserName === "" || userVar.email === "" || userVar.password === "" || userVar.passwordConfirm === "") {
-            props.errorM({error: true, comment: "Please fill all the fields"});
+            props.errorM({ error: true, comment: "Please fill all the fields" });
             return err;
         }
         else if (userVar.password !== userVar.passwordConfirm) {
-            props.errorM({error: true, comment: "Passwords do not match"});
+            props.errorM({ error: true, comment: "Passwords do not match" });
             return err;
         }
         else {
@@ -45,7 +45,7 @@ export default function Register(props) {
                 navigate("/");
             }
             else {
-                props.errorM({error: true, comment: "User already exist"});
+                props.errorM({ error: true, comment: "User already exist" });
             }
         }
     }

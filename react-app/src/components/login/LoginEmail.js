@@ -1,46 +1,42 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import LoginGoogle from "./LoginGoogle";
 import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import LoginGoogle from "./LoginGoogle";
 
 export default function LoginEmail(props) {
-    
-    const navigation = useNavigate();
+
     const [formState, setFormState] = useState({ email: "", password: "" })
     const { email, password } = formState;
-   
-    
 
     const handleChange = (e) => {
         let value = e.target.value;
         let name = e.target.name;
         setFormState(prev => ({ ...prev, [name]: value }));
     }
-      
-      
+
     const login = async (e) => {
         e.preventDefault();
         try {
             if (email === "" || password === "") {
-                props.errorM({error: true, comment: "Please fill all the fields"});
+                props.errorM({ error: true, comment: "Please fill all the fields" });
             }
             else {
-                const result = await axios.post('http://localhost:3000/login', { email, password }, {withCredentials:true});
+                const result = await axios.post('http://localhost:3000/login', { email, password }, { withCredentials: true });
                 if (result.data.id != null && result.data.loguejat) {
-                    navigation("/");
+                    window.location.reload();
                 }
                 else {
-                   props.errorM({error: true, comment: "Username or password incorrect"});
+                    props.errorM({ error: true, comment: "Username or password incorrect" });
                 }
             }
         }
         catch (error) {
-            props.errorM({error: true, comment: error});
+            props.errorM({ error: true, comment: error });
         }
     }
 
     return (
-    
+
         <div className="login_page">
             <label htmlFor="chk" aria-hidden="true" id="titel">Sign In</label>
             <form className="login-form" action="react-app/src/components">
@@ -51,6 +47,6 @@ export default function LoginEmail(props) {
             </form>
             <LoginGoogle />
         </div>
-        
+
     );
 }

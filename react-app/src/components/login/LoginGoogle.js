@@ -1,9 +1,9 @@
-import { signInWithPopup } from 'firebase/auth';
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import { auth, provider } from '../../firebase-config';
-import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
+import React from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../firebase-config';
 
 export default function LoginGoogle() {
 
@@ -13,7 +13,7 @@ export default function LoginGoogle() {
 
 		try {
 			const result = await signInWithPopup(auth, provider);
-			const response = await axios.post('http://localhost:3000/loginWithGoogle', result.user);
+			await axios.post('http://localhost:3000/loginWithGoogle', result.user);
 			return true;
 		} catch (error) {
 			console.log(error);
@@ -26,12 +26,12 @@ export default function LoginGoogle() {
 		await signInWithGoogle()
 			.then((succes) => {
 				if (succes) {
-					navigation('/');
+					window.location.reload();
 				} else {
 					return (
 						<>
 							<h3>Incorrect Log In. Please try again</h3>
-							<button onClick={navigation('/')}>Go Home</button>
+							<button onClick={navigation('/home')}>Go Home</button>
 						</>
 					)
 				}

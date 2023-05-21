@@ -5,12 +5,12 @@ import { debounce } from 'lodash';
 import ErrorMessage from '../errorMessages/ErrorMessage';
 
 
-export default function SearchBar({handleSearch}) {
-    
+export default function SearchBar({ handleSearch }) {
+
     const [buttonClicked, setButtonClicked] = useState(false);
-    const [errorIngredients, setError] = useState({comentari: ''})
+    const [errorIngredients, setError] = useState({ comentari: '' })
     const handleChange = async (value) => {
-        if (value.size === 0){
+        if (value.size === 0) {
             handleSearch([]);
         } else {
             try {
@@ -30,37 +30,36 @@ export default function SearchBar({handleSearch}) {
             setError({ commentari: '' });
         }
     };
- 
+
     //To dealy the the call of the API 
-    const debouncedSearch = debounce((e) =>{
+    const debouncedSearch = debounce((e) => {
         handleChange(e.target.value);
     }, 800);
 
-    async function searchRecipesWithIngr(){
-        if (!buttonClicked){
+    async function searchRecipesWithIngr() {
+        if (!buttonClicked) {
             try {
-                const userBO = await axios.get('http://localhost:3000/user');
                 let response = await axios.post('http://localhost:3000/user/searchWithIngredients', {});
                 handleSearch(response.data);
                 setButtonClicked(true);
             }
             catch (error) {
-                if (error.response.data === 'No ingredients found!'){
-                    setError({comentari: 'Add ingredients to your list to search recipes with them!'})
+                if (error.response.data === 'No ingredients found!') {
+                    setError({ comentari: 'Add ingredients to your list to search recipes with them!' })
                     console.log(errorIngredients);
                 }
             }
-        }else{
+        } else {
             setButtonClicked(false);
             handleSearch([]);
         }
     }
 
     return (
-        <div className="searchBar-div"> 
-            {errorIngredients?.comentari &&(
+        <div className="searchBar-div">
+            {errorIngredients?.comentari && (
                 <div className="errorNoIngredients">
-                    <ErrorMessage errorMessage={'Add ingredients to your list for recipe search!'} clicked={clicked}/>
+                    <ErrorMessage errorMessage={'Add ingredients to your list for recipe search!'} clicked={clicked} />
                 </div>
             )}
             <input
@@ -69,7 +68,7 @@ export default function SearchBar({handleSearch}) {
                 onChange={(e) => debouncedSearch(e)}
             />
             <button className={`CookButton ${buttonClicked ? "clicked" : ""}`} onClick={() => searchRecipesWithIngr()} value="Create user">{buttonClicked ? "Stop searching with my ingredients" : "Cook with my ingredients"} </button>
-            
+
         </div>
     );
 }

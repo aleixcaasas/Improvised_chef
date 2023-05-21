@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsTrash3 } from "react-icons/bs"
 import { useNavigate } from "react-router-dom";
 
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FavoriteRecipes() {
 
@@ -16,9 +16,7 @@ export default function FavoriteRecipes() {
     async function recipeDetails(title, id) {
         let formatedTitle = title.replace(/\s+/g, '-');
         formatedTitle = formatedTitle.toLowerCase();
-        //response conté tota la ingo de la recepta i obrirRercepta es una funció que li pasem per props per obrir la nova pagina
         obrirRecepta({ formatedTitle, id });
-
     }
 
     const obrirRecepta = async (info) => {
@@ -31,7 +29,7 @@ export default function FavoriteRecipes() {
         const getInfo = async () => {
             try {
                 const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email != '') {
+                if (userBO.data.email !== '') {
                     const response = await axios.post('http://localhost:3000/user/recipes', {});
                     setUSerAPI(userBO.data);
                     setRecipes(response);
@@ -108,7 +106,6 @@ export default function FavoriteRecipes() {
             );
         }
     }
-
 
     return (
         <div className="div-favRecipes">

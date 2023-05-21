@@ -1,9 +1,9 @@
 import React from "react";
-import RouterDirections from "./router/RouterDirections";
 import axios from "axios";
+import RouterDirections from "./router/RouterDirections";
 
 export default function App() {
-    axios.defaults.withCredentials = true;
+	axios.defaults.withCredentials = true;
 	return (
 		<div className="App">
 			<RouterDirections />

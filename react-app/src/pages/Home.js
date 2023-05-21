@@ -26,7 +26,7 @@ export default function Home() {
     };
 
     const obrirRecepta = async (info) => {
-        const response = await axios.post(`http://localhost:3000/recipe/detail`, {recipeId: info.id});
+        const response = await axios.post(`http://localhost:3000/recipe/detail`, { recipeId: info.id });
         const infoRecipe = response.data;
         navigation(`/recipe/${info.formatedTitle}`, { state: { infoRecipe } });
     }
@@ -38,14 +38,14 @@ export default function Home() {
         }
     };
 
-    
+
 
     const handleSearch = (searchedReceips) => {
         if (searchedReceips.length !== 0) {
             setOldRecipes(recipes);
             setRecipes(searchedReceips);
         }
-        else{
+        else {
             setRecipes(oldRecipes)
         }
     };
@@ -54,7 +54,7 @@ export default function Home() {
         if (recipes.length === 0) {
             const fetchRecipes = async () => {
                 try {
-                    if(!recipes.data){
+                    if (!recipes.data) {
                         const response = await axios.get('http://localhost:3000/recipes/random');
                         setRecipes(response.data);
                     }
@@ -81,7 +81,7 @@ export default function Home() {
             {
                 userLOCAL?.email && (
                     <>
-                        <SideBar/>
+                        <SideBar />
                         <SearchBar handleSearch={handleSearch} />
                         <ResumeRecipeContainer receiptsJSON={recipes} obrirRecepta={obrirRecepta} />
                     </>
