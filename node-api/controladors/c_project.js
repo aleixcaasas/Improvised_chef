@@ -146,7 +146,7 @@ const controller = {
 
     editUserProfile: async function(req, res) {
         const params = req.body;
-        const userId = params.userId;
+        const userId = req.session.userID;
         const userName = params.userName;
         const fullName = params.fullName;
         const profilePic = req.file;

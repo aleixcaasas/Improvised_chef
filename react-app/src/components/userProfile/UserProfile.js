@@ -1,6 +1,6 @@
-import "./UserProfile.css"
-import DeleteAccountButton from "../login/deleteAccount"
 import axios from "axios";
+import "./UserProfile.css";
+import DeleteAccountButton from "../login/deleteAccount";
 import React, { useEffect, useState, useRef } from "react";
 
 export default function UserProfile() {
@@ -30,14 +30,6 @@ export default function UserProfile() {
         getInfo();
     }, []);
 
-    const handleMouseEnter = () => {
-        uploadButtonRef.current.style.display = 'block';
-    };
-
-    const handleMouseLeave = () => {
-        uploadButtonRef.current.style.display = 'none';
-    };
-
     const handleImageChange = () => {
         const chosenFile = fileRef.current.files[0];
         if (chosenFile) {
@@ -63,6 +55,10 @@ export default function UserProfile() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+
+            if(response.status === 200){
+                window.location.reload();
+            }
         } catch (error) {
             console.log(error);
         }
@@ -89,7 +85,6 @@ export default function UserProfile() {
                             </div>
                             <div id="profile_right">
                                 {response?.data && (
-
                                     <div id="image_change">
                                         <img ref={imageRef} id="user-image-pic" alt="" src={response.data[0].profilePic} />
                                         <input ref={fileRef} id="file" type="file" onChange={handleImageChange} />
@@ -97,7 +92,6 @@ export default function UserProfile() {
                                             Change photo
                                         </label>
                                     </div>
-
                                 )}
                                 {!response?.data && (
                                     <h1>Loading...</h1>
