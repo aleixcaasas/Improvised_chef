@@ -184,6 +184,10 @@
         margin-left: 0;
     }
 
+    .containers_myKitchen{
+        width: 100%;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
