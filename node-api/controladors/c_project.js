@@ -167,7 +167,7 @@ const controller = {
                 console.log(err);
             });
         }
-        let response = await editUserProfile(userId, fullName, userName);
+        let response = await editUserProfile(userID, fullName, userName);
         res.status(response[0]).send(response[1]);
     },
 
@@ -277,6 +277,7 @@ const controller = {
     deleteUser: async function(req, res) {
         const { userID, userEmail } = req.session;
         let response = await deleteUser(userID);
+        req.session.destroy();
         return res.status(response[0]).send(response[1]);
     }
 }

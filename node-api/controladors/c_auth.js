@@ -109,9 +109,6 @@ const registerWithEmail = async (fullName, userName, email, password) => {
     return {id: id, loguejat: true};
 };
 
-
-
-
 const resetPasswordEmail = async (email) => {
     try{
         if (await emailNotExists(email)){ //email exists

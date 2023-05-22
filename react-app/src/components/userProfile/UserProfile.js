@@ -8,6 +8,8 @@ export default function UserProfile() {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [userAPI, setUSerAPI] = useState('');
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const imageRef = useRef(null);
     const fileRef = useRef(null);
@@ -48,6 +50,9 @@ export default function UserProfile() {
         formData.append('fullName', name);
         formData.append('userName', username);
         formData.append('profilePic', fileRef.current.files[0]);
+        formData.append('password', password);
+        formData.append('confirmPassword', confirmPassword);
+
 
         try {
             const response = await axios.post('http://localhost:3000/user/edit', formData, {
@@ -77,9 +82,9 @@ export default function UserProfile() {
                                 <p>Your username</p>
                                 <input className="text_input" placeholder={response?.data[0].userName} value={username} onChange={(e) => setUsername(e.target.value)} />
                                 <p>Password</p>
-                                <input type="password" className="text_input" placeholder={"Password"} />
+                                <input type="password" className="text_input" placeholder={"Password"} onChange={(e) => setPassword(e.target.value)}/>
                                 <p>Repeat password</p>
-                                <input type="password" className="text_input" placeholder={"Password"} />
+                                <input type="password" className="text_input" placeholder={"Password"} onChange={(e) => setConfirmPassword(e.target.value)}/>
 
 
                             </div>
