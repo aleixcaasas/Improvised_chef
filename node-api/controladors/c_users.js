@@ -297,7 +297,7 @@ const addUserRecipe = async (userId, recipeId) => {
                 return [500, 'User recipe exist'];
             }
             else {
-                const recipeDoc = await getDoc(doc(db, "recipes", recipeId));
+                const recipeDoc = await getDoc(doc(db, "recipes", recipeId.toString()));
                 if (recipeDoc.exists()) {
                     await updateDoc(doc(db, "users", userId), {
                         favoriteRecipes: arrayUnion({

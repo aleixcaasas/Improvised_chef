@@ -21,27 +21,48 @@ export default function DetailRecipe(props) {
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
     }, [infoRecipe]);
 
-    function setFavIcon() {
-        if (allIngredients) {
-            return <AiFillStar size={40} className="fav-icon" />;
-        } else {
-            return <AiOutlineStar size={40} className="fav-icon" onClick={() => addFavRecipe(infoRecipe.id)} />;
-        }
-    }
-
     // FALTA ARREGLAR PK NO FUNCIONA
     async function addFavRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
             if (userBO.data.email !== '') {
-                await axios.post('http://localhost:3000/user/addRecipe', {
+                const response = await axios.post('http://localhost:3000/user/addRecipe', {
                     recipeId: idRecipe
                 });
+                if(response.status == 201){
+                    setRecipeFavorite(true);
+                }
             }
         } catch (error) {
             console.log(error);
         }
     }
+
+    async function removeFavRecipe(idRecipe) {
+        try {
+            const userBO = await axios.get('http://localhost:3000/user');
+            if (userBO.data.email !== '') {
+                const response = await axios.post('http://localhost:3000/user/removeRecipe', {
+                    recipeId: idRecipe
+                });
+                if(response.status == 200){
+                    setRecipeFavorite(false);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function setFavIcon(recipeId) {
+        if (recipeFavorite) {
+            return <AiFillStar size={40} className="fav-icon" onClick={() => removeFavRecipe(recipeId)}/>;
+        } else {
+            return <AiOutlineStar size={40} className="fav-icon" onClick={() => addFavRecipe(recipeId)} />;
+        }
+    }
+
+    
 
     // TAMPOC FUNCIONA
     useEffect(() => {
@@ -52,17 +73,20 @@ export default function DetailRecipe(props) {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
                     });
                     setUSerAPI(userBO.data);
-                    setRecipesList(response.data)
-                    const isFavorite = recipesList.some(recipe => recipe.id === recipeId);
-                    setRecipeFavorite(isFavorite);
+                    const recipeList = response.data;
+                    for (let i = 0; i < recipeList.length; i++) {
+                        if (recipeList[i].id === recipeId) {
+                            setRecipeFavorite(true);
+                            break;
+                        }
+                    }
                 }
             } catch (error) {
                 console.log(error);
             }
         }
         isRecipeFavorite(infoRecipe.id);
-        console.log(recipeFavorite);
-    }, [infoRecipe])
+    }, [infoRecipe, recipeFavorite])
 
     function set_difficulty(difficulty) {
         return (
@@ -92,7 +116,7 @@ export default function DetailRecipe(props) {
         <div className="div-Recipe">
             <div className="general-div">
                 <div className="detail-title-div">
-                    {setFavIcon()}
+                    {setFavIcon(infoRecipe.id)}
                     <h2 className="detail-title">{infoRecipe.title.toUpperCase()}</h2>
                     <div className="prepareButt-div"><button className="prepareButt" >
                         {allIngredients && ("Prepare recipe")}{!allIngredients && ("Add all ingredients to shopping list")}</button></div>
