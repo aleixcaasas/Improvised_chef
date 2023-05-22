@@ -30,14 +30,6 @@ export default function UserProfile() {
         getInfo();
     }, []);
 
-    const handleMouseEnter = () => {
-        uploadButtonRef.current.style.display = 'block';
-    };
-
-    const handleMouseLeave = () => {
-        uploadButtonRef.current.style.display = 'none';
-    };
-
     const handleImageChange = () => {
         const chosenFile = fileRef.current.files[0];
         if (chosenFile) {
@@ -57,30 +49,19 @@ export default function UserProfile() {
         formData.append('userName', username);
         formData.append('profilePic', fileRef.current.files[0]);
 
-
         try {
             const response = await axios.post('http://localhost:3000/user/edit', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+
+            if(response.status === 200){
+                window.location.reload();
+            }
         } catch (error) {
             console.log(error);
         }
-
-
-
-        /*profilePic :
-
-        password : 
-        confirmPassword :*/
-
-
-        /*
-        const name = document.getElementById('name-input').value;
-        const username = document.getElementById('username-input').value;
-        const email = document.getElementById('email-input').value;
-        */
     }
 
     return (
@@ -88,34 +69,37 @@ export default function UserProfile() {
             <div className="profile_container">
                 <div className="profile_user">
                     <h1>Welcome {response?.data[0].fullName}</h1>
-                    <div className="profile_basic_information">
-                        <div className="name_surname_email">
-                            <p>Your name</p>
-                            <input className="text_input" placeholder={response?.data[0].fullName} value={name} onChange={(e) => setName(e.target.value)} />
-                            <p>Your username</p>
-                            <input className="text_input" placeholder={response?.data[0].userName} value={username} onChange={(e) => setUsername(e.target.value)} />
-                            <p>Password</p>
-                            <input type="password" className="text_input" placeholder={"Password"} />
-                            <p>Repeat password</p>
-                            <input type="password" className="text_input" placeholder={"Password"} />
+                    <div>
+                        <div className="profile_basic_information">    
+                            <div className="name_surname_email">
+                                <p>Your name</p>
+                                <input className="text_input" placeholder={response?.data[0].fullName} value={name} onChange={(e) => setName(e.target.value)} />
+                                <p>Your username</p>
+                                <input className="text_input" placeholder={response?.data[0].userName} value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <p>Password</p>
+                                <input type="password" className="text_input" placeholder={"Password"} />
+                                <p>Repeat password</p>
+                                <input type="password" className="text_input" placeholder={"Password"} />
 
 
+                            </div>
+                            <div id="profile_right">
+                                {response?.data && (
+                                    <div id="image_change">
+                                        <img ref={imageRef} id="user-image-pic" alt="" src={response.data[0].profilePic} />
+                                        <input ref={fileRef} id="file" type="file" onChange={handleImageChange} />
+                                        <label ref={uploadButtonRef} id="label" htmlFor="file">
+                                            Change photo
+                                        </label>
+                                    </div>
+                                )}
+                                {!response?.data && (
+                                    <h1>Loading...</h1>
+                                )}
+                            </div>
                         </div>
-                        <div id="profile_right">
-                            {response?.data && (
 
-                                <div id="image_change">
-                                    <img ref={imageRef} id="user-image-pic" alt="" src={response.data[0].profilePic} />
-                                    <input ref={fileRef} id="file" type="file" onChange={handleImageChange} />
-                                    <label ref={uploadButtonRef} id="label" htmlFor="file">
-                                        Change photo
-                                    </label>
-                                </div>
-
-                            )}
-                            {!response?.data && (
-                                <h1>Loading...</h1>
-                            )}
+                        <div id="button_save_delete">
                             <button id="save_profile_button" onClick={handleSaveProfile}>
                                 Save profile
                             </button>
