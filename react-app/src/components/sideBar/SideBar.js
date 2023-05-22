@@ -7,7 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 
-const Sidebar = (props) => {
+export default function Sidebar() {
     const [response, setResponse] = useState(null)
     const [sidebar, setSidebar] = useState(true);
     const showSidebar = () => setSidebar(!sidebar);
@@ -28,8 +28,6 @@ const Sidebar = (props) => {
     useEffect(() => {
         const getInfo = async () => {
             try {
-                // eslint-disable-next-line
-                const userBO = await axios.get('http://localhost:3000/user');
                 const response = await axios.post('http://localhost:3000/user/summary', {});
                 setResponse(response);
 
@@ -148,6 +146,3 @@ const Sidebar = (props) => {
         </>
     )
 }
-
-export default Sidebar;
-

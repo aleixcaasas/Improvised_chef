@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function FavoriteRecipes() {
 
     const [recipes, setRecipes] = useState(null)
-    const [userAPI, setUSerAPI] = useState('');
+    const [userAPI, setUserAPI] = useState('');
 
     const navigation = useNavigate();
 
@@ -26,12 +26,20 @@ export default function FavoriteRecipes() {
     }
 
     useEffect(() => {
-        const getInfo = async () => {
-            try {
+        async function getUser(){
+            if (userAPI === null) {
                 const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email !== '') {
+                setUserAPI(userBO.data);
+            }
+        }
+        getUser();
+    }, [userAPI])
+
+    useEffect(() => {
+        async function getInfo() {
+            try {
+                if (userAPI !== null) {
                     const response = await axios.post('http://localhost:3000/user/recipes', {});
-                    setUSerAPI(userBO.data);
                     setRecipes(response);
                 }
             } catch (error) {
@@ -45,7 +53,7 @@ export default function FavoriteRecipes() {
         let newFavoriteRecipes = Object.assign({}, recipes);
         let recipeEliminated = {};
         try {
-            if (userAPI.email !== '') {
+            if (userAPI !== null) {
                 recipeEliminated = await axios.post('http://localhost:3000/user/removeRecipe', {
                     recipeId: id
                 });
@@ -99,7 +107,6 @@ export default function FavoriteRecipes() {
                             {recipesList.data[recipesList.data.length - 1] !== recipe && (
                                 <hr className="separador" />
                             )}
-
                         </>
                     )}
                 </ul>

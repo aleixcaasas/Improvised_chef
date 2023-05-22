@@ -12,7 +12,7 @@ export default function DetailRecipe(props) {
     const [allIngredients, setAllIngredients] = useState('');
     const [recipeFavorite, setRecipeFavorite] = useState('');
     const [recipePrepared, setRecipePrepared] = useState(false);
-    const [userAPI, setUSerAPI] = useState('');
+    const [userAPI, setUserAPI] = useState(null);
 
     useEffect(() => {
         function hasAllIngredients(ingredients) {
@@ -22,13 +22,21 @@ export default function DetailRecipe(props) {
     }, [infoRecipe]);
 
     useEffect(() => {
+        async function getUser(){
+            if (userAPI === null) {
+                const userBO = await axios.get('http://localhost:3000/user');
+                setUserAPI(userBO.data);
+            }
+        }
+        getUser();
+    }, [userAPI])
+
+    useEffect(() => {
         async function isRecipeFavorite(recipeId) {
             try {
-                const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email !== '') {
+                if (userAPI !== null) {
                     const response = await axios.post('http://localhost:3000/user/recipes', {
                     });
-                    setUSerAPI(userBO.data);
                     const recipeList = response.data;
                     for (let i = 0; i < recipeList.length; i++) {
                         if (recipeList[i].id === recipeId) {
@@ -46,8 +54,7 @@ export default function DetailRecipe(props) {
 
     async function addFavRecipe(idRecipe) {
         try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
+            if (userAPI !== null) {
                 const response = await axios.post('http://localhost:3000/user/addRecipe', {
                     recipeId: idRecipe
                 });
@@ -62,8 +69,7 @@ export default function DetailRecipe(props) {
 
     async function removeFavRecipe(idRecipe) {
         try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
+            if (userAPI !== null) {
                 const response = await axios.post('http://localhost:3000/user/removeRecipe', {
                     recipeId: idRecipe
                 });
@@ -86,12 +92,11 @@ export default function DetailRecipe(props) {
 
     async function addIngredientsRecipe(idRecipe) {
         try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
+            if (userAPI !== null) {
                 const response = await axios.post('http://localhost:3000/user/addRecipeIngredients', {
                     recipeId: idRecipe
                 });
-                if (response.status == 200) {
+                if (response.status === 200) {
                     alert("Ingredients added to the shopping list");
                 }
             }
@@ -99,11 +104,10 @@ export default function DetailRecipe(props) {
             console.log(error);
         }
     }
-    
+
     async function removeIngredientsRecipe(idRecipe) {
         try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
+            if (userAPI !== null) {
                 const response = await axios.post('http://localhost:3000/user/removeRecipeIngredients', {
                     recipeId: idRecipe
                 });
@@ -116,11 +120,11 @@ export default function DetailRecipe(props) {
             console.log(error);
         }
     }
-    
+
     const openRecipeLink = () => {
         window.open(infoRecipe.self_url, '_blank');
     };
-    
+
     function set_difficulty(difficulty) {
         return (
             <>

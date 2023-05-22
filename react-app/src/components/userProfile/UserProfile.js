@@ -53,7 +53,6 @@ export default function UserProfile() {
         formData.append('password', password);
         formData.append('confirmPassword', confirmPassword);
 
-
         try {
             const response = await axios.post('http://localhost:3000/user/edit', formData, {
                 headers: {

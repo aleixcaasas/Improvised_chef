@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import '../components/login/login.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SideBar from "../components/sideBar/SideBar"
 import Register from "../components/register/Register";
 import LoginEmail from "../components/login/LoginEmail";
 import SearchBar from "../components/searchBar/SearchBar"
-import { useState, useEffect } from "react";
 import ErrorMessage from '../components/errorMessages/ErrorMessage'
 import ResumeRecipeContainer from "../components/resumeRecipe/ResumeRecipeContainer"
 
@@ -37,8 +37,6 @@ export default function Home() {
             <ErrorMessage errorMessage={message.comment} clicked={clicked}></ErrorMessage>
         }
     };
-
-
 
     const handleSearch = (searchedReceips) => {
         if (searchedReceips.length !== 0) {

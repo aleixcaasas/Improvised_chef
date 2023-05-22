@@ -11,16 +11,24 @@ export default function MyIngredients() {
 
     const [call, setCall] = useState({ clicked: false })
     const [ingredients, setIngredients] = useState(null)
-    const [userAPI, setUSerAPI] = useState('');
+    const [userAPI, setUserAPI] = useState('');
 
     useEffect(() => {
-        const getInfo = async () => {
-            try {
+        async function getUser(){
+            if (userAPI === null) {
                 const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email !== '') {
+                setUserAPI(userBO.data);
+            }
+        }
+        getUser();
+    }, [userAPI])
+
+    useEffect(() => {
+        async function getInfo() {
+            try {
+                if (userAPI !== null) {
                     const response = await axios.post('http://localhost:3000/user/ingredients', {
                     });
-                    setUSerAPI(userBO.data);
                     setIngredients(response);
                 }
             } catch (error) {
@@ -34,7 +42,7 @@ export default function MyIngredients() {
         let ingEliminated = {};
         let newIngredientList = Object.assign({}, ingredients);
         try {
-            if (userAPI.email !== '') {
+            if (userAPI !== null) {
                 ingEliminated = await axios.post('http://localhost:3000/user/removeIngredient', {
                     ingredientId: id,
                     ingredientName: name

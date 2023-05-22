@@ -10,7 +10,6 @@ export default function DeleteAccountButton() {
 	async function handleDeleteAccount(){
 		try {
 			const response = await axios.post('http://localhost:3000/user/delete');
-			
 			if(response.status === 200){
 				navigation("/home");
 			}
