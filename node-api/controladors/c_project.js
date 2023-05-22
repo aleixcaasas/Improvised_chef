@@ -259,7 +259,7 @@ const controller = {
     removeRecipeIngredients: async function (req, res) {
         const { userID, userEmail } = req.session;
         const recipeId = req.body.recipeId;
-        let response = await removeRecipeIngredients(userID, parseInt(recipeId));
+        let response = await removeRecipeIngredients(userID, recipeId);
         return res.status(response[0]).send(response[1]);
     },
     getIngredientSearched: async function(req, res) {
