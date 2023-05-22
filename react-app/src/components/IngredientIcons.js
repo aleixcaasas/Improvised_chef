@@ -17,14 +17,14 @@ const ingredientGroups = {
 };
 
 const ingredientCategories = {
-    "spices": ["salt", "pepper", "cumin", "paprika", "mustard", "garlic", "ginger"],
+    "spices": ["salt", "pepper", "cumin", "paprika", "mustard", "garlic", "ginger", "coriander", "ground", "sage", "rosemary"],
     "herbs": ["basil", "oregano", "parsley", "thyme", "sesame seed"],
-    "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach"],
-    "fruits": ["banana", "apple", "orange", "grape", "lime", "kale", "lemon"],
+    "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach", "potato", "cherry", "auberginie", "beetroot"],
+    "fruits": ["banana", "apple", "orange", "grape", "lime", "kale", "lemon", "avocado"],
     "dairy": ["milk", "cheese", "yogurt", "butter"],
     "meat": ["beef", "pork", "chicken", "lamb", "mincemeat", "steak", "sausage"],
     "seafood": ["shrimp", "salmon", "tuna", "crab", "fish"],
-    "baking": ["flour", "sugar", "baking powder", "baking soda", "egg", "eggs", "rice", "chocolate", "cream"],
+    "baking": ["flour", "sugar", "baking powder", "baking soda", "egg", "eggs", "rice", "chocolate", "cream", "paste"],
     "liquids": ["water", "oil", "vinegar", "broth", "honey", "tamari", "soy", "syrup"],
     "miscellaneous": []
 }
