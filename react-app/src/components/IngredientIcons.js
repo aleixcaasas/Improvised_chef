@@ -17,10 +17,10 @@ const ingredientGroups = {
 };
 
 const ingredientCategories = {
-    "spices": ["salt", "pepper", "cumin", "paprika", "mustard", "garlic", "ginger", "coriander", "ground", "sage", "rosemary"],
+    "spices": ["salt", "pepper", "cumin", "paprika", "mustard", "garlic", "ginger", "coriander", "ground", "sage", "rosemary", "seed", "saffron"],
     "herbs": ["basil", "oregano", "parsley", "thyme", "sesame seed"],
-    "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach", "potato", "cherry", "auberginie", "beetroot"],
-    "fruits": ["banana", "apple", "orange", "grape", "lime", "kale", "lemon", "avocado"],
+    "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach", "potato", "cherry", "aubergine", "beetroot"],
+    "fruits": ["banana", "apple", "orange", "grape", "lime", "kale", "lemon", "avocado", "apricot"],
     "dairy": ["milk", "cheese", "yogurt", "butter"],
     "meat": ["beef", "pork", "chicken", "lamb", "mincemeat", "steak", "sausage"],
     "seafood": ["shrimp", "salmon", "tuna", "crab", "fish"],
