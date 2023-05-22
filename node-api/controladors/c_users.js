@@ -185,7 +185,12 @@ const addIngredientsRecipeShoppingList = async (userId, recipeData) => {
     try {
         const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
-            const ingredientsNotHasIt = recipeData.ingredients.filter(item => item['hasIt'] === false);
+            const ingredientsNotHasIt = recipeData.ingredients.filter(item => item['hasIt'] === false).map(item => {
+                return {
+                    id: item.id,
+                    name: item.name
+                }
+            });
             await updateDoc(doc(db, "users", userId), { shoppingList: arrayUnion(...querySnapshot.data().shoppingList, ...ingredientsNotHasIt)});
             return [200, 'Recipe ingredients added to shoppingList'];
         }
