@@ -56,7 +56,7 @@ export default function MyKitchen() {
         if (recipesList.length === 0) {
             return (
                 <div className="container_list" id='no_list'>
-                    You does not have favorite recipes yet!
+                    You don't have favorite recipes yet!
                     <h5>EXPLORE NEW RECIPES</h5>
                     <Link to="/home">
                         <button id='button_round'>+</button>
