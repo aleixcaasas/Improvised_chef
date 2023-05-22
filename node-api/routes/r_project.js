@@ -25,6 +25,7 @@ router.post('/ingredients/name', projectController.ingredientsName);
 router.post('/user/summary', projectController.getUserInfo);
 router.post('/user/profile', projectController.getUserProfile);
 router.post('/user/edit', upload.single('profilePic'), projectController.editUserProfile);
+router.post('/user/delete', projectController.deleteUser);
 
 router.post('/user/myKitchen', projectController.myKitchen);
 
@@ -32,7 +33,6 @@ router.post('/user/ingredients', projectController.getUserIngredientList);
 router.post('/user/addIngredient', projectController.addUserIngredient);
 router.post('/user/removeIngredient', projectController.removeUserIngredient);
 
-router.post('/user/addIngredientsRecipeShoppingList', projectController.addIngredientsRecipeShoppingList);
 router.post('/user/shoppingList', projectController.getUserShoppingList);
 router.post('/user/addShoppingList', projectController.addUserShoppingList);
 router.post('/user/removeShoppingList', projectController.removeUserShoppingList);
@@ -40,10 +40,11 @@ router.post('/user/removeShoppingList', projectController.removeUserShoppingList
 router.post('/user/recipes', projectController.getUserRecipeList);
 router.post('/user/addRecipe', projectController.addUserRecipe);
 router.post('/user/removeRecipe', projectController.removeUserRecipe);
-router.post('/user/removeRecipeIngredients', projectController.removeRecipeIngredients)
 router.post('/user/searchWithIngredients', projectController.searchWithIngredients);
-router.post('/user/searchIngredients', projectController.getIngredientSearched);
-router.post('/user/delete', projectController.deleteUser);
 
+router.post('/user/searchIngredients', projectController.getIngredientSearched);
+
+router.post('/user/addRecipeIngredients', projectController.addIngredientsRecipeShoppingList);
+router.post('/user/removeRecipeIngredients', projectController.removeRecipeIngredients)
 
 module.exports = router;
