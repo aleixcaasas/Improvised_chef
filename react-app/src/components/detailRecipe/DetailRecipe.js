@@ -11,7 +11,6 @@ export default function DetailRecipe(props) {
     const { infoRecipe } = props;
     const [allIngredients, setAllIngredients] = useState('');
     const [recipeFavorite, setRecipeFavorite] = useState('');
-    const [recipesList, setRecipesList] = useState('')
     const [userAPI, setUSerAPI] = useState('');
 
     useEffect(() => {
@@ -21,7 +20,6 @@ export default function DetailRecipe(props) {
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
     }, [infoRecipe]);
 
-    // FALTA ARREGLAR PK NO FUNCIONA
     async function addFavRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
@@ -29,7 +27,7 @@ export default function DetailRecipe(props) {
                 const response = await axios.post('http://localhost:3000/user/addRecipe', {
                     recipeId: idRecipe
                 });
-                if (response.status == 201) {
+                if (response.status === 201) {
                     setRecipeFavorite(true);
                 }
             }
@@ -45,7 +43,7 @@ export default function DetailRecipe(props) {
                 const response = await axios.post('http://localhost:3000/user/removeRecipe', {
                     recipeId: idRecipe
                 });
-                if (response.status == 200) {
+                if (response.status === 200) {
                     setRecipeFavorite(false);
                 }
             }
@@ -105,7 +103,7 @@ export default function DetailRecipe(props) {
         );
     }
 
-    async function addIngredientsRecipe(idRecipe){
+    async function addIngredientsRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
             if (userBO.data.email !== '') {
@@ -121,7 +119,7 @@ export default function DetailRecipe(props) {
         }
     }
 
-    async function removeIngredientsRecipe(idRecipe){
+    async function removeIngredientsRecipe(idRecipe) {
         try {
             const userBO = await axios.get('http://localhost:3000/user');
             if (userBO.data.email !== '') {
@@ -152,10 +150,10 @@ export default function DetailRecipe(props) {
                             <button className="prepareButt" onClick={() => removeIngredientsRecipe(infoRecipe.id)}>
                                 Prepare recipe
                             </button>
-                        }{!allIngredients && 
-                        <button className="prepareButt" onClick={() => addIngredientsRecipe(infoRecipe.id)}>
-                            Add all ingredients to shopping list
-                        </button>}
+                        }{!allIngredients &&
+                            <button className="prepareButt" onClick={() => addIngredientsRecipe(infoRecipe.id)}>
+                                Add all ingredients to shopping list
+                            </button>}
                     </div>
                 </div>
 

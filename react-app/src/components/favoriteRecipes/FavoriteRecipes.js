@@ -82,12 +82,12 @@ export default function FavoriteRecipes() {
                 <ul className="favourites">
                     {recipesList.data.map((recipe) =>
                         <>
-                            <div className="fav" onClick={() => recipeDetails(recipe.title, recipe.id)}>
+                            <div className="fav">
                                 <div className="recipe">
-                                    <div className="div-image">
+                                    <div className="div-image" onClick={() => recipeDetails(recipe.title, recipe.id)}>
                                         <img className="image" src={recipe.image} alt=""></img>
                                     </div>
-                                    <div className="recipe-data">
+                                    <div className="recipe-data" onClick={() => recipeDetails(recipe.title, recipe.id)}>
                                         <li className="title">{recipe.title}</li>
                                         <li className="data">{recipe.difficulty} to make, it takes {recipe.time_cooking}</li>
                                     </div>

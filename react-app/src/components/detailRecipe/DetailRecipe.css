@@ -21,6 +21,7 @@
 }
 .fav-icon{
     margin-left: 5%;
+    cursor: pointer;
 }
 
 .detail-title-div {
