@@ -29,7 +29,7 @@ export default function DetailRecipe(props) {
                 const response = await axios.post('http://localhost:3000/user/addRecipe', {
                     recipeId: idRecipe
                 });
-                if(response.status == 201){
+                if (response.status == 201) {
                     setRecipeFavorite(true);
                 }
             }
@@ -45,7 +45,7 @@ export default function DetailRecipe(props) {
                 const response = await axios.post('http://localhost:3000/user/removeRecipe', {
                     recipeId: idRecipe
                 });
-                if(response.status == 200){
+                if (response.status == 200) {
                     setRecipeFavorite(false);
                 }
             }
@@ -56,15 +56,12 @@ export default function DetailRecipe(props) {
 
     function setFavIcon(recipeId) {
         if (recipeFavorite) {
-            return <AiFillStar size={40} className="fav-icon" onClick={() => removeFavRecipe(recipeId)}/>;
+            return <AiFillStar size={40} className="fav-icon" onClick={() => removeFavRecipe(recipeId)} />;
         } else {
             return <AiOutlineStar size={40} className="fav-icon" onClick={() => addFavRecipe(recipeId)} />;
         }
     }
 
-    
-
-    // TAMPOC FUNCIONA
     useEffect(() => {
         async function isRecipeFavorite(recipeId) {
             try {
@@ -108,6 +105,38 @@ export default function DetailRecipe(props) {
         );
     }
 
+    async function addIngredientsRecipe(idRecipe){
+        try {
+            const userBO = await axios.get('http://localhost:3000/user');
+            if (userBO.data.email !== '') {
+                const response = await axios.post('http://localhost:3000/user/addRecipeIngredients', {
+                    recipeId: idRecipe
+                });
+                if (response.status == 200) {
+                    alert("Ingredients added to the shopping list");
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function removeIngredientsRecipe(idRecipe){
+        try {
+            const userBO = await axios.get('http://localhost:3000/user');
+            if (userBO.data.email !== '') {
+                const response = await axios.post('http://localhost:3000/user/removeRecipeIngredients', {
+                    recipeId: idRecipe
+                });
+                if (response.status == 200) {
+                    alert("Ingredients removed from the ingredients list");
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const openRecipeLink = () => {
         window.open(infoRecipe.self_url, '_blank');
     };
@@ -118,8 +147,16 @@ export default function DetailRecipe(props) {
                 <div className="detail-title-div">
                     {setFavIcon(infoRecipe.id)}
                     <h2 className="detail-title">{infoRecipe.title.toUpperCase()}</h2>
-                    <div className="prepareButt-div"><button className="prepareButt" >
-                        {allIngredients && ("Prepare recipe")}{!allIngredients && ("Add all ingredients to shopping list")}</button></div>
+                    <div className="prepareButt-div">
+                        {allIngredients &&
+                            <button className="prepareButt" onClick={() => removeIngredientsRecipe(infoRecipe.id)}>
+                                Prepare recipe
+                            </button>
+                        }{!allIngredients && 
+                        <button className="prepareButt" onClick={() => addIngredientsRecipe(infoRecipe.id)}>
+                            Add all ingredients to shopping list
+                        </button>}
+                    </div>
                 </div>
 
                 <div className="three-elements-div">
@@ -177,6 +214,6 @@ export default function DetailRecipe(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

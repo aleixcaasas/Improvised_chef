@@ -16,9 +16,9 @@ const getUserInfo = async function (id) {
             };
             result.push(selectedFields);
         });
-        return [200,result];
+        return [200, result];
     } catch (error) {
-        return [500,'Error al fer fetch de dades de usuari'];
+        return [500, 'Error al fer fetch de dades de usuari'];
     }
 };
 
@@ -45,7 +45,7 @@ const getUserProfile = async function (id) {
 
 };
 
-const uploadProfilePic = async function(userId, profilePic){
+const uploadProfilePic = async function (userId, profilePic) {
     try {
         const storageRef = ref(storage, `images/${userId + " / " + profilePic.originalname}`);
         const metadata = {
@@ -66,13 +66,13 @@ const uploadProfilePic = async function(userId, profilePic){
             });
         return [200, 'Image uploaded successfully'];
     }
-    catch (error){
+    catch (error) {
         return [500, error];
     }
 }
 
-const changePassword = async function(newPassword, confirmPassword){
-    if(auth.currentUser.providerData[0].providerId==="password" && newPassword.length > 0 && confirmPassword.length > 0){
+const changePassword = async function (newPassword, confirmPassword) {
+    if (auth.currentUser.providerData[0].providerId === "password" && newPassword.length > 0 && confirmPassword.length > 0) {
         if (newPassword === confirmPassword) {
             await updatePassword(auth.currentUser, newPassword);
         }
@@ -82,7 +82,7 @@ const changePassword = async function(newPassword, confirmPassword){
     }
 }
 
-const editUserProfile = async function(userId, newFullName, newUserName){
+const editUserProfile = async function (userId, newFullName, newUserName) {
     try {
         const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
@@ -96,7 +96,7 @@ const editUserProfile = async function(userId, newFullName, newUserName){
             return [500, 'User profile not edited'];
         }
     }
-    catch (error){
+    catch (error) {
         return [500, error];
     }
 }
@@ -143,7 +143,7 @@ const addUserIngredient = async (userId, ingredientId, ingredientName) => {
                 await updateDoc(doc(db, "users", userId), {
                     myIngredients: arrayUnion({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                return [200, {text: 'Ingredient "' + ingredientName + '" added to myIngredients.',name: ingredientName}];
+                return [200, { text: 'Ingredient "' + ingredientName + '" added to myIngredients.', name: ingredientName }];
             }
         }
         else {
@@ -151,7 +151,7 @@ const addUserIngredient = async (userId, ingredientId, ingredientName) => {
         }
     }
     catch (error) {
-        return [500, 'Error insert ingredients: '+error];
+        return [500, 'Error insert ingredients: ' + error];
     }
 };
 
@@ -166,7 +166,7 @@ const removeUserIngredient = async (userId, ingredientId, ingredientName) => {
                 await updateDoc(doc(db, "users", userId), {
                     myIngredients: arrayRemove({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                return [200, {text: 'Ingredient "' + ingredientName + '" deleted to myIngredients.', name: ingredientName}];
+                return [200, { text: 'Ingredient "' + ingredientName + '" deleted to myIngredients.', name: ingredientName }];
             }
             else {
                 return [500, 'User ingredient not exist'];
@@ -177,7 +177,7 @@ const removeUserIngredient = async (userId, ingredientId, ingredientName) => {
         }
     }
     catch (error) {
-        return [500, 'Error remove ingredients: '+error]
+        return [500, 'Error remove ingredients: ' + error]
     }
 };
 
@@ -191,14 +191,14 @@ const addIngredientsRecipeShoppingList = async (userId, recipeData) => {
                     name: item.name
                 }
             });
-            await updateDoc(doc(db, "users", userId), { shoppingList: arrayUnion(...querySnapshot.data().shoppingList, ...ingredientsNotHasIt)});
+            await updateDoc(doc(db, "users", userId), { shoppingList: arrayUnion(...querySnapshot.data().shoppingList, ...ingredientsNotHasIt) });
             return [200, 'Recipe ingredients added to shoppingList'];
         }
         else {
             return [500, 'User not exist'];
         }
 
-    } catch(error) {
+    } catch (error) {
         return [500, 'Error add recipe ingredients to shoppingList: ' + error];
     }
 }
@@ -214,7 +214,7 @@ const getUserShoppingList = async (userId) => {
         }
     }
     catch (error) {
-        return [500, 'Error getting shoppingList: '+error];
+        return [500, 'Error getting shoppingList: ' + error];
     }
 };
 
@@ -226,21 +226,21 @@ const addUserShoppingList = async (userId, ingredientName, ingredientId) => {
                 return Object.values(ingredient).includes(parseInt(ingredientId)) ||
                     Object.values(ingredient).includes(ingredientName)
             })) {
-                return [500,'Ingredient ShoppingList exist'];
+                return [500, 'Ingredient ShoppingList exist'];
             }
             else {
                 await updateDoc(doc(db, "users", userId), {
                     shoppingList: arrayUnion({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                return [200,{text: 'Ingredient "' + ingredientName + '" added to shoppingList.',name: ingredientName}];
+                return [200, { text: 'Ingredient "' + ingredientName + '" added to shoppingList.', name: ingredientName }];
             }
         }
         else {
-            return [500,'User not exist'];
+            return [500, 'User not exist'];
         }
     }
     catch (error) {
-        return [500,`Error insert shoppingList: ${error}`];
+        return [500, `Error insert shoppingList: ${error}`];
     }
 };
 
@@ -256,10 +256,10 @@ const removeUserShoppingList = async (userId, ingredientName, ingredientId) => {
                 await updateDoc(doc(db, "users", userId), {
                     shoppingList: arrayRemove({ id: parseInt(ingredientId), name: ingredientName })
                 });
-                return [200,{text: 'Ingredient "' + ingredientName + '" deleted to shoppingList.', name: ingredientName}];
+                return [200, { text: 'Ingredient "' + ingredientName + '" deleted to shoppingList.', name: ingredientName }];
             }
             else {
-                return [200,'Ingredient shoppingList not exist'];
+                return [200, 'Ingredient shoppingList not exist'];
             }
         }
         else {
@@ -272,18 +272,18 @@ const removeUserShoppingList = async (userId, ingredientName, ingredientId) => {
 };
 
 const getUserRecipeList = async (userId) => {
-    
+
     try {
         const querySnapshot = await getDoc(doc(db, "users", userId));
         if (querySnapshot.exists()) {
             return [200, querySnapshot.data().favoriteRecipes];
         }
         else {
-            return [404,'User not exist'];
+            return [404, 'User not exist'];
         }
     }
     catch (error) {
-        return [500,`Error getting favoriteRecipes! ${error}`];
+        return [500, `Error getting favoriteRecipes! ${error}`];
     }
 };
 
@@ -309,16 +309,16 @@ const addUserRecipe = async (userId, recipeId) => {
                     return [201, 'Recipe added successfully'];
                 }
                 else {
-                    return [404,'Recipe not exist'];
+                    return [404, 'Recipe not exist'];
                 }
             }
         }
         else {
-            return [404,'User not exist'];
+            return [404, 'User not exist'];
         }
     }
     catch (error) {
-        return [500,'Error adding recipe'];
+        return [500, 'Error adding recipe'];
     }
 };
 
@@ -340,7 +340,7 @@ const removeUserRecipe = async (userId, recipeId) => {
         await updateDoc(userRef, {
             favoriteRecipes: updatedRecipes
         });
-        return [200, {text: `Recipe ${recipeId} removed from favoriteRecipes`, id: recipeId}];
+        return [200, { text: `Recipe ${recipeId} removed from favoriteRecipes`, id: recipeId }];
 
     } catch (error) {
         return [500, `Error removing recipe: ${error}`];
@@ -358,7 +358,7 @@ const searchWithIngredients = async (userId) => {
 
         const ingredientList = userDoc.data().myIngredients || [];
         if (!ingredientList.length) {
-            return [404,'No ingredients found!'];
+            return [404, 'No ingredients found!'];
         }
 
         const ingredientIDs = ingredientList.map(ingredient => ingredient.id);
@@ -405,7 +405,7 @@ const searchWithIngredients = async (userId) => {
             docData.ingredientsToBuy = ingredientsToBuy;
             result.push(docData);
         });
-        result.sort((a,b) => (a.ingredientsBought < b.ingredientsBought ? 1 : -1));
+        result.sort((a, b) => (a.ingredientsBought < b.ingredientsBought ? 1 : -1));
         return [200, result];
 
 
@@ -414,27 +414,26 @@ const searchWithIngredients = async (userId) => {
     }
 };
 
-const removeRecipeIngredients = async (userId, recipeId) =>
-{
-        try {
-            const userRef = doc(db, "users", userId);
-            const userDoc = await getDoc(userRef);
-            if (!userDoc.exists()) {
-                return [404, 'User not found'];
-            }
-            const recipeRef = doc(db, "recipes", recipeId);
-            const recipeDoc = await getDoc(recipeRef);
-            if (!recipeDoc.exists()) {
-                return [404, 'Recipe not found'];
-            }
-            const myIngredients = userDoc.data().myIngredients;
-            const recipeIngredients = recipeDoc.data().ingredients;
-            const updatedIngredients = myIngredients.filter((ingredient) => !recipeIngredients.includes(ingredient))
+const removeRecipeIngredients = async (userId, recipeId) => {
+    try {
+        const userRef = doc(db, "users", userId.toString());
+        const userDoc = await getDoc(userRef);
+        if (!userDoc.exists()) {
+            return [404, 'User not found'];
+        }
+        const recipeRef = doc(db, "recipes", recipeId.toString());
+        const recipeDoc = await getDoc(recipeRef);
+        if (!recipeDoc.exists()) {
+            return [404, 'Recipe not found'];
+        }
+        const myIngredients = userDoc.data().myIngredients;
+        const recipeIngredients = recipeDoc.data().ingredients;
+        const updatedIngredients = myIngredients.filter((ingredient) => !recipeIngredients.some((recipeIngredient) => recipeIngredient.id === ingredient.id));
 
-            await userRef.update({myIngredients: updatedIngredients});
-            return [200, 'Removed matching myIngredients from user successfully'];
+        await updateDoc(doc(db, "users", userId), { myIngredients: updatedIngredients });
+        return [200, 'Removed matching myIngredients from user successfully'];
 
-        } catch (error) {
+    } catch (error) {
         return [500, `Error removing user ingredients from recipe: ${error}`];
     }
 }
