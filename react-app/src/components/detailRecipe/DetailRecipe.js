@@ -11,6 +11,7 @@ export default function DetailRecipe(props) {
     const { infoRecipe } = props;
     const [allIngredients, setAllIngredients] = useState('');
     const [recipeFavorite, setRecipeFavorite] = useState('');
+    const [recipePrepared, setRecipePrepared] = useState(false);
     const [userAPI, setUSerAPI] = useState('');
 
     useEffect(() => {
@@ -19,6 +20,29 @@ export default function DetailRecipe(props) {
         }
         setAllIngredients(hasAllIngredients(infoRecipe.ingredients));
     }, [infoRecipe]);
+
+    useEffect(() => {
+        async function isRecipeFavorite(recipeId) {
+            try {
+                const userBO = await axios.get('http://localhost:3000/user');
+                if (userBO.data.email !== '') {
+                    const response = await axios.post('http://localhost:3000/user/recipes', {
+                    });
+                    setUSerAPI(userBO.data);
+                    const recipeList = response.data;
+                    for (let i = 0; i < recipeList.length; i++) {
+                        if (recipeList[i].id === recipeId) {
+                            setRecipeFavorite(true);
+                            break;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        isRecipeFavorite(infoRecipe.id);
+    }, [infoRecipe, recipeFavorite])
 
     async function addFavRecipe(idRecipe) {
         try {
@@ -60,29 +84,43 @@ export default function DetailRecipe(props) {
         }
     }
 
-    useEffect(() => {
-        async function isRecipeFavorite(recipeId) {
-            try {
-                const userBO = await axios.get('http://localhost:3000/user');
-                if (userBO.data.email !== '') {
-                    const response = await axios.post('http://localhost:3000/user/recipes', {
-                    });
-                    setUSerAPI(userBO.data);
-                    const recipeList = response.data;
-                    for (let i = 0; i < recipeList.length; i++) {
-                        if (recipeList[i].id === recipeId) {
-                            setRecipeFavorite(true);
-                            break;
-                        }
-                    }
+    async function addIngredientsRecipe(idRecipe) {
+        try {
+            const userBO = await axios.get('http://localhost:3000/user');
+            if (userBO.data.email !== '') {
+                const response = await axios.post('http://localhost:3000/user/addRecipeIngredients', {
+                    recipeId: idRecipe
+                });
+                if (response.status == 200) {
+                    alert("Ingredients added to the shopping list");
                 }
-            } catch (error) {
-                console.log(error);
             }
+        } catch (error) {
+            console.log(error);
         }
-        isRecipeFavorite(infoRecipe.id);
-    }, [infoRecipe, recipeFavorite])
-
+    }
+    
+    async function removeIngredientsRecipe(idRecipe) {
+        try {
+            const userBO = await axios.get('http://localhost:3000/user');
+            if (userBO.data.email !== '') {
+                const response = await axios.post('http://localhost:3000/user/removeRecipeIngredients', {
+                    recipeId: idRecipe
+                });
+                if (response.status == 200) {
+                    alert("Ingredients removed from the ingredients list");
+                    setRecipePrepared(true);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    const openRecipeLink = () => {
+        window.open(infoRecipe.self_url, '_blank');
+    };
+    
     function set_difficulty(difficulty) {
         return (
             <>
@@ -103,64 +141,30 @@ export default function DetailRecipe(props) {
         );
     }
 
-    async function addIngredientsRecipe(idRecipe) {
-        try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
-                const response = await axios.post('http://localhost:3000/user/addRecipeIngredients', {
-                    recipeId: idRecipe
-                });
-                if (response.status == 200) {
-                    alert("Ingredients added to the shopping list");
-                }
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async function removeIngredientsRecipe(idRecipe) {
-        try {
-            const userBO = await axios.get('http://localhost:3000/user');
-            if (userBO.data.email !== '') {
-                const response = await axios.post('http://localhost:3000/user/removeRecipeIngredients', {
-                    recipeId: idRecipe
-                });
-                if (response.status == 200) {
-                    alert("Ingredients removed from the ingredients list");
-                }
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const openRecipeLink = () => {
-        window.open(infoRecipe.self_url, '_blank');
-    };
-
     return (
         <div className="div-Recipe">
             <div className="general-div">
-                <div className="detail-title-div">
-                    {setFavIcon(infoRecipe.id)}
+                <div className={!recipePrepared ? "detail-title-div" : "detail-title-div centered"}>
+                    {!recipePrepared && (
+                        setFavIcon(infoRecipe.id))
+                    }
                     <h2 className="detail-title">{infoRecipe.title.toUpperCase()}</h2>
                     <div className="prepareButt-div">
-                        {allIngredients &&
+                        {allIngredients && !recipePrepared &&
                             <button className="prepareButt" onClick={() => removeIngredientsRecipe(infoRecipe.id)}>
                                 Prepare recipe
                             </button>
-                        }{!allIngredients &&
+                        }{!allIngredients && !recipePrepared &&
                             <button className="prepareButt" onClick={() => addIngredientsRecipe(infoRecipe.id)}>
                                 Add all ingredients to shopping list
-                            </button>}
+                            </button>
+                        }
                     </div>
                 </div>
 
                 <div className="three-elements-div">
                     <div className="photo-ingredients-div">
                         <div className="foto-div" style={{ backgroundImage: `url("${infoRecipe.image}")` }} />
-
                         <div className="detail-ingredients-div">
                             <h4>INGREDIENTS:</h4>
                             <hr className="separator-ingredients"></hr>
@@ -180,20 +184,23 @@ export default function DetailRecipe(props) {
                             )}
                         </div>
                     </div>
-
                     <div className="detail-description-div">
-                        <h4>RECIPE DETAILS:</h4>
-                        <hr className="separator-ingredients"></hr>
-                        <div className="description">
-                            <div>
-                                <p className="details-p">{set_difficulty(infoRecipe.difficulty)}<a className="details">  Difficulty: </a> <a>  {infoRecipe.difficulty}</a></p>
-                                <p className="details-p"><RiRestaurant2Line size={20} /><a className="details">Serves: </a> <a>{infoRecipe.serves}</a></p>
-                                <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Preparation Time: </a> <a>{infoRecipe.time_preparation}</a></p>
-                                <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Cooking Time: </a> <a>{infoRecipe.time_cooking}</a></p>
-                            </div>
-                            <button className="button-link" onClick={openRecipeLink}>Original recipe</button>
-                        </div>
-                        <h4>DESCRIPTION:</h4>
+                        {!recipePrepared && (
+                            <>
+                                <h4>RECIPE DETAILS:</h4>
+                                <hr className="separator-ingredients"></hr>
+                                <div className="description">
+                                    <div>
+                                        <p className="details-p">{set_difficulty(infoRecipe.difficulty)}<a className="details">  Difficulty: </a> <a>  {infoRecipe.difficulty}</a></p>
+                                        <p className="details-p"><RiRestaurant2Line size={20} /><a className="details">Serves: </a> <a>{infoRecipe.serves}</a></p>
+                                        <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Preparation Time: </a> <a>{infoRecipe.time_preparation}</a></p>
+                                        <p className="details-p"><RiDashboard3Line size={20} /><a className="details">Cooking Time: </a> <a>{infoRecipe.time_cooking}</a></p>
+                                    </div>
+                                    <button className="button-link" onClick={openRecipeLink}>Original recipe</button>
+                                </div>
+                            </>
+                        )}
+                        < h4 > DESCRIPTION:</h4>
                         <hr className="separator-ingredients"></hr>
                         <div className="description">
                             <p>{infoRecipe.description}</p>

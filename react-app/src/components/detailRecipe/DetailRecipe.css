@@ -36,6 +36,10 @@
     column-gap: 20px;
 }
 
+.centered{
+    justify-content: center;
+}
+
 .fav-icon{
     color: var(--green);
 }
