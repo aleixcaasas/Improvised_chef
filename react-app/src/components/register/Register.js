@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 export default function Register(props) {
 
-    const navigate = useNavigate();
     const [err] = useState("");
     const [userVar, setUserVar] = useState({
         Name: "",
@@ -41,8 +39,9 @@ export default function Register(props) {
             const email = userVar.email;
             const password = userVar.password;
             const result = await axios.post('http://localhost:3000/register', { name, userName, email, password });
-            if (result.data.loguejat === "true") {
-                navigate("/");
+            console.log(result);
+            if (result.status === 200) {
+                window.location.reload();
             }
             else {
                 props.errorM({ error: true, comment: "User already exist" });
