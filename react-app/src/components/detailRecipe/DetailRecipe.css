@@ -169,5 +169,43 @@ h4{
     }
 }
 
+@media only screen and (max-width: 580px) { 
+    .general-div{
+        overflow-y: scroll;
+    }
+
+    .fav-icon{
+        margin: 0;
+    }
+
+    .detail-title{
+        width: auto;
+    }
+
+    .prepareButt{
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .photo-ingredients-div{
+        width: 100%;
+        margin-bottom: 10px;
+        row-gap: 10px;
+    }
+
+    .detail-title-div, .three-elements-div {
+        flex-direction: column;
+        margin: 0;
+        width: 90%;
+    }
+
+    .detail-title-div{
+        text-align: center;
+    }
+
+    .detail-description-div{
+        margin-bottom: 20px;
+    }
+}
 
 

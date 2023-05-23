@@ -12,7 +12,7 @@ export default function DetailRecipe(props) {
     const [allIngredients, setAllIngredients] = useState('');
     const [recipeFavorite, setRecipeFavorite] = useState('');
     const [recipePrepared, setRecipePrepared] = useState(false);
-    const [userAPI, setUserAPI] = useState(null);
+    const [userAPI, setUserAPI] = useState("");
 
     useEffect(() => {
         function hasAllIngredients(ingredients) {

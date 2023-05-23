@@ -260,4 +260,8 @@
 		position: fixed;
 		z-index: 1;
 	}
+	
+	.desplegable{
+		left: -250%;
+	}
 }
