@@ -3,6 +3,7 @@ import axios from "axios";
 import { FaBars } from 'react-icons/fa';
 import { TbCheese } from 'react-icons/tb';
 import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineStar } from 'react-icons/ai';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
@@ -87,7 +88,7 @@ export default function Sidebar() {
                         <Link to="/ShoppingList"><li><MdOutlineShoppingCart size={30} /><label>Shopping List</label></li></Link>
 
 
-                        <Link to="/FavoriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favorites</label></li></Link>
+                        <Link to="/FavoriteRecipes"><li><AiOutlineStar size={30} /><label>My Favorites</label></li></Link>
                     </ul>
                 </div>
 
@@ -138,7 +139,7 @@ export default function Sidebar() {
                         <Link to="/ShoppingList"><li><MdOutlineShoppingCart size={30} /><label>Shopping List</label></li></Link>
 
 
-                        <Link to="/FavoriteRecipes"><li><MdOutlineFavoriteBorder size={30} /><label>My Favourites</label></li></Link>
+                        <Link to="/FavoriteRecipes"><li><AiOutlineStar size={30} /><label>My Favourites</label></li></Link>
                     </ul>
                 </div>
 
