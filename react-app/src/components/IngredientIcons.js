@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoIosWater } from "react-icons/io";
-import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish, GiShinyApple } from "react-icons/gi"
+import { GiHerbsBundle, GiBroccoli, GiMilkCarton, GiChiliPepper, GiMeat, GiSlicedBread, GiOpenedFoodCan, GiDoubleFish, GiShinyApple, GiCheeseWedge } from "react-icons/gi"
 
 const size_icon = 30;
 const ingredientGroups = {
@@ -13,6 +13,7 @@ const ingredientGroups = {
     'seafood': <GiDoubleFish size={size_icon} style={{ color: '#31c4a0' }} />,
     'baking': <GiSlicedBread size={size_icon} style={{ color: '#eec07b' }} />,
     'liquids': <IoIosWater size={size_icon} style={{ color: '#CDBA99' }} />,
+    'cheese' : <GiCheeseWedge size={size_icon} style={{color: '#FBDB65'}} />,
     'miscellaneous': <GiOpenedFoodCan size={size_icon} style={{ color: '539165' }} />
 };
 
@@ -22,9 +23,10 @@ const ingredientCategories = {
     "vegetables": ["tomato", "carrot", "onion", "celery", "mushroom", "broccoli", "cauliflower", "cabbage", "spinach", "potato", "cherry", "aubergine", "beetroot"],
     "fruits": ["banana", "apple", "orange", "grape", "lime", "kale", "lemon", "avocado", "apricot"],
     "dairy": ["milk", "cheese", "yogurt", "butter"],
-    "meat": ["beef", "pork", "chicken", "lamb", "mincemeat", "steak", "sausage"],
+    "meat": ["beef", "pork", "chicken", "lamb", "mincemeat", "steak", "sausage", "bacon", ],
     "seafood": ["shrimp", "salmon", "tuna", "crab", "fish"],
     "baking": ["flour", "sugar", "baking powder", "baking soda", "egg", "eggs", "rice", "chocolate", "cream", "paste"],
+    "cheese" : ["cheese", "feta", "mozzarella", "parmesan"],
     "liquids": ["water", "oil", "vinegar", "broth", "honey", "tamari", "soy", "syrup"],
     "miscellaneous": []
 }

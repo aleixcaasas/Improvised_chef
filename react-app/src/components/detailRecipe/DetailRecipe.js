@@ -177,10 +177,10 @@ export default function DetailRecipe(props) {
                                     <li style={{ display: 'flex', alignItems: 'center' }}>
                                         {getIngredientIcon(ingredient.name)}
                                         <div className="ingredient-name">{ingredient.name} </div>
-                                        {ingredient.hasIt && (
+                                        {ingredient.hasIt && !recipePrepared && (
                                             <TiTick size={25} style={{ color: 'var(--green)' }} />
                                         )}
-                                        {!ingredient.hasIt && (
+                                        {!ingredient.hasIt && !recipePrepared && (
                                             <TiTimes size={25} style={{ color: 'var(--red)' }} />
                                         )}
                                     </li>

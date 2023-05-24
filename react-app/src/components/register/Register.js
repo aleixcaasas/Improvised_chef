@@ -39,7 +39,6 @@ export default function Register(props) {
             const email = userVar.email;
             const password = userVar.password;
             const result = await axios.post('http://localhost:3000/register', { name, userName, email, password });
-            console.log(result);
             if (result.status === 200) {
                 window.location.reload();
             }
