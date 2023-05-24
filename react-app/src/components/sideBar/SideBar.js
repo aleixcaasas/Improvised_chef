@@ -6,7 +6,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { AiOutlineStar } from 'react-icons/ai';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { MdLogout, MdOutlineFavoriteBorder, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
+import { MdLogout, MdOutlineShoppingCart, MdPersonOutline, MdOutlineHome, MdOutlineKitchen } from 'react-icons/md';
 
 export default function Sidebar() {
     const [response, setResponse] = useState(null)
