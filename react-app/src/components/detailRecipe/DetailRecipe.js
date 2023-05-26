@@ -99,7 +99,7 @@ export default function DetailRecipe(props) {
                     recipeId: idRecipe
                 });
                 if (response.status === 200) {
-                    setclicked({boolean: true, message: 'Ingredients added to your ingredients list'});
+                    setclicked({boolean: true, message: 'Ingredients added to your shopping list'});
                 }
             }
         } catch (error) {
@@ -114,7 +114,7 @@ export default function DetailRecipe(props) {
                     recipeId: idRecipe
                 });
                 if (response.status === 200) {
-                    setclicked({boolean: true, message: 'Ingredients removed from the ingredients list'});
+                    setclicked({boolean: true, message: 'Ingredients removed from your ingredients list'});
                     setRecipePrepared(true);
                 }
             }
