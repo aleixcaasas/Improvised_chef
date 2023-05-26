@@ -162,6 +162,32 @@ h4{
     margin-bottom: 8px;
 }
 
+.title-popup{
+    margin-left:15%;
+    margin-right:15%;
+    text-align: center;
+}
+
+.happy-face {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: #3a7155;
+}
+
+.added-removed-ingredients-popup{
+    height: 223px;
+    width: 500px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background:var(--cream);
+    overflow: hidden;
+    border-radius: 10px;
+	  box-shadow: 5px 20px 50px var(--black);   
+}
+
 @media only screen and (max-width: 768px) { 
     .general-div {
         width: 95%;
@@ -207,5 +233,3 @@ h4{
         margin-bottom: 20px;
     }
 }
-
-
