@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineStar } from 'react-icons/ai';
 import { TiTick, TiTimes } from 'react-icons/ti';
 import { getIngredientIcon } from "../IngredientIcons";
+import { RxFace } from 'react-icons/rx';
 import { RiEmotionLaughLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiDashboard3Line, RiRestaurant2Line } from 'react-icons/ri';
 
 export default function DetailRecipe(props) {
@@ -13,6 +14,7 @@ export default function DetailRecipe(props) {
     const [recipeFavorite, setRecipeFavorite] = useState('');
     const [recipePrepared, setRecipePrepared] = useState(false);
     const [userAPI, setUserAPI] = useState("");
+    const [clicked, setclicked] = useState("");
 
     useEffect(() => {
         function hasAllIngredients(ingredients) {
@@ -22,7 +24,7 @@ export default function DetailRecipe(props) {
     }, [infoRecipe]);
 
     useEffect(() => {
-        async function getUser(){
+        async function getUser() {
             if (userAPI === null) {
                 const userBO = await axios.get('http://localhost:3000/user');
                 setUserAPI(userBO.data);
@@ -97,7 +99,7 @@ export default function DetailRecipe(props) {
                     recipeId: idRecipe
                 });
                 if (response.status === 200) {
-                    alert("Ingredients added to the shopping list");
+                    setclicked({boolean: true, message: 'Ingredients added to your ingredients list'});
                 }
             }
         } catch (error) {
@@ -111,8 +113,8 @@ export default function DetailRecipe(props) {
                 const response = await axios.post('http://localhost:3000/user/removeRecipeIngredients', {
                     recipeId: idRecipe
                 });
-                if (response.status == 200) {
-                    alert("Ingredients removed from the ingredients list");
+                if (response.status === 200) {
+                    setclicked({boolean: true, message: 'Ingredients removed from the ingredients list'});
                     setRecipePrepared(true);
                 }
             }
@@ -124,6 +126,10 @@ export default function DetailRecipe(props) {
     const openRecipeLink = () => {
         window.open(infoRecipe.self_url, '_blank');
     };
+
+    function clickGreat(){
+        setclicked(false);
+    }
 
     function set_difficulty(difficulty) {
         return (
@@ -147,6 +153,13 @@ export default function DetailRecipe(props) {
 
     return (
         <div className="div-Recipe">
+            {clicked.boolean && (
+                <div className="added-removed-ingredients-popup">
+                    <h2 className='title-popup'>{clicked.message}</h2>
+                    <RxFace size={30} className='happy-face' />
+                    <button className="retryButton" type="submit" onClick={() => {clickGreat()}} >Great!</button>
+                </div>
+            )}
             <div className="general-div">
                 <div className={!recipePrepared ? "detail-title-div" : "detail-title-div centered"}>
                     {!recipePrepared && (
